@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 
 import App from "./App";
 // For Profile Page
-import Profile from './pages/Profile'
+import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
 // import NotFound from "./pages/404";
 
 
@@ -17,6 +18,7 @@ root.render(
       <Route path="/" element={<App />} />
       {/* Endpoint  for user profile */}
       <Route path="/profile" element={<Profile />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       {/* 404 */}
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
