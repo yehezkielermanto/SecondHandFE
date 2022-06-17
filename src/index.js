@@ -8,6 +8,7 @@ import App from "./App";
 // For Profile Page
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
+import Register from './pages/Register';
 // import NotFound from "./pages/404";
 
 
@@ -19,6 +20,8 @@ root.render(
       {/* Endpoint  for user profile */}
       <Route path="/profile" element={<Profile />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/register" element={<Register />} />
+
       {/* 404 */}
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
