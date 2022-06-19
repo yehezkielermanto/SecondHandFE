@@ -8,7 +8,7 @@ import "../public/css/style.css";
 const LoginForm = () => {
   return (
     <>
-      <section className="h-full text-left">
+      <section className="flex flex-col h-full text-left">
         <div className="flex md:flex-none xl:justify-center lg:justify-center justify-center items-center flex-wrap h-full">
           <div className="hidden md:block lg:w-6/12 items-center">
             <img src={Image} className="w-full m-0" alt="image register" />
@@ -28,21 +28,19 @@ const LoginForm = () => {
                 <div className="mb-5">
                   <Input
                     type="email"
-                    className="form-control w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
-                        border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
+                    className="form-control block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white bg-clip-padding
+                    border border-solid border-gray-300 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     id="emailInput"
                     placeholder="Contoh: johndee@gmail.com"
                   />
                 </div>
                 <p className="mb-3 text-sm">Password</p>
                 <div className="mb-5">
-                  <Input.Password
-                    type="password"
-                    className="form-control px-2 py-2 font-normal text-base text-neutral-3 bg-white 
-                        border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                    id="passwordInput"
-                    placeholder="Masukkan password"
-                  />
+                  <Input type="password" className="form-control block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white bg-clip-padding
+                      border border-solid border-gray-300 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      id="examplePassword0"
+                      placeholder="Masukkan Password"
+                    />
                 </div>
 
                 <div className="text-center pt-2 mb-6 md-flex-end">
