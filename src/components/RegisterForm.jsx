@@ -1,5 +1,5 @@
 import React from "react";
-import Image from '../assets/register.png'
+import Image from '../img/register.png'
 import { Link } from "react-router-dom";
 import {FiArrowLeft} from 'react-icons/fi'
 import {Input} from "antd"
@@ -28,19 +28,19 @@ const RegisterComponent = () => {
                     <div className="mb-5">
                     <Input type="text" className="form-control rounded-[16px] w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
                     border-neutral-2  transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                        id="nameInput" placeholder="Nama Lengkap"  />
+                        id="nameInput" placeholder="Nama Lengkap" />
                     </div>
                     <p className="mb-3 text-sm">Email</p>
                     <div className="mb-5">
                     <Input
                         type="email" className="form-control w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
                         border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                        id="emailInput" placeholder="Contoh: johndee@gmail.com"  />
+                        id="emailInput" placeholder="Contoh: johndee@gmail.com"/>
                     </div>
                     <p className="mb-3 text-sm">Password</p>
                     <div className="mb-5">
                     <Input.Password
-                        type="password" className="form-control px-2 py-2 font-normal text-base text-neutral-3 bg-white 
+                        type="password" className="form-control px-4 py-2 font-normal text-base text-neutral-3 bg-white 
                         border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
                         id="passwordInput" placeholder="Masukkan password" />
                     </div>

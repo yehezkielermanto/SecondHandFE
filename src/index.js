@@ -2,15 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
+import "antd/dist/antd.css";
 import reportWebVitals from './reportWebVitals';
+
 
 import App from "./App";
 // For Profile Page
-import Profile from './pages/Profile';
-import Dashboard from './pages/Dashboard';
-import Register from './pages/Register';
-// import NotFound from "./pages/404";
+// import Profile from './pages/Profile'
+import Register from './pages/Register'
+import Login from './pages/Login'
 
+// import NotFound from "./pages/404";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,10 +20,9 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       {/* Endpoint  for user profile */}
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      {/* <Route path="/profile" element={<Profile />} /> */}
       <Route path="/register" element={<Register />} />
-
+      <Route path="/login" element={<Login />} />
       {/* 404 */}
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>

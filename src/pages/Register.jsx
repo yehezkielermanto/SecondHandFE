@@ -1,4 +1,5 @@
 import "../public/css/style.css";
+import "../public/css/tailwind.css";
 import RegisterForm from "../components/RegisterForm";
 
 function Register() {
