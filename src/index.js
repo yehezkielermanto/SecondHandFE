@@ -9,6 +9,7 @@ import App from "./App";
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 import Register from './pages/Register';
+import Login from './pages/Login';
 // import NotFound from "./pages/404";
 
 
@@ -21,6 +22,7 @@ root.render(
       <Route path="/profile" element={<Profile />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
 
       {/* 404 */}
       {/* <Route path="*" element={<NotFound />} /> */}
