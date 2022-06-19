@@ -1,5 +1,5 @@
 import React from "react";
-import Image from '../assets/register.png'
+import Image from '../img/register.png'
 import { Link } from "react-router-dom";
 import {FiArrowLeft} from 'react-icons/fi'
 import {Input} from "antd"
@@ -26,25 +26,25 @@ const RegisterComponent = () => {
                 <form>
                     <p className="mb-3 text-sm">Nama</p>
                     <div className="mb-5">
-                    <Input type="text" className="form-control rounded-[16px] w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
-                    border-neutral-2  transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                        id="nameInput" placeholder="Nama Lengkap"  />
+                    <Input type="text" className="form-control block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white bg-clip-padding
+                            border border-solid border-gray-300 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        id="nameInput" placeholder="Nama Lengkap" />
                     </div>
                     <p className="mb-3 text-sm">Email</p>
                     <div className="mb-5">
                     <Input
-                        type="email" className="form-control w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
-                        border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                        id="emailInput" placeholder="Contoh: johndee@gmail.com"  />
+                        type="email" className="form-control block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white bg-clip-padding
+                        border border-solid border-gray-300 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        id="emailInput" placeholder="Contoh: johndee@gmail.com"/>
                     </div>
                     <p className="mb-3 text-sm">Password</p>
                     <div className="mb-5">
-                    <Input.Password
-                        type="password" className="form-control px-2 py-2 font-normal text-base text-neutral-3 bg-white 
-                        border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                        id="passwordInput" placeholder="Masukkan password" />
+                    <Input type="password" className="form-control block w-full px-3 py-1.5 text-sm font-normal text-gray-700 bg-white bg-clip-padding
+                    border border-solid border-gray-300 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    id="examplePassword0"
+                    placeholder="Masukkan Password"
+                    />
                     </div>
-
                     <div className="text-center pt-2 mb-6 md-flex-end">
                     <button className="inline-block  hover:bg-[#8f48cf] bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[16px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                         type="button" data-mdb-ripple="true" data-mdb-ripple-color="dark">
