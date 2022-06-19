@@ -12,6 +12,9 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 // import NotFound from "./pages/404";
 
+import "antd/dist/antd.css";
+import "./public/css/tailwind.css";
+import "./public/css/style.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
