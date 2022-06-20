@@ -1,51 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useGoogleLogin } from "@react-oauth/google";
-import { Navigate, Link } from "react-router-dom";
-import Image from "../img/register.png";
-import { FiArrowLeft } from "react-icons/fi";
-import { Input } from "antd";
-import "../public/css/style.css";
-import { registerUser, loginWithGoogle } from "../redux/actions/authActions";
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useGoogleLogin } from '@react-oauth/google'
+import { Navigate, Link } from 'react-router-dom'
+import Image from '../img/register.png'
+import { FiArrowLeft } from 'react-icons/fi'
+import { Input } from 'antd'
+import { registerUser, loginWithGoogle } from '../redux/actions/authActions'
 
 const RegisterComponent = () => {
-  const dispatch = useDispatch();
-  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+  const { isAuthenticated, error } = useSelector((state) => state.auth)
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      alert(error)
     }
-  }, [error]);
+  }, [error])
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [nama, setNama] = useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [nama, setNama] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (nama === "") {
-      alert("Username Kosong");
+    e.preventDefault()
+    console.log('nama', nama)
+    if (nama === '') {
+      alert('Username Kosong')
     }
-    if (email === "") {
-      alert("Email Kosong");
+    if (email === '') {
+      alert('Email Kosong')
     }
-    if (password === "") {
-      alert("Password Kosong");
+    if (password === '') {
+      alert('Password Kosong')
     }
-    if (nama !== "" && email !== "" && password !== "") {
-      dispatch(registerUser({ email, password, nama }));
+    if (nama !== '' && email !== '' && password !== '') {
+      dispatch(registerUser({ email, password, nama }))
     }
-  };
+  }
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      dispatch(loginWithGoogle(tokenResponse.access_token));
+      dispatch(loginWithGoogle(tokenResponse.access_token))
     },
     onError: (error) => {
-      alert(error);
+      alert(error)
     },
-  });
+  })
   return (
     <>
       {!isAuthenticated ? (
@@ -69,8 +69,7 @@ const RegisterComponent = () => {
                   <div className="mb-5">
                     <Input
                       type="text"
-                      className="form-control rounded-[16px] w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
-                    border-neutral-2  transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
+                      className="form-control rounded-[16px] w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white border-neutral-2  transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
                       id="nameInput"
                       placeholder="Nama Lengkap"
                       value={nama}
@@ -108,7 +107,7 @@ const RegisterComponent = () => {
                   <div className="text-center pt-2 mb-6 md-flex-end">
                     <button
                       className="inline-block  hover:bg-[#8f48cf] bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[16px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-                      type="button"
+                      type="submit"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="dark"
                     >
@@ -146,6 +145,6 @@ const RegisterComponent = () => {
         <Navigate to="/" />
       )}
     </>
-  );
-};
-export default RegisterComponent;
+  )
+}
+export default RegisterComponent
