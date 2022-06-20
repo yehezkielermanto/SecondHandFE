@@ -2,7 +2,7 @@ import React from "react";
 import "../public/css/style.css";
 import product from "../img/product.png";
 import logo from "../img/logo.png";
-import poster from "../img/illustration.png";
+import Slider from "../components/Slider";
 
   const margin={
     marginLeft: "100px",
@@ -59,8 +59,10 @@ function Dashboard() {
     </nav>
 
     <div className="flex flex-warp items-center justify-center w-full mt-10">
-      <img src={poster} alt=""/>
-    </div>
+        <section className="h-100 gradient-form">
+          <Slider />
+        </section>
+      </div>
 
     <main style={margin}>
     <h1 className='flex w-full font-bold mt-10'>Telusuri Kategori</h1>
