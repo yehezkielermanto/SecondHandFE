@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2 # We will get the code from GitHub
-      - run: yarn install --legacy-peer-deps # Install dependencies
+      - run: yarn install --force # Install dependencies
       - run: yarn test # Run tests
   # Build to staging
   deploy-staging:
