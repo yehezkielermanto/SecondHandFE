@@ -12,6 +12,7 @@ import App from "./App";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 // import NotFound from "./pages/404";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -23,6 +24,14 @@ root.render(
         {/* Endpoint  for user profile */}
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/login"
+          element={
+            <GoogleOAuthProvider clientId="68980823363-57tmdid7nhefj7abt7l5u1jcbfdddg2p.apps.googleusercontent.com">
+              <Login />
+            </GoogleOAuthProvider>
+          }
+        />
         <Route
           path="/register"
           element={
