@@ -1,14 +1,14 @@
 import "../public/css/style.css";
-import RegisterForm from "../components/RegisterForm";
+import LoginForm from "../components/LoginForm";
 
-function Register() {
+function Login() {
   return (
     <div className="App">
       <section className="h-screen gradient-form">
-        <RegisterForm />
+        <LoginForm />
       </section>
     </div>
   );
 }
 
-export default Register;
+export default Login;

@@ -5,10 +5,11 @@ import { Navigate, Link } from "react-router-dom";
 import Image from "../img/register.png";
 import { FiArrowLeft } from "react-icons/fi";
 import { Input } from "antd";
-import "../public/css/style.css";
-import { registerUser, loginWithGoogle } from "../redux/actions/authActions";
 
-const RegisterComponent = () => {
+import "antd/dist/antd.css";
+import { loginViaForm, loginWithGoogle } from "../redux/actions/authActions";
+
+const Login = () => {
   const dispatch = useDispatch();
   const { isAuthenticated, error } = useSelector((state) => state.auth);
 
@@ -20,21 +21,17 @@ const RegisterComponent = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nama, setNama] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (nama === "") {
-      alert("Username Kosong");
-    }
     if (email === "") {
-      alert("Email Kosong");
+      alert("Email is required");
     }
     if (password === "") {
-      alert("Password Kosong");
+      alert("Password is required");
     }
-    if (nama !== "" && email !== "" && password !== "") {
-      dispatch(registerUser({ email, password, nama }));
+    if (email !== "" && password !== "") {
+      dispatch(loginViaForm({ email, password }));
     }
   };
 
@@ -46,6 +43,7 @@ const RegisterComponent = () => {
       alert(error);
     },
   });
+
   return (
     <>
       {!isAuthenticated ? (
@@ -58,32 +56,19 @@ const RegisterComponent = () => {
               <div className="lg:px-12 md:mx-12">
                 <Link to="/">
                   <button>
-                    <FiArrowLeft className="lg:invisible item-left text-black text-xl mb-5" />
+                    <FiArrowLeft className="lg:invisible item-left text-black text-xl" />
                   </button>
                 </Link>
                 <div className="text-left">
-                  <h4 className="text-2xl font-bold mb-4 pt-6">Daftar</h4>
+                  <h4 className="text-2xl font-bold mb-4 pt-6">Masuk</h4>
                 </div>
                 <form onSubmit={handleSubmit}>
-                  <p className="mb-3 text-sm">Nama</p>
-                  <div className="mb-5">
-                    <Input
-                      type="text"
-                      className="form-control rounded-[16px] w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
-                    border-neutral-2  transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                      id="nameInput"
-                      placeholder="Nama Lengkap"
-                      value={nama}
-                      onChange={(e) => setNama(e.target.value)}
-                      required
-                    />
-                  </div>
                   <p className="mb-3 text-sm">Email</p>
                   <div className="mb-5">
                     <Input
                       type="email"
                       className="form-control w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
-                        border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
+                border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
                       id="emailInput"
                       placeholder="Contoh: johndee@gmail.com"
                       value={email}
@@ -95,9 +80,9 @@ const RegisterComponent = () => {
                   <div className="mb-5">
                     <Input.Password
                       type="password"
-                      className="form-control px-2 py-2 font-normal text-base text-neutral-3 bg-white 
-                        border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                      id="passwordInput"
+                      className="form-control w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
+                border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
+                      id="emailInput"
                       placeholder="Masukkan password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -105,14 +90,14 @@ const RegisterComponent = () => {
                     />
                   </div>
 
-                  <div className="text-center pt-2 mb-6 md-flex-end">
+                  <div className="text-center pt-2 mb-6">
                     <button
                       className="inline-block  hover:bg-[#8f48cf] bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[16px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                       type="button"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="dark"
                     >
-                      Daftar
+                      Masuk
                     </button>
                     <button
                       className="inline-block  hover:bg-[#8f48cf] bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[16px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
@@ -121,18 +106,18 @@ const RegisterComponent = () => {
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="dark"
                     >
-                      Register with Google
+                      Login with Google
                     </button>
                   </div>
-                  <div className="text-center text-sm md-flex-end">
-                    <p className="md:mb-5  md:pt-0">
-                      Sudah punya akun?
-                      <Link to="/login">
+                  <div className="text-center text-sm ">
+                    <p>
+                      Belum punya akun?
+                      <Link to="/register">
                         <button
-                          className="text-[#7126B5] hover:text-sky-400 font-semibold pl-1 
-                            transition duration-300 ease-in-out"
+                          className="text-purple-4 hover:text-purple-3 font-semibold pl-1 
+                    transition duration-300 ease-in-out"
                         >
-                          Masuk disini
+                          Daftar disini
                         </button>
                       </Link>
                     </p>
@@ -143,9 +128,9 @@ const RegisterComponent = () => {
           </div>
         </section>
       ) : (
-        <Navigate to="/" />
+        <Navigate to={`/`} />
       )}
     </>
   );
 };
-export default RegisterComponent;
+export default Login;
