@@ -1,5 +1,4 @@
-import "../public/css/style.css";
-import RegisterForm from "../components/RegisterForm";
+import RegisterForm from '../components/RegisterForm'
 
 function Register() {
   return (
@@ -8,7 +7,7 @@ function Register() {
         <RegisterForm />
       </section>
     </div>
-  );
+  )
 }
 
-export default Register;
+export default Register
