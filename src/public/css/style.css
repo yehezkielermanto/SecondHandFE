@@ -1,3 +1,15 @@
+.fade-anim img {
+    animation: fadeAnim 0.5s ease-out;
+  }
+  @keyframes fadeAnim {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,4 +19,39 @@
 
 html, body {
     font-family: 'Poppins', sans-serif;
+}
+#button{
+  margin-left: 100px;
+}
+#card{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+#plus{
+  margin-top: -100px;
+}
+@media screen and (max-width: 992px) {
+  #button{
+    margin-left: 50px;
+  }
+  #plus{
+    margin-top: -50px;
+  }
+  #card{
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #button{
+    margin-left: 10px;
+  }
+  #plus{
+    margin-top: -10px;
+  }
+  #card{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
