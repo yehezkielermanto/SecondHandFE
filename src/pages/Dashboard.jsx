@@ -5,7 +5,7 @@ import logo from "../img/logo.png";
 import Slider from "../components/Slider";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FiLogIn } from "react-icons/fi";
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 function Dashboard() {
     return (

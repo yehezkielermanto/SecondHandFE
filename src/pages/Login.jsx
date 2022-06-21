@@ -1,5 +1,4 @@
-import "../public/css/style.css";
-import LoginForm from "../components/LoginForm";
+import LoginForm from '../components/LoginForm'
 
 function Login() {
   return (
@@ -8,7 +7,7 @@ function Login() {
         <LoginForm />
       </section>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
