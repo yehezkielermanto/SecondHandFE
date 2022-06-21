@@ -4,20 +4,8 @@ import product from '../img/product.png'
 import logo from '../img/logo.png'
 import Slider from '../components/Slider'
 import { Link } from 'react-router-dom'
-
-const margin = {
-  marginLeft: '100px',
-  marginRight: '100px',
-}
-const marginleft = {
-  marginLeft: '100px',
-}
-const marginright = {
-  marginRight: '100px',
-}
-const marginmin = {
-  marginTop: '-100px',
-}
+import { AiOutlineSearch } from 'react-icons/ai'
+import { FiLogIn } from 'react-icons/fi'
 
 function Dashboard() {
   return (
