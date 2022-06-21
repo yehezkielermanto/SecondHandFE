@@ -5,7 +5,7 @@ import logo from "../img/logo.png";
 import Slider from "../components/Slider";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FiLogIn } from "react-icons/fi";
-
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
     return (
@@ -28,6 +28,7 @@ function Dashboard() {
       </div>
       
       <div className="flex items-center justify-end w-5/12 h-20 py-5">
+      <Link to="/login">
       <button
             className="flex font-poppins bg-[#7126B5] pr-6 pl-3 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
@@ -37,6 +38,7 @@ function Dashboard() {
               <FiLogIn className="text-white"/>
               Masuk
           </button>
+          </Link>
       </div>
       <div className="W-1/12"></div>
     </nav>
