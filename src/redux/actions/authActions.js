@@ -1,14 +1,18 @@
 import { AUTH_ERROR, LOGIN, LOGOUT } from './types'
+const { REACT_APP_URLENDPOINT } = process.env
 
 export const registerUser = (data) => async (dispatch) => {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${REACT_APP_URLENDPOINT}/api/v1/auth/register`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    })
+    )
     const result = await response.json()
     if (result.token) {
       dispatch({
@@ -25,7 +29,7 @@ export const registerUser = (data) => async (dispatch) => {
 
 export const loginViaForm = (data) => async (dispatch) => {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/auth/login', {
+    const response = await fetch(`${REACT_APP_URLENDPOINT}/api/v1/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,13 +55,16 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
     const data = {
       access_token: accessToken,
     }
-    const response = await fetch('http://localhost:8000/api/v1/auth/google', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${REACT_APP_URLENDPOINT}/api/v1/auth/google`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    })
+    )
     const result = await response.json()
     if (result.token) {
       dispatch({
