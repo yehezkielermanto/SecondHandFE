@@ -17,7 +17,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 // import NotFound from "./pages/404";
 
-const { REACT_APP_CLIENT_ID } = process.env
+const { REACT_APP_ID } = process.env
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -31,7 +31,7 @@ root.render(
         <Route
           path="/login"
           element={
-            <GoogleOAuthProvider clientId={REACT_APP_CLIENT_ID}>
+            <GoogleOAuthProvider clientId={REACT_APP_ID}>
               <Login />
             </GoogleOAuthProvider>
           }
@@ -39,7 +39,7 @@ root.render(
         <Route
           path="/register"
           element={
-            <GoogleOAuthProvider clientId={REACT_APP_CLIENT_ID}>
+            <GoogleOAuthProvider clientId={REACT_APP_ID}>
               <Register />
             </GoogleOAuthProvider>
           }
