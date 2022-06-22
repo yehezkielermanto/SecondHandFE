@@ -93,7 +93,7 @@ const Login = () => {
                   <div className="text-center pt-2 mb-6">
                     <button
                       className="inline-block  hover:bg-[#8f48cf] bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[16px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-                      type="button"
+                      type="submit"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="dark"
                     >
