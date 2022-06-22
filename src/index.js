@@ -31,7 +31,7 @@ root.render(
         <Route
           path="/login"
           element={
-            <GoogleOAuthProvider clientId="{REACT_APP_CLIENT_ID}">
+            <GoogleOAuthProvider clientId={REACT_APP_CLIENT_ID}>
               <Login />
             </GoogleOAuthProvider>
           }
@@ -39,7 +39,7 @@ root.render(
         <Route
           path="/register"
           element={
-            <GoogleOAuthProvider clientId="{REACT_APP_CLIENT_ID}">
+            <GoogleOAuthProvider clientId={REACT_APP_CLIENT_ID}>
               <Register />
             </GoogleOAuthProvider>
           }
