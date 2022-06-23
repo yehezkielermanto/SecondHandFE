@@ -6,7 +6,7 @@ const ProfileHeaderComponent = () => {
   return (
     <>
       {/* Main Content */}
-      <div className="flex flex-col h-full sm:w-full lg:w-6/12 lg:mx-auto mt-5 px-3">
+      <div className="flex flex-col h-full sm:w-full lg:w-6/12 lg:mx-auto mt-5 px-3 text-left">
         <Link to="/">
           <div className="invisible lg:visible p-0 w-10 flex justify-center hover:bg-violet-800 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" className="block ml-0 my-1 h-5 w-5 hover:fill-neutral-50" viewBox="0 0 20 20" fill="currentColor">
@@ -16,7 +16,7 @@ const ProfileHeaderComponent = () => {
         </Link>
         <form>
           <div class="flex justify-center items-center w-full">
-            <label for="dropzone-file" class="flex flex-col p-0 w-20 justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer ">
+            <label for="dropzone-file" class="flex flex-col p-0 w-20 justify-center items-center bg-[#E2D4F0] hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer ">
               <div class="flex flex-col justify-center items-center pt-5 pb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path
@@ -89,7 +89,7 @@ const ProfileHeaderComponent = () => {
             />
           </div>
           <br />
-          <button className="bg-violet-700 hover:bg-violet-900 w-full p-1.5 rounded-lg">
+          <button className="bg-[#7126B5] hover:bg-violet-900 w-full p-1.5 rounded-lg">
             <span className="text-white font-medium">Simpan</span>
           </button>
         </form>
