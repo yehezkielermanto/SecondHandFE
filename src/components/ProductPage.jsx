@@ -24,7 +24,7 @@ export default function Product() {
 				close={() => setMobileSidebarOpen(false)}
 			/>
 			{/* Hero */}
-			
+				
 			<HeaderProduct/>
 			<div className="md:flex items-start justify-center 2xl:px-20 md:px-6">
 				<div className="xl:w-2/5 lg:w-2/5 w-80 mb-20">

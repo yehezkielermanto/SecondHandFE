@@ -4,7 +4,7 @@ import Slider from "../components/Slider";
 import NavDashboard from "../components/NavDashboar";
 import ButtonDashboard from "../components/ButtonDashboard";
 import CardDashboard from "../components/CardDashboard";
-import NavbarProduk from "../components/ NavbarProduk";
+import NavbarProduk from "../components/NavbarProduk";
 import { useDispatch, useSelector } from "react-redux";
 
 function Dashboard() {
@@ -18,6 +18,7 @@ function Dashboard() {
 
   return (
     <>
+
       <nav className="flex items-center justify-between drop-shadow-lg w-full h-20 bg-white">
         <div className="flex items-center w-20 h-20 py-5 -mx-2 lg:w-1/2">
           <div style={marginleft}></div>
@@ -73,4 +74,8 @@ function Dashboard() {
   );
 }
 
+<<<<<<< HEAD
 export default Dashboard;
+=======
+export default Dashboard;
+>>>>>>> e8d6c99f7534b4ff64fce0aced34d4590c95e8a0
