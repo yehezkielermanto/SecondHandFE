@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import '../public/css/style.css'
 import logo from '../img/logo.png'
 import { FiLogIn } from 'react-icons/fi'
 import { BsMenuUp } from 'react-icons/bs'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import ResponsiveNavLink from './ResponsiveNavLink'
-import '../public/css/style.css'
 
 const NavDashboard = () => {
   const [open, setOpen] = useState(false)
@@ -66,12 +67,28 @@ const NavDashboard = () => {
         <div
           className={`${
             open ? 'block' : 'hidden'
-          } bg-white absolute ml-0 mr-0 top-6 mt-10 py-1 rounded-lg w-56 overflow-hidden z-10`}
+          } bg-white absolute py-1 rounded-lg h-full inset-0 w-1/2 overflow-hidden z-10`}
         >
-          <ResponsiveNavLink href="/">Home</ResponsiveNavLink>
-          <ResponsiveNavLink href="/profile">Profile</ResponsiveNavLink>
-          <ResponsiveNavLink href="/login">Masuk</ResponsiveNavLink>
-          <ResponsiveNavLink href="/register">Register</ResponsiveNavLink>
+          <ResponsiveNavLink className="inline font-semibold top-5">
+            Second Hand{' '}
+            <button
+              onClick={() => setOpen((open) => !open)}
+              className="item-center w-fit ml-5 bg-white p-1 rounded-full cursor-pointer hover:bg-gray-300 hover:bg-opacity-50 transition"
+            >
+              <AiOutlineCloseCircle className="text-black h-4 w-4 " />
+            </button>
+          </ResponsiveNavLink>
+          <ResponsiveNavLink href="/login">
+            <button
+              className="flex font-poppins bg-[#7126B5] pr-6 pl-3 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              type="button"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+            >
+              <FiLogIn className="text-white" />
+              Masuk
+            </button>
+          </ResponsiveNavLink>
         </div>
 
         <input

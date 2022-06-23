@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import Slider from '../components/Slider'
-import NavDashboard from '../components/NavDashboard'
+import NavDashboard from '../components/NavDashboar'
 import ButtonDashboard from '../components/ButtonDashboard'
 import CardDashboard from '../components/CardDashboard'
-import NavbarProduk from '../components/ NavbarProduk'
+import NavbarProduk from '../components/NavbarProduk'
 import { useDispatch, useSelector } from 'react-redux'
 import '../public/css/style.css'
 

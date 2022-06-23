@@ -58,7 +58,7 @@ export default function Slider() {
 
   return (
     <div ref={slideRef} className="flex justify-center mt-10 w-full select-none relative">
-      <div className="aspect-w-16 aspect-h-9">
+      <div className="aspect-w-16 aspect-h-9 min-w-0">
         <img src={featuredProducts[currentIndex]} alt="" />
       </div>
 
