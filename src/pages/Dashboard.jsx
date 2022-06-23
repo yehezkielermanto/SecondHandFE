@@ -7,6 +7,20 @@ import CardDashboard from "../components/CardDashboard";
 import NavbarProduk from "../components/ NavbarProduk";
 import { useDispatch, useSelector } from "react-redux";
 
+const margin={
+  marginLeft: "100px",
+  marginRight: "100px",
+}
+const marginleft={
+  marginLeft: "100px",
+}
+const marginright={
+  marginRight: "100px",
+}
+const marginmin={
+marginTop: "-100px",
+}
+
 function Dashboard() {
   const dispatch = useDispatch();
   const { isAuthenticated, error } = useSelector((state) => state.auth);
