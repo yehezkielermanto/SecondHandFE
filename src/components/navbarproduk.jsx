@@ -1,9 +1,9 @@
-import { Navbar, Container, Form, Offcanvas, Nav } from "react-bootstrap";
-import "../public/css/nav.css";
+import { Navbar, Container, Form, Offcanvas, Nav } from 'react-bootstrap'
+import '../public/css/nav.css'
 
-import Logo from "../img/logo.png";
+import Logo from '../img/logo.png'
 
-import { Search, ListUl, Bell, Person } from "react-bootstrap-icons";
+import { Search, ListUl, Bell, Person } from 'react-bootstrap-icons'
 
 const NavbarProduk = () => {
   return (
@@ -12,7 +12,7 @@ const NavbarProduk = () => {
       sticky="top"
       className="shadow-sm"
       expand="lg"
-      style={{ backgroundColor: "white" }}
+      style={{ backgroundColor: 'white' }}
     >
       <Container>
         <Navbar.Brand>
@@ -54,7 +54,7 @@ const NavbarProduk = () => {
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
-  );
-};
+  )
+}
 
-export default NavbarProduk;
+export default NavbarProduk
