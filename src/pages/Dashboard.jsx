@@ -59,7 +59,7 @@ function Dashboard() {
 
       <div className="flex flex-warp items-center justify-center w-full mt-10">
         <section className="h-100 gradient-form">
-
+</section>
       <div>
         <section>
          
@@ -68,6 +68,7 @@ function Dashboard() {
           <ButtonDashboard />
           <CardDashboard />
         </section>
+      </div>
       </div>
     </>
   );
