@@ -1,6 +1,8 @@
-import { AUTH_ERROR, LOGIN, LOGOUT } from './types'
+import { AUTH_ERROR, LOGIN, LOGOUT, isREGISTER } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
+import Swal from 'sweetalert2'
 
+// register new user
 export const registerUser = (data) => async (dispatch) => {
   try {
     const response = await fetch(
@@ -14,12 +16,25 @@ export const registerUser = (data) => async (dispatch) => {
       },
     )
     const result = await response.json()
-    if (result.token) {
+    if (result.data) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        titleText: 'Success Register',
+        showConfirmButton: false,
+        timer: 1000,
+      })
       dispatch({
-        type: LOGIN,
-        payload: result.token,
+        type: isREGISTER,
       })
     } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        titleText: 'Failed Register or Email is used before',
+        showConfirmButton: false,
+        timer: 1000,
+      })
       authError(result.error)
     }
   } catch (error) {
@@ -38,6 +53,13 @@ export const loginViaForm = (data) => async (dispatch) => {
     })
     const result = await response.json()
     if (result.token) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        titleText: 'Login Successfully',
+        showConfirmButton: false,
+        timer: 1000,
+      })
       dispatch({
         type: LOGIN,
         payload: result.token,
@@ -67,6 +89,13 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
     )
     const result = await response.json()
     if (result.token) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        titleText: 'Success Login or Register',
+        showConfirmButton: false,
+        timer: 1000,
+      })
       dispatch({
         type: LOGIN,
         payload: result.token,
