@@ -9,7 +9,7 @@ import { registerUser, loginWithGoogle } from '../redux/actions/authActions'
 
 const RegisterComponent = () => {
   const dispatch = useDispatch()
-  const { isAuthenticated, error } = useSelector((state) => state.auth)
+  const { isRegister, error } = useSelector((state) => state.auth)
 
   useEffect(() => {
     if (error) {
@@ -48,7 +48,7 @@ const RegisterComponent = () => {
   })
   return (
     <>
-      {!isAuthenticated ? (
+      {!isRegister ? (
         <section className="h-full text-left">
           <div className="flex md:flex-none xl:justify-center lg:justify-center justify-center items-center flex-wrap h-full">
             <div className="hidden md:block lg:w-6/12 items-center">
@@ -142,7 +142,7 @@ const RegisterComponent = () => {
           </div>
         </section>
       ) : (
-        <Navigate to="/" />
+        <Navigate to="/login" />
       )}
     </>
   )

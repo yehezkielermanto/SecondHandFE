@@ -1,27 +1,24 @@
-import React from 'react'
-import '../public/css/style.css'
-import product from '../img/product.png'
-import logo from '../img/logo.png'
-import Slider from '../components/Slider'
-import { Link } from 'react-router-dom'
-
-const margin = {
-  marginLeft: '100px',
-  marginRight: '100px',
-}
-const marginleft = {
-  marginLeft: '100px',
-}
-const marginright = {
-  marginRight: '100px',
-}
-const marginmin = {
-  marginTop: '-100px',
-}
+import React, { useEffect } from "react";
+import "../public/css/style.css";
+import Slider from "../components/Slider";
+import NavDashboard from "../components/NavDashboar";
+import ButtonDashboard from "../components/ButtonDashboard";
+import CardDashboard from "../components/CardDashboard";
+import NavbarProduk from "../components/ NavbarProduk";
+import { useDispatch, useSelector } from "react-redux";
 
 function Dashboard() {
+  const dispatch = useDispatch();
+  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [error]);
+
   return (
     <>
+
       <nav className="flex items-center justify-between drop-shadow-lg w-full h-20 bg-white">
         <div className="flex items-center w-20 h-20 py-5 -mx-2 lg:w-1/2">
           <div style={marginleft}></div>
@@ -62,234 +59,18 @@ function Dashboard() {
 
       <div className="flex flex-warp items-center justify-center w-full mt-10">
         <section className="h-100 gradient-form">
+
+      <div>
+        <section>
+         
+
           <Slider />
+          <ButtonDashboard />
+          <CardDashboard />
         </section>
       </div>
-
-      <main style={margin}>
-        <h1 className="flex w-full font-bold mt-10">Telusuri Kategori</h1>
-        <div className="flex w-full mx-100 mt-1">
-          <button
-            className="flex font-poppins bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
-            type="button"
-            data-mdb-ripple="true"
-            data-mdb-ripple-color="dark"
-          >
-            Semua
-            <div className="w-5 h-5 my-auto ml-2">
-              <svg
-                width="100"
-                height="100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.703 10.123a2 2 0 01-.076 3.341l-9.565 5.98c-1.332.834-3.06-.124-3.06-1.695V5.165c0-1.612 1.81-2.562 3.136-1.646l9.565 6.604z"
-                  fill="#FFF"
-                />
-              </svg>
-            </div>
-          </button>
-          <button
-            className="flex font-poppins bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
-            type="button"
-            data-mdb-ripple="true"
-            data-mdb-ripple-color="dark"
-          >
-            Hobi
-            <div className="w-5 h-5 my-auto ml-2">
-              <svg
-                width="100"
-                height="100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.703 10.123a2 2 0 01-.076 3.341l-9.565 5.98c-1.332.834-3.06-.124-3.06-1.695V5.165c0-1.612 1.81-2.562 3.136-1.646l9.565 6.604z"
-                  fill="#FFF"
-                />
-              </svg>
-            </div>
-          </button>
-          <button
-            className="flex font-poppins bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
-            type="button"
-            data-mdb-ripple="true"
-            data-mdb-ripple-color="dark"
-          >
-            Kendaraan
-            <div className="w-5 h-5 my-auto ml-2">
-              <svg
-                width="100"
-                height="100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.703 10.123a2 2 0 01-.076 3.341l-9.565 5.98c-1.332.834-3.06-.124-3.06-1.695V5.165c0-1.612 1.81-2.562 3.136-1.646l9.565 6.604z"
-                  fill="#FFF"
-                />
-              </svg>
-            </div>
-          </button>
-          <button
-            className="flex font-poppins bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
-            type="button"
-            data-mdb-ripple="true"
-            data-mdb-ripple-color="dark"
-          >
-            Baju
-            <div className="w-5 h-5 my-auto ml-2">
-              <svg
-                width="100"
-                height="100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.703 10.123a2 2 0 01-.076 3.341l-9.565 5.98c-1.332.834-3.06-.124-3.06-1.695V5.165c0-1.612 1.81-2.562 3.136-1.646l9.565 6.604z"
-                  fill="#FFF"
-                />
-              </svg>
-            </div>
-          </button>
-          <button
-            className="flex font-poppins bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
-            type="button"
-            data-mdb-ripple="true"
-            data-mdb-ripple-color="dark"
-          >
-            Elektronik
-            <div className="w-5 h-5 my-auto ml-2">
-              <svg
-                width="100"
-                height="100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.703 10.123a2 2 0 01-.076 3.341l-9.565 5.98c-1.332.834-3.06-.124-3.06-1.695V5.165c0-1.612 1.81-2.562 3.136-1.646l9.565 6.604z"
-                  fill="#FFF"
-                />
-              </svg>
-            </div>
-          </button>
-          <button
-            className="flex font-poppins bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
-            type="button"
-            data-mdb-ripple="true"
-            data-mdb-ripple-color="dark"
-          >
-            Kesehatan
-            <div className="w-5 h-5 my-auto ml-2">
-              <svg
-                width="100"
-                height="100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.703 10.123a2 2 0 01-.076 3.341l-9.565 5.98c-1.332.834-3.06-.124-3.06-1.695V5.165c0-1.612 1.81-2.562 3.136-1.646l9.565 6.604z"
-                  fill="#FFF"
-                />
-              </svg>
-            </div>
-          </button>
-        </div>
-
-        <div className="flex w-full mt-5">
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-        </div>
-
-        <div className="flex w-full mt-1">
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-          <div className="inline-block w-full ml-1 mr-1 border border-gray-300 p-3">
-            <img src={product} alt="" />
-            <h3 className="font-bold">jam tangan cosmos</h3>
-            <p>asadasdasd</p>
-            <h3 className="font-bold">Rp.00000</h3>
-          </div>
-        </div>
-      </main>
-
-      <div style={marginmin}>
-        <div className="flex justify-center drop-shadow-lg">
-          <button
-            className="flex font-poppins bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
-            type="button"
-            data-mdb-ripple="true"
-            data-mdb-ripple-color="dark"
-          >
-            + Jual
-          </button>
-        </div>
-      </div>
     </>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

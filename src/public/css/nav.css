@@ -1,0 +1,102 @@
+.searchbar {
+    width: 400px;
+    height: 43px;
+    border-radius: 15px;
+    background-color: #EEEEEE;
+    border: none;
+    display: flexbox;
+}
+
+img, svg, video, canvas, audio, iframe, embed, object {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.searchbar input {
+    width: 360px;
+    background: transparent;
+    border : none;
+    outline: none;
+}
+.carousel-inner{
+    width: 100%;
+    height: 600px;
+    border-radius: 20px;
+}
+
+.carousel-control-prev, .carousel-control-next{
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    top: calc(50% - 25px);
+}
+
+.carousel-control-prev{
+    left: 3%;
+}
+
+.carousel-control-next{
+    right: 3%;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #7126B5 !important;
+}
+
+.text-family{
+    font-family: 'Poppins', sans-serif;
+}
+
+.text-color{
+    font-family: 'Poppins', sans-serif;
+    color: #8A8A8A;
+}
+
+.button-add{
+    height: 45px;
+    background-color: #7126B5;
+    border: none;
+    border-radius: 20px;
+}
+
+.button-edit{
+    height: 45px;
+    border: #7126B5 solid 2px;
+    border-radius: 20px;
+}
+
+.button-edit2{
+    border: #7126B5 solid 2px;
+    border-radius: 10px;
+}
+
+.button-delete{
+    height: 45px;
+    border: red solid 2px;
+    border-radius: 20px;
+}
+
+.layout-foto{
+    width: 80px;
+    height: 80px;
+}
+
+.foto{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-left: 7px;
+    border-radius: 20%;
+}
+
+.line{
+    width: 225px;
+    height: 1px;
+    background-color: #8A8A8A;
+    margin-top: -5px;
+    margin-left: 10px;
+}
