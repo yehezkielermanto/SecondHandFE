@@ -30,9 +30,9 @@ function Dashboard() {
           <div className="flex items-center font-poppins">
             <input
               type="text"
-              className="form-control block w-full lg:px-10 py-1.5 font-normal text-gray-700 border border-solid border-gray-300 rounded-[10px] m-0 text-gray-700 bg-gray-300"
+              className="form-control block w-full lg:px-10 py-1.5 font-normal text-gray-700 border border-solid border-gray-300 rounded-[10px] m-0 text-gray-700 bg-[#EEEEEE]"
               id="exampleFormControlInput"
-              placeholder="cari apapun disini"
+              placeholder="Cari disini ..."
             />
           </div>
         </div>
