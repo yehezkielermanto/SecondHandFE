@@ -28,6 +28,7 @@ root.render(
         <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
         <Route path="/profile" element={<Profile />} />
+        <Route path="/review" element={<Reviewproduk />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route
           path="/login"
