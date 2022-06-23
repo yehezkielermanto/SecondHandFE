@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
 
-import App from './App'
+import Protected from './components/Protected'
 // For Profile Page
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
@@ -32,7 +32,14 @@ root.render(
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/user" element={<UserProfile />} />
+        <Route
+          path="/user"
+          element={
+            <Protected>
+              <UserProfile />
+            </Protected>
+          }
+        />
         <Route
           path="/login"
           element={
