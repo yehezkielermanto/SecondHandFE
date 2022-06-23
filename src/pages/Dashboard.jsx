@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import "../public/css/style.css";
-import Slider from "../components/Slider";
-import NavDashboard from "../components/NavDashboar";
-import ButtonDashboard from "../components/ButtonDashboard";
-import CardDashboard from "../components/CardDashboard";
-import NavbarProduk from "../components/ NavbarProduk";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from 'react'
+import Slider from '../components/Slider'
+import NavDashboard from '../components/NavDashboard'
+import ButtonDashboard from '../components/ButtonDashboard'
+import CardDashboard from '../components/CardDashboard'
+import NavbarProduk from '../components/ NavbarProduk'
+import { useDispatch, useSelector } from 'react-redux'
+import '../public/css/style.css'
 
 function Dashboard() {
-  const dispatch = useDispatch();
-  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+  const { isAuthenticated, error } = useSelector((state) => state.auth)
   useEffect(() => {
     if (error) {
-      alert(error);
+      alert(error)
     }
-  }, [error]);
+  }, [error])
 
   return (
     <>
@@ -28,7 +28,7 @@ function Dashboard() {
         </section>
       </div>
     </>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard
