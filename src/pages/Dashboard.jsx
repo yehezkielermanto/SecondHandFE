@@ -20,8 +20,10 @@ function Dashboard() {
     <>
       <div>
         <section>
+          <NavbarProduk />
+          <NavDashboard />
           {/* check state is authenticated or not */}
-          {!isAuthenticated ? <NavDashboard /> : <NavbarProduk />}
+          {/* {!isAuthenticated ? <NavDashboard /> : <NavbarProduk />} */}
           <Slider />
           <ButtonDashboard />
           <CardDashboard />

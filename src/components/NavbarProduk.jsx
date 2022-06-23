@@ -1,3 +1,4 @@
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navbar, Container, Form, Offcanvas, Nav } from 'react-bootstrap'
 import '../public/css/nav.css'
 
