@@ -12,10 +12,14 @@ import store from "./redux/store";
 
 import App from "./App";
 // For Profile Page
-import Profile from "./pages/Profile";
-import Dashboard from "./pages/Dashboard";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+
+import Profile from './pages/Profile'
+import Dashboard from './pages/Dashboard'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import Product from './pages/ProductSeller'
+import UserProfile from './pages/UserProfile'
+
 // import NotFound from "./pages/404";
 
 const { REACT_APP_ID } = process.env;
@@ -30,6 +34,8 @@ root.render(
         <Route path="/profile" element={<Profile />} />
         <Route path="/review" element={<Reviewproduk />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/user" element={<UserProfile />} />
         <Route
           path="/login"
           element={
