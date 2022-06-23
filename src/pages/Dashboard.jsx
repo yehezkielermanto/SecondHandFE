@@ -4,7 +4,7 @@ import Slider from "../components/Slider";
 import NavDashboard from "../components/NavDashboar";
 import ButtonDashboard from "../components/ButtonDashboard";
 import CardDashboard from "../components/CardDashboard";
-import NavbarProduk from "../components/NavbarProduk";
+import NavbarProduk from "../components/ NavbarProduk";
 import { useDispatch, useSelector } from "react-redux";
 
 function Dashboard() {
@@ -59,7 +59,7 @@ function Dashboard() {
 
       <div className="flex flex-warp items-center justify-center w-full mt-10">
         <section className="h-100 gradient-form">
-        </section>
+</section>
       <div>
         <section>
          
@@ -74,8 +74,4 @@ function Dashboard() {
   );
 }
 
-<<<<<<< HEAD
 export default Dashboard;
-=======
-export default Dashboard;
->>>>>>> e8d6c99f7534b4ff64fce0aced34d4590c95e8a0
