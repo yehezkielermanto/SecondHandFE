@@ -4,7 +4,7 @@ import NavDashboard from '../components/NavDashboar'
 import ButtonDashboard from '../components/ButtonDashboard'
 import CardDashboard from '../components/CardDashboard'
 import HeaderProduct from '../components/HeaderProduct'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import '../public/css/style.css'
 
 function Dashboard() {
