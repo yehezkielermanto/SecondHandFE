@@ -66,18 +66,21 @@ export const fetchUser = () => async (dispatch) => {
 }
 
 export const submitUpdate = (data) => async (dispatch) => {
-    const toSendNama = data.nama;
-    const toSendKota = data.kota;
-    const toSendAlamat = data.alamat;
-    const toSendNohp = data.nohp;
+    const nama = data.nama;
+    const idkota = data.kota;
+    const alamat = data.alamat;
+    const nohp = data.nohp;
+    const gambar = data.imgprofile;
     const idUpdate = data.idUser;
 
-    let toSendFull = {toSendNama, toSendKota, toSendAlamat, toSendNohp}
+    let toSendFull = {nama, alamat, nohp, gambar, idkota}
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT_UPDATEUSER}/${idUpdate}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(toSendFull),
     });

@@ -25,6 +25,7 @@ const ProfileHeaderComponent = (props) => {
   const [kota, setKota] = useState();
   const [alamat, setAlamat] = useState();
   const [nohp, setNohp] = useState();
+  const [imgProfile, setImg] = useState();
 
   
 
@@ -123,8 +124,18 @@ const ProfileHeaderComponent = (props) => {
        });
     }
 
+    if (imgProfile === "") {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        titleText: "Gambar Profile Masih Kosong !",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
+
     if (nama !== '' && kota !== '' && alamat !== '' && nohp !== '') {
-      dispatch(submitUpdate({idUser, nama, kota, alamat, nohp}))
+      dispatch(submitUpdate({idUser, nama, kota, alamat, nohp, imgProfile}))
     }
   }
 
@@ -158,7 +169,7 @@ const ProfileHeaderComponent = (props) => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden" />
+                <input id="dropzone-file" value={imgProfile} onChange={(e) => setImg(e.target.value)} type="file" class="hidden" />
               </label>
             </div>
             {/* <br /> */}
@@ -167,10 +178,14 @@ const ProfileHeaderComponent = (props) => {
               Nama<span className="text-red-600">*</span>
             </p>
             <div className="mb-4 font-poppins">
+              <h3 className="mb-1">Nama Sekarang: {user.nama}</h3>
               <input
                 type="text"
                 className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="exampleFormControlInput1" onChange={(e) => setNama(e.target.value)} value={user.nama} placeholder="Masukan Nama"
+                id="exampleFormControlInput1"
+                onChange={(e) => setNama(e.target.value)}
+                value={nama}
+                placeholder="Masukan Nama"
               />
             </div>
             {/* <br/> */}
@@ -184,7 +199,7 @@ const ProfileHeaderComponent = (props) => {
                 onChange={(e) => setKota(e.target.value)}
               >
                 <option selected>Pilih Kota</option>
-                {city.length === 0 ? <option>Daftar Kota Kosong</option> : city.map((kota) => <option>{kota.nama_kota}</option>)}
+                {city.length === 0 ? <option value="">Daftar Kota Kosong</option> : city.map((kota) => <option value={kota.id}>{kota.nama_kota}</option>)}
               </select>
             </div>
             {/* <br /> */}
@@ -192,10 +207,11 @@ const ProfileHeaderComponent = (props) => {
               Alamat<span className="text-red-600">*</span>
             </p>
             <div className="mb-4 font-poppins">
+              <h3 className="mb-1">Alamat Sekarang: {user.alamat}</h3>
               <textarea
                 className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="exampleFormControlInput1"
-                value={user.alamat}
+                value={alamat}
                 name="alamat"
                 onChange={(e) => setAlamat(e.target.value)}
                 placeholder="Contoh: Jalan Kulon No. 2"
@@ -206,11 +222,12 @@ const ProfileHeaderComponent = (props) => {
               No. Handphone<span className="text-red-600">*</span>
             </p>
             <div className="mb-4 font-poppins">
+              <h3 className="mb-1">No. Handphone Sekarang: {user.nohp}</h3>
               <input
                 type="text"
                 className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="exampleFormControlInput1"
-                value={user.nohp}
+                value={nohp}
                 name="nohp"
                 onChange={(e) => setNohp(e.target.value)}
                 placeholder="Contoh: +6285739103132"
