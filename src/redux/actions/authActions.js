@@ -1,4 +1,4 @@
-import { AUTH_ERROR, LOGIN, LOGOUT, isREGISTER } from './types'
+import { AUTH_ERROR, isGOOGLELOGIN, LOGIN, LOGOUT, isREGISTER } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 import Swal from 'sweetalert2'
 
@@ -122,7 +122,7 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
         timer: 1000,
       })
       dispatch({
-        type: LOGIN,
+        type: isGOOGLELOGIN,
         payload: result.token,
       })
     } else {
