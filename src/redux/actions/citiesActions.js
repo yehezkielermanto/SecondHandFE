@@ -1,4 +1,4 @@
-import { GET_USER, USERS_ERROR, LOGOUT } from "./types";
+import { GET_CITIES, CITIES_ERROR, LOGOUT } from "./types";
 
 const citiesError = (error) => async (dispatch) => {
   dispatch({
@@ -16,21 +16,22 @@ const citiesError = (error) => async (dispatch) => {
 
 export const listCities = () => async (dispatch) => {
   try {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
     const response = await fetch(process.env.REACT_APP_ENDPOINT_LISTCITIES, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
 
     const result = await response.json();
 
+    // console.log("ACTION CITY, " + JSON.stringify(result.allCity.city))
+
     if (result) {
       dispatch({
-        type: GET_USER,
-        payload: response.allCity,
+        type: GET_CITIES,
+        payload: result.allCity.city,
       });
     }
 

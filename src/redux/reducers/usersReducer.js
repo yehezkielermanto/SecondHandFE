@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { GET_USER, UPDATEPROFILE, USERS_ERROR } from "../actions/types";
+import { GET_USER, USERS_ERROR } from "../actions/types";
 
 // const initialState = {
 //   isAuthenticated: !!localStorage.getItem("token"),

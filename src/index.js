@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Reviewproduk from "./pages/reviewproduk"
 // import NotFound from "./pages/404";
 
 const { REACT_APP_ID } = process.env;

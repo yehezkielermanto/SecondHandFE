@@ -1,55 +1,135 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../public/css/style.css";
+import Swal from "sweetalert2";
 import { Link, Navigate } from "react-router-dom";
-import { fetchUser } from "../redux/actions/authActions";
+import { fetchUser, submitUpdate } from "../redux/actions/usersActions";
 import { listCities } from "../redux/actions/citiesActions";
 
 // if (!isAuthenticated) {
 //   return <Navigate to={`/login`} />;
 // }
 
-const ProfileHeaderComponent = () => {
+const ProfileHeaderComponent = (props) => {
 
   const dispatch = useDispatch();
-  const {isAuthenticated, error} = useSelector((state) => state.auth)
 
-  const { errorU, user } = useSelector((state) => state.users);
+  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  const { user, errorU } = useSelector((state) => state.users);
+  const { city, errorC } = useSelector((state) => state.cities);
 
-  const { errorC, cities } = useSelector((state) => state.cities);
+  console.log
+
+  const [idUser, setId] = useState();
+  const [nama, setNama] = useState();
+  const [kota, setKota] = useState();
+  const [alamat, setAlamat] = useState();
+  const [nohp, setNohp] = useState();
+
+  
+
+  useEffect(() => {
+    (async () => {
+      dispatch(listCities());
+      // dispatch(fetchUser());
+    })();
+  }, [dispatch]);
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        titleText: error,
+        showConfirmButton: false,
+        timer: 1000,
+      });
+      // alert(error);
     }
   }, [error])
 
   useEffect(() => {
     if (errorU) {
-      alert(errorU);
+       Swal.fire({
+         position: "center",
+         icon: "error",
+         titleText: errorU,
+         showConfirmButton: false,
+         timer: 1000,
+       });
+      // alert(errorU);
     }
   }, [errorU]);
 
   useEffect(() => {
     if (errorC) {
-      alert(errorC);
+       Swal.fire({
+         position: "center",
+         icon: "error",
+         titleText: errorC,
+         showConfirmButton: false,
+         timer: 1000,
+       });
+      // alert(errorC);
     }
   }, [errorC]);
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     dispatch(fetchUser());
-  //     dispatch(listCities());
-  //   }
-  // }, [isAuthenticated])
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchUser());
+    }
+  }, [isAuthenticated])
 
-  // useEffect(() => {
-  //   if (user != null) {
-  //     dispatch(fetchUser());
-  //     dispatch(listCities());
-  //   }
-  // }, [user]);
+  const handleSubmit = async (e) => {
+    // e.preventDefault()
 
+    if (nama === '' ) {
+       Swal.fire({
+         position: "center",
+         icon: "warning",
+         titleText: "Nama Masih Kosong !",
+         showConfirmButton: false,
+         timer: 1000,
+       });
+    }
+    
+    if (kota === '' ) {
+       Swal.fire({
+         position: "center",
+         icon: "warning",
+         titleText: "Kota Masih Kosong !",
+         showConfirmButton: false,
+         timer: 1000,
+       });
+    }
+
+    if (alamat === '' ) {
+       Swal.fire({
+         position: "center",
+         icon: "warning",
+         titleText: "Alamat Masih Kosong !",
+         showConfirmButton: false,
+         timer: 1000,
+       });
+    }
+
+    if (nohp === '' ) {
+       Swal.fire({
+         position: "center",
+         icon: "warning",
+         titleText: "No. HP Masih Kosong !",
+         showConfirmButton: false,
+         timer: 1000,
+       });
+    }
+
+    if (nama !== '' && kota !== '' && alamat !== '' && nohp !== '') {
+      dispatch(submitUpdate({idUser, nama, kota, alamat, nohp}))
+    }
+  }
+
+  // console.log("USERNYA, "+user)
+  // console.log("USERNYAaa, " + JSON.stringify(user));
   return (
     <>
       {/* Main Content */}
@@ -61,8 +141,11 @@ const ProfileHeaderComponent = () => {
             </svg>
           </div>
         </Link>
-
-          <form>
+        {!isAuthenticated ? (
+          <Navigate to={`/`} />
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <input type="hidden" value={user.id} name="idUser" onChange={(e) => setId(e.target.value)} />
             <div class="flex justify-center items-center w-full">
               <label for="dropzone-file" class="flex flex-col p-0 w-20 justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer ">
                 <div class="flex flex-col justify-center items-center pt-5 pb-6">
@@ -87,9 +170,7 @@ const ProfileHeaderComponent = () => {
               <input
                 type="text"
                 className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="exampleFormControlInput1"
-                value={user.nama}
-                placeholder="Nama"
+                id="exampleFormControlInput1" onChange={(e) => setNama(e.target.value)} value={user.nama} placeholder="Masukan Nama"
               />
             </div>
             {/* <br/> */}
@@ -97,9 +178,13 @@ const ProfileHeaderComponent = () => {
               Kota<span className="text-red-600">*</span>
             </p>
             <div className="mb-4 font-poppins">
-              <select class="block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+              <select
+                class="block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                name="kota"
+                onChange={(e) => setKota(e.target.value)}
+              >
                 <option selected>Pilih Kota</option>
-                {cities.length == 0 ? <option>Daftar Kota Kosong</option> : cities.map((city) => <option>{city.city.nama_kota}</option>)}
+                {city.length === 0 ? <option>Daftar Kota Kosong</option> : city.map((kota) => <option>{kota.nama_kota}</option>)}
               </select>
             </div>
             {/* <br /> */}
@@ -111,6 +196,8 @@ const ProfileHeaderComponent = () => {
                 className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="exampleFormControlInput1"
                 value={user.alamat}
+                name="alamat"
+                onChange={(e) => setAlamat(e.target.value)}
                 placeholder="Contoh: Jalan Kulon No. 2"
               ></textarea>
             </div>
@@ -124,6 +211,8 @@ const ProfileHeaderComponent = () => {
                 className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="exampleFormControlInput1"
                 value={user.nohp}
+                name="nohp"
+                onChange={(e) => setNohp(e.target.value)}
                 placeholder="Contoh: +6285739103132"
               />
             </div>
@@ -132,6 +221,7 @@ const ProfileHeaderComponent = () => {
               <span className="text-white font-medium">Simpan</span>
             </button>
           </form>
+        )}
       </div>
     </>
   );

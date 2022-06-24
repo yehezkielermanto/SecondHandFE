@@ -1,7 +1,7 @@
 import { GET_CITIES, CITIES_ERROR, } from "../actions/types";
 
 const initialState = {
-  cities: {},
+  city: [],
   errorC: null,
 };
 
@@ -15,7 +15,7 @@ const userReducer = (state = initialState, action) => {
     case GET_CITIES:
       return {
         ...state,
-        cities: action.payload,
+        city: action.payload,
       };
     case CITIES_ERROR:
       return {
