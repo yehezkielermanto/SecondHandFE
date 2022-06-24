@@ -6,6 +6,8 @@ import './public/css/tailwind.css'
 import './public/css/style.css'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
 
@@ -20,6 +22,12 @@ import UserProfile from './pages/UserProfile'
 
 // import NotFound from "./pages/404";
 
+const options = {
+  positions: positions.BOTTOM_CENTER,
+  timeout: 4000,
+  offset: '30px',
+  transitions: transitions.SCALE,
+}
 const { REACT_APP_ID } = process.env
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -30,7 +38,14 @@ root.render(
         <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
         <Route path="/profile" element={<Profile />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <AlertProvider template={AlertTemplate} {...options}>
+              <Dashboard />
+            </AlertProvider>
+          }
+        />
         <Route path="/product" element={<Product />} />
         <Route
           path="/user"
