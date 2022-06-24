@@ -9,12 +9,15 @@ import { Provider } from 'react-redux'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
 
-import App from './App'
+import Protected from './components/Protected'
 // For Profile Page
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Product from './pages/ProductSeller'
+import UserProfile from './pages/UserProfile'
+
 // import NotFound from "./pages/404";
 
 const { REACT_APP_ID } = process.env
@@ -28,6 +31,15 @@ root.render(
         {/* Endpoint  for user profile */}
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/product" element={<Product />} />
+        <Route
+          path="/user"
+          element={
+            <Protected>
+              <UserProfile />
+            </Protected>
+          }
+        />
         <Route
           path="/login"
           element={

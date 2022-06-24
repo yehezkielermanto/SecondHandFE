@@ -17,44 +17,40 @@
 /* Font Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-html, body {
+html,
+body {
   font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
 }
-#button{
-margin-left: 100px;
+#button {
+  margin-left: 100px;
 }
-#card{
-margin-left: 100px;
-margin-right: 100px;
+#card {
+  margin-left: 100px;
+  margin-right: 100px;
 }
-#plus{
-margin-top: -100px;
+#plus {
+  margin-top: -100px;
 }
-#navmo{
-margin-top: -50px;
-}
-@media screen and (max-width: 992px) {
-#button{
-  margin-left: 50px;
-}
-#plus{
+#navmo {
   margin-top: -50px;
 }
-#card{
-  margin-left: 50px;
-  margin-right: 50px;
-}
+@media screen and (max-width: 992px) {
+  #button {
+    margin-left: 50px;
+  }
+  #card {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
 }
 
 @media screen and (max-width: 576px) {
-#button{
-  margin-left: 10px;
-}
-#plus{
-  margin-top: -10px;
-}
-#card{
-  margin-left: 10px;
-  margin-right: 10px;
-}
+  #button {
+    margin-left: 10px;
+  }
+  #card {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
