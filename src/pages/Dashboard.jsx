@@ -6,22 +6,6 @@ import CardDashboard from '../components/CardDashboard'
 import HeaderProduct from '../components/HeaderProduct'
 import { useDispatch, useSelector } from 'react-redux'
 import '../public/css/style.css'
-import logo from '../img/logo.png'
-import { Link } from 'react-router-dom'
-
-const margin = {
-  marginLeft: '100px',
-  marginRight: '100px',
-}
-const marginleft = {
-  marginLeft: '100px',
-}
-const marginright = {
-  marginRight: '100px',
-}
-const marginmin = {
-  marginTop: '-100px',
-}
 
 function Dashboard() {
   const { isAuthenticated, error } = useSelector((state) => state.auth)
