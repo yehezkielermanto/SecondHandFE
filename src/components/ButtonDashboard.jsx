@@ -15,7 +15,7 @@ const ButtonDashboard = () => {
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               >
-              <AiOutlineSearch className="hover:text-white text-gray-700"/>
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
               Semua
           </button>
           </div>
@@ -26,7 +26,7 @@ const ButtonDashboard = () => {
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               >
-              <AiOutlineSearch className="hover:text-white text-gray-700"/>
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
               Hobi
           </button>
           </div>
@@ -37,7 +37,7 @@ const ButtonDashboard = () => {
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               >
-              <AiOutlineSearch className="hover:text-white text-gray-700"/>
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
               Kendaraan
           </button>
           </div>
@@ -48,7 +48,7 @@ const ButtonDashboard = () => {
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               >
-              <AiOutlineSearch className="hover:text-white text-gray-700"/>
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
               Baju
           </button>
           </div>
@@ -59,7 +59,7 @@ const ButtonDashboard = () => {
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               >
-              <AiOutlineSearch className="hover:text-white text-gray-700"/>
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
               Elektronik
           </button>
           </div>
@@ -70,7 +70,7 @@ const ButtonDashboard = () => {
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               >
-              <AiOutlineSearch className="hover:text-white text-gray-700"/>
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
               Kesehatan
           </button>
           </div>

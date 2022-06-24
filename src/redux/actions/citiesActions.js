@@ -17,7 +17,7 @@ const citiesError = (error) => async (dispatch) => {
 export const listCities = () => async (dispatch) => {
   try {
     // const token = localStorage.getItem("token");
-    const response = await fetch(process.env.REACT_APP_ENDPOINT_LISTCITIES, {
+    const response = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/cities`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

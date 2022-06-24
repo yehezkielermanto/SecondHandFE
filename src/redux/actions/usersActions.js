@@ -1,4 +1,4 @@
-import {GET_USER, USERS_ERROR, LOGOUT} from './types'
+import {GET_USER, USERS_ERROR, LOGOUT, JUST_UPDATED} from './types'
 import Swal from "sweetalert2";
 
 const usersError = (error) => async (dispatch) => {
@@ -26,13 +26,13 @@ const usersError = (error) => async (dispatch) => {
 export const fetchUser = () => async (dispatch) => {
     try {
         const token = localStorage.getItem('token')
-        const response = await fetch(process.env.REACT_APP_ENDPOINT_AKU, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        })
+        const response = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/users/siapaSaya`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const result = await response.json()
 
@@ -66,30 +66,34 @@ export const fetchUser = () => async (dispatch) => {
 }
 
 export const submitUpdate = (data) => async (dispatch) => {
+  try {
     const nama = data.nama;
     const idkota = data.kota;
     const alamat = data.alamat;
     const nohp = data.nohp;
-    const gambar = data.imgprofile;
+    const gambar = data.imgProfile;
     const idUpdate = data.idUser;
 
-    let toSendFull = {nama, alamat, nohp, gambar, idkota}
-  try {
+    let toSendFull = { nama, alamat, nohp, gambar, idkota };
+
     const token = localStorage.getItem("token");
-    const response = await fetch(`${process.env.REACT_APP_ENDPOINT_UPDATEUSER}/${idUpdate}`, {
+
+    alert("ID TO SEND, " + idUpdate+ ", NAMA, "+nama);
+
+    const response = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/users/${idUpdate}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(toSendFull),
+      body: nama, idkota, alamat, nohp, gambar,
     });
 
     const result = await response.json();
     
     if (result.token) {
       dispatch({
-        type: LOGIN,
+        type: JUST_UPDATED,
         payload: result.token,
       });
     } else {
@@ -97,7 +101,7 @@ export const submitUpdate = (data) => async (dispatch) => {
       Swal.fire({
         position: "center",
         icon: "warning",
-        titleText: result.message,
+        titleText: result.error,
         showConfirmButton: false,
         timer: 950,
       });
