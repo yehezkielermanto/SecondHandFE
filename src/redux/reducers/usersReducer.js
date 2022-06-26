@@ -23,9 +23,10 @@ const usersReducer = (state = initialState, action) => {
         justUpdated: false,
       };
     case JUST_UPDATED:
+      console.log("JUST UPDATED LOAD")
       return {
         ...state,
-        user: action.payload,
+        user: null,
         justUpdated: true,
       };
     case USERS_ERROR:

@@ -1,18 +1,18 @@
 import { GET_CITIES, CITIES_ERROR, LOGOUT } from "./types";
 
-const citiesError = (error) => async (dispatch) => {
-  dispatch({
-    type: CITIES_ERROR,
-    payload: error.message,
-  });
+// const citiesError = (error) => async (dispatch) => {
+  // dispatch({
+  //   type: CITIES_ERROR,
+  //   payload: error.message,
+  // });
 
-  setTimeout(() => {
-    dispatch({
-      type: CITIES_ERROR,
-      payload: null,
-    });
-  }, 5000);
-};
+//   setTimeout(() => {
+//     dispatch({
+//       type: CITIES_ERROR,
+//       payload: null,
+//     });
+//   }, 5000);
+// };
 
 export const listCities = () => async (dispatch) => {
   try {
@@ -41,10 +41,15 @@ export const listCities = () => async (dispatch) => {
         type: LOGOUT,
       });
     } else {
-      // alert(result.message);
-      citiesError(result.error);
+      dispatch({
+        type: CITIES_ERROR,
+        payload: result.error,
+      });
     }
   } catch (error) {
-    citiesError(error);
+    dispatch({
+      type: CITIES_ERROR,
+      payload: error,
+    });
   }
 };

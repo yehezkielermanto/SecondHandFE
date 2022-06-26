@@ -18,7 +18,7 @@ const ProfileHeaderComponent = (props) => {
   const { user, justUpdated, errorU } = useSelector((state) => state.users);
   const { city, errorC } = useSelector((state) => state.cities);
 
-  const [idUser, setId] = useState();
+  // const [idUser, setId] = useState();
   const [nama, setNama] = useState();
   const [kota, setKota] = useState();
   const [alamat, setAlamat] = useState();
@@ -66,7 +66,7 @@ const ProfileHeaderComponent = (props) => {
          icon: "error",
          titleText: errorC,
          showConfirmButton: false,
-         timer: 1000,
+         timer: 2000,
        });
       // alert(errorC);
     }
@@ -75,6 +75,8 @@ const ProfileHeaderComponent = (props) => {
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchUser());
+    } else {
+      alert("User Data Not Found !")
     }
   }, [isAuthenticated])
 
@@ -85,72 +87,17 @@ const ProfileHeaderComponent = (props) => {
         icon: "success",
         titleText: "Profil Anda Berhasil Terubah !",
         showConfirmButton: false,
-        timer: 1000,
+        timer: 2000,
       });
     }
   }, [justUpdated])
 
   const handleSubmit = async (e) => {
-    const image = fileRef.current.files[0];
-    const reader = new FileReader();
+    e.preventDefault();
 
-    // e.preventDefault()
-    if (nama === '' ) {
-       Swal.fire({
-         position: "center",
-         icon: "warning",
-         titleText: "Nama Masih Kosong !",
-         showConfirmButton: false,
-         timer: 1000,
-       });
-    }
-    
-    if (kota === '' ) {
-       Swal.fire({
-         position: "center",
-         icon: "warning",
-         titleText: "Kota Masih Kosong !",
-         showConfirmButton: false,
-         timer: 1000,
-       });
-    }
+      console.log(imgProfile)
 
-    if (alamat === '' ) {
-       Swal.fire({
-         position: "center",
-         icon: "warning",
-         titleText: "Alamat Masih Kosong !",
-         showConfirmButton: false,
-         timer: 1000,
-       });
-    }
-
-    if (nohp === '' ) {
-       Swal.fire({
-         position: "center",
-         icon: "warning",
-         titleText: "No. HP Masih Kosong !",
-         showConfirmButton: false,
-         timer: 1000,
-       });
-    }
-
-    if (imgProfile === "") {
-      Swal.fire({
-        position: "center",
-        icon: "warning",
-        titleText: "Gambar Profile Masih Kosong !",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-    }
-
-    if (nama !== '' && kota !== '' && alamat !== '' && nohp !== '') {
-      reader.readAsDataURL(image);
-      setImg(reader.result);
-
-      dispatch(submitUpdate({idUser: user.id, nama, kota, alamat, nohp, imgProfile}))
-    }
+      dispatch(submitUpdate({ idUser: user.id, nama, kota, alamat, nohp, gambar: imgProfile }));
   }
 
   // console.log("USERNYA, "+user)
@@ -159,6 +106,7 @@ const ProfileHeaderComponent = (props) => {
     <>
       {/* Main Content */}
       {!justUpdated ? (
+
         <div className="flex flex-col h-full sm:w-full lg:w-6/12 lg:mx-auto mt-5 px-3 text-left">
           <Link to="/">
             <div className="invisible lg:visible p-0 w-10 flex justify-center hover:bg-violet-800 rounded-full">
@@ -168,7 +116,7 @@ const ProfileHeaderComponent = (props) => {
             </div>
           </Link>
           {!isAuthenticated ? (
-            <Navigate to={`/`} />
+            <Navigate to="/" />
           ) : (
             <form onSubmit={handleSubmit}>
               <input type="hidden" value={user.id} onChange={(e) => setId(e.target.value)} />
@@ -187,7 +135,7 @@ const ProfileHeaderComponent = (props) => {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   </div>
-                  <input id="dropzone-file" type="file" ref={fileRef} class="hidden" />
+                  <input id="dropzone-file" type="file" ref={fileRef} onChange={(e) => setImg(e.target.files[0])} className="hidden" />
                 </label>
               </div>
               {/* <br /> */}
@@ -257,9 +205,9 @@ const ProfileHeaderComponent = (props) => {
               </button>
             </form>
           )}
+           
         </div>
       ) : (
-
         <Navigate to="/user" />
       )}
     </>
