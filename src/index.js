@@ -17,6 +17,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Product from './pages/ProductSeller'
 import UserProfile from './pages/UserProfile'
+import CategoryTable from './components/CategoryTable'
 
 // import NotFound from "./pages/404";
 
@@ -57,16 +58,23 @@ root.render(
           }
         />
 
+        <Route
+          path="/kategori"
+          element={            
+              <CategoryTable />
+          }
+        />
+
         {/* 404 */}
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
 
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
-)
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

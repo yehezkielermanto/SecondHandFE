@@ -82,7 +82,50 @@ export const submitUpdate = (data) => async (dispatch) => {
     } 
 
     console.log("IMGNYA, " + data.gambar);
+    
+    console.log("WITh IMG");
+    formdata.append("nama", data.nama);
+    formdata.append("alamat", data.alamat);
+    formdata.append("nohp", data.nohp);
+    formdata.append("gambar", data.gambar);
+    formdata.append("idkota", data.kota);
 
+    console.log(formdata.nama);
+
+    const requestOptions = {
+      method: "PUT",
+      body: formdata,
+      headers: { Authorization: `Bearer ${token}` },
+      redirect: "follow",
+    };
+
+    // console.log(idUpdate);
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/users/update/${idUpdate}`, requestOptions);
+
+      const result = await response.json();
+
+      if (result.status === "OK") {
+        dispatch({
+          type: JUST_UPDATED,
+        });
+      } else {
+        // usersError(result.error.message);
+        dispatch({
+          type: USERS_ERROR,
+          payload: result.error,
+        });
+        return;
+      }
+    } catch (error) {
+      dispatch({
+        type: USERS_ERROR,
+        payload: error,
+      });
+    }
+
+    /*
     if (data.gambar === undefined || data.gambar === null) {
       console.log("WITHOUT IMG");
       formdata.append("nama", data.nama);
@@ -90,6 +133,8 @@ export const submitUpdate = (data) => async (dispatch) => {
       formdata.append("nohp", data.nohp);
       formdata.append("idkota", data.kota);
       formdata.append("gambar", "");
+
+      console.log(formdata.nama)
 
       const requestOptions = {
         method: "PUT",
@@ -99,6 +144,7 @@ export const submitUpdate = (data) => async (dispatch) => {
       };
 
       try {
+        console.log("ID UPDATE, "+idUpdate)
         const response = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/usersNP/${idUpdate}`, requestOptions);
 
         const result = await response.json();
@@ -130,6 +176,8 @@ export const submitUpdate = (data) => async (dispatch) => {
       formdata.append("nohp", data.nohp);
       formdata.append("gambar", data.gambar);
       formdata.append("idkota", data.kota);
+
+      console.log(formdata.nama)
 
       const requestOptions = {
         method: "PUT",
@@ -165,4 +213,5 @@ export const submitUpdate = (data) => async (dispatch) => {
         });
       }
     }
+    */
 };
