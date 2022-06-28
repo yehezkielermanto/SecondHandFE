@@ -6,14 +6,12 @@ import './public/css/tailwind.css'
 import './public/css/style.css'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
-import { transitions, positions, Provider as AlertProvider } from 'react-alert'
-import AlertTemplate from 'react-alert-template-basic'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
 
 import Protected from './components/Protected'
 // For Profile Page
-import DaftarJual from "./pages/DaftarJual";
+import DaftarJual from './pages/DaftarJual'
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'

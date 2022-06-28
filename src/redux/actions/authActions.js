@@ -1,7 +1,6 @@
 import { AUTH_ERROR, isGOOGLELOGIN, LOGIN, LOGOUT, isREGISTER } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 import Swal from 'sweetalert2'
-import { useAlert } from 'react-alert'
 
 // register new user
 export const registerUser = (data) => async (dispatch) => {
@@ -56,19 +55,18 @@ export const loginViaForm = (data) => async (dispatch) => {
 
     const result = await response.json()
     if (result.token) {
-      // Swal.fire({
-      //   position: 'center',
-      //   icon: 'success',
-      //   titleText: 'Login Successfully',
-      //   showConfirmButton: false,
-      //   timer: 1000,
-      // })
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        titleText: 'Login Successfully',
+        showConfirmButton: false,
+        timer: 1000,
+      })
       dispatch({
         type: LOGIN,
         payload: result.token,
       })
       // alert('Login berhasil')
-      useAlert().show('Login successfully')
     } else if (result.message == 'Email not found') {
       Swal.fire({
         position: 'center',

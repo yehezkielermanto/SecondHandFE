@@ -1,19 +1,19 @@
-import React from "react";
-import CardName from "../components/CardName";
+import React from 'react'
+import CardName from '../components/CardName'
 import {
   AiOutlineArrowRight,
   AiOutlineHeart,
   AiOutlinePlus,
-} from "react-icons/ai";
-import { HiOutlineCube } from "react-icons/hi";
-import { FiDollarSign } from "react-icons/fi";
-import NavbarProduk from "../components/ NavbarProduk";
-import { Link } from "react-router-dom";
+} from 'react-icons/ai'
+import { HiOutlineCube } from 'react-icons/hi'
+import { FiDollarSign } from 'react-icons/fi'
+import HeaderProduct from '../components/HeaderProduct'
+import { Link } from 'react-router-dom'
 
 const DaftarJual = () => {
   return (
     <div className="mb-5">
-      <NavbarProduk />
+      <HeaderProduct />
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-10 mx-auto position-relative">
@@ -193,7 +193,7 @@ const DaftarJual = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DaftarJual;
+export default DaftarJual
