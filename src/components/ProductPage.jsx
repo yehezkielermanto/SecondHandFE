@@ -47,7 +47,7 @@ export default function Product() {
 				</div>
 
 				<div className="px-4 flex flex-col relative bottom-2 gap-4 md:flex-grow md:bottom-0 ">
-					<div className="bg-white rounded-xl px-6 py-4 flex flex-col shadow-low md:shadow-high p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white max-w-xs">
+					<div className="w-full relative md:w-4/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white">
 						<h1 className="font-medium">Jam Tangan Casio</h1>
 						<p className="text-sm text-neutral-3">Aksesoris</p>
 						<p className="">Rp 250.000</p>
@@ -60,7 +60,7 @@ export default function Product() {
 						</button>
 					</div>
 
-					<div className="flex bg-white rounded-xl px-6 py-4 shadow-low gap-4 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white max-w-xs">
+					<div className="flex bg-white rounded-xl py-4 shadow-low gap-4 p-4 w-full relative md:w-4/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white">
 						<img className="h-14 aspect-square rounded-xl object-cover" src={Seller} />
 						<div className="flex flex-col justify-center">
 							<h1 className="font-medium">Nama Penjual</h1>
@@ -70,7 +70,7 @@ export default function Product() {
 				</div>
 			</div>
 
-			<div className="pb-5 px-4 mt-2 md:max-w-screen-lg md:mt-4 md:mx-auto md:px-0 md:pb-0 ">
+			<div className="pb-5 px-4 mt-2 mb-10 md:max-w-screen-lg md:mt-4 md:mx-auto md:px-0 md:pb-0 ">
 				<div className="w-full relative md:w-3/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.15)] bg-white mt-5">
 					<h1 className="font-medium mb-5">Deskripsi</h1>
 					<p className="text-sm font-regular lg:leading-tight leading-normal text-[#8A8A8A] dark:text-[#8A8A8A]">
@@ -83,7 +83,7 @@ export default function Product() {
 			</div>
 
 			<div className="fixed w-full bottom-4 px-4 md:hidden">
-				<button className="bg-purple-4 font-medium text-white text-center py-4 w-full rounded-xl">
+				<button className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl">
 					Terbitkan
 				</button>
 			</div>
