@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function addProduct() {
   return (
     <>
-     <nav className="flex items-center drop-shadow-lg w-full bg-white invisible sm:visible">
+      <nav className="flex items-center drop-shadow-lg w-full bg-white invisible sm:visible">
         <div className="w-1/12"></div>
         <div className="flex items-center font-poppins w-5/12">
           <div className="flex-grow lg:flex-grow-0 lg:flex lg:justify-center lg:items-center lg:gap-4">
@@ -88,7 +88,6 @@ export default function addProduct() {
           <FiSearch className="text-2xl" />
         </div>
       </div>
-    </>
     </>
   )
 }

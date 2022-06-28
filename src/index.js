@@ -32,7 +32,14 @@ root.render(
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
-        <Route path="/user/profile" element={<Profile />} />
+        <Route
+          path="/user/profile"
+          element={
+            <Protected>
+              <Profile />
+            </Protected>
+          }
+        />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
         <Route

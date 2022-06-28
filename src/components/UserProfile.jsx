@@ -27,9 +27,16 @@ export default function AkunComponent() {
       </div>
 
       <div className="lg:mx-10 md:mx-10 my-10 my-10 text-2xl first-letter pr-4 pl-4 divide-y divide-gray-300">
-        <div className="items-center flex gap-5  py-6 font-medium text-sm">
-          <FiEdit className=" text-2xl text-[#4B1979] " />
-          Ubah Akun
+        <div className="items-center flex gap-5   font-medium text-sm">
+          <Link
+            className="w-full hover:bg-[#E2D4F0] py-6 px-3"
+            to="/user/profile"
+          >
+            <div className="flex">
+              <FiEdit className=" text-2xl text-[#4B1979] " />
+              <p className="mx-4">Ubah Akun</p>
+            </div>
+          </Link>
         </div>
         <div className="items-center flex gap-5 py-6 font-medium text-sm">
           <FiSettings className=" text-2xl text-[#4B1979] " />
