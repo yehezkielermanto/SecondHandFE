@@ -19,58 +19,54 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Product from './pages/ProductSeller'
 import UserProfile from './pages/UserProfile'
+import CategoryTable from './components/CategoryTable'
+import NotFound from './pages/404'
+import AddProduct from './pages/addProducts'
 
-// import NotFound from "./pages/404";
-
-const options = {
-  positions: positions.BOTTOM_CENTER,
-  timeout: 4000,
-  offset: '30px',
-  transitions: transitions.SCALE,
-}
 const { REACT_APP_ID } = process.env
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Provider store={store}>
-    <AlertProvider template={AlertTemplate} {...options}>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Dashboard />} />
-          {/* Endpoint  for user profile */}
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/product" element={<Product />} />
-          <Route
-            path="/user"
-            element={
-              <Protected>
-                <UserProfile />
-              </Protected>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <GoogleOAuthProvider clientId={REACT_APP_ID}>
-                <Login />
-              </GoogleOAuthProvider>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <GoogleOAuthProvider clientId={REACT_APP_ID}>
-                <Register />
-              </GoogleOAuthProvider>
-            }
-          />
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Dashboard />} />
+        {/* Endpoint  for user profile */}
+        <Route path="/user/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/product" element={<Product />} />
+        <Route
+          path="/user"
+          element={
+            <Protected>
+              <UserProfile />
+            </Protected>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <GoogleOAuthProvider clientId={REACT_APP_ID}>
+              <Login />
+            </GoogleOAuthProvider>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <GoogleOAuthProvider clientId={REACT_APP_ID}>
+              <Register />
+            </GoogleOAuthProvider>
+          }
+        />
 
-          {/* 404 */}
-          {/* <Route path="*" element={<NotFound />} /> */}
-        </Routes>
-      </BrowserRouter>
-    </AlertProvider>
+        <Route path="/kategori" element={<CategoryTable />} />
+        {/* add new products */}
+        <Route path="/addProduct" element={<AddProduct />} />
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   </Provider>,
 
   // <React.StrictMode>
