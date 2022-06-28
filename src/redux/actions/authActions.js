@@ -1,6 +1,7 @@
-import { AUTH_ERROR, LOGIN, LOGOUT, isREGISTER } from './types'
+import { AUTH_ERROR, isGOOGLELOGIN, LOGIN, LOGOUT, isREGISTER } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 import Swal from 'sweetalert2'
+import { useAlert } from 'react-alert'
 
 // register new user
 export const registerUser = (data) => async (dispatch) => {
@@ -42,6 +43,7 @@ export const registerUser = (data) => async (dispatch) => {
   }
 }
 
+// login action
 export const loginViaForm = (data) => async (dispatch) => {
   try {
     const response = await fetch(`${REACT_APP_URLENDPOINT}/api/v1/auth/login`, {
@@ -51,20 +53,48 @@ export const loginViaForm = (data) => async (dispatch) => {
       },
       body: JSON.stringify(data),
     })
+
     const result = await response.json()
     if (result.token) {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        titleText: 'Login Successfully',
-        showConfirmButton: false,
-        timer: 1000,
-      })
+      // Swal.fire({
+      //   position: 'center',
+      //   icon: 'success',
+      //   titleText: 'Login Successfully',
+      //   showConfirmButton: false,
+      //   timer: 1000,
+      // })
       dispatch({
         type: LOGIN,
         payload: result.token,
       })
+      // alert('Login berhasil')
+      useAlert().show('Login successfully')
+    } else if (result.message == 'Email not found') {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        titleText: 'Email not found',
+        showConfirmButton: false,
+        timer: 1000,
+      })
+      authError(result.error)
+    } else if (result.message == 'Password incorrect') {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        titleText: 'Password incorrect',
+        showConfirmButton: false,
+        timer: 1000,
+      })
+      authError(result.error)
     } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        titleText: 'Login Failed',
+        showConfirmButton: false,
+        timer: 1000,
+      })
       authError(result.error)
     }
   } catch (error) {
@@ -97,7 +127,7 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
         timer: 1000,
       })
       dispatch({
-        type: LOGIN,
+        type: isGOOGLELOGIN,
         payload: result.token,
       })
     } else {

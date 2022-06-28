@@ -1,14 +1,7 @@
-import React, { useState } from 'react'
-import '../public/css/style.css'
-import { FiLogIn } from 'react-icons/fi'
-import { FiSearch } from 'react-icons/fi'
-import { FiMenu } from 'react-icons/fi'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import ResponsiveNavLink from './ResponsiveNavLink'
 
-const NavDashboard = () => {
-  const [open, setOpen] = useState(false)
+export default function addProduct() {
   return (
     <>
       <nav className="flex items-center drop-shadow-lg w-full bg-white invisible sm:visible">
@@ -98,5 +91,3 @@ const NavDashboard = () => {
     </>
   )
 }
-
-export default NavDashboard

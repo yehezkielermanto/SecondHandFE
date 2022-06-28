@@ -82,7 +82,7 @@ const Login = () => {
                       type="password"
                       className="form-control w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
                 border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
-                      id="emailInput"
+                      id="passwordInput"
                       placeholder="Masukkan password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
