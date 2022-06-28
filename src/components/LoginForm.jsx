@@ -1,48 +1,48 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useGoogleLogin } from "@react-oauth/google";
-import { Navigate, Link } from "react-router-dom";
-import Image from "../img/register.png";
-import { FiArrowLeft } from "react-icons/fi";
-import { Input } from "antd";
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useGoogleLogin } from '@react-oauth/google'
+import { Navigate, Link } from 'react-router-dom'
+import Image from '../img/register.png'
+import { FiArrowLeft } from 'react-icons/fi'
+import { Input } from 'antd'
 
-import "antd/dist/antd.css";
-import { loginViaForm, loginWithGoogle } from "../redux/actions/authActions";
+import 'antd/dist/antd.css'
+import { loginViaForm, loginWithGoogle } from '../redux/actions/authActions'
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+  const { isAuthenticated, error } = useSelector((state) => state.auth)
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      alert(error)
     }
-  }, [error]);
+  }, [error])
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (email === "") {
-      alert("Email is required");
+    e.preventDefault()
+    if (email === '') {
+      alert('Email is required')
     }
-    if (password === "") {
-      alert("Password is required");
+    if (password === '') {
+      alert('Password is required')
     }
-    if (email !== "" && password !== "") {
-      dispatch(loginViaForm({ email, password }));
+    if (email !== '' && password !== '') {
+      dispatch(loginViaForm({ email, password }))
     }
-  };
+  }
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      dispatch(loginWithGoogle(tokenResponse.access_token));
+      dispatch(loginWithGoogle(tokenResponse.access_token))
     },
     onError: (error) => {
-      alert(error);
+      alert(error)
     },
-  });
+  })
 
   return (
     <>
@@ -93,7 +93,7 @@ const Login = () => {
                   <div className="text-center pt-2 mb-6">
                     <button
                       className="inline-block  hover:bg-[#8f48cf] bg-[#7126B5] px-6 py-2.5 text-white font-medium text-sm leading-tight rounded-[16px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-                      type="button"
+                      type="submit"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="dark"
                     >
@@ -131,6 +131,6 @@ const Login = () => {
         <Navigate to={`/`} />
       )}
     </>
-  );
-};
-export default Login;
+  )
+}
+export default Login

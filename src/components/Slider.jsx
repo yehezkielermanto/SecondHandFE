@@ -57,23 +57,33 @@ export default function Slider() {
   };
 
   return (
-    <div ref={slideRef} className="w-full select-none relative">
-      <div className="aspect-w-16 aspect-h-9">
+    <div ref={slideRef} className="flex justify-center mt-10 w-full select-none relative">
+      <div className="aspect-w-16 aspect-h-9 min-w-0">
         <img src={featuredProducts[currentIndex]} alt="" />
       </div>
 
-      <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
+      <div className="absolute w-full top-1/2 transform -translate-y-1/2 flex justify-between items-center">
         <button
-          className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
+          className="w-1/2 h-fit bg-opacity-100 cursor-pointer hover:bg-opacity-100 transition"
           onClick={handleOnPrevClick}
         >
-          prev
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
         </button>
         <button
-          className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
+          className="w-1/2 h-fit bg-opacity-100 cursor-pointer hover:bg-opacity-100 transition"
           onClick={handleOnNextClick}
         >
-         next 
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
         </button>
       </div>
     </div>

@@ -1,7 +1,10 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./index.css";
+import "antd/dist/antd.css";
+import "./public/css/tailwind.css";
+import "./public/css/style.css";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -14,22 +17,26 @@ import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import CariBarang from "./pages/CariBarang";
+import DaftarJual from "./pages/DaftarJual";
 // import NotFound from "./pages/404";
+
+const { REACT_APP_ID } = process.env;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<App />} />
+        <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/caribarang" element={<CariBarang />} />
+        <Route path="/daftarjual" element={<DaftarJual />} />
         <Route
           path="/login"
           element={
-            <GoogleOAuthProvider clientId="68980823363-57tmdid7nhefj7abt7l5u1jcbfdddg2p.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId={REACT_APP_ID}>
               <Login />
             </GoogleOAuthProvider>
           }
@@ -37,7 +44,7 @@ root.render(
         <Route
           path="/register"
           element={
-            <GoogleOAuthProvider clientId="68980823363-57tmdid7nhefj7abt7l5u1jcbfdddg2p.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId={REACT_APP_ID}>
               <Register />
             </GoogleOAuthProvider>
           }
