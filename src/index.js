@@ -13,6 +13,7 @@ import store from './redux/store'
 
 import Protected from './components/Protected'
 // For Profile Page
+import DaftarJual from "./pages/DaftarJual";
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
@@ -32,6 +33,11 @@ root.render(
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
+
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/daftarjual" element={<DaftarJual />} />
+
         <Route
           path="/user/profile"
           element={
