@@ -1,10 +1,16 @@
-import { AUTH_ERROR, LOGIN, LOGOUT, isREGISTER } from '../actions/types'
+import {
+  AUTH_ERROR,
+  isGOOGLELOGIN,
+  LOGIN,
+  LOGOUT,
+  isREGISTER,
+} from '../actions/types'
 
 const initialState = {
   isRegister: false,
   isAuthenticated: !!localStorage.getItem('token'),
   token: localStorage.getItem('token'),
-  user: {},
+  // user: {},
   error: null,
 }
 
@@ -15,6 +21,15 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isRegister: true,
         token: null,
+        error: null,
+      }
+    case isGOOGLELOGIN:
+      localStorage.setItem('token', action.payload)
+      return {
+        ...state,
+        isRegister: true,
+        isAuthenticated: true,
+        token: action.payload,
         error: null,
       }
     case LOGIN:
@@ -31,6 +46,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
+        isRegister: false,
         token: null,
         error: null,
       }
