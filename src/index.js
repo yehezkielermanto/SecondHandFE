@@ -16,7 +16,6 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import CariBarang from "./pages/CariBarang";
 import DaftarJual from "./pages/DaftarJual";
 // import NotFound from "./pages/404";
 
@@ -31,7 +30,6 @@ root.render(
         {/* Endpoint  for user profile */}
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/caribarang" element={<CariBarang />} />
         <Route path="/daftarjual" element={<DaftarJual />} />
         <Route
           path="/login"
