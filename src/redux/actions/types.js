@@ -14,3 +14,6 @@ export const USERS_ERROR = 'USERS_ERROR'
 export const GET_CITIES = 'GET_CITIES'
 export const CITIES_ERROR = 'CITIES_ERROR'
 
+// type for category
+export const CATEGORY = 'CATEGORY'
+export const CATEGORY_ERROR = 'CATEGORY_ERROR'

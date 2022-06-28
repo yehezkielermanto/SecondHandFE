@@ -6,6 +6,8 @@ import './public/css/tailwind.css'
 import './public/css/style.css'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
 
@@ -18,8 +20,8 @@ import Login from './pages/Login'
 import Product from './pages/ProductSeller'
 import UserProfile from './pages/UserProfile'
 import CategoryTable from './components/CategoryTable'
-
-// import NotFound from "./pages/404";
+import NotFound from './pages/404'
+import AddProduct from './pages/addProducts'
 
 const { REACT_APP_ID } = process.env
 
@@ -30,7 +32,14 @@ root.render(
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
-        <Route path="/user/profile" element={<Profile />} />
+        <Route
+          path="/user/profile"
+          element={
+            <Protected>
+              <Profile />
+            </Protected>
+          }
+        />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
         <Route
@@ -58,23 +67,19 @@ root.render(
           }
         />
 
-        <Route
-          path="/kategori"
-          element={            
-              <CategoryTable />
-          }
-        />
-
+        <Route path="/kategori" element={<CategoryTable />} />
+        {/* add new products */}
+        <Route path="/addProduct" element={<AddProduct />} />
         {/* 404 */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-  </Provider>
+  </Provider>,
 
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
-);
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
