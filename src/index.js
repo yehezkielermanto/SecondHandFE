@@ -33,49 +33,44 @@ const { REACT_APP_ID } = process.env
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Dashboard />} />
-        {/* Endpoint  for user profile */}
-        <Route path="/profile" element={<Profile />} />
-        <Route
-          path="/dashboard"
-          element={
-            <AlertProvider template={AlertTemplate} {...options}>
-              <Dashboard />
-            </AlertProvider>
-          }
-        />
-        <Route path="/product" element={<Product />} />
-        <Route
-          path="/user"
-          element={
-            <Protected>
-              <UserProfile />
-            </Protected>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <GoogleOAuthProvider clientId={REACT_APP_ID}>
-              <Login />
-            </GoogleOAuthProvider>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <GoogleOAuthProvider clientId={REACT_APP_ID}>
-              <Register />
-            </GoogleOAuthProvider>
-          }
-        />
+    <AlertProvider template={AlertTemplate} {...options}>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Dashboard />} />
+          {/* Endpoint  for user profile */}
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/product" element={<Product />} />
+          <Route
+            path="/user"
+            element={
+              <Protected>
+                <UserProfile />
+              </Protected>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <GoogleOAuthProvider clientId={REACT_APP_ID}>
+                <Login />
+              </GoogleOAuthProvider>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <GoogleOAuthProvider clientId={REACT_APP_ID}>
+                <Register />
+              </GoogleOAuthProvider>
+            }
+          />
 
-        {/* 404 */}
-        {/* <Route path="*" element={<NotFound />} /> */}
-      </Routes>
-    </BrowserRouter>
+          {/* 404 */}
+          {/* <Route path="*" element={<NotFound />} /> */}
+        </Routes>
+      </BrowserRouter>
+    </AlertProvider>
   </Provider>,
 
   // <React.StrictMode>

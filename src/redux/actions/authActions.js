@@ -67,8 +67,8 @@ export const loginViaForm = (data) => async (dispatch) => {
         type: LOGIN,
         payload: result.token,
       })
-      alert('Login berhasil')
-      useAlert().success('Login successfully')
+      // alert('Login berhasil')
+      useAlert().show('Login successfully')
     } else if (result.message == 'Email not found') {
       Swal.fire({
         position: 'center',
