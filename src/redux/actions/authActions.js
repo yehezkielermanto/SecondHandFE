@@ -42,6 +42,7 @@ export const registerUser = (data) => async (dispatch) => {
   }
 }
 
+// login action
 export const loginViaForm = (data) => async (dispatch) => {
   try {
     const response = await fetch(`${REACT_APP_URLENDPOINT}/api/v1/auth/login`, {
@@ -51,6 +52,7 @@ export const loginViaForm = (data) => async (dispatch) => {
       },
       body: JSON.stringify(data),
     })
+
     const result = await response.json()
     if (result.token) {
       Swal.fire({
@@ -64,6 +66,7 @@ export const loginViaForm = (data) => async (dispatch) => {
         type: LOGIN,
         payload: result.token,
       })
+      // alert('Login berhasil')
     } else if (result.message == 'Email not found') {
       Swal.fire({
         position: 'center',

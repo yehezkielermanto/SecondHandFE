@@ -27,7 +27,7 @@ body {
 }
 #card {
   margin-left: 100px;
-  margin-right: 100px;
+  padding-right: 100px;
 }
 #plus {
   margin-top: -100px;
@@ -35,11 +35,19 @@ body {
 #navmo {
   margin-top: -50px;
 }
+#caresoul{
+  margin-left: 90px;
+  margin-right: 90px;
+}
 @media screen and (max-width: 992px) {
   #button {
     margin-left: 50px;
   }
   #card {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  #caresoul{
     margin-left: 50px;
     margin-right: 50px;
   }
@@ -52,5 +60,9 @@ body {
   #card {
     margin-left: 10px;
     margin-right: 10px;
+  }
+  #caresoul{
+    margin-left: 0;
+    margin-right: 0;
   }
 }

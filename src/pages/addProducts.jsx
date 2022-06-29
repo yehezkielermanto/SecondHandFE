@@ -1,14 +1,8 @@
-import React, { useState } from 'react'
-import '../public/css/style.css'
-import { FiLogIn } from 'react-icons/fi'
-import { FiSearch } from 'react-icons/fi'
+import React from 'react'
 import { FiMenu } from 'react-icons/fi'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import ResponsiveNavLink from './ResponsiveNavLink'
 
-const NavDashboard = () => {
-  const [open, setOpen] = useState(false)
+export default function addProduct() {
   return (
     <>
       <nav className="flex items-center drop-shadow-lg w-full bg-white invisible sm:visible">
@@ -16,28 +10,7 @@ const NavDashboard = () => {
         <div className="flex items-center font-poppins w-5/12">
           <div className="flex-grow lg:flex-grow-0 lg:flex lg:justify-center lg:items-center lg:gap-4">
             <div className="hidden lg:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
-            <div className="h-12 rounded-2xl py-3 px-6 text-neutral-3 flex bg-[#EEEEEE]">
-              <input
-                className="w-full h-full bg-transparent"
-                placeholder="Cari di sini ..."
-              />
-              <FiSearch className="text-2xl" />
-            </div>
           </div>
-        </div>
-
-        <div className="flex items-center justify-end w-5/12 h-20 py-5">
-          <Link to="/login">
-            <button
-              className="flex font-poppins bg-[#7126B5] pr-6 pl-3 py-2.5 text-white font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
-              type="button"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              <FiLogIn className="text-white mr-1" />
-              Masuk
-            </button>
-          </Link>
         </div>
         <div className="W-1/12"></div>
       </nav>
@@ -98,5 +71,3 @@ const NavDashboard = () => {
     </>
   )
 }
-
-export default NavDashboard

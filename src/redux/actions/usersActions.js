@@ -14,8 +14,20 @@ export const fetchUser = () => async (dispatch) => {
 
     const result = await response.json();
 
-    // console.log("ACTION, " + result)
-    // console.log("ACTIONnn, " + JSON.stringify(result.data));
+    const fetchImgDetail = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/users/profileImg/details/${result.data.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const imgDetail = await fetchImgDetail.json();
+
+    // console.log(imgDetail);
+
+    result.data.imgFileData = imgDetail.dataImg;
+
+    console.log(result);
 
     dispatch({
       type: GET_USER,

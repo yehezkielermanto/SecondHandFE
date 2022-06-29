@@ -22,8 +22,7 @@ function Dashboard() {
       ) : (
         <HeaderProduct />
       )}
-      <div className="flex flex-warp items-center justify-center w-full mt-10">
-        <section className="h-100 gradient-form"></section>
+      <div className="flex flex-warp items-center justify-center w-full">
         <div>
           <section>
             <Slider />
