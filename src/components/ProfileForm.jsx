@@ -127,12 +127,12 @@ const ProfileHeaderComponent = (props) => {
           ) : (
             <form onSubmit={handleSubmit}>
               <input type="hidden" value={user.id} onChange={(e) => setId(e.target.value)} />
-              <div class="flex justify-center items-center w-full">
+              <div className="flex justify-center items-center w-full">
                 <label
                   for="dropzone-file"
-                  class="flex flex-col p-0 w-20 justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
+                  className="flex flex-col p-0 w-20 justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
                 >
-                  <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                  <div className="flex flex-col justify-center items-center pt-5 pb-6">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path
                         strokeLinecap="round"
@@ -168,7 +168,7 @@ const ProfileHeaderComponent = (props) => {
               </p>
               <div className="mb-4 font-poppins">
                 <select
-                  class="block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  className="block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   name="kota"
                   onChange={(e) => setKota(e.target.value)}
                 >

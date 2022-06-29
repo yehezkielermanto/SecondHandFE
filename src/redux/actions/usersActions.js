@@ -1,6 +1,5 @@
 import { GET_USER, USERS_ERROR, JUST_UPDATED } from "./types";
 import Swal from "sweetalert2";
-import { get } from "../../../../Backend/config/routes";
 
 export const fetchUser = () => async (dispatch) => {
   try {
@@ -15,7 +14,7 @@ export const fetchUser = () => async (dispatch) => {
 
     const result = await response.json();
 
-    const fetchImgDetail = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/users/profileImg/details/`, {
+    const fetchImgDetail = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/users/profileImg/details/${result.data.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -24,10 +23,11 @@ export const fetchUser = () => async (dispatch) => {
 
     const imgDetail = await fetchImgDetail.json();
 
-    result.imgFileData = imgDetail.dataImg
+    // console.log(imgDetail);
 
-    // console.log("ACTION, " + result)
-    // console.log("ACTIONnn, " + JSON.stringify(result.data));
+    result.data.imgFileData = imgDetail.dataImg;
+
+    console.log(result);
 
     dispatch({
       type: GET_USER,

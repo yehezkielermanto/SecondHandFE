@@ -8,6 +8,7 @@ import { fetchUser } from "../redux/actions/usersActions";
 import { logout } from '../redux/actions/authActions'
 import { Link } from 'react-router-dom'
 import { IKImage, IKContext } from "imagekitio-react";
+const urlImg = "https://ik.imagekit.io/jmprup9kb";
 
 export default function AkunComponent() {
   const dispatch = useDispatch()
@@ -45,6 +46,8 @@ export default function AkunComponent() {
     dispatch(logout())
   }
 
+  console.log(urlImg)
+
   return (
     <section>
       <Header title="Akun Saya" />
@@ -53,9 +56,18 @@ export default function AkunComponent() {
           <FiCamera />
         </div>
       ) : (
-        <div className="mt-5 flex text-[#4B1979] items-center justify-center text-2xl  mx-auto h-24 bg-[#E2D4F0] w-24 rounded-xl">
+        <div className="mt-5 flex text-[#4B1979] items-center justify-center text-2xl  mx-auto h-24 bg-[#E2D4F0] w-24 rounded-xl overflow-hidden">
           {/* <img src={user.gambar} alt="Img Not Found" className="w-max h-max rounded-xl" /> */}
-          <IKImage urlEndpoint={process.env.IMAGEKITURL} path={user.imgFileData.filePath} />
+          <IKImage
+            urlEndpoint={urlImg}
+            path={user.imgFileData.filePath}
+            transformation={[
+              {
+                h: 96,
+                w:96
+              },
+            ]}
+          />
         </div>
       )}
 
