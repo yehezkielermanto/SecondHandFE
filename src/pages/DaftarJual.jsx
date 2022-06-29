@@ -7,20 +7,20 @@ import {
 } from "react-icons/ai";
 import { HiOutlineCube } from "react-icons/hi";
 import { FiDollarSign } from "react-icons/fi";
-import NavbarProduk from "../components/ NavbarProduk";
+import HeaderProduct from "../components/HeaderProduct";
 import { Link } from "react-router-dom";
 
 const DaftarJual = () => {
   return (
     <div className="mb-5">
-      <NavbarProduk />
+      <HeaderProduct />
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-10 mx-auto position-relative">
             <h6 className="fw-bold font-20 mt-5">Daftar Jual Saya</h6>
             <CardName />
 
-            <div className="row">
+            {/* <div className="row">
               <div className="d-block d-sm-none mb-3">
                 <button type="button" class="btn btn-success round">
                   <HiOutlineCube />
@@ -85,7 +85,7 @@ const DaftarJual = () => {
                   </div>
                 </div>
 
-                {/* <div className="card card-child card-sm-child m-1">
+                <div className="card card-child card-sm-child m-1">
                   <img
                     src="https://via.placeholder.com/200x100.png"
                     className="card-img-top"
@@ -105,9 +105,9 @@ const DaftarJual = () => {
                     </p>
                     <p className="card-text mb-0">Rp. 250.000</p>
                   </div>
-                </div> */}
+                </div>
 
-                {/* <div className="card card-child card-sm-child m-1">
+                <div className="card card-child card-sm-child m-1">
                   <img
                     src="https://via.placeholder.com/200x100.png"
                     className="card-img-top"
@@ -120,9 +120,9 @@ const DaftarJual = () => {
                     </p>
                     <p className="card-text mb-0">Rp. 250.000</p>
                   </div>
-                </div> */}
+                </div>
 
-                {/* <div className="card card-child card-sm-child m-1">
+                <div className="card card-child card-sm-child m-1">
                   <img
                     src="https://via.placeholder.com/200x100.png"
                     className="card-img-top"
@@ -164,7 +164,7 @@ const DaftarJual = () => {
                     </p>
                     <p className="card-text mb-0">Rp. 250.000</p>
                   </div>
-                </div> */}
+                </div>
 
                 <div className="card card-child card-sm-child m-1">
                   <img
@@ -188,7 +188,7 @@ const DaftarJual = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
