@@ -6,13 +6,12 @@ import './public/css/tailwind.css'
 import './public/css/style.css'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
-import { transitions, positions, Provider as AlertProvider } from 'react-alert'
-import AlertTemplate from 'react-alert-template-basic'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
 
 import Protected from './components/Protected'
 // For Profile Page
+import DaftarJual from './pages/DaftarJual'
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
@@ -32,6 +31,11 @@ root.render(
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
+
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/daftarjual" element={<DaftarJual />} />
+
         <Route
           path="/user/profile"
           element={
