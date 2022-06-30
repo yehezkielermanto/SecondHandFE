@@ -8,12 +8,12 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 export default function Slider() {
 
   return (
-    <div className=" flex justify-center w-5/6 relative sm:aspect-auto aspect-[6/5]" id="caresoul">
+    <div className=" flex justify-center w-5/6 relative" id="caresoul">
     <Carousel showThumbs={false} showArrows={true} showStatus={false} infiniteLoop={true} autoPlay delayLength={2000}>
-      <img className="w-full sm:aspect-auto aspect-[6/5] object-cover rounded-xl" src={poster} />
-      <img className="w-full sm:aspect-auto aspect-[6/5] object-cover rounded-xl" src={poster} />
-      <img className="w-full sm:aspect-auto aspect-[6/5] object-cover rounded-xl" src={poster} />
-      <img className="w-full sm:aspect-auto aspect-[6/5] object-cover rounded-xl" src={poster} />
+      <img className="w-full object-cover rounded-xl" src={poster} />
+      <img className="w-full object-cover rounded-xl" src={poster} />
+      <img className="w-full object-cover rounded-xl" src={poster} />
+      <img className="w-full object-cover rounded-xl" src={poster} />
     </Carousel>
   </div>
   );
