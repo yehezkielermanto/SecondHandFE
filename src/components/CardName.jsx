@@ -2,6 +2,7 @@ import React from "react";
 
 const CardName = () => {
   return (
+    <>
       <div className="card shadow round my-4">
         <div className="card-body">
           <div className="d-flex align-items-center ps-3">
@@ -22,7 +23,7 @@ const CardName = () => {
             <div className="flex-grow-1 ms-3">
               <button
                 type="button"
-                class="btn btn-outline-primary btn-sm float-end"
+                className="btn btn-outline-primary btn-sm float-end"
               >
                 Edit
               </button>
@@ -30,6 +31,7 @@ const CardName = () => {
           </div>
         </div>
       </div>
+      </>
   );
 };
 
