@@ -18,6 +18,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Product from './pages/ProductSeller'
 import UserProfile from './pages/UserProfile'
+import Notification from './pages/Notification'
 import CategoryTable from './components/CategoryTable'
 import NotFound from './pages/404'
 import AddProduct from './pages/addProducts'
@@ -35,6 +36,7 @@ root.render(
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/daftarjual" element={<DaftarJual />} />
+        <Route path="/notif" element={<Notification />} />
 
         <Route
           path="/user/profile"
