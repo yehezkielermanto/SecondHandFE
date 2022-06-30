@@ -11,14 +11,17 @@ import store from './redux/store'
 
 import Protected from './components/Protected'
 // For Profile Page
+import DaftarJual from './pages/DaftarJual'
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Product from './pages/ProductSeller'
 import UserProfile from './pages/UserProfile'
-
-// import NotFound from "./pages/404";
+import Notification from './pages/Notification'
+import CategoryTable from './components/CategoryTable'
+import NotFound from './pages/404'
+import AddProduct from './pages/addProducts'
 
 const { REACT_APP_ID } = process.env
 
@@ -29,7 +32,20 @@ root.render(
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
+
         <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/daftarjual" element={<DaftarJual />} />
+        <Route path="/notif" element={<Notification />} />
+
+        <Route
+          path="/user/profile"
+          element={
+            <Protected>
+              <Profile />
+            </Protected>
+          }
+        />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
         <Route
@@ -57,8 +73,11 @@ root.render(
           }
         />
 
+        <Route path="/kategori" element={<CategoryTable />} />
+        {/* add new products */}
+        <Route path="/addProduct" element={<AddProduct />} />
         {/* 404 */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </Provider>,
