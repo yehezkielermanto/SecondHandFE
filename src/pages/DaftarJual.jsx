@@ -12,27 +12,28 @@ import { Link } from 'react-router-dom'
 
 const DaftarJual = () => {
   return (
+    <>
     <div className="mb-5">
       <HeaderProduct />
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-10 mx-auto position-relative">
-            <h6 className="fw-bold font-20 mt-5">Daftar Jual Saya</h6>
+            <h6 className="fw-bold font-bold mt-5">Daftar Jual Saya</h6>
             <CardName />
 
             <div className="row">
               <div className="d-block d-sm-none mb-3">
-                <button type="button" class="btn btn-success round">
+                <button type="button" className="btn btn-success round">
                   <HiOutlineCube />
                   <small>Success</small>
                 </button>
 
-                <button type="button" class="btn btn-success round mx-2">
+                <button type="button" className="btn btn-success round mx-2">
                   <AiOutlineHeart />
                   <small>Disukai</small>
                 </button>
 
-                <button type="button" class="btn btn-success round">
+                <button type="button" className="btn btn-success round">
                   <FiDollarSign />
                   <small>Terjual</small>
                 </button>
@@ -42,8 +43,8 @@ const DaftarJual = () => {
                 <div className="card shadow round">
                   <div className="card-body">
                     <h6 className="fw-bold font-16">Kategori</h6>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item d-flex justify-content-between align-items-center px-1">
+                    <ul className="list-group list-group-flush">
+                      <li className="list-group-item d-flex justify-content-between align-items-center px-1">
                         <div>
                           <HiOutlineCube className="me-2" />
                           Semua Produk
@@ -53,7 +54,7 @@ const DaftarJual = () => {
                         </div>
                       </li>
 
-                      <li class="list-group-item d-flex justify-content-between align-items-center px-1">
+                      <li className="list-group-item d-flex justify-content-between align-items-center px-1">
                         <div>
                           <AiOutlineHeart className="me-2" />
                           Diminati
@@ -63,7 +64,7 @@ const DaftarJual = () => {
                         </div>
                       </li>
 
-                      <li class="list-group-item d-flex justify-content-between align-items-center px-1">
+                      <li className="list-group-item d-flex justify-content-between align-items-center px-1">
                         <div>
                           <FiDollarSign className="me-2" />
                           Terjual
@@ -193,7 +194,9 @@ const DaftarJual = () => {
         </div>
       </div>
     </div>
-  )
+    </>
+  );
 }
+
 
 export default DaftarJual

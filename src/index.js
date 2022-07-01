@@ -17,11 +17,13 @@ import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Product from './pages/ProductSeller'
+import ProductBuyer from './pages/ProductBuyer'
 import UserProfile from './pages/UserProfile'
 import Notification from './pages/Notification'
 import CategoryTable from './components/CategoryTable'
 import NotFound from './pages/404'
 import AddProduct from './pages/addProducts'
+import BuyerInfo from './components/BuyerInfo'
 
 const { REACT_APP_ID } = process.env
 
@@ -37,7 +39,6 @@ root.render(
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/daftarjual" element={<DaftarJual />} />
         <Route path="/notif" element={<Notification />} />
-
         <Route
           path="/user/profile"
           element={
@@ -48,6 +49,8 @@ root.render(
         />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
+        <Route path='/productbuyer' element={<ProductBuyer />} />
+        <Route path="/buyerinfo" element={<BuyerInfo />} />
         <Route
           path="/user"
           element={
