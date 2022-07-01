@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiMenu } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import ResponsiveNavLink from '../components/ResponsiveNavLink'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { listCategory } from '../redux/actions/categoryAction'
+import { newProduct } from '../redux/actions/produkActions'
+import Swal from 'sweetalert2'
 
 export default function addProduct() {
   const dispatch = useDispatch()
@@ -13,25 +15,131 @@ export default function addProduct() {
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { category, errorC } = useSelector((state) => state.category)
 
-  const [namaProduk, setProduk] = useState()
-  const [hargaProduk, setHarga] = useState()
-  const [kategori, setKategori] = useState()
-  const [deskripsi, setDeskripsi] = useState()
-  const [gambarProduk, setGambar] = useState()
+  const [namaProduk, setProduk] = useState('')
+  const [hargaProduk, setHarga] = useState('')
+  const [kategori, setKategori] = useState('')
+  const [deskripsi, setDeskripsi] = useState('')
+  const [gambarProduk, setGambar] = useState('')
 
+  // handling submit button
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(namaProduk)
 
-    console.log(imgProfile)
+    if (namaProduk === '') {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please provide product name',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+    if (hargaProduk === '') {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please provide product price',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+    if (kategori === '') {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please select product category',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+    if (deskripsi === '') {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please provide product description',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+    if (gambarProduk === '') {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please input at least one picture',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+
+    if (
+      namaProduk !== '' &&
+      hargaProduk !== '' &&
+      kategori !== '' &&
+      deskripsi !== ''
+    ) {
+      dispatch(
+        // dispatch formData to backend
+        newProduct({
+          namaProduk,
+          hargaProduk,
+          kategori,
+          deskripsi,
+          gambarProduk,
+        }),
+      )
+    }
   }
 
-  // use effect
+  const handlePreview = async (e) => {
+    e.preventDefault()
+  }
+
+  // use effect list category
   useEffect(() => {
     ;(async () => {
       dispatch(listCategory())
-      // dispatch(fetchUser());
     })()
   }, [dispatch])
+
+  // use effect is authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Please login first',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+  })
+
+  // use effect category error or user error or isAuthenticated error
+  useEffect(() => {
+    if (error) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: error,
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+  }, [error])
+
+  useEffect(() => {
+    if (errorC) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: error,
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+  }, [errorC])
 
   return (
     <>
@@ -77,30 +185,30 @@ export default function addProduct() {
       </div>
 
       {/* form input new product */}
-      <form>
-        {/* {!justUpdated ? ( */}
-        <div className="flex flex-col h-full sm:w-full lg:w-6/12 lg:mx-auto mt-5 px-3 text-left">
-          <div className="h-full sm:w-full lg:mx-auto mt-5 px-3 text-left">
-            <Link to="/">
-              <div className="invisible lg:visible p-0 w-10 flex justify-center hover:bg-violet-800 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="block ml-0 my-1 h-5 w-5 hover:fill-neutral-50"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </Link>
-            {/* {!isAuthenticated ? (
-            <Navigate to="/" />
-          ) : ( */}
-            <form onSubmit={handleSubmit}>
+      {!isAuthenticated ? (
+        <Navigate to="/" />
+      ) : (
+        <form>
+          {/* {!justUpdated ? ( */}
+          <div className="flex flex-col h-full sm:w-full lg:w-6/12 lg:mx-auto mt-5 px-3 text-left">
+            <div className="h-full sm:w-full lg:mx-auto mt-5 px-3 text-left">
+              <Link to="/">
+                <div className="invisible lg:visible p-0 w-10 flex justify-center hover:bg-violet-800 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="block ml-0 my-1 h-5 w-5 hover:fill-neutral-50"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </Link>
+
               <input
                 type="hidden"
                 value=""
@@ -144,15 +252,17 @@ export default function addProduct() {
               <div className="mb-4 font-poppins">
                 <select
                   class="block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  name="kota"
+                  name="kategori"
                   onChange={(e) => setKategori(e.target.value)}
                 >
-                  <option selected>Pilih Kategori</option>
+                  <option selected value="">
+                    Pilih Kategori
+                  </option>
                   {category.length === 0 ? (
                     <option value="">Daftar Kategori Kosong</option>
                   ) : (
                     category.map((kategori) => (
-                      <option value={kategori.id}>
+                      <option key={kategori.id} value={kategori.id}>
                         {kategori.nama_kategori}
                       </option>
                     ))
@@ -195,21 +305,25 @@ export default function addProduct() {
               </div>
               <br />
               <div className="flex flex-row">
-                <button className="hover:bg-violet-900 border-2 border-violet-700 hover:text-white mx-2 w-full p-1.5 rounded-lg">
+                <button
+                  onClick={handlePreview}
+                  className="hover:bg-violet-900 border-2 border-violet-700 hover:text-white mx-2 w-full p-1.5 rounded-lg"
+                >
                   <span className="text-dark font-medium">Preview</span>
                 </button>
-                <button className="bg-violet-700 hover:bg-violet-900 w-full p-1.5 rounded-lg mx-2">
+                <button
+                  onClick={handleSubmit}
+                  className="bg-violet-700 hover:bg-violet-900 w-full p-1.5 rounded-lg mx-2"
+                >
                   <span className="text-white font-medium">Terbitkan</span>
                 </button>
               </div>
-            </form>
-            {/* )} */}
+
+              {/* // {)}} */}
+            </div>
           </div>
-        </div>
-        {/* ) : (
-          <Navigate to="/user" />
-        )} */}
-      </form>
+        </form>
+      )}
     </>
   )
 }
