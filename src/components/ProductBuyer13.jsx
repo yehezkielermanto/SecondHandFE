@@ -1,13 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { FiSearch, FiList, FiBell, FiUser, FiArrowLeft } from "react-icons/fi";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FiArrowLeft, FiX } from 'react-icons/fi'
+import { FiSearch, FiList, FiBell, FiUser } from "react-icons/fi";
 import Image from "../img/productDetails.png"
 import Seller from "../img/seller.png"
 import { Carousel } from 'react-responsive-carousel'
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from 'react-router-dom'
+import { Input } from 'antd'
+import product from '../img/productBuyer.png'
 
-
-export default function Product() {
+export default function ProductBuyer13() {
+	const navigate = useNavigate()
+  
+    const [ isModalAcceptShow, setModalAcceptShow ] = useState(false);
+    const isModalShow = isModalAcceptShow;
+  
+    const handleCloseModal=() => {
+      setModalAcceptShow(false)
+    }
+    const handleOpenAcceptModal=() => {
+      setModalAcceptShow(true)
+    }
 
 	return (
 		<div className="w-screen min-h-screen">
@@ -29,7 +42,7 @@ export default function Product() {
 						<FiBell />
 						<Link to="/user">
 								<FiUser className="xl:w-5 h-full mx-2" />
-							</Link>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -39,7 +52,8 @@ export default function Product() {
 						<img className="w-full aspect-[6/5] object-cover md:rounded-xl" src={Image} />
 						<img className="w-full aspect-[6/5] object-cover md:rounded-xl" src={Image} />
 					</Carousel>
-					<button className="absolute top-4 left-4 rounded-full w-8 h-8 bg-white flex justify-center items-center">
+					<button onClick={() => navigate(-1)} 
+					className="absolute top-4 left-4 rounded-full w-8 h-8 bg-white flex justify-center items-center">
 						<FiArrowLeft />
 					</button>
 				</div>
@@ -47,20 +61,17 @@ export default function Product() {
 				<div className="px-4 flex flex-col relative bottom-2 gap-4 md:flex-grow md:bottom-0 ">
 					<div className="w-full relative md:w-4/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white">
 						<h1 className="font-medium">Jam Tangan Casio</h1>
-						<p className="text-sm text-neutral-3">Aksesoris</p>
+						<p className="text-sm text-[#8A8A8A] dark:text-[#8A8A8A] mb-3">Aksesoris</p>
 						<p className="">Rp 250.000</p>
 
-						<button className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg">
-							Terbitkan
-						</button>
-						<button className="hidden md:block w-full border border-[#7126B5] bg-white font-medium text-neutral-5 text-center py-2 mt-4 rounded-lg">
-							Edit
+						<button onClick={handleOpenAcceptModal} className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg">
+							Saya Tertarik dan Ingin Nego
 						</button>
 					</div>
 
 					<div className="flex bg-white rounded-xl py-4 shadow-low gap-4 p-4 w-full relative md:w-4/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white">
 						<img className="h-14 aspect-square rounded-xl object-cover" src={Seller} />
-						<div className="flex flex-col justify-center">
+						<div className="flex flex-col justify-center ml-3">
 							<h1 className="font-medium">Nama Penjual</h1>
 							<p className="text-sm text-neutral-3">Kota</p>
 						</div>
@@ -80,10 +91,55 @@ export default function Product() {
 				</div>
 			</div>
 
+			{/* Mobile version */}
 			<div className="fixed w-full bottom-4 px-4 md:hidden">
-				<button className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl">
-					Terbitkan
+				<button onClick={handleOpenAcceptModal} className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl" >
+                Saya Tertarik dan Ingin Nego
 				</button>
+			</div>
+
+			{/* Backdrop for Modal */}
+			<div onClick={handleCloseModal} className={`w-screen h-screen fixed ${isModalShow?'flex':'hidden'} items-center justify-center bg-black bg-opacity-70 top-0 left-0 z-50`}>
+  
+			{/* Modal for Terima */}
+			<div onClick={(e)=>e.stopPropagation()} className={`${isModalAcceptShow?'bg-white':'hidden'} lg:relative absolute bottom-0 p-6 w-full max-w-sm md:h-auto rounded-2xl`}>
+				<button className='float-right'>
+					<FiX onClick={handleCloseModal} className='text-xl mb-2' />
+				</button>
+				<p className='text-sm font-medium pb-2 pt-8'>
+					Masukkan Harga Tawarmu
+				</p>
+				<p className='text-sm text-neutral-3 text text-[#8A8A8A] font-normal py-2'>
+					Harga tawaranmu akan diketahui penual, jika penjual cocok kamu akan segera dihubungi penjual.
+				</p>
+				<div className='bg-[#EEEEEE] p-4 rounded-2xl my-2'>
+					<div className="flex flex-row items-center">
+						<img className="w-[48px] h-[48px] rounded-[12px] border border-neutral-2" alt="produk" src={product} />
+						<div className="flex flex-col justify-between ml-4 text-sm">
+							<p className='mb-1 font-medium'>Jam Tangan Casio</p>
+							<p className='mb-1 font-regular'>Rp 250.000</p>
+						</div>
+					</div>
+				</div>
+				<p className='text-sm font-medium pb-2 pt-2'>
+					Harga Tawar
+				</p>
+				<div className="mb-5">
+                    <Input
+                      type="text"
+                      className="form-control w-full px-4 py-2 font-normal text-sm text-neutral-3 bg-white 
+                border-neutral-2 rounded-[16px] transition ease-in-out m-0 focus:text-gray-700 focus:outline-none"
+                      id="tawar"
+                      placeholder="Rp 0,00"
+                      required
+                    />
+                  </div>
+				<button className="flex items-center justify-center w-full py-3 mt-6 bg-[#7126B5] hover:bg-[#8f48cf] text-white font-normal text-sm rounded-[16px] 
+						focus:shadow-lg focus:outline-none active:shadow-lg" type="button"  >
+					<p>Kirim</p>
+				</button>
+			</div>
+
 			</div>
 		</div>
 	);
