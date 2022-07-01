@@ -19,16 +19,16 @@ const ButtonDashboard = () => {
   }
   const filterAll = (event) => {
     event.currentTarget.classList.remove("bg-purple-300");
-    event.currentTarget.classList.add("btnFilterOn");
-    document.getElementById("filterHobi").classList.remove("btnFilterOn");
+    event.currentTarget.classList.add("bg-sky-600");
+    document.getElementById("filterHobi").classList.remove("bg-sky-600");
     document.getElementById("filterHobi").classList.add("bg-purple-300");
-    document.getElementById("filterKendaraan").classList.remove("btnFilterOn");
+    document.getElementById("filterKendaraan").classList.remove("bg-sky-600");
     document.getElementById("filterKendaraan").classList.add("bg-purple-300");
-    document.getElementById("filterBaju").classList.remove("btnFilterOn");
+    document.getElementById("filterBaju").classList.remove("bg-sky-600");
     document.getElementById("filterBaju").classList.add("bg-purple-300");
-    document.getElementById("filterElektronik").classList.remove("btnFilterOn");
+    document.getElementById("filterElektronik").classList.remove("bg-sky-600");
     document.getElementById("filterElektronik").classList.add("bg-purple-300");
-    document.getElementById("filterKesehatan").classList.remove("btnFilterOn");
+    document.getElementById("filterKesehatan").classList.remove("bg-sky-600");
     document.getElementById("filterKesehatan").classList.add("bg-purple-300");
     dispatch(getAllProducts());
   };
@@ -36,16 +36,16 @@ const ButtonDashboard = () => {
   const filterHobi = (event) => {
     let kategori = "Hobi";
     event.currentTarget.classList.remove("bg-purple-300");
-    event.currentTarget.classList.add("btnFilterOn");
-    document.getElementById("filterAll").classList.remove("btnFilterOn");
+    event.currentTarget.classList.add("bg-sky-600");
+    document.getElementById("filterAll").classList.remove("bg-sky-600");
     document.getElementById("filterAll").classList.add("bg-purple-300");
-    document.getElementById("filterKendaraan").classList.remove("btnFilterOn");
+    document.getElementById("filterKendaraan").classList.remove("bg-sky-600");
     document.getElementById("filterKendaraan").classList.add("bg-purple-300");
-    document.getElementById("filterBaju").classList.remove("btnFilterOn");
+    document.getElementById("filterBaju").classList.remove("bg-sky-600");
     document.getElementById("filterBaju").classList.add("bg-purple-300");
-    document.getElementById("filterElektronik").classList.remove("btnFilterOn");
+    document.getElementById("filterElektronik").classList.remove("bg-sky-600");
     document.getElementById("filterElektronik").classList.add("bg-purple-300");
-    document.getElementById("filterKesehatan").classList.remove("btnFilterOn");
+    document.getElementById("filterKesehatan").classList.remove("bg-sky-600");
     document.getElementById("filterKesehatan").classList.add("bg-purple-300");
     dispatch(getProductByKategori(kategori));
   };
@@ -53,16 +53,16 @@ const ButtonDashboard = () => {
   const filterKendaraan = (event) => {
     let kategori = "Kendaraan";
     event.currentTarget.classList.remove("bg-purple-300");
-    event.currentTarget.classList.add("btnFilterOn");
-    document.getElementById("filterHobi").classList.remove("btnFilterOn");
+    event.currentTarget.classList.add("bg-sky-600");
+    document.getElementById("filterHobi").classList.remove("bg-sky-600");
     document.getElementById("filterHobi").classList.add("bg-purple-300");
-    document.getElementById("filterAll").classList.remove("btnFilterOn");
+    document.getElementById("filterAll").classList.remove("bg-sky-600");
     document.getElementById("filterAll").classList.add("bg-purple-300");
-    document.getElementById("filterBaju").classList.remove("btnFilterOn");
+    document.getElementById("filterBaju").classList.remove("bg-sky-600");
     document.getElementById("filterBaju").classList.add("bg-purple-300");
-    document.getElementById("filterElektronik").classList.remove("btnFilterOn");
+    document.getElementById("filterElektronik").classList.remove("bg-sky-600");
     document.getElementById("filterElektronik").classList.add("bg-purple-300");
-    document.getElementById("filterKesehatan").classList.remove("btnFilterOn");
+    document.getElementById("filterKesehatan").classList.remove("bg-sky-600");
     document.getElementById("filterKesehatan").classList.add("bg-purple-300");
     dispatch(getProductByKategori(kategori));
   };
@@ -70,16 +70,16 @@ const ButtonDashboard = () => {
   const filterBaju = (event) => {
     let kategori = "Baju";
     event.currentTarget.classList.remove("bg-purple-300");
-    event.currentTarget.classList.add("btnFilterOn");
-    document.getElementById("filterHobi").classList.remove("btnFilterOn");
+    event.currentTarget.classList.add("bg-sky-600");
+    document.getElementById("filterHobi").classList.remove("bg-sky-600");
     document.getElementById("filterHobi").classList.add("bg-purple-300");
-    document.getElementById("filterKendaraan").classList.remove("btnFilterOn");
+    document.getElementById("filterKendaraan").classList.remove("bg-sky-600");
     document.getElementById("filterKendaraan").classList.add("bg-purple-300");
-    document.getElementById("filterAll").classList.remove("btnFilterOn");
+    document.getElementById("filterAll").classList.remove("bg-sky-600");
     document.getElementById("filterAll").classList.add("bg-purple-300");
-    document.getElementById("filterElektronik").classList.remove("btnFilterOn");
+    document.getElementById("filterElektronik").classList.remove("bg-sky-600");
     document.getElementById("filterElektronik").classList.add("bg-purple-300");
-    document.getElementById("filterKesehatan").classList.remove("btnFilterOn");
+    document.getElementById("filterKesehatan").classList.remove("bg-sky-600");
     document.getElementById("filterKesehatan").classList.add("bg-purple-300");
     dispatch(getProductByKategori(kategori));
   };
@@ -87,16 +87,16 @@ const ButtonDashboard = () => {
   const filterElektronik = (event) => {
     let kategori = "Elektronik";
     event.currentTarget.classList.remove("bg-purple-300");
-    event.currentTarget.classList.add("btnFilterOn");
-    document.getElementById("filterHobi").classList.remove("btnFilterOn");
+    event.currentTarget.classList.add("bg-sky-600");
+    document.getElementById("filterHobi").classList.remove("bg-sky-600");
     document.getElementById("filterHobi").classList.add("bg-purple-300");
-    document.getElementById("filterKendaraan").classList.remove("btnFilterOn");
+    document.getElementById("filterKendaraan").classList.remove("bg-sky-600");
     document.getElementById("filterKendaraan").classList.add("bg-purple-300");
-    document.getElementById("filterBaju").classList.remove("btnFilterOn");
+    document.getElementById("filterBaju").classList.remove("bg-sky-600");
     document.getElementById("filterBaju").classList.add("bg-purple-300");
-    document.getElementById("filterAll").classList.remove("btnFilterOn");
+    document.getElementById("filterAll").classList.remove("bg-sky-600");
     document.getElementById("filterAll").classList.add("bg-purple-300");
-    document.getElementById("filterKesehatan").classList.remove("btnFilterOn");
+    document.getElementById("filterKesehatan").classList.remove("bg-sky-600");
     document.getElementById("filterKesehatan").classList.add("bg-purple-300");
     dispatch(getProductByKategori(kategori));
   };
@@ -104,16 +104,16 @@ const ButtonDashboard = () => {
   const filterKesehatan = (event) => {
     let kategori = "Kesehatan";
     event.currentTarget.classList.remove("bg-purple-300");
-    event.currentTarget.classList.add("btnFilterOn");
-    document.getElementById("filterHobi").classList.remove("btnFilterOn");
+    event.currentTarget.classList.add("bg-sky-600");
+    document.getElementById("filterHobi").classList.remove("bg-sky-600");
     document.getElementById("filterHobi").classList.add("bg-purple-300");
-    document.getElementById("filterKendaraan").classList.remove("btnFilterOn");
+    document.getElementById("filterKendaraan").classList.remove("bg-sky-600");
     document.getElementById("filterKendaraan").classList.add("bg-purple-300");
-    document.getElementById("filterBaju").classList.remove("btnFilterOn");
+    document.getElementById("filterBaju").classList.remove("bg-sky-600");
     document.getElementById("filterBaju").classList.add("bg-purple-300");
-    document.getElementById("filterElektronik").classList.remove("btnFilterOn");
+    document.getElementById("filterElektronik").classList.remove("bg-sky-600");
     document.getElementById("filterElektronik").classList.add("bg-purple-300");
-    document.getElementById("filterAll").classList.remove("btnFilterOn");
+    document.getElementById("filterAll").classList.remove("bg-sky-600");
     document.getElementById("filterAll").classList.add("bg-purple-300");
     dispatch(getProductByKategori(kategori));
   };
