@@ -1,4 +1,8 @@
-import { PRODUCT_ERROR, DELETE_PRODUCT } from "../actions/types";
+import {
+  GET_ALL_PRODUCT,
+  PRODUCT_ERROR,
+  DELETE_PRODUCT,
+} from "../actions/types";
 const initialState = {
   product: [],
   detailProduct: [],
@@ -10,6 +14,12 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
+        status: action.status,
+      };
     case DELETE_PRODUCT:
       return {
         ...state,

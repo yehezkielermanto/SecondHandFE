@@ -21,3 +21,4 @@ export const CATEGORY_ERROR = "CATEGORY_ERROR";
 //products
 export const PRODUCT_ERROR = "PRODUCT_ERROR";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const GET_ALL_PRODUCT = "GET_ALL_PRODUCT";
