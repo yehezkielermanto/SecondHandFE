@@ -5,7 +5,7 @@ import { FiSearch } from 'react-icons/fi'
 import { FiMenu } from 'react-icons/fi'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import ResponsiveNavLink from './ResponsiveNavLink'
+import ResponsiveNavLink from '../components/ResponsiveNavLink'
 
 const NavDashboard = () => {
   const [open, setOpen] = useState(false)
