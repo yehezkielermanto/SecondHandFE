@@ -28,7 +28,7 @@ export const listCategory = () => async (dispatch) => {
 
     const result = await response.json()
 
-    console.log(result)
+    // console.log(result)
     if (result) {
       dispatch({
         type: CATEGORY,

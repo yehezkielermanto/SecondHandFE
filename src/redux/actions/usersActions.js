@@ -17,6 +17,12 @@ export const fetchUser = () => async (dispatch) => {
 
     const result = await response.json()
 
+    // check if token expired
+    if (result.message === 'Token Expired') {
+      return dispatch({
+        type: LOGOUT,
+      })
+    }
     const fetchImgDetail = await fetch(
       `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/profileImg/details/${result.data.id}`,
       {
@@ -33,18 +39,10 @@ export const fetchUser = () => async (dispatch) => {
 
     result.data.imgFileData = imgDetail.dataImg
 
-    console.log(result)
     dispatch({
       type: GET_USER,
       payload: result.data,
     })
-
-    // check if token expired
-    if (result.message === 'Token expired') {
-      dispatch({
-        type: LOGOUT,
-      })
-    }
   } catch (error) {
     // usersError(error.message);
     dispatch({

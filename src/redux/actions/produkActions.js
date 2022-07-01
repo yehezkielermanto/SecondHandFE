@@ -59,6 +59,9 @@ export const newProduct = (data) => async (dispatch) => {
     formdata.append('nama', data.namaProduk)
     formdata.append('harga', data.hargaProduk)
     formdata.append('deskripsi', data.deskripsi)
+    formdata.append('image', data.gambarProduk)
+
+    console.log(data.gambarProduk)
 
     const requestOptions = {
       method: 'POST',

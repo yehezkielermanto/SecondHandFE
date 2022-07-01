@@ -76,7 +76,8 @@ export default function addProduct() {
       namaProduk !== '' &&
       hargaProduk !== '' &&
       kategori !== '' &&
-      deskripsi !== ''
+      deskripsi !== '' &&
+      gambarProduk !== ''
     ) {
       dispatch(
         // dispatch formData to backend
