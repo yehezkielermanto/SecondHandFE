@@ -1,4 +1,4 @@
-import UserProfile from '../components/UserProfile'
+import UserProfile from "../components/UserProfile";
 
 function Akun() {
   return (
@@ -7,7 +7,7 @@ function Akun() {
         <UserProfile />
       </section>
     </div>
-  )
+  );
 }
 
-export default Akun
+export default Akun;
