@@ -5,69 +5,82 @@ import product from "../img/product.png";
 const CardDashboard = () => {
     return (
       <>
-    <div id="card" className="flex flex-row flex-wrap mt-5 justify-between">
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+<div className="flex justify-center">
+    <div id="card" className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6  mt-5 w-fit relative z-30 overflow-x-hidden">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-    <div className="inline-block m-1 border border-gray-300 p-3 basis-1/6">
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
       <img src={product} alt="" className="w-full"/>
       <h3 className='font-semibold'>jam tangan cosmos</h3>
       <p>asadasdasd</p>
       <h3 className='font-semibold'>Rp.00000</h3>
     </div>
-
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
+      <img src={product} alt="" className="w-full"/>
+      <h3 className='font-semibold'>jam tangan cosmos</h3>
+      <p>asadasdasd</p>
+      <h3 className='font-semibold'>Rp.00000</h3>
     </div>
+    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
+      <img src={product} alt="" className="w-full"/>
+      <h3 className='font-semibold'>jam tangan cosmos</h3>
+      <p>asadasdasd</p>
+      <h3 className='font-semibold'>Rp.00000</h3>
+    </div>
+    </div>
+</div>
       </>
     );
 }

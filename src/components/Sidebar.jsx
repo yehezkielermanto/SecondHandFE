@@ -6,7 +6,7 @@ import { FiLogIn, FiX } from "react-icons/fi";
 export default function Sidebar(props) {
 	return (
 		<div
-			className={`w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-70 z-[100] lg:hidden ${
+			className={`w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-70 relative z-[100] lg:hidden ${
 				props.show ? "flex" : "hidden"
 			}`}
 			onClick={() => props.close()}
