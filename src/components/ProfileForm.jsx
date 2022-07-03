@@ -4,11 +4,8 @@ import "../public/css/style.css";
 import Swal from "sweetalert2";
 import { Link, Navigate } from "react-router-dom";
 import { fetchUser, submitUpdate } from "../redux/actions/usersActions";
+import { logout } from "../redux/actions/authActions";
 import { listCities } from "../redux/actions/citiesActions";
-
-// if (!isAuthenticated) {
-//   return <Navigate to={`/login`} />;
-// }
 
 const ProfileHeaderComponent = (props) => {
   const dispatch = useDispatch();
@@ -17,7 +14,6 @@ const ProfileHeaderComponent = (props) => {
   const { user, justUpdated, errorU } = useSelector((state) => state.users);
   const { city, errorC } = useSelector((state) => state.cities);
 
-  // const [idUser, setId] = useState();
   const [nama, setNama] = useState();
   const [kota, setKota] = useState();
   const [alamat, setAlamat] = useState();
@@ -28,7 +24,6 @@ const ProfileHeaderComponent = (props) => {
   useEffect(() => {
     (async () => {
       dispatch(listCities());
-      // dispatch(fetchUser());
     })();
   }, [dispatch]);
 
@@ -39,9 +34,10 @@ const ProfileHeaderComponent = (props) => {
         icon: "error",
         titleText: error,
         showConfirmButton: false,
-        timer: 1000,
+        timer: 3000,
       });
-      // alert(error);
+
+      dispatch(logout());
     }
   }, [error]);
 
@@ -52,7 +48,7 @@ const ProfileHeaderComponent = (props) => {
         icon: "error",
         titleText: errorU,
         showConfirmButton: false,
-        timer: 1000,
+        timer: 3000,
       });
       // alert(errorU);
     }
@@ -65,7 +61,7 @@ const ProfileHeaderComponent = (props) => {
         icon: "error",
         titleText: errorC,
         showConfirmButton: false,
-        timer: 2000,
+        timer: 3000,
       });
       // alert(errorC);
     }
@@ -76,6 +72,7 @@ const ProfileHeaderComponent = (props) => {
       dispatch(fetchUser());
     } else {
       alert("User Data Not Found !");
+      dispatch(logout());
     }
   }, [isAuthenticated]);
 
@@ -108,8 +105,6 @@ const ProfileHeaderComponent = (props) => {
     );
   };
 
-  // console.log("USERNYA, "+user)
-  // console.log("USERNYAaa, " + JSON.stringify(user));
   return (
     <>
       {/* Main Content */}
