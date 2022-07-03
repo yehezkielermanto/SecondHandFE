@@ -1,4 +1,5 @@
 import {
+  GET_ALL_PRODUCT,
   PRODUCT_ERROR,
   DELETE_PRODUCT,
   ADD_PRODUCT,
@@ -15,6 +16,12 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
+        status: action.status,
+      }
     case ADD_PRODUCT:
       return {
         ...state,
@@ -25,7 +32,6 @@ const productReducer = (state = initialState, action) => {
         ...state,
         status: action.payload,
       }
-
     case PRODUCT_ERROR:
       return {
         ...state,
