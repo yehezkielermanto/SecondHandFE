@@ -1,4 +1,9 @@
-import { PRODUCT_ERROR, DELETE_PRODUCT, ADD_PRODUCT } from '../actions/types'
+import {
+  PRODUCT_ERROR,
+  DELETE_PRODUCT,
+  ADD_PRODUCT,
+  TEMP_PRODUCT,
+} from '../actions/types'
 const initialState = {
   product: [],
   detailProduct: [],
@@ -26,6 +31,12 @@ const productReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         status: 'FAIL',
+      }
+    case TEMP_PRODUCT:
+      return {
+        ...state,
+        previewProduct: action.payload,
+        status: 'edited',
       }
     default:
       return state

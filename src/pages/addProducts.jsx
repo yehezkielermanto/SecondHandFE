@@ -6,12 +6,11 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import ResponsiveNavLink from '../components/ResponsiveNavLink'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { listCategory } from '../redux/actions/categoryAction'
-import { newProduct } from '../redux/actions/produkActions'
+import { newProduct, tempProduct } from '../redux/actions/produkActions'
 import Swal from 'sweetalert2'
 
 export default function addProduct() {
   const dispatch = useDispatch()
-
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { category, errorC } = useSelector((state) => state.category)
 
@@ -20,6 +19,10 @@ export default function addProduct() {
   const [kategori, setKategori] = useState('')
   const [deskripsi, setDeskripsi] = useState('')
   const [gambarProduk, setGambar] = useState('')
+  const [previewImg1, setPreview1] = useState('')
+  const [previewImg2, setPreview2] = useState('')
+  const [previewImg3, setPreview3] = useState('')
+  const [previewImg4, setPreview4] = useState('')
 
   // handling submit button
   const handleSubmit = async (e) => {
@@ -92,8 +95,56 @@ export default function addProduct() {
     }
   }
 
+  // -----------------------------------handle preview image
+  const image1 = async (e) => {
+    e.preventDefault()
+    setGambar([...gambarProduk, URL.createObjectURL(e.target.files[0])])
+    setPreview1({ file: URL.createObjectURL(e.target.files[0]) })
+  }
+  const image2 = async (e) => {
+    e.preventDefault()
+    setGambar([...gambarProduk, URL.createObjectURL(e.target.files[0])])
+    setPreview2({ file: URL.createObjectURL(e.target.files[0]) })
+  }
+  const image3 = async (e) => {
+    e.preventDefault()
+    setGambar([...gambarProduk, URL.createObjectURL(e.target.files[0])])
+    setPreview3({ file: URL.createObjectURL(e.target.files[0]) })
+  }
+  const image4 = async (e) => {
+    e.preventDefault()
+    setGambar([...gambarProduk, URL.createObjectURL(e.target.files[0])])
+    setPreview4({ file: URL.createObjectURL(e.target.files[0]) })
+  }
+  // -----------------------------------show preview product before publish
   const handlePreview = async (e) => {
     e.preventDefault()
+    // check inputan is empty or not
+    if (
+      namaProduk !== '' &&
+      hargaProduk !== '' &&
+      kategori !== '' &&
+      deskripsi !== '' &&
+      gambarProduk !== ''
+    ) {
+      dispatch(
+        tempProduct({
+          namaProduk,
+          hargaProduk,
+          kategori,
+          deskripsi,
+          gambarProduk,
+        }),
+      )
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please input all field before preview',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
   }
 
   // use effect list category
@@ -288,19 +339,85 @@ export default function addProduct() {
               <p className="mb-2 text-xs font-poppins">
                 Foto Produk<span className="text-red-600">*</span>
               </p>
-              <div className="mb-4">
+              <div className="mb-4 flex flex-row">
+                {/* image 1 */}
                 <label
-                  for="dropzone-file"
-                  class="flex flex-col p-0 w-20 justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
+                  for="dropzone-file1"
+                  class="flex flex-col mx-2 w-full justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
                 >
                   <div class="flex flex-col justify-center items-center pt-5 pb-6">
-                    <AiOutlinePlus />
+                    {previewImg1 === '' ? (
+                      <AiOutlinePlus />
+                    ) : (
+                      <img src={previewImg1.file} alt="image" />
+                    )}
                   </div>
                   <input
-                    id="dropzone-file"
+                    id="dropzone-file1"
                     type="file"
-                    onChange={(e) => setGambar(e.target.files)}
+                    onChange={image1}
                     className="hidden"
+                    multiple
+                  />
+                </label>
+                {/* image 2 */}
+                <label
+                  for="dropzone-file2"
+                  class="flex flex-col mx-2 w-full justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
+                >
+                  <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                    {previewImg2 === '' ? (
+                      <AiOutlinePlus />
+                    ) : (
+                      <img src={previewImg2.file} alt="image" />
+                    )}
+                  </div>
+                  <input
+                    id="dropzone-file2"
+                    type="file"
+                    onChange={image2}
+                    className="hidden"
+                    multiple
+                  />
+                </label>
+                {/* image 3 */}
+                <label
+                  for="dropzone-file3"
+                  class="flex flex-col mx-2 w-full justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
+                >
+                  <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                    {previewImg3 === '' ? (
+                      <AiOutlinePlus />
+                    ) : (
+                      <img src={previewImg3.file} alt="image" />
+                    )}
+                  </div>
+                  <input
+                    id="dropzone-file3"
+                    type="file"
+                    onChange={image3}
+                    className="hidden"
+                    multiple
+                  />
+                </label>
+                {/* image 4 */}
+                <label
+                  for="dropzone-file4"
+                  class="flex flex-col mx-2 w-full justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
+                >
+                  <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                    {previewImg4 === '' ? (
+                      <AiOutlinePlus />
+                    ) : (
+                      <img src={previewImg4.file} alt="image" />
+                    )}
+                  </div>
+                  <input
+                    id="dropzone-file4"
+                    type="file"
+                    onChange={image4}
+                    className="hidden"
+                    multiple
                   />
                 </label>
               </div>
@@ -312,6 +429,7 @@ export default function addProduct() {
                 >
                   <span className="text-dark font-medium">Preview</span>
                 </button>
+
                 <button
                   onClick={handleSubmit}
                   className="bg-violet-700 hover:bg-violet-900 w-full p-1.5 rounded-lg mx-2"

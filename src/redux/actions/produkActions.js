@@ -1,6 +1,11 @@
 import Swal from 'sweetalert2'
 
-import { PRODUCT_ERROR, DELETE_PRODUCT, ADD_PRODUCT } from './types'
+import {
+  PRODUCT_ERROR,
+  DELETE_PRODUCT,
+  ADD_PRODUCT,
+  TEMP_PRODUCT,
+} from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 
 // action delete product
@@ -61,7 +66,7 @@ export const newProduct = (data) => async (dispatch) => {
     formdata.append('deskripsi', data.deskripsi)
     formdata.append('image', data.gambarProduk)
 
-    console.log(data.gambarProduk)
+    console.log(data.gambarProduk.FileList)
 
     const requestOptions = {
       method: 'POST',
@@ -92,5 +97,15 @@ export const newProduct = (data) => async (dispatch) => {
     dispatch({
       type: PRODUCT_ERROR,
     })
+  }
+}
+
+export const tempProduct = (data) => async (dispatch) => {
+  try {
+    if (data != '') {
+      dispatch({ type: TEMP_PRODUCT, payload: data })
+    }
+  } catch (error) {
+    dispatch({ type: PRODUCT_ERROR })
   }
 }
