@@ -49,7 +49,7 @@ root.render(
         />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
-        <Route path='/productbuyer' element={<ProductBuyer />} />
+        <Route path="/productbuyer" element={<ProductBuyer />} />
         <Route path="/buyerinfo" element={<BuyerInfo />} />
         <Route
           path="/user"
@@ -78,7 +78,14 @@ root.render(
 
         <Route path="/kategori" element={<CategoryTable />} />
         {/* add new products */}
-        <Route path="/addProduct" element={<AddProduct />} />
+        <Route
+          path="/addProduct"
+          element={
+            <Protected>
+              <AddProduct />
+            </Protected>
+          }
+        />
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>

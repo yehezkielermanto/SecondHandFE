@@ -28,17 +28,22 @@ export const listCategory = () => async (dispatch) => {
 
     const result = await response.json()
 
-    // console.log(result)
-    if (result) {
+    if (result != '') {
       dispatch({
         type: CATEGORY,
-        payload: result.list,
+        payload: result.category,
+      })
+    } else {
+      dispatch({
+        type: CATEGORY_ERROR,
+        payload: '',
       })
     }
   } catch (error) {
+    console.log(error.message)
     dispatch({
       type: CATEGORY_ERROR,
-      payload: error,
+      payload: error.message,
     })
   }
 }
