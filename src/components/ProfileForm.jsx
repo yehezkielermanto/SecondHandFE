@@ -14,6 +14,21 @@ const ProfileHeaderComponent = (props) => {
   const { user, justUpdated, errorU } = useSelector((state) => state.users);
   const { city, errorC } = useSelector((state) => state.cities);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchUser());
+    } else {
+      alert("User Data Not Found !");
+      dispatch(logout());
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    (async () => {
+      dispatch(listCities());
+    })();
+  }, [dispatch]);
+
   const [nama, setNama] = useState();
   const [kota, setKota] = useState();
   const [alamat, setAlamat] = useState();
@@ -21,13 +36,9 @@ const ProfileHeaderComponent = (props) => {
   const [imgProfile, setImg] = useState();
   const fileRef = useRef();
 
-  
+  // nama = user.nama;
 
-  useEffect(() => {
-    (async () => {
-      dispatch(listCities());
-    })();
-  }, [dispatch]);
+  console.log(user.nama);
 
   useEffect(() => {
     if (error) {
@@ -68,15 +79,6 @@ const ProfileHeaderComponent = (props) => {
       // alert(errorC);
     }
   }, [errorC]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(fetchUser());
-    } else {
-      alert("User Data Not Found !");
-      dispatch(logout());
-    }
-  }, [isAuthenticated]);
 
   useEffect(() => {
     if (justUpdated) {
@@ -144,21 +146,23 @@ const ProfileHeaderComponent = (props) => {
               </div>
               {/* <br /> */}
               <br />
+              <p className="mb-2 text-xs font-poppins">Note, Jika Kolom input tidak diisi, maka tetap menggunakan data info yang lama</p>
+              <br/>
               <p className="mb-2 text-xs font-poppins">
                 Nama<span className="text-red-600">*</span>
               </p>
               <div className="mb-4 font-poppins">
-                <h3 className="mb-1">Nama Sekarang: {user.nama}</h3>
+                {/* <h3 className="mb-1">Nama Sekarang: {user.nama}</h3> */}
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   onChange={(e) => setNama(e.target.value)}
                   value={nama}
-                  placeholder="Masukan Nama"
+                  placeholder={`Nama Lama, ` + user.nama}
                 />
               </div>
-              <h3 className="mb-1">Kode Kota Sekarang: {user.idkota}</h3>
+              {/* <h3 className="mb-1">Kode Kota Sekarang: {user.idkota}</h3> */}
               {/* <br/> */}
               <p className="mb-2 text-xs font-poppins">
                 Kota<span className="text-red-600">*</span>
@@ -188,14 +192,14 @@ const ProfileHeaderComponent = (props) => {
                 Alamat<span className="text-red-600">*</span>
               </p>
               <div className="mb-4 font-poppins">
-                <h3 className="mb-1">Alamat Sekarang: {user.alamat}</h3>
+                {/* <h3 className="mb-1">Alamat Sekarang: {user.alamat}</h3> */}
                 <textarea
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   value={alamat}
                   name="alamat"
                   onChange={(e) => setAlamat(e.target.value)}
-                  placeholder="Contoh: Jalan Kulon No. 2"
+                  placeholder={`Alamat Lama, ` + user.alamat}
                 ></textarea>
               </div>
               {/* <br/> */}
@@ -203,7 +207,7 @@ const ProfileHeaderComponent = (props) => {
                 No. Handphone<span className="text-red-600">*</span>
               </p>
               <div className="mb-4 font-poppins">
-                <h3 className="mb-1">No. Handphone Sekarang: {user.nohp}</h3>
+                {/* <h3 className="mb-1">No. Handphone Sekarang: {user.nohp}</h3> */}
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -211,7 +215,7 @@ const ProfileHeaderComponent = (props) => {
                   value={nohp}
                   name="nohp"
                   onChange={(e) => setNohp(e.target.value)}
-                  placeholder="Contoh: +6285739103132"
+                  placeholder={`No. HP Lama, ` + user.nohp}
                 />
               </div>
               <br />
