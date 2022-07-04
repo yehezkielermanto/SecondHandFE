@@ -21,6 +21,8 @@ const ProfileHeaderComponent = (props) => {
   const [imgProfile, setImg] = useState();
   const fileRef = useRef();
 
+  
+
   useEffect(() => {
     (async () => {
       dispatch(listCities());
@@ -91,7 +93,7 @@ const ProfileHeaderComponent = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(imgProfile);
+    // console.log(imgProfile);
 
     dispatch(
       submitUpdate({
