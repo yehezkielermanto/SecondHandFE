@@ -1,18 +1,27 @@
+<<<<<<< HEAD
 import { GET_USER, USERS_ERROR, JUST_UPDATED, LOGOUT } from "./types";
+=======
+import { GET_USER, USERS_ERROR, JUST_UPDATED, LOGOUT } from './types'
+import Swal from 'sweetalert2'
+>>>>>>> 2060d9eb50d2248fe4a6d28c97bead852a8242b9
 
 export const fetchUser = () => async (dispatch) => {
   try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/users/siapaSaya`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const token = localStorage.getItem('token')
+    const response = await fetch(
+      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/siapaSaya`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    )
 
-    const result = await response.json();
+    const result = await response.json()
 
+<<<<<<< HEAD
     /* check if token expired */
     if (result.message === "Token Expired") {
       dispatch({
@@ -25,37 +34,56 @@ export const fetchUser = () => async (dispatch) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+=======
+    // check if token expired
+    if (result.message === 'Token Expired') {
+      return dispatch({
+        type: LOGOUT,
+      })
+    }
+    const fetchImgDetail = await fetch(
+      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/profileImg/details/${result.data.id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+>>>>>>> 2060d9eb50d2248fe4a6d28c97bead852a8242b9
       },
-    });
+    )
 
-    const imgDetail = await fetchImgDetail.json();
+    const imgDetail = await fetchImgDetail.json()
 
     // console.log(imgDetail);
 
-    result.data.imgFileData = imgDetail.dataImg;
-
-    console.log(result);
+    result.data.imgFileData = imgDetail.dataImg
 
     dispatch({
       type: GET_USER,
       payload: result.data,
+<<<<<<< HEAD
     });
+=======
+    })
+>>>>>>> 2060d9eb50d2248fe4a6d28c97bead852a8242b9
   } catch (error) {
     // usersError(error.message);
     dispatch({
       type: USERS_ERROR,
       payload: error,
-    });
-    return;
+    })
+    return
   }
-};
+}
 
 export const submitUpdate = (data) => async (dispatch) => {
+  const idUpdate = data.idUser
+  const formdata = new FormData()
+  const token = localStorage.getItem('token')
 
-    const idUpdate = data.idUser;
-    const formdata = new FormData();
-    const token = localStorage.getItem("token");
+  const namaT = data.nama
 
+<<<<<<< HEAD
     if (data.nama === undefined ) {
         dispatch({
           type: USERS_ERROR,
@@ -79,15 +107,35 @@ export const submitUpdate = (data) => async (dispatch) => {
       });
       return;
     } 
+=======
+  // console.log("TEST DATA, " + namaT);
 
-    if (data.kota == undefined || data.kota == null) {
-      dispatch({
-        type: USERS_ERROR,
-        payload: "Kota Belum Terpilih",
-      });
-      return;
-    } 
+  if (data.nama === undefined) {
+    dispatch({
+      type: USERS_ERROR,
+      payload: 'Nama kosong',
+    })
+    return
+  }
 
+  if (data.alamat == undefined || data.alamat == null) {
+    dispatch({
+      type: USERS_ERROR,
+      payload: 'Alamat kosong',
+    })
+    return
+  }
+>>>>>>> 2060d9eb50d2248fe4a6d28c97bead852a8242b9
+
+  if (data.nohp == undefined || data.nohp == null) {
+    dispatch({
+      type: USERS_ERROR,
+      payload: 'No. HP Kosong !',
+    })
+    return
+  }
+
+<<<<<<< HEAD
     // console.log("IMGNYA, " + data.gambar);
     // console.log("WITh IMG");
     formdata.append("nama", data.nama);
@@ -95,23 +143,37 @@ export const submitUpdate = (data) => async (dispatch) => {
     formdata.append("nohp", data.nohp);
     formdata.append("gambar", data.gambar);
     formdata.append("idkota", data.kota);
+=======
+  if (data.kota == undefined || data.kota == null) {
+    dispatch({
+      type: USERS_ERROR,
+      payload: 'Kota Belum Terpilih',
+    })
+    return
+  }
+>>>>>>> 2060d9eb50d2248fe4a6d28c97bead852a8242b9
 
-    console.log(formdata.nama);
+  console.log('IMGNYA, ' + data.gambar)
 
-    const requestOptions = {
-      method: "PUT",
-      body: formdata,
-      headers: { Authorization: `Bearer ${token}` },
-      redirect: "follow",
-    };
+  console.log('WITh IMG')
+  formdata.append('nama', data.nama)
+  formdata.append('alamat', data.alamat)
+  formdata.append('nohp', data.nohp)
+  formdata.append('gambar', data.gambar)
+  formdata.append('idkota', data.kota)
 
-    // console.log(idUpdate);
+  console.log(formdata.nama)
 
-    try {
-      const response = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/users/update/${idUpdate}`, requestOptions);
+  const requestOptions = {
+    method: 'PUT',
+    body: formdata,
+    headers: { Authorization: `Bearer ${token}` },
+    redirect: 'follow',
+  }
 
-      const result = await response.json();
+  // console.log(idUpdate);
 
+<<<<<<< HEAD
       /* check if token expired */
       if (result.message === "Token Expired") {
         dispatch({
@@ -155,6 +217,72 @@ export const submitUpdate = (data) => async (dispatch) => {
       }
 
       if (imgDetail.status === "FAILED") {
+=======
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/update/${idUpdate}`,
+      requestOptions,
+    )
+
+    const result = await response.json()
+
+    if (result.status === 'OK') {
+      dispatch({
+        type: JUST_UPDATED,
+      })
+    } else {
+      // usersError(result.error.message);
+      dispatch({
+        type: USERS_ERROR,
+        payload: result.error,
+      })
+      return
+    }
+  } catch (error) {
+    dispatch({
+      type: USERS_ERROR,
+      payload: error,
+    })
+  }
+
+  /*
+    if (data.gambar === undefined || data.gambar === null) {
+      console.log("WITHOUT IMG");
+      formdata.append("nama", data.nama);
+      formdata.append("alamat", data.alamat);
+      formdata.append("nohp", data.nohp);
+      formdata.append("idkota", data.kota);
+      formdata.append("gambar", "");
+
+      console.log(formdata.nama)
+
+      const requestOptions = {
+        method: "PUT",
+        body: formdata,
+        headers: { Authorization: `Bearer ${token}` },
+        redirect: "follow",
+      };
+
+      try {
+        console.log("ID UPDATE, "+idUpdate)
+        const response = await fetch(`${process.env.REACT_APP_URLENDPOINT}/api/v1/usersNP/${idUpdate}`, requestOptions);
+
+        const result = await response.json();
+
+        if (result.status === "OK") {
+          dispatch({
+            type: JUST_UPDATED,
+          });
+        } else {
+          dispatch({
+            type: USERS_ERROR,
+            payload: result.error.message,
+          });
+          return;
+        }
+      } catch (error) {
+        // usersError(error.message);
+>>>>>>> 2060d9eb50d2248fe4a6d28c97bead852a8242b9
         dispatch({
           type: USERS_ERROR,
           payload: imgDetail.message,
@@ -181,5 +309,10 @@ export const submitUpdate = (data) => async (dispatch) => {
       });
       return;
     }
+<<<<<<< HEAD
 
 };
+=======
+    */
+}
+>>>>>>> 2060d9eb50d2248fe4a6d28c97bead852a8242b9

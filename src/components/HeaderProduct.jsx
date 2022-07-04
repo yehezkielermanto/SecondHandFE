@@ -8,7 +8,7 @@ export default function HeaderProduct() {
   const [open,setOpen]=useState(false);
   return (
     <div>
-    <div className="drop-shadow-lg pb-12">
+    <div className="drop-shadow-lg pb-12 relative z-30">
       {/* Header */}
       <div className="w-full flex pt-8 px-4 gap-4 lg:bg-white lg:shadow-high lg:justify-between lg:py-4 lg:px-16">
         <button
