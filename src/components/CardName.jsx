@@ -7,7 +7,7 @@ const CardName = () => {
           <div className="d-flex align-items-center ps-3">
             <div className="flex flex-row">
               <img
-                src="https://via.placeholder.com/50/50"
+                src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=50"
                 className="rounded"
                 alt="..."
               />
