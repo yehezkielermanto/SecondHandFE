@@ -4,6 +4,7 @@ import {
   DELETE_PRODUCT,
   ADD_PRODUCT,
   TEMP_PRODUCT,
+  EDIT_PRODUCT,
 } from '../actions/types'
 const initialState = {
   product: [],
@@ -43,6 +44,12 @@ const productReducer = (state = initialState, action) => {
         ...state,
         previewProduct: action.payload,
         status: 'edited',
+      }
+    case EDIT_PRODUCT:
+      return {
+        ...state,
+        previewProduct: action.payload,
+        status: 'notPreview',
       }
     default:
       return state

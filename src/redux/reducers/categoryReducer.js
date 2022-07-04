@@ -2,7 +2,7 @@ import { CATEGORY, CATEGORY_ERROR } from '../actions/types'
 
 const initialState = {
   category: [],
-  error: null,
+  errorC: null,
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -11,13 +11,13 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         category: action.payload,
-        error: null,
+        errorC: null,
       }
     case CATEGORY_ERROR:
       return {
         ...state,
         category: [],
-        error: action.payload,
+        errorC: action.payload,
       }
     default:
       return state

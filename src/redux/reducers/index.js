@@ -1,10 +1,10 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux'
 
-import authReducer from "./authReducer";
-import usersReducer from "./usersReducer";
-import citiesReducer from "./citiesReducer";
-import categoryReducer from "./categoryReducer";
-import productReducer from "./produkReducer";
+import authReducer from './authReducer'
+import usersReducer from './usersReducer'
+import citiesReducer from './citiesReducer'
+import categoryReducer from './categoryReducer'
+import productReducer from './produkReducer'
 
 export default combineReducers({
   auth: authReducer,
@@ -12,4 +12,4 @@ export default combineReducers({
   cities: citiesReducer,
   product: productReducer,
   category: categoryReducer,
-});
+})

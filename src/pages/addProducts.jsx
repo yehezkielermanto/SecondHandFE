@@ -5,14 +5,17 @@ import { Link, Navigate } from 'react-router-dom'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import ResponsiveNavLink from '../components/ResponsiveNavLink'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { listCategory } from '../redux/actions/categoryAction'
+import { listCategory } from '../redux/actions/categoryActions'
 import { newProduct, tempProduct } from '../redux/actions/produkActions'
 import Swal from 'sweetalert2'
+import { fetchUser } from '../redux/actions/usersActions'
 
-export default function addProduct() {
+export default function addProducts() {
   const dispatch = useDispatch()
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { category, errorC } = useSelector((state) => state.category)
+  const { status, previewProduct } = useSelector((state) => state.product)
+  const { user } = useSelector((state) => state.users)
 
   const [namaProduk, setProduk] = useState('')
   const [hargaProduk, setHarga] = useState('')
@@ -134,6 +137,7 @@ export default function addProduct() {
           kategori,
           deskripsi,
           gambarProduk,
+          kota: user.idkota,
         }),
       )
     } else {
@@ -147,14 +151,15 @@ export default function addProduct() {
     }
   }
 
-  // use effect list category
+  // --------------------------------------list category
   useEffect(() => {
     ;(async () => {
       dispatch(listCategory())
+      dispatch(fetchUser())
     })()
   }, [dispatch])
 
-  // use effect is authenticated
+  // ------------------------------use effect is authenticated
   useEffect(() => {
     if (isAuthenticated) {
     } else {
@@ -236,9 +241,9 @@ export default function addProduct() {
         </div>
       </div>
 
-      {/* form input new product */}
-      {!isAuthenticated ? (
-        <Navigate to="/" />
+      {/* ------------------------------------------form input new product */}
+      {status === 'edited' ? (
+        <Navigate to="/product" />
       ) : (
         <form>
           {/* {!justUpdated ? ( */}
@@ -278,7 +283,11 @@ export default function addProduct() {
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   onChange={(e) => setProduk(e.target.value)}
-                  value={namaProduk}
+                  value={
+                    previewProduct == ''
+                      ? namaProduk
+                      : previewProduct.namaProduk
+                  }
                   placeholder="Nama Produk"
                 />
               </div>
@@ -293,7 +302,11 @@ export default function addProduct() {
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   onChange={(e) => setHarga(e.target.value)}
-                  value={hargaProduk}
+                  value={
+                    previewProduct == ''
+                      ? hargaProduk
+                      : previewProduct.hargaProduk
+                  }
                   placeholder="Rp 0,00"
                 />
               </div>
@@ -307,7 +320,10 @@ export default function addProduct() {
                   name="kategori"
                   onChange={(e) => setKategori(e.target.value)}
                 >
-                  <option selected value="">
+                  <option
+                    selected
+                    value={previewProduct == '' ? '' : previewProduct.kategori}
+                  >
                     Pilih Kategori
                   </option>
                   {category.length === 0 ? (
@@ -330,7 +346,9 @@ export default function addProduct() {
                 <textarea
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
-                  value={deskripsi}
+                  value={
+                    previewProduct == '' ? deskripsi : previewProduct.deskripsi
+                  }
                   name="nohp"
                   onChange={(e) => setDeskripsi(e.target.value)}
                   placeholder="Contoh: Jalan Ikan Hiu 33"
@@ -346,10 +364,20 @@ export default function addProduct() {
                   class="flex flex-col mx-2 w-full justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
                 >
                   <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                    {previewProduct!= '' ? (
+                      previewProduct.gambarProduk.map((gambar)=>(
+
                     {previewImg1 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={previewImg1.file} alt="image" />
+                      <img
+                        src={
+                          previewProduct == ''
+                            ? previewImg1.file
+                            : previewProduct.gambarProduk
+                        }
+                        alt="image"
+                      />
                     )}
                   </div>
                   <input
@@ -420,6 +448,8 @@ export default function addProduct() {
                     multiple
                   />
                 </label>
+                      ))
+                    ):('')}
               </div>
               <br />
               <div className="flex flex-row">

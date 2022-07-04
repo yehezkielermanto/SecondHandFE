@@ -6,6 +6,7 @@ import {
   DELETE_PRODUCT,
   ADD_PRODUCT,
   TEMP_PRODUCT,
+  EDIT_PRODUCT,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 
@@ -177,7 +178,47 @@ export const newProduct = (data) => async (dispatch) => {
 export const tempProduct = (data) => async (dispatch) => {
   try {
     if (data != '') {
-      dispatch({ type: TEMP_PRODUCT, payload: data })
+      const response = await fetch(
+        REACT_APP_URLENDPOINT + '/api/v1/cities/' + data.kota,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        },
+      )
+      const findCateg = await fetch(
+        REACT_APP_URLENDPOINT + '/api/v1/category/' + data.kategori,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        },
+      )
+      const result = await response.json()
+      const category = await findCateg.json()
+      const kota = result.city.nama_kota
+
+      console.log(data)
+      dispatch({
+        type: TEMP_PRODUCT,
+        payload: {
+          namaProduk: data.namaProduk,
+          hargaProduk: data.hargaProduk,
+          kategori: data.kategori,
+          deskripsi: data.deskripsi,
+          gambarProduk: data.gambarProduk,
+          kota: kota,
+          namaKategori: category.category.nama_kategori,
+        },
+      })
+    }
+  } catch (error) {
+    dispatch({ type: PRODUCT_ERROR })
+  }
+}
+
+export const editProduct = (data) => async (dispatch) => {
+  try {
+    if (data != '') {
+      dispatch({ type: EDIT_PRODUCT, payload: data })
     }
   } catch (error) {
     dispatch({ type: PRODUCT_ERROR })

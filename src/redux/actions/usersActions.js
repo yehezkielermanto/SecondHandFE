@@ -1,5 +1,5 @@
 import { GET_USER, USERS_ERROR, JUST_UPDATED, LOGOUT } from './types'
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 
 export const fetchUser = () => async (dispatch) => {
   try {
