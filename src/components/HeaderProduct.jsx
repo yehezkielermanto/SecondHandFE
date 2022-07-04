@@ -10,14 +10,14 @@ export default function HeaderProduct() {
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   return (
     <div>
-    <div className="drop-shadow-lg pb-12 relative z-30">
+    <div className="drop-shadow-lg mt-8 lg:mt-0 relative z-30">
     <Sidebar
 				show={isMobileSidebarOpen}
 				close={() => setMobileSidebarOpen(false)}
-				loggedIn={ isLoggedIn }
+				
 			/>
       {/* Header */}
-      <div className="w-full flex pt-8 px-4 gap-4 lg:bg-white lg:shadow-high lg:justify-between lg:py-4 lg:px-16">
+      <div className="w-full flex px-4 gap-4 lg:bg-white lg:shadow-high lg:justify-between lg:py-4 lg:px-16">
         <button
           className="w-12 h-12 p-3 bg-white rounded-2xl lg:hidden"
           onClick={() => setMobileSidebarOpen(true)}
