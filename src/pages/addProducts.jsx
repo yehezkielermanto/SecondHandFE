@@ -364,9 +364,6 @@ export default function addProducts() {
                   class="flex flex-col mx-2 w-full justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
                 >
                   <div class="flex flex-col justify-center items-center pt-5 pb-6">
-                    {previewProduct!= '' ? (
-                      previewProduct.gambarProduk.map((gambar)=>(
-
                     {previewImg1 === '' ? (
                       <AiOutlinePlus />
                     ) : (
@@ -448,8 +445,6 @@ export default function addProducts() {
                     multiple
                   />
                 </label>
-                      ))
-                    ):('')}
               </div>
               <br />
               <div className="flex flex-row">
