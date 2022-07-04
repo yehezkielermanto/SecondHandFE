@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { FiLogIn, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
 export default function Sidebar(props) {
 	return (
@@ -23,23 +23,19 @@ export default function Sidebar(props) {
 					/>
 				</div>
 				<div className="mt-4 flex flex-col">
-					{props.loggedIn ? (
+				
 						<>
-							<Link to="/notifikasi" className="">
+							<Link to="/notif" className="mb-1">
 								Notifikasi
 							</Link>
-							<Link to="/daftar-jual" className="">
+							<Link to="/daftar-jual" className="mb-1">
 								Daftar Jual
 							</Link>
-							<Link to="/akun-saya" className="">
+							<Link to="/akun-saya" className="mb-1">
 								Akun Saya
 							</Link>
 						</>
-					) : (
-						<Link to="/login" className="btn self-start">
-							<FiLogIn /> Masuk
-						</Link>
-					)}
+					
 				</div>
 			</div>
 		</div>
