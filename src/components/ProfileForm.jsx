@@ -14,9 +14,9 @@ const ProfileHeaderComponent = (props) => {
   const [kota, setKota] = useState();
   const [alamat, setAlamat] = useState();
   const [nohp, setNohp] = useState();
-  const [imgProfile, setImg] = useState();
-  const [previewImg, setPreview] = useState("");
-  const fileRef = useRef();
+  const [imgProfile, setImg] = useState('');
+  const [previewImg, setPreview] = useState('');
+  // const fileRef = useRef();
 
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { user, justUpdated, errorU } = useSelector((state) => state.users)
@@ -35,13 +35,15 @@ const ProfileHeaderComponent = (props) => {
   useEffect(() => {
     setNama(user.nama);
     setAlamat(user.alamat);
-    setKota(user.idkota)
+    setKota(user.idkota);
     setNohp(user.nohp);
+    setPreview(imgProfile);
   }, [user])
 
-  const image = async (e) => {
+  const imageUpload = async (e) => {
     e.preventDefault();
-    setImg([...imgProfile, URL.createObjectURL(e.target.files[0])]);
+    setImg(e.target.files[0]);
+    // setImg([...imgProfile, URL.createObjectURL(e.target.files[0])]);
     setPreview({ file: URL.createObjectURL(e.target.files[0]) });
   };
 
@@ -53,7 +55,8 @@ const ProfileHeaderComponent = (props) => {
 
   // nama = user.nama;
 
-  console.log(previewImg.file);
+  console.log(imgProfile)
+  console.log(previewImg);
 
   useEffect(() => {
     if (error) {
@@ -146,7 +149,7 @@ const ProfileHeaderComponent = (props) => {
               <div className="flex justify-center items-center w-full">
                 <label
                   for="dropzone-file"
-                  className="flex flex-col p-0 w-20 justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
+                  className="flex flex-col p-0 w-28 h-28 justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-4 border-gray-300 border-dashed cursor-pointer overflow-hidden"
                 >
                   <div className="flex flex-col justify-center items-center pt-5 pb-6">
                     {previewImg === "" ? (
@@ -159,11 +162,12 @@ const ProfileHeaderComponent = (props) => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
                     ) : (
+                      // <img src={URL.createObjectURL(imgProfile)} alt="not found" />
                       <img src={previewImg.file} alt="not found" />
                     )}
                   </div>
                   {/* <input id="dropzone-file" type="file" ref={fileRef} onChange={(e) => setImg(e.target.files[0])} className="hidden" /> */}
-                  <input id="dropzone-file" type="file" onChange={image} className="hidden" />
+                  <input id="dropzone-file" type="file" onChange={imageUpload} className="hidden" />
                 </label>
               </div>
               {/* User's Name Input */}
