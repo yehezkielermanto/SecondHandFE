@@ -346,14 +346,16 @@ export default function addProducts() {
                   <option selected value={kategori}>
                     Pilih Kategori
                   </option>
-                  {category.length === 0 ? (
+                  {/* {category.length === 0 ? ( */}
+                  {category === null ? (
                     <option value="">Daftar Kategori Kosong</option>
                   ) : (
-                    category.map((kategori) => (
-                      <option key={kategori.id} value={kategori.id}>
-                        {kategori.nama_kategori}
-                      </option>
-                    ))
+                    // category.map((kategori) => (
+                    //   <option key={kategori.id} value={kategori.id}>
+                    //     {kategori.nama_kategori}
+                    //   </option>
+                    // ))
+                    <h1>yeeeyyy</h1>
                   )}
                 </select>
               </div>
