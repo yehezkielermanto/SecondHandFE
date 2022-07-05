@@ -141,8 +141,10 @@ export const newProduct = (data) => async (dispatch) => {
     formdata.append('nama', data.namaProduk)
     formdata.append('harga', data.hargaProduk)
     formdata.append('deskripsi', data.deskripsi)
-    formdata.append('image', data.gambarProduk)
-
+    for (let i = 0; i < data.gambarProduk.length; i++) {
+      formdata.append('image', data.gambarProduk[i])
+      console.log(data.gambarProduk[i])
+    }
     const requestOptions = {
       method: 'POST',
       body: formdata,
@@ -196,7 +198,7 @@ export const tempProduct = (data) => async (dispatch) => {
       const category = await findCateg.json()
       const kota = result.city.nama_kota
 
-      console.log(data)
+      // console.log(data)
       dispatch({
         type: TEMP_PRODUCT,
         payload: {

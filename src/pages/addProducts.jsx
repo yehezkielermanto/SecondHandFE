@@ -27,7 +27,7 @@ export default function addProducts() {
   const [previewImg3, setPreview3] = useState('')
   const [previewImg4, setPreview4] = useState('')
 
-  // handling submit button
+  // handling submit button -> terbitkan produk
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(namaProduk)
@@ -150,6 +150,37 @@ export default function addProducts() {
       })
     }
   }
+
+  //----------------useEffect nama
+  useEffect(() => {
+    setProduk(previewProduct.namaProduk)
+    setHarga(previewProduct.hargaProduk)
+    setDeskripsi(previewProduct.deskripsi)
+    setKategori(previewProduct.kategori)
+    if (previewProduct != '') {
+      // set gambar dari redux
+      setGambar(previewProduct.gambarProduk)
+      // cek panjang gambar dari redux
+      let gambarProdukLength = previewProduct.gambarProduk.length
+      for (let i = 0; i < gambarProdukLength; i++) {
+        if (gambarProdukLength == 1) {
+          setPreview1({ file: previewProduct.gambarProduk[0] })
+        } else if (gambarProdukLength == 2) {
+          setPreview1({ file: previewProduct.gambarProduk[0] })
+          setPreview2({ file: previewProduct.gambarProduk[1] })
+        } else if (gambarProdukLength == 3) {
+          setPreview1({ file: previewProduct.gambarProduk[0] })
+          setPreview2({ file: previewProduct.gambarProduk[1] })
+          setPreview3({ file: previewProduct.gambarProduk[2] })
+        } else if (gambarProdukLength == 4) {
+          setPreview1({ file: previewProduct.gambarProduk[0] })
+          setPreview2({ file: previewProduct.gambarProduk[1] })
+          setPreview3({ file: previewProduct.gambarProduk[2] })
+          setPreview4({ file: previewProduct.gambarProduk[3] })
+        }
+      }
+    }
+  }, [previewProduct])
 
   // --------------------------------------list category
   useEffect(() => {
@@ -283,11 +314,7 @@ export default function addProducts() {
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   onChange={(e) => setProduk(e.target.value)}
-                  value={
-                    previewProduct == ''
-                      ? namaProduk
-                      : previewProduct.namaProduk
-                  }
+                  value={namaProduk}
                   placeholder="Nama Produk"
                 />
               </div>
@@ -302,11 +329,7 @@ export default function addProducts() {
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   onChange={(e) => setHarga(e.target.value)}
-                  value={
-                    previewProduct == ''
-                      ? hargaProduk
-                      : previewProduct.hargaProduk
-                  }
+                  value={hargaProduk}
                   placeholder="Rp 0,00"
                 />
               </div>
@@ -320,10 +343,7 @@ export default function addProducts() {
                   name="kategori"
                   onChange={(e) => setKategori(e.target.value)}
                 >
-                  <option
-                    selected
-                    value={previewProduct == '' ? '' : previewProduct.kategori}
-                  >
+                  <option selected value={kategori}>
                     Pilih Kategori
                   </option>
                   {category.length === 0 ? (
@@ -346,9 +366,7 @@ export default function addProducts() {
                 <textarea
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
-                  value={
-                    previewProduct == '' ? deskripsi : previewProduct.deskripsi
-                  }
+                  value={deskripsi}
                   name="nohp"
                   onChange={(e) => setDeskripsi(e.target.value)}
                   placeholder="Contoh: Jalan Ikan Hiu 33"
@@ -367,14 +385,7 @@ export default function addProducts() {
                     {previewImg1 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img
-                        src={
-                          previewProduct == ''
-                            ? previewImg1.file
-                            : previewProduct.gambarProduk
-                        }
-                        alt="image"
-                      />
+                      <img src={previewImg1.file} alt="image" />
                     )}
                   </div>
                   <input
@@ -382,7 +393,6 @@ export default function addProducts() {
                     type="file"
                     onChange={image1}
                     className="hidden"
-                    multiple
                   />
                 </label>
                 {/* image 2 */}
@@ -402,7 +412,6 @@ export default function addProducts() {
                     type="file"
                     onChange={image2}
                     className="hidden"
-                    multiple
                   />
                 </label>
                 {/* image 3 */}
@@ -422,7 +431,6 @@ export default function addProducts() {
                     type="file"
                     onChange={image3}
                     className="hidden"
-                    multiple
                   />
                 </label>
                 {/* image 4 */}
@@ -442,7 +450,6 @@ export default function addProducts() {
                     type="file"
                     onChange={image4}
                     className="hidden"
-                    multiple
                   />
                 </label>
               </div>
