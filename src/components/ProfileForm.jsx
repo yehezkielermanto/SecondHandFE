@@ -8,12 +8,21 @@ import { logout } from "../redux/actions/authActions";
 import { listCities } from "../redux/actions/citiesActions";
 
 const ProfileHeaderComponent = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { isAuthenticated, error } = useSelector((state) => state.auth);
-  const { user, justUpdated, errorU } = useSelector((state) => state.users);
-  const { city, errorC } = useSelector((state) => state.cities);
+  const [nama, setNama] = useState();
+  const [kota, setKota] = useState();
+  const [alamat, setAlamat] = useState();
+  const [nohp, setNohp] = useState();
+  const [imgProfile, setImg] = useState();
+  const [previewImg, setPreview] = useState("");
+  const fileRef = useRef();
 
+  const { isAuthenticated, error } = useSelector((state) => state.auth)
+  const { user, justUpdated, errorU } = useSelector((state) => state.users)
+  const { city, errorC } = useSelector((state) => state.cities)
+
+  /* array inside useEffect, dependencies */
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchUser());
@@ -24,27 +33,33 @@ const ProfileHeaderComponent = (props) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
+    setNama(user.nama);
+    setAlamat(user.alamat);
+    setKota(user.idkota)
+    setNohp(user.nohp);
+  }, [user])
+
+  const image = async (e) => {
+    e.preventDefault();
+    setImg([...imgProfile, URL.createObjectURL(e.target.files[0])]);
+    setPreview({ file: URL.createObjectURL(e.target.files[0]) });
+  };
+
+  useEffect(() => {
     (async () => {
       dispatch(listCities());
     })();
   }, [dispatch]);
 
-  const [nama, setNama] = useState();
-  const [kota, setKota] = useState();
-  const [alamat, setAlamat] = useState();
-  const [nohp, setNohp] = useState();
-  const [imgProfile, setImg] = useState();
-  const fileRef = useRef();
-
   // nama = user.nama;
 
-  console.log(user.nama);
+  console.log(previewImg.file);
 
   useEffect(() => {
     if (error) {
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'error',
         titleText: error,
         showConfirmButton: false,
         timer: 3000,
@@ -52,48 +67,48 @@ const ProfileHeaderComponent = (props) => {
 
       dispatch(logout());
     }
-  }, [error]);
+  }, [error])
 
   useEffect(() => {
     if (errorU) {
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'error',
         titleText: errorU,
         showConfirmButton: false,
         timer: 3000,
       });
       // alert(errorU);
     }
-  }, [errorU]);
+  }, [errorU])
 
   useEffect(() => {
     if (errorC) {
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'error',
         titleText: errorC,
         showConfirmButton: false,
         timer: 3000,
       });
       // alert(errorC);
     }
-  }, [errorC]);
+  }, [errorC])
 
   useEffect(() => {
     if (justUpdated) {
       Swal.fire({
-        position: "center",
-        icon: "success",
-        titleText: "Profil Anda Berhasil Terubah !",
+        position: 'center',
+        icon: 'success',
+        titleText: 'Profil Anda Berhasil Terubah !',
         showConfirmButton: false,
         timer: 2000,
-      });
+      })
     }
-  }, [justUpdated]);
+  }, [justUpdated])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // console.log(imgProfile);
 
@@ -105,18 +120,19 @@ const ProfileHeaderComponent = (props) => {
         alamat,
         nohp,
         gambar: imgProfile,
-      })
-    );
-  };
+      }),
+    )
+  }
 
   return (
     <>
       {/* Main Content */}
       {!justUpdated ? (
-        <div className="flex flex-col h-full sm:w-full lg:w-6/12 lg:mx-auto mt-5 px-3 text-left">
+        <div className="flex flex-col h-auto sm:w-full lg:w-7/12 lg:mx-auto  p-3 text-left border-2">
           <Link to="/user">
             <div className="invisible lg:visible p-0 w-10 flex justify-center hover:bg-violet-800 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" className="block ml-0 my-1 h-5 w-5 hover:fill-neutral-50" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="block ml-0 my-1 h-5 w-5 " viewBox="0 0 20 20" fill="currentColor">
+                {/* hover:fill-neutral-50 */}
                 <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
               </svg>
             </div>
@@ -125,6 +141,7 @@ const ProfileHeaderComponent = (props) => {
             <Navigate to="/" />
           ) : (
             <form onSubmit={handleSubmit}>
+              {/* User's id */}
               <input type="hidden" value={user.id} onChange={(e) => setId(e.target.value)} />
               <div className="flex justify-center items-center w-full">
                 <label
@@ -132,22 +149,27 @@ const ProfileHeaderComponent = (props) => {
                   className="flex flex-col p-0 w-20 justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
                 >
                   <div className="flex flex-col justify-center items-center pt-5 pb-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                      />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
+                    {previewImg === "" ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                        />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    ) : (
+                      <img src={previewImg.file} alt="not found" />
+                    )}
                   </div>
-                  <input id="dropzone-file" type="file" ref={fileRef} onChange={(e) => setImg(e.target.files[0])} className="hidden" />
+                  {/* <input id="dropzone-file" type="file" ref={fileRef} onChange={(e) => setImg(e.target.files[0])} className="hidden" /> */}
+                  <input id="dropzone-file" type="file" onChange={image} className="hidden" />
                 </label>
               </div>
-              {/* <br /> */}
+              {/* User's Name Input */}
               <br />
               <p className="mb-2 text-xs font-poppins">Note, Jika Kolom input tidak diisi, maka tetap menggunakan data info yang lama</p>
-              <br/>
+              <br />
               <p className="mb-2 text-xs font-poppins">
                 Nama<span className="text-red-600">*</span>
               </p>
@@ -162,8 +184,8 @@ const ProfileHeaderComponent = (props) => {
                   placeholder={`Nama Lama, ` + user.nama}
                 />
               </div>
-              {/* <h3 className="mb-1">Kode Kota Sekarang: {user.idkota}</h3> */}
-              {/* <br/> */}
+              <h3 className="mb-1">Kode Kota Sekarang: {user.idkota}</h3>
+              {/* User's City Input */}
               <p className="mb-2 text-xs font-poppins">
                 Kota<span className="text-red-600">*</span>
               </p>
@@ -187,7 +209,7 @@ const ProfileHeaderComponent = (props) => {
                   )}
                 </select>
               </div>
-              {/* <br /> */}
+              {/* User's address input */}
               <p className="mb-2 text-xs font-poppins">
                 Alamat<span className="text-red-600">*</span>
               </p>
@@ -202,7 +224,7 @@ const ProfileHeaderComponent = (props) => {
                   placeholder={`Alamat Lama, ` + user.alamat}
                 ></textarea>
               </div>
-              {/* <br/> */}
+              {/* User's phone number input */}
               <p className="mb-2 text-xs font-poppins">
                 No. Handphone<span className="text-red-600">*</span>
               </p>
@@ -219,7 +241,7 @@ const ProfileHeaderComponent = (props) => {
                 />
               </div>
               <br />
-              <button className="bg-violet-700 hover:bg-violet-900 w-full p-1.5 rounded-lg">
+              <button type="submit" className="bg-violet-700 hover:bg-violet-900 w-full p-1.5 rounded-lg">
                 <span className="text-white font-medium">Simpan</span>
               </button>
             </form>
@@ -230,6 +252,6 @@ const ProfileHeaderComponent = (props) => {
       )}
     </>
   );
-};
+}
 
-export default ProfileHeaderComponent;
+export default ProfileHeaderComponent

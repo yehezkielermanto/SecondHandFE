@@ -3,7 +3,9 @@ import {
   PRODUCT_ERROR,
   DELETE_PRODUCT,
   ADD_PRODUCT,
-} from "../actions/types";
+  TEMP_PRODUCT,
+  EDIT_PRODUCT,
+} from '../actions/types'
 const initialState = {
   product: [],
   detailProduct: [],
@@ -11,7 +13,7 @@ const initialState = {
   previewProduct: [],
   status: null,
   error: null,
-};
+}
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -20,27 +22,38 @@ const productReducer = (state = initialState, action) => {
         ...state,
         product: action.payload,
         status: action.status,
-      };
+      }
     case ADD_PRODUCT:
       return {
         ...state,
-        status: "success add product",
-      };
+        status: 'success add product',
+      }
     case DELETE_PRODUCT:
       return {
         ...state,
         status: action.payload,
-      };
-
+      }
     case PRODUCT_ERROR:
       return {
         ...state,
         error: action.payload,
-        status: "FAIL",
-      };
+        status: 'FAIL',
+      }
+    case TEMP_PRODUCT:
+      return {
+        ...state,
+        previewProduct: action.payload,
+        status: 'edited',
+      }
+    case EDIT_PRODUCT:
+      return {
+        ...state,
+        previewProduct: action.payload,
+        status: 'notPreview',
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default productReducer;
+export default productReducer

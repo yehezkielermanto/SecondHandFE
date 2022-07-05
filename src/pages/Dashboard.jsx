@@ -19,12 +19,12 @@ const Dashboard = () => {
     <>
       {!isAuthenticated ? <NavDashboard /> : <HeaderProduct />}
       <div className="mt-10">
-        <div>
+        
           <section>
             <Slider />
             <ButtonDashboard />
             <CardDashboard />
-          </section>
+          
           <div className="relative z-50" id="plus">
             <div className="flex justify-center drop-shadow-lg">
               <button
@@ -37,7 +37,7 @@ const Dashboard = () => {
               </button>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </>
   );
