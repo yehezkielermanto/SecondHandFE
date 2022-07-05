@@ -18,7 +18,7 @@ export default function Slider() {
       <img className="w-full object-cover rounded-xl aspect-w-16 aspect-h-9" src={poster} />
     </Carousel>
   </div>
-  <div className=" flex justify-center w-full h-80 relative sm:hidden carousel-wrapper aspect-w-16 aspect-h-9" id="caresoul">
+  <div className=" flex justify-center w-full h-80 top-0 relative sm:hidden carousel-wrapper aspect-w-16 aspect-h-9" id="caresoul">
   <Carousel showThumbs={false} showArrows={true} showStatus={false} infiniteLoop={true} autoPlay delayLength={2000}>
     <img className="w-full object-cover rounded-xl aspect-w-16 aspect-h-9" src={posterKecil} />
     <img className="w-full object-cover rounded-xl aspect-w-16 aspect-h-9" src={posterKecil} />
