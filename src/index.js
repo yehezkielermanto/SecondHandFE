@@ -24,6 +24,7 @@ import CategoryTable from './components/CategoryTable'
 import NotFound from './pages/404'
 import AddProduct from './pages/addProducts'
 import BuyerInfo from './components/BuyerInfo'
+import ProductPageEdit from './components/ProductPageEdit'
 
 const { REACT_APP_ID } = process.env
 
@@ -39,6 +40,7 @@ root.render(
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/daftarjual" element={<DaftarJual />} />
         <Route path="/notif" element={<Notification />} />
+        <Route path="/productEditPage" element={<ProductPageEdit />} />
         <Route
           path="/user/profile"
           element={
