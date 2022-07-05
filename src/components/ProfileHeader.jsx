@@ -24,11 +24,9 @@ const ProfileHeaderComponent = () => {
               </svg>
             </div>
           </Link>
-          {/* <h1 className="border-solid border-2 border-orange-400">Back</h1> */}
         </div>
         <div className="w-60">
           <h1 className="text-center font-medium">Lengkapi Info Akun</h1>
-          {/* <h1 className="text-center border-solid border-2 border-red-400">Lengkapi Info Akun</h1> */}
         </div>
         <div className="w-20"></div>
       </div>
