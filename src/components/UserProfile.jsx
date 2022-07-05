@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react'
-import { FiCamera, FiLogOut, FiPlusCircle, FiSettings } from 'react-icons/fi'
-import { FiEdit } from 'react-icons/fi'
-import Header from '../components/Header'
-import { FiHome, FiBell, FiPluscircle, FiList, FiUser } from 'react-icons/fi'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from "react";
+import { FiCamera, FiLogOut, FiPlusCircle, FiSettings } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
+import Header from "../components/Header";
+import { FiHome, FiBell, FiPluscircle, FiList, FiUser } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../redux/actions/usersActions";
-import { logout } from '../redux/actions/authActions'
-import { Link } from 'react-router-dom'
+import { logout } from "../redux/actions/authActions";
+import { Link } from "react-router-dom";
 import { IKImage, IKContext } from "imagekitio-react";
 const urlImg = "https://ik.imagekit.io/jmprup9kb";
 
 export default function AkunComponent() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { isAuthenticated, error } = useSelector((state) => state.auth);
   const { user, justUpdated, errorU } = useSelector((state) => state.users);
-  
+
   useEffect(() => {
     if (error) {
-      alert(error)
+      alert(error);
     }
-  }, [error])
+  }, [error]);
 
   useEffect(() => {
     if (errorU) {
@@ -43,10 +43,10 @@ export default function AkunComponent() {
   }, [isAuthenticated]);
 
   const handleLogout = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
 
-  console.log(urlImg)
+  console.log(urlImg);
 
   return (
     <section>
@@ -64,7 +64,7 @@ export default function AkunComponent() {
             transformation={[
               {
                 h: 96,
-                w:96
+                w: 96,
               },
             ]}
           />
@@ -73,7 +73,10 @@ export default function AkunComponent() {
 
       <div className="lg:mx-10 md:mx-10 my-10 my-10 text-2xl first-letter pr-4 pl-4 divide-y divide-gray-300">
         <div className="items-center flex gap-5   font-medium text-sm">
-          <Link className="w-full hover:bg-[#E2D4F0] py-6 px-3" to="/user/profile">
+          <Link
+            className="w-full hover:bg-[#E2D4F0] py-6 px-3"
+            to="/user/profile"
+          >
             <div className="flex">
               <FiEdit className=" text-2xl text-[#4B1979] " />
               <p className="mx-4">Ubah Akun</p>
@@ -86,7 +89,10 @@ export default function AkunComponent() {
         </div>
 
         <div className="items-center flex gap-5  font-medium text-sm ">
-          <button className="w-full hover:bg-[#E2D4F0] py-6 px-3" onClick={handleLogout}>
+          <button
+            className="w-full hover:bg-[#E2D4F0] py-6 px-3"
+            onClick={handleLogout}
+          >
             <div className="flex">
               <FiLogOut className="text-2xl text-[#4B1979]" />
               <p className="mx-4">Keluar</p>
@@ -95,7 +101,9 @@ export default function AkunComponent() {
         </div>
       </div>
 
-      <div className="lg:hidden md:hidden py-2 text-ls text-center text-gray-400 font-normal">Version 1.0.0</div>
+      <div className="lg:hidden md:hidden py-2 text-ls text-center text-gray-400 font-normal">
+        Version 1.0.0
+      </div>
 
       <div className="mb-5 lg:hidden md:hidden fixed bottom-0 w-full grid grid-cols-5 ">
         <div className="flex justify-center items-center flex-col text-xs">

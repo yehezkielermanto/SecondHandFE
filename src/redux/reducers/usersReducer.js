@@ -1,13 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { GET_USER, JUST_UPDATED, USERS_ERROR } from "../actions/types";
 
-// const initialState = {
-//   isAuthenticated: !!localStorage.getItem("token"),
-//   token: localStorage.getItem("token"),
-//   user: {},
-//   errorU: null,
-// };
-
 const initialState = {
   user: {},
   justUpdated: false,
@@ -21,13 +14,15 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
         justUpdated: false,
+        errorU: null,
       };
     case JUST_UPDATED:
       console.log("JUST UPDATED LOAD")
       return {
         ...state,
-        user: null,
+        user: action.payload,
         justUpdated: true,
+        errorU: null,
       };
     case USERS_ERROR:
       return {

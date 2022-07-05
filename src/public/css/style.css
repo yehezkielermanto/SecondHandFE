@@ -27,7 +27,7 @@ body {
 }
 #card {
   margin-left: 100px;
-  padding-right: 100px;
+  margin-right: 100px;
 }
 #plus {
   margin-top: -100px;
@@ -62,6 +62,7 @@ body {
     margin-right: 10px;
   }
   #caresoul{
+    margin-top:-120px;
     margin-left: 0;
     margin-right: 0;
   }
