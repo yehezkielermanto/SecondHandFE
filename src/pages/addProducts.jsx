@@ -23,15 +23,215 @@ export default function addProducts() {
   const [deskripsi, setDeskripsi] = useState('')
   const [gambarProduk, setGambar] = useState('')
   const [previewImg1, setPreview1] = useState('')
+  const [dataUrl1, setDataUrl1] = useState('')
   const [previewImg2, setPreview2] = useState('')
+  const [dataUrl2, setDataUrl2] = useState('')
   const [previewImg3, setPreview3] = useState('')
+  const [dataUrl3, setDataUrl3] = useState('')
   const [previewImg4, setPreview4] = useState('')
+  const [dataUrl4, setDataUrl4] = useState('')
 
-  // handling submit button -> terbitkan produk
+  // -----------------------------------handle preview image
+  // --------------------------------------------image1
+  const image1 = async (e) => {
+    e.preventDefault()
+    // setGambar([e.target.files[0]])
+    setPreview1(e.target.files[0])
+  }
+
+  useEffect(() => {
+    let fileReader,
+      isCancel = false
+    if (previewImg1) {
+      fileReader = new FileReader()
+      fileReader.onload = (e) => {
+        const { result } = e.target
+        if (result && !isCancel) {
+          setDataUrl1(result)
+        }
+      }
+      fileReader.readAsDataURL(previewImg1)
+    }
+    return () => {
+      isCancel = true
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort()
+      }
+    }
+  }, [previewImg1])
+
+  // ----------------------------------image2
+  const image2 = async (e) => {
+    e.preventDefault()
+    // setGambar([e.target.files[0]])
+    // setTempGambar([URL.createObjectURL(e.target.files[0])])
+    setPreview2(e.target.files[0])
+  }
+
+  useEffect(() => {
+    let fileReader,
+      isCancel = false
+    if (previewImg2) {
+      fileReader = new FileReader()
+      fileReader.onload = (e) => {
+        const { result } = e.target
+        if (result && !isCancel) {
+          setDataUrl2(result)
+        }
+      }
+      fileReader.readAsDataURL(previewImg2)
+    }
+    return () => {
+      isCancel = true
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort()
+      }
+    }
+  }, [previewImg2])
+
+  // -----------------------------------------------------image3
+  const image3 = async (e) => {
+    e.preventDefault()
+    // setGambar([e.target.files[0]])
+    // setTempGambar([URL.createObjectURL(e.target.files[0])])
+    setPreview3(e.target.files[0])
+  }
+  useEffect(() => {
+    let fileReader,
+      isCancel = false
+    if (previewImg3) {
+      fileReader = new FileReader()
+      fileReader.onload = (e) => {
+        const { result } = e.target
+        if (result && !isCancel) {
+          setDataUrl3(result)
+        }
+      }
+      fileReader.readAsDataURL(previewImg3)
+    }
+    return () => {
+      isCancel = true
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort()
+      }
+    }
+  }, [previewImg3])
+
+  // ----------------------------------------------------image4
+  const image4 = async (e) => {
+    e.preventDefault()
+    // setGambar([e.target.files[0]])
+    // setTempGambar([URL.createObjectURL(e.target.files[0])])
+    setPreview4(e.target.files[0])
+  }
+  useEffect(() => {
+    let fileReader,
+      isCancel = false
+    if (previewImg4) {
+      fileReader = new FileReader()
+      fileReader.onload = (e) => {
+        const { result } = e.target
+        if (result && !isCancel) {
+          setDataUrl4(result)
+        }
+      }
+      fileReader.readAsDataURL(previewImg4)
+    }
+    return () => {
+      isCancel = true
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort()
+      }
+    }
+  }, [previewImg4])
+  // -----------------------------------show preview product before publish
+  const handlePreview = async (e) => {
+    e.preventDefault()
+    // temp gambar
+    let tempGambar = []
+    let dataGambar = []
+
+    // check inputan is empty or not
+    if (
+      namaProduk !== '' &&
+      hargaProduk !== '' &&
+      kategori !== '' &&
+      deskripsi !== '' &&
+      previewImg1 !== ''
+    ) {
+      if (dataUrl1 != '') {
+        tempGambar.push(dataUrl1)
+        dataGambar.push(previewImg1)
+      }
+      if (dataUrl2 != '') {
+        tempGambar.push(dataUrl2)
+        dataGambar.push(previewImg2)
+      }
+      if (dataUrl3 != '') {
+        tempGambar.push(dataUrl3)
+        dataGambar.push(previewImg3)
+      }
+      if (dataUrl4 != '') {
+        tempGambar.push(dataUrl4)
+        dataGambar.push(previewImg4)
+      }
+      dispatch(
+        tempProduct({
+          namaProduk,
+          hargaProduk,
+          kategori,
+          deskripsi,
+          kota: user.idkota,
+          gambar: tempGambar,
+          dataGambar: dataGambar,
+        }),
+      )
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'please input all field before preview',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+  }
+
+  //----------------useEffect nama
+  useEffect(() => {
+    setProduk(previewProduct.namaProduk)
+    setHarga(previewProduct.hargaProduk)
+    setDeskripsi(previewProduct.deskripsi)
+    setKategori(previewProduct.kategori)
+    if (previewProduct != '') {
+      // set gambar dari redux
+      // setTempGambar(previewProduct.tempGambar)
+      // cek panjang gambar dari redux
+      let tempGambarLength = previewProduct.gambar.length
+      for (let i = 0; i < tempGambarLength; i++) {
+        if (tempGambarLength == 1) {
+          setPreview1(previewProduct.dataGambar[0])
+        } else if (tempGambarLength == 2) {
+          setPreview1(previewProduct.dataGambar[0])
+          setPreview2(previewProduct.dataGambar[1])
+        } else if (tempGambarLength == 3) {
+          setPreview1(previewProduct.dataGambar[0])
+          setPreview2(previewProduct.dataGambar[1])
+          setPreview3(previewProduct.dataGambar[2])
+        } else if (tempGambarLength == 4) {
+          setPreview1(previewProduct.dataGambar[0])
+          setPreview2(previewProduct.dataGambar[1])
+          setPreview3(previewProduct.dataGambar[2])
+          setPreview4(previewProduct.dataGambar[3])
+        }
+      }
+    }
+  }, [previewProduct])
+
+  // ----------------------------handling submit button -> terbitkan produk
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(namaProduk)
-
+    let dataGambar = []
     if (namaProduk === '') {
       Swal.fire({
         position: 'center',
@@ -68,7 +268,7 @@ export default function addProducts() {
         timer: 1500,
       })
     }
-    if (gambarProduk === '') {
+    if (previewImg1 === '') {
       Swal.fire({
         position: 'center',
         icon: 'warning',
@@ -83,8 +283,20 @@ export default function addProducts() {
       hargaProduk !== '' &&
       kategori !== '' &&
       deskripsi !== '' &&
-      gambarProduk !== ''
+      previewImg1 !== ''
     ) {
+      if (dataUrl1 != '') {
+        dataGambar.push(previewImg1)
+      }
+      if (dataUrl2 != '') {
+        dataGambar.push(previewImg2)
+      }
+      if (dataUrl3 != '') {
+        dataGambar.push(previewImg3)
+      }
+      if (dataUrl4 != '') {
+        dataGambar.push(previewImg4)
+      }
       dispatch(
         // dispatch formData to backend
         newProduct({
@@ -92,95 +304,11 @@ export default function addProducts() {
           hargaProduk,
           kategori,
           deskripsi,
-          gambarProduk,
+          dataGambar: dataGambar,
         }),
       )
     }
   }
-
-  // -----------------------------------handle preview image
-  const image1 = async (e) => {
-    e.preventDefault()
-    setGambar([...gambarProduk, URL.createObjectURL(e.target.files[0])])
-    setPreview1({ file: URL.createObjectURL(e.target.files[0]) })
-  }
-  const image2 = async (e) => {
-    e.preventDefault()
-    setGambar([...gambarProduk, URL.createObjectURL(e.target.files[0])])
-    setPreview2({ file: URL.createObjectURL(e.target.files[0]) })
-  }
-  const image3 = async (e) => {
-    e.preventDefault()
-    setGambar([...gambarProduk, URL.createObjectURL(e.target.files[0])])
-    setPreview3({ file: URL.createObjectURL(e.target.files[0]) })
-  }
-  const image4 = async (e) => {
-    e.preventDefault()
-    setGambar([...gambarProduk, URL.createObjectURL(e.target.files[0])])
-    setPreview4({ file: URL.createObjectURL(e.target.files[0]) })
-  }
-  // -----------------------------------show preview product before publish
-  const handlePreview = async (e) => {
-    e.preventDefault()
-    // check inputan is empty or not
-    if (
-      namaProduk !== '' &&
-      hargaProduk !== '' &&
-      kategori !== '' &&
-      deskripsi !== '' &&
-      gambarProduk !== ''
-    ) {
-      dispatch(
-        tempProduct({
-          namaProduk,
-          hargaProduk,
-          kategori,
-          deskripsi,
-          gambarProduk,
-          kota: user.idkota,
-        }),
-      )
-    } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'please input all field before preview',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-  }
-
-  //----------------useEffect nama
-  useEffect(() => {
-    setProduk(previewProduct.namaProduk)
-    setHarga(previewProduct.hargaProduk)
-    setDeskripsi(previewProduct.deskripsi)
-    setKategori(previewProduct.kategori)
-    if (previewProduct != '') {
-      // set gambar dari redux
-      setGambar(previewProduct.gambarProduk)
-      // cek panjang gambar dari redux
-      let gambarProdukLength = previewProduct.gambarProduk.length
-      for (let i = 0; i < gambarProdukLength; i++) {
-        if (gambarProdukLength == 1) {
-          setPreview1({ file: previewProduct.gambarProduk[0] })
-        } else if (gambarProdukLength == 2) {
-          setPreview1({ file: previewProduct.gambarProduk[0] })
-          setPreview2({ file: previewProduct.gambarProduk[1] })
-        } else if (gambarProdukLength == 3) {
-          setPreview1({ file: previewProduct.gambarProduk[0] })
-          setPreview2({ file: previewProduct.gambarProduk[1] })
-          setPreview3({ file: previewProduct.gambarProduk[2] })
-        } else if (gambarProdukLength == 4) {
-          setPreview1({ file: previewProduct.gambarProduk[0] })
-          setPreview2({ file: previewProduct.gambarProduk[1] })
-          setPreview3({ file: previewProduct.gambarProduk[2] })
-          setPreview4({ file: previewProduct.gambarProduk[3] })
-        }
-      }
-    }
-  }, [previewProduct])
 
   // --------------------------------------list category
   useEffect(() => {
@@ -350,12 +478,11 @@ export default function addProducts() {
                   {category === null ? (
                     <option value="">Daftar Kategori Kosong</option>
                   ) : (
-                    // category.map((kategori) => (
-                    //   <option key={kategori.id} value={kategori.id}>
-                    //     {kategori.nama_kategori}
-                    //   </option>
-                    // ))
-                    <h1>yeeeyyy</h1>
+                    category.map((kategori) => (
+                      <option key={kategori.id} value={kategori.id}>
+                        {kategori.nama_kategori}
+                      </option>
+                    ))
                   )}
                 </select>
               </div>
@@ -387,7 +514,7 @@ export default function addProducts() {
                     {previewImg1 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={previewImg1.file} alt="image" />
+                      <img src={dataUrl1} alt="image" />
                     )}
                   </div>
                   <input
@@ -406,7 +533,7 @@ export default function addProducts() {
                     {previewImg2 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={previewImg2.file} alt="image" />
+                      <img src={dataUrl2} alt="image" />
                     )}
                   </div>
                   <input
@@ -425,7 +552,7 @@ export default function addProducts() {
                     {previewImg3 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={previewImg3.file} alt="image" />
+                      <img src={dataUrl3} alt="image" />
                     )}
                   </div>
                   <input
@@ -444,7 +571,7 @@ export default function addProducts() {
                     {previewImg4 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={previewImg4.file} alt="image" />
+                      <img src={dataUrl4} alt="image" />
                     )}
                   </div>
                   <input
