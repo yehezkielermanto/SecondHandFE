@@ -8,7 +8,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../redux/actions/usersActions'
 import { IKImage } from 'imagekitio-react'
-import { editProduct } from '../redux/actions/produkActions'
+import { editProduct, newProduct } from '../redux/actions/produkActions'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 
 export default function Product() {
@@ -23,7 +23,22 @@ export default function Product() {
         hargaProduk: previewProduct.hargaProduk,
         kategori: previewProduct.kategori,
         deskripsi: previewProduct.deskripsi,
-        gambarProduk: previewProduct.gambarProduk,
+        gambar: previewProduct.gambar,
+        dataGambar: previewProduct.dataGambar,
+      }),
+    )
+  }
+
+  const handlePublish = async (e) => {
+    e.preventDefault()
+    dispatch(
+      newProduct({
+        namaProduk: previewProduct.namaProduk,
+        hargaProduk: previewProduct.hargaProduk,
+        kategori: previewProduct.kategori,
+        deskripsi: previewProduct.deskripsi,
+        gambar: previewProduct.gambar,
+        dataGambar: previewProduct.dataGambar,
       }),
     )
   }
@@ -71,7 +86,7 @@ export default function Product() {
                 showStatus={false}
                 infiniteLoop={true}
               >
-                {previewProduct.gambarProduk.map((gambar) => (
+                {previewProduct.gambar.map((gambar) => (
                   <img
                     className="w-full aspect-[6/5] object-cover md:rounded-xl"
                     src={gambar}
@@ -91,7 +106,10 @@ export default function Product() {
                 </p>
                 <p className="">Rp {previewProduct.hargaProduk}</p>
 
-                <button className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg">
+                <button
+                  className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg"
+                  onClick={handlePublish}
+                >
                   Terbitkan
                 </button>
 
@@ -129,7 +147,10 @@ export default function Product() {
           </div>
 
           <div className="fixed w-full bottom-4 px-4 md:hidden">
-            <button className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl">
+            <button
+              className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl"
+              onClick={handlePublish}
+            >
               Terbitkan
             </button>
           </div>
