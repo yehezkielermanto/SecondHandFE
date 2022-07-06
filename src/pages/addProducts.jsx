@@ -6,7 +6,11 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import ResponsiveNavLink from '../components/ResponsiveNavLink'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { listCategory } from '../redux/actions/categoryActions'
-import { newProduct, tempProduct } from '../redux/actions/produkActions'
+import {
+  newProduct,
+  tempProduct,
+  showLoading,
+} from '../redux/actions/produkActions'
 import Swal from 'sweetalert2'
 import { fetchUser } from '../redux/actions/usersActions'
 
@@ -21,7 +25,6 @@ export default function addProducts() {
   const [hargaProduk, setHarga] = useState('')
   const [kategori, setKategori] = useState('')
   const [deskripsi, setDeskripsi] = useState('')
-  const [gambarProduk, setGambar] = useState('')
   const [previewImg1, setPreview1] = useState('')
   const [dataUrl1, setDataUrl1] = useState('')
   const [previewImg2, setPreview2] = useState('')
@@ -144,6 +147,7 @@ export default function addProducts() {
       }
     }
   }, [previewImg4])
+
   // -----------------------------------show preview product before publish
   const handlePreview = async (e) => {
     e.preventDefault()
@@ -297,6 +301,13 @@ export default function addProducts() {
       if (dataUrl4 != '') {
         dataGambar.push(previewImg4)
       }
+      Swal.fire({
+        title: 'Sedang menambah Barang',
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
       dispatch(
         // dispatch formData to backend
         newProduct({
@@ -478,11 +489,17 @@ export default function addProducts() {
                   {category === null ? (
                     <option value="">Daftar Kategori Kosong</option>
                   ) : (
-                    category.map((kategori) => (
-                      <option key={kategori.id} value={kategori.id}>
-                        {kategori.nama_kategori}
-                      </option>
-                    ))
+                    category.map((kateg) =>
+                      previewProduct.kategori == kateg.id ? (
+                        <option selected value={kategori.id}>
+                          {kateg.nama_kategori}
+                        </option>
+                      ) : (
+                        <option key={kateg.id} value={kateg.id}>
+                          {kateg.nama_kategori}
+                        </option>
+                      ),
+                    )
                   )}
                 </select>
               </div>
