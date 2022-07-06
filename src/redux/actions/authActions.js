@@ -2,7 +2,6 @@ import { AUTH_ERROR, isGOOGLELOGIN, LOGIN, LOGOUT, isREGISTER } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 import Swal from 'sweetalert2'
 
-
 // register new user
 export const registerUser = (data) => async (dispatch) => {
   try {
@@ -68,7 +67,6 @@ export const loginViaForm = (data) => async (dispatch) => {
         payload: result.token,
       })
       // alert('Login berhasil')
-     
     } else if (result.message == 'Email not found') {
       Swal.fire({
         position: 'center',

@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { FiLogIn, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
 export default function Sidebar(props) {
 	return (
 		<div
-			className={`w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-70 z-[100] lg:hidden ${
+			className={`w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-70 relative z-[100] lg:hidden ${
 				props.show ? "flex" : "hidden"
 			}`}
 			onClick={() => props.close()}
@@ -23,23 +23,19 @@ export default function Sidebar(props) {
 					/>
 				</div>
 				<div className="mt-4 flex flex-col">
-					{props.loggedIn ? (
+				
 						<>
-							<Link to="/notifikasi" className="">
+							<Link to="/notif" className="mb-1">
 								Notifikasi
 							</Link>
-							<Link to="/daftar-jual" className="">
+							<Link to="/daftar-jual" className="mb-1">
 								Daftar Jual
 							</Link>
-							<Link to="/akun-saya" className="">
+							<Link to="/akun-saya" className="mb-1">
 								Akun Saya
 							</Link>
 						</>
-					) : (
-						<Link to="/login" className="btn self-start">
-							<FiLogIn /> Masuk
-						</Link>
-					)}
+					
 				</div>
 			</div>
 		</div>
