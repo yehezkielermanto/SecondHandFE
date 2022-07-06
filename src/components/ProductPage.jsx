@@ -10,6 +10,7 @@ import { fetchUser } from '../redux/actions/usersActions'
 import { IKImage } from 'imagekitio-react'
 import { editProduct, newProduct } from '../redux/actions/produkActions'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
+import Swal from 'sweetalert2'
 
 export default function Product() {
   const dispatch = useDispatch()
@@ -31,6 +32,13 @@ export default function Product() {
 
   const handlePublish = async (e) => {
     e.preventDefault()
+    Swal.fire({
+      title: 'Sedang menambah Barang',
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+      },
+    })
     dispatch(
       newProduct({
         namaProduk: previewProduct.namaProduk,
@@ -52,7 +60,9 @@ export default function Product() {
 
   return (
     <>
-      {status !== 'edited' ? (
+      {status == 'success add product' ? (
+        <Navigate to="/daftarjual" />
+      ) : status !== 'edited' ? (
         <Navigate to="/addProduct" />
       ) : (
         <div className="w-screen min-h-screen">

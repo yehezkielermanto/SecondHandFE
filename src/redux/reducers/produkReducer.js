@@ -5,6 +5,7 @@ import {
   ADD_PRODUCT,
   TEMP_PRODUCT,
   EDIT_PRODUCT,
+  NEW_PRODUCT,
 } from '../actions/types'
 const initialState = {
   product: [],
@@ -27,7 +28,13 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         status: 'success add product',
-        isLoading: false,
+      }
+    case NEW_PRODUCT:
+      return {
+        ...state,
+        status: '',
+        product: [],
+        previewProduct: [],
       }
     case DELETE_PRODUCT:
       return {
