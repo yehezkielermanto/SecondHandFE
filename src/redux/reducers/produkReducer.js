@@ -27,6 +27,7 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         status: 'success add product',
+        isLoading: false,
       }
     case DELETE_PRODUCT:
       return {

@@ -20,7 +20,7 @@ export const registerUser = (data) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        titleText: 'Success Register',
+        titleText: 'Berhasil Registrasi',
         showConfirmButton: false,
         timer: 1000,
       })
@@ -31,7 +31,7 @@ export const registerUser = (data) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        titleText: 'Failed Register or Email is used before',
+        titleText: 'Gagal registrasi atau email telah digunakan',
         showConfirmButton: false,
         timer: 1000,
       })
@@ -58,7 +58,7 @@ export const loginViaForm = (data) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        titleText: 'Login Successfully',
+        titleText: 'Berhasil Masuk',
         showConfirmButton: false,
         timer: 1000,
       })
@@ -71,7 +71,7 @@ export const loginViaForm = (data) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        titleText: 'Email not found',
+        titleText: 'Email tidak ditemukan',
         showConfirmButton: false,
         timer: 1000,
       })
@@ -80,7 +80,7 @@ export const loginViaForm = (data) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        titleText: 'Password incorrect',
+        titleText: 'Password salah',
         showConfirmButton: false,
         timer: 1000,
       })
@@ -89,7 +89,7 @@ export const loginViaForm = (data) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        titleText: 'Login Failed',
+        titleText: 'Gagal login',
         showConfirmButton: false,
         timer: 1000,
       })
@@ -120,7 +120,7 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        titleText: 'Success Login or Register',
+        titleText: 'Berhasil registrasi atau login',
         showConfirmButton: false,
         timer: 1000,
       })

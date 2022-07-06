@@ -37,7 +37,14 @@ root.render(
 
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/daftarjual" element={<DaftarJual />} />
+        <Route
+          path="/daftarjual"
+          element={
+            <Protected>
+              <DaftarJual />
+            </Protected>
+          }
+        />
         <Route path="/notif" element={<Notification />} />
         <Route path="/productEditPage" element={<ProductPageEdit />} />
         <Route
