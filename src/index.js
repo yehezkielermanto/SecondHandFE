@@ -8,7 +8,6 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
-
 import Protected from './components/Protected'
 // For Profile Page
 import DaftarJual from './pages/DaftarJual'

@@ -3,18 +3,18 @@ import React from "react";
 const CardName = () => {
   return (
     <>
-      <div className="card shadow round my-4">
-        <div className="card-body">
-          <div className="d-flex align-items-center ps-3">
+      <div className="border-2">
+        <div className="">
+          <div className="flex justify-between">
             <div className="flex flex-row">
               <img
-                src="https://via.placeholder.com/50/50"
+                src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=50"
                 className="rounded"
                 alt="..."
               />
               <div className="text-start mx-3">
-                <h6 className="card-title">Nama Penjual</h6>
-                <p className="card-text text-muted">
+                <h6 className="">Nama Penjual</h6>
+                <p className="text-muted">
                   <small>Kota</small>
                 </p>
               </div>
@@ -31,7 +31,7 @@ const CardName = () => {
           </div>
         </div>
       </div>
-      </>
+    </>
   );
 };
 
