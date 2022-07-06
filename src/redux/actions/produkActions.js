@@ -131,7 +131,7 @@ export const getProductByKategori = (params) => async (dispatch) => {
   }
 }
 
-// action add new product
+// -------------------------------action add new product
 export const newProduct = (data) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token')
@@ -162,7 +162,7 @@ export const newProduct = (data) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'New Product Added Successfully',
+        title: 'Barang berhasil ditambahkan',
         showConfirmButton: false,
         timer: 1500,
       })

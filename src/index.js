@@ -8,7 +8,6 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
-
 import Protected from './components/Protected'
 // For Profile Page
 import DaftarJual from './pages/DaftarJual'
@@ -38,7 +37,14 @@ root.render(
 
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/daftarjual" element={<DaftarJual />} />
+        <Route
+          path="/daftarjual"
+          element={
+            <Protected>
+              <DaftarJual />
+            </Protected>
+          }
+        />
         <Route path="/notif" element={<Notification />} />
         <Route path="/productEditPage" element={<ProductPageEdit />} />
         <Route
