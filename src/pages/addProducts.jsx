@@ -6,13 +6,10 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import ResponsiveNavLink from '../components/ResponsiveNavLink'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { listCategory } from '../redux/actions/categoryActions'
-import {
-  newProduct,
-  tempProduct,
-  showLoading,
-} from '../redux/actions/produkActions'
+import { newProduct, tempProduct } from '../redux/actions/produkActions'
 import Swal from 'sweetalert2'
 import { fetchUser } from '../redux/actions/usersActions'
+import { statusAddProduct } from '../redux/actions/produkActions'
 
 export default function addProducts() {
   const dispatch = useDispatch()
@@ -37,6 +34,7 @@ export default function addProducts() {
   // --------------------------------------list category and name
   useEffect(() => {
     ;(async () => {
+      dispatch(statusAddProduct())
       dispatch(fetchUser())
       dispatch(listCategory())
     })()
@@ -306,7 +304,7 @@ export default function addProducts() {
         Swal.fire({
           position: 'center',
           icon: 'warning',
-          title: 'please provide product name',
+          title: 'mohon isikan nama',
           showConfirmButton: false,
           timer: 1500,
         })
@@ -315,7 +313,7 @@ export default function addProducts() {
         Swal.fire({
           position: 'center',
           icon: 'warning',
-          title: 'please provide product price',
+          title: 'mohon isikan harga',
           showConfirmButton: false,
           timer: 1500,
         })
@@ -324,7 +322,7 @@ export default function addProducts() {
         Swal.fire({
           position: 'center',
           icon: 'warning',
-          title: 'please select product category',
+          title: 'mohon pilih kategori',
           showConfirmButton: false,
           timer: 1500,
         })
@@ -333,7 +331,7 @@ export default function addProducts() {
         Swal.fire({
           position: 'center',
           icon: 'warning',
-          title: 'please provide product description',
+          title: 'mohon isikan deskripsi',
           showConfirmButton: false,
           timer: 1500,
         })
@@ -342,7 +340,7 @@ export default function addProducts() {
         Swal.fire({
           position: 'center',
           icon: 'warning',
-          title: 'please input at least one picture',
+          title: 'mohon pilih setidaknya satu gambar',
           showConfirmButton: false,
           timer: 1500,
         })
@@ -432,7 +430,9 @@ export default function addProducts() {
       </div>
 
       {/* ------------------------------------------form input new product */}
-      {status === 'edited' ? (
+      {status == 'success add product' ? (
+        <Navigate to="/daftarjual" />
+      ) : status === 'edited' ? (
         <Navigate to="/product" />
       ) : (
         <form>
@@ -635,8 +635,6 @@ export default function addProducts() {
                   <span className="text-white font-medium">Terbitkan</span>
                 </button>
               </div>
-
-              {/* // {)}} */}
             </div>
           </div>
         </form>

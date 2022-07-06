@@ -7,6 +7,7 @@ import {
   ADD_PRODUCT,
   TEMP_PRODUCT,
   EDIT_PRODUCT,
+  NEW_PRODUCT,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 
@@ -223,4 +224,8 @@ export const editProduct = (data) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: PRODUCT_ERROR })
   }
+}
+
+export const statusAddProduct = () => async (dispatch) => {
+  dispatch({ type: NEW_PRODUCT })
 }
