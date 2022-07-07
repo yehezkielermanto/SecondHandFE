@@ -9,6 +9,7 @@ import { listCategory } from '../redux/actions/categoryActions'
 import { newProduct, tempProduct } from '../redux/actions/produkActions'
 import Swal from 'sweetalert2'
 import { fetchUser } from '../redux/actions/usersActions'
+import { statusAddProduct } from '../redux/actions/produkActions'
 
 export default function addProducts() {
   const dispatch = useDispatch()
@@ -21,7 +22,6 @@ export default function addProducts() {
   const [hargaProduk, setHarga] = useState('')
   const [kategori, setKategori] = useState('')
   const [deskripsi, setDeskripsi] = useState('')
-  const [gambarProduk, setGambar] = useState('')
   const [previewImg1, setPreview1] = useState('')
   const [dataUrl1, setDataUrl1] = useState('')
   const [previewImg2, setPreview2] = useState('')
@@ -31,6 +31,53 @@ export default function addProducts() {
   const [previewImg4, setPreview4] = useState('')
   const [dataUrl4, setDataUrl4] = useState('')
 
+  // --------------------------------------list category and name
+  useEffect(() => {
+    ;(async () => {
+      dispatch(statusAddProduct())
+      dispatch(fetchUser())
+      dispatch(listCategory())
+    })()
+  }, [dispatch])
+
+  // ------------------------------use effect is authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Please login first',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+  })
+
+  // use effect category error or user error or isAuthenticated error
+  useEffect(() => {
+    if (error) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: error,
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+  }, [error])
+
+  useEffect(() => {
+    if (errorC) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: error,
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+  }, [errorC])
   // -----------------------------------handle preview image
   // --------------------------------------------image1
   const image1 = async (e) => {
@@ -144,6 +191,7 @@ export default function addProducts() {
       }
     }
   }, [previewImg4])
+
   // -----------------------------------show preview product before publish
   const handlePreview = async (e) => {
     e.preventDefault()
@@ -152,48 +200,59 @@ export default function addProducts() {
     let dataGambar = []
 
     // check inputan is empty or not
-    if (
-      namaProduk !== '' &&
-      hargaProduk !== '' &&
-      kategori !== '' &&
-      deskripsi !== '' &&
-      previewImg1 !== ''
-    ) {
-      if (dataUrl1 != '') {
-        tempGambar.push(dataUrl1)
-        dataGambar.push(previewImg1)
-      }
-      if (dataUrl2 != '') {
-        tempGambar.push(dataUrl2)
-        dataGambar.push(previewImg2)
-      }
-      if (dataUrl3 != '') {
-        tempGambar.push(dataUrl3)
-        dataGambar.push(previewImg3)
-      }
-      if (dataUrl4 != '') {
-        tempGambar.push(dataUrl4)
-        dataGambar.push(previewImg4)
-      }
-      dispatch(
-        tempProduct({
-          namaProduk,
-          hargaProduk,
-          kategori,
-          deskripsi,
-          kota: user.idkota,
-          gambar: tempGambar,
-          dataGambar: dataGambar,
-        }),
-      )
-    } else {
+    if (user.idkota == null || user.alamat == null || user.nohp == null) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        title: 'please input all field before preview',
+        title: 'mohon isikan data diri terlebih dahulu',
         showConfirmButton: false,
         timer: 1500,
       })
+    } else {
+      if (
+        namaProduk !== '' &&
+        hargaProduk !== '' &&
+        kategori !== '' &&
+        deskripsi !== '' &&
+        previewImg1 !== ''
+      ) {
+        // check kelengkapan user
+        if (dataUrl1 != '') {
+          tempGambar.push(dataUrl1)
+          dataGambar.push(previewImg1)
+        }
+        if (dataUrl2 != '') {
+          tempGambar.push(dataUrl2)
+          dataGambar.push(previewImg2)
+        }
+        if (dataUrl3 != '') {
+          tempGambar.push(dataUrl3)
+          dataGambar.push(previewImg3)
+        }
+        if (dataUrl4 != '') {
+          tempGambar.push(dataUrl4)
+          dataGambar.push(previewImg4)
+        }
+        dispatch(
+          tempProduct({
+            namaProduk,
+            hargaProduk,
+            kategori,
+            deskripsi,
+            kota: user.idkota,
+            gambar: tempGambar,
+            dataGambar: dataGambar,
+          }),
+        )
+      } else {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'tolong isi semua kolom sebelum melihat',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
     }
   }
 
@@ -232,130 +291,100 @@ export default function addProducts() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     let dataGambar = []
-    if (namaProduk === '') {
+    if (user.idkota == null || user.alamat == null || user.nohp == null) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        title: 'please provide product name',
+        title: 'mohon isikan data diri terlebih dahulu',
         showConfirmButton: false,
         timer: 1500,
       })
-    }
-    if (hargaProduk === '') {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'please provide product price',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-    if (kategori === '') {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'please select product category',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-    if (deskripsi === '') {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'please provide product description',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-    if (previewImg1 === '') {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'please input at least one picture',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
+    } else {
+      if (namaProduk === '') {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'mohon isikan nama',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
+      if (hargaProduk === '') {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'mohon isikan harga',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
+      if (kategori === '') {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'mohon pilih kategori',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
+      if (deskripsi === '') {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'mohon isikan deskripsi',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
+      if (previewImg1 === '') {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'mohon pilih setidaknya satu gambar',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
 
-    if (
-      namaProduk !== '' &&
-      hargaProduk !== '' &&
-      kategori !== '' &&
-      deskripsi !== '' &&
-      previewImg1 !== ''
-    ) {
-      if (dataUrl1 != '') {
-        dataGambar.push(previewImg1)
+      if (
+        namaProduk !== '' &&
+        hargaProduk !== '' &&
+        kategori !== '' &&
+        deskripsi !== '' &&
+        previewImg1 !== ''
+      ) {
+        if (dataUrl1 != '') {
+          dataGambar.push(previewImg1)
+        }
+        if (dataUrl2 != '') {
+          dataGambar.push(previewImg2)
+        }
+        if (dataUrl3 != '') {
+          dataGambar.push(previewImg3)
+        }
+        if (dataUrl4 != '') {
+          dataGambar.push(previewImg4)
+        }
+        Swal.fire({
+          title: 'Sedang menambah Barang',
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+          },
+        })
+        dispatch(
+          // dispatch formData to backend
+          newProduct({
+            namaProduk,
+            hargaProduk,
+            kategori,
+            deskripsi,
+            dataGambar: dataGambar,
+          }),
+        )
       }
-      if (dataUrl2 != '') {
-        dataGambar.push(previewImg2)
-      }
-      if (dataUrl3 != '') {
-        dataGambar.push(previewImg3)
-      }
-      if (dataUrl4 != '') {
-        dataGambar.push(previewImg4)
-      }
-      dispatch(
-        // dispatch formData to backend
-        newProduct({
-          namaProduk,
-          hargaProduk,
-          kategori,
-          deskripsi,
-          dataGambar: dataGambar,
-        }),
-      )
     }
   }
-
-  // --------------------------------------list category
-  useEffect(() => {
-    ;(async () => {
-      dispatch(listCategory())
-      dispatch(fetchUser())
-    })()
-  }, [dispatch])
-
-  // ------------------------------use effect is authenticated
-  useEffect(() => {
-    if (isAuthenticated) {
-    } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'Please login first',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-  })
-
-  // use effect category error or user error or isAuthenticated error
-  useEffect(() => {
-    if (error) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: error,
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-  }, [error])
-
-  useEffect(() => {
-    if (errorC) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: error,
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-  }, [errorC])
 
   return (
     <>
@@ -401,14 +430,16 @@ export default function addProducts() {
       </div>
 
       {/* ------------------------------------------form input new product */}
-      {status === 'edited' ? (
+      {status == 'success add product' ? (
+        <Navigate to="/daftarjual" />
+      ) : status === 'edited' ? (
         <Navigate to="/product" />
       ) : (
         <form>
           {/* {!justUpdated ? ( */}
           <div className="flex flex-col h-full sm:w-full lg:w-6/12 lg:mx-auto mt-5 px-3 text-left">
             <div className="h-full sm:w-full lg:mx-auto mt-5 px-3 text-left">
-              <Link to="/">
+              <Link to="/daftarjual">
                 <div className="invisible lg:visible p-0 w-10 flex justify-center hover:bg-violet-800 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -478,11 +509,17 @@ export default function addProducts() {
                   {category === null ? (
                     <option value="">Daftar Kategori Kosong</option>
                   ) : (
-                    category.map((kategori) => (
-                      <option key={kategori.id} value={kategori.id}>
-                        {kategori.nama_kategori}
-                      </option>
-                    ))
+                    category.map((kateg) =>
+                      previewProduct.kategori == kateg.id ? (
+                        <option selected value={kategori.id}>
+                          {kateg.nama_kategori}
+                        </option>
+                      ) : (
+                        <option key={kateg.id} value={kateg.id}>
+                          {kateg.nama_kategori}
+                        </option>
+                      ),
+                    )
                   )}
                 </select>
               </div>
@@ -598,8 +635,6 @@ export default function addProducts() {
                   <span className="text-white font-medium">Terbitkan</span>
                 </button>
               </div>
-
-              {/* // {)}} */}
             </div>
           </div>
         </form>
