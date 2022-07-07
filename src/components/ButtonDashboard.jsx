@@ -18,7 +18,7 @@ const ButtonDashboard = () => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  if (product.length === 0 && status !== "GET_ALL") {
+  if (product === undefined && status !== "GET_ALL") {
     dispatch(getAllProducts());
   }
 
