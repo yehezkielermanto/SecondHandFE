@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "../components/Slider";
 import NavDashboard from "../components/NavDashboar";
 import ButtonDashboard from "../components/ButtonDashboard";
 import CardDashboard from "../components/CardDashboard";
 import HeaderProduct from "../components/HeaderProduct";
 import { useSelector } from "react-redux";
+
 import "../public/css/style.css";
 
 const Dashboard = () => {
   const { isAuthenticated, error } = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (error) {
       alert(error);
@@ -19,12 +21,11 @@ const Dashboard = () => {
     <>
       {!isAuthenticated ? <NavDashboard /> : <HeaderProduct />}
       <div className="mt-10">
-        
-          <section>
-            <Slider />
-            <ButtonDashboard />
-            <CardDashboard />
-          
+        <section>
+          <Slider />
+          <ButtonDashboard />
+          <CardDashboard />
+
           <div className="relative z-50" id="plus">
             <div className="flex justify-center drop-shadow-lg">
               <button

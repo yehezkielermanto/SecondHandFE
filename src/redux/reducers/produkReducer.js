@@ -24,7 +24,7 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         product: action.payload,
-        status: action.status,
+        status: 'GET_ALL',
       }
     case ADD_PRODUCT:
       return {

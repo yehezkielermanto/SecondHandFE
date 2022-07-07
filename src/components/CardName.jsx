@@ -22,7 +22,7 @@ const CardName = () => {
             </div>
 
             <div className="flex items-center mx-3">
-              <Link to="/user">
+              <Link to="/user/profile">
                 <button
                   type="button"
                   className="btn btn-outline-primary btn-sm float-end border border-violet-900 rounded-md px-2 hover:bg-violet-900 hover:text-white"
