@@ -100,7 +100,7 @@ export default function BuyerInfo(props) {
                 {/* Buttons */}
                 <div
                   className={`${
-                    isAcceptProduct ? 'hidden' : 'grid'
+                    isAcceptProduct == true ? 'hidden' : 'grid'
                   } grid-cols-2 lg:float-right text-center pt-4 pb-4`}
                 >
                   <button
