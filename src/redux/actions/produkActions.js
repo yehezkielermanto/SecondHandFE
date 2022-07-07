@@ -73,13 +73,13 @@ export const getAllProducts = () => async (dispatch) => {
     console.log(data);
     dispatch({
       type: GET_ALL_PRODUCT,
-      payload: data,
+      product: data,
       status: "GET_ALL",
     });
   } catch (error) {
     dispatch({
       type: PRODUCT_ERROR,
-      payload: error.response,
+      product: error.response,
     });
     Swal.fire({
       position: "center",

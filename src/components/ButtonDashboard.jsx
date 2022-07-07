@@ -112,7 +112,7 @@ const ButtonDashboard = () => {
   };
 
   const filterElektronik = (event) => {
-    let nama_kategori = "Elektronik";
+    let Elektronik = 4;
     event.currentTarget.classList.remove("bg-sky-400");
     event.currentTarget.classList.add("bg-violet-400");
     document.getElementById("filterHobi").classList.remove("bg-violet-400");
@@ -129,11 +129,11 @@ const ButtonDashboard = () => {
       .getElementById("filterKesehatan")
       .classList.remove("bg-violet-400");
     document.getElementById("filterKesehatan").classList.add("bg-sky-400");
-    // dispatch(getProductByKategori(nama_kategori));
+    dispatch(getProductByKategori(Elektronik));
   };
 
   const filterKesehatan = (event) => {
-    let nama_kategori = "Kesehatan";
+    let Kesehatan = 5;
     event.currentTarget.classList.remove("bg-sky-400");
     event.currentTarget.classList.add("bg-violet-400");
     document.getElementById("filterHobi").classList.remove("bg-violet-400");
@@ -150,7 +150,7 @@ const ButtonDashboard = () => {
     document.getElementById("filterElektronik").classList.add("bg-sky-400");
     document.getElementById("filterAll").classList.remove("bg-violet-400");
     document.getElementById("filterAll").classList.add("bg-sky-400");
-    // dispatch(getProductByKategori(nama_kategori));
+    dispatch(getProductByKategori(Kesehatan));
   };
 
   return (
