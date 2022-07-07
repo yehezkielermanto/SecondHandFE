@@ -8,7 +8,6 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
-
 import Protected from './components/Protected'
 // For Profile Page
 import DaftarJual from './pages/DaftarJual'
@@ -24,6 +23,7 @@ import CategoryTable from './components/CategoryTable'
 import NotFound from './pages/404'
 import AddProduct from './pages/addProducts'
 import BuyerInfo from './components/BuyerInfo'
+import ProductPageEdit from './components/ProductPageEdit'
 
 const { REACT_APP_ID } = process.env
 
@@ -37,8 +37,16 @@ root.render(
 
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/daftarjual" element={<DaftarJual />} />
+        <Route
+          path="/daftarjual"
+          element={
+            <Protected>
+              <DaftarJual />
+            </Protected>
+          }
+        />
         <Route path="/notif" element={<Notification />} />
+        <Route path="/productEditPage" element={<ProductPageEdit />} />
         <Route
           path="/user/profile"
           element={
@@ -49,7 +57,7 @@ root.render(
         />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
-        <Route path='/productbuyer' element={<ProductBuyer />} />
+        <Route path="/productbuyer" element={<ProductBuyer />} />
         <Route path="/buyerinfo" element={<BuyerInfo />} />
         <Route
           path="/user"
@@ -78,7 +86,14 @@ root.render(
 
         <Route path="/kategori" element={<CategoryTable />} />
         {/* add new products */}
-        <Route path="/addProduct" element={<AddProduct />} />
+        <Route
+          path="/addProduct"
+          element={
+            <Protected>
+              <AddProduct />
+            </Protected>
+          }
+        />
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>

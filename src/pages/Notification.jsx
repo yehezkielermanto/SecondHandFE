@@ -10,7 +10,7 @@ const Notification = () => {
   const [open,setOpen]=useState(false);
     return (
       <>
-<nav className="flex items-center drop-shadow-lg font-poppins w-full bg-white sm:hidden mb-5 p-3">
+<nav className="flex items-center drop-shadow-lg font-poppins w-full bg-white mb-5 p-3">
 
 
 

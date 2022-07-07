@@ -5,9 +5,78 @@ import { AiOutlineSearch } from "react-icons/ai";
 const ButtonDashboard = () => {
     return (
       <>
-      <div id="button">
+      <div id="button" className=" relative z-30">
       <h1 className='font-bold font-poppins mt-10'>Telusuri Kategori</h1>
-      <div className="flex w-full mt-1 snap-x bg-scroll">
+      <div className="flex w-full mt-1 overflow-x-scroll lg:hidden">
+        <div className="snap-center">
+          <button
+            className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              type="button"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
+              Semua
+          </button>
+          </div>
+          <div className="snap-center">
+          <button
+            className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              type="button"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
+              Hobi
+          </button>
+          </div>
+          <div className="snap-center">
+          <button
+            className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              type="button"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
+              Kendaraan
+          </button>
+          </div>
+          <div className="snap-center">
+          <button
+            className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              type="button"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
+              Baju
+          </button>
+          </div>
+          <div className="snap-center">
+          <button
+            className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              type="button"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
+              Elektronik
+          </button>
+          </div>
+          <div className="snap-center">
+          <button
+            className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              type="button"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >
+              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1"/>
+              Kesehatan
+          </button>
+          </div>
+          </div>
+
+          <div className="flex w-full mt-1 invisible lg:visible">
         <div className="snap-center">
           <button
             className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
