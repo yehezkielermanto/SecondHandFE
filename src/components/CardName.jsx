@@ -3,7 +3,7 @@ import React from "react";
 const CardName = () => {
   return (
     <>
-      <div className="border-2">
+      <div className="border-2 p-4">
         <div className="">
           <div className="flex justify-between">
             <div className="flex flex-row">
