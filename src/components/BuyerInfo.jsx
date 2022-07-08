@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { Link, useNavigate } from 'react-router-dom'
+
 import { FiArrowLeft, FiX, FiAlertCircle } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 import buyer from '../img/buyer.png'
@@ -100,7 +102,9 @@ export default function BuyerInfo(props) {
                 {/* Buttons */}
                 <div
                   className={`${
+
                     isAcceptProduct ? 'hidden' : 'grid'
+
                   } grid-cols-2 lg:float-right text-center pt-4 pb-4`}
                 >
                   <button
@@ -303,6 +307,7 @@ export default function BuyerInfo(props) {
               </div>
             </div>
           </div>
+
           <Link to="/BuyerInfoEnd">
           <button
             className="flex items-center justify-center w-full py-3 mt-6 bg-[#7126B5] hover:bg-[#8f48cf] text-white font-normal text-sm rounded-[16px] 
@@ -311,8 +316,11 @@ export default function BuyerInfo(props) {
             Kirim
           </button>
           </Link>
+
         </div>
       </div>
     </section>
   )
+
 }
+

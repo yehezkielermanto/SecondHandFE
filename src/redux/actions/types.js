@@ -27,4 +27,5 @@ export const GET_ALL_PRODUCT = 'GET_ALL_PRODUCT'
 export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 export const NEW_PRODUCT = 'NEW_PRODUCT'
 
+
 export const TERIMA_PENAWARAN = 'TERIMA_PENAWARAN'

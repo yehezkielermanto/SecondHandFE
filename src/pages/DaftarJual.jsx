@@ -1,16 +1,20 @@
 import React from 'react'
 import CardName from '../components/CardName'
+
 import { FiDollarSign, FiBox, FiHeart, FiChevronRight, FiPlus } from "react-icons/fi";
 import HeaderProduct from "../components/HeaderProduct";
 import { Link } from "react-router-dom";
 import daftarJual from "../img/daftarjual.png"
+
 
 const DaftarJual = () => {
   return (
     <div className="w-screen min-h-screen">
       <HeaderProduct />
 
+
       <div className="flex flex-col w-full px-4 py-8 lg:max-w-screen-lg lg:mx-auto">
+
 
         <h1 className="hidden lg:block font-bold text-xl mb-4">Daftar Jual Saya</h1>            
          
@@ -72,8 +76,10 @@ const DaftarJual = () => {
                     <p className="">Rp. 250.000</p>
                   </div>
               </div>
+
               <div className="flex flex-col w-full h-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
                   <div className="h-1/2">
+
                     <img
                       src={daftarJual}
                       className="w-full h-full block rounded-[4px] justify-center items-center"
@@ -121,7 +127,9 @@ const DaftarJual = () => {
             </div>
         </div>
       </div>
+
     </div>
+
   )
 }
 
