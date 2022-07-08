@@ -1,88 +1,49 @@
-import React from "react";
-import "../public/css/style.css";
-import product from "../img/product.png";
+import React from 'react'
+import '../public/css/style.css'
+import product1 from '../img/product.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getAllProducts } from '../redux/actions/produkActions'
+import { useState } from 'react'
 
 const CardDashboard = () => {
-    return (
-      <>
-<div className="flex justify-center">
-    <div id="card" className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 md:grid-cols-5  mt-5 w-fit relative z-30 overflow-x-hidden">
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg">
-      <img src={product} alt="" className="w-full"/>
-      <h3 className='font-semibold'>jam tangan cosmos</h3>
-      <p>asadasdasd</p>
-      <h3 className='font-semibold'>Rp.00000</h3>
-    </div>
-    </div>
-</div>
-      </>
-    );
+  const dispatch = useDispatch()
+  const { product } = useSelector((state) => state.product)
+
+  useEffect(() => {
+    ;(async () => {
+      dispatch(getAllProducts())
+    })()
+  }, [dispatch])
+
+  return (
+    <>
+      {/* <div className="flex flex-row justify-center"> */}
+      {product === undefined ? (
+        <></>
+      ) : (
+        <>
+          {product.length === 0 ? (
+            <div>
+              <h4 className="content-center font-semibold text-center">
+                Produk Tidak Tersedia
+              </h4>
+            </div>
+          ) : (
+            product.data.barang.map((product) => (
+              <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg mx-2 w-1/6">
+                <img src={product1} alt="" className="w-full" />
+                <h3 className="font-semibold">{product.nama}</h3>
+                <p>{product.deskripsi}</p>
+                <h3 className="font-semibold">{product.harga}</h3>
+              </div>
+            ))
+          )}
+        </>
+      )}
+      {/* </div> */}
+    </>
+  )
 }
 
-export default CardDashboard;
+export default CardDashboard

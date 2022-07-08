@@ -4,11 +4,11 @@ import {
   AiOutlineArrowRight,
   AiOutlineHeart,
   AiOutlinePlus,
-} from "react-icons/ai";
-import { HiOutlineCube } from "react-icons/hi";
-import { FiDollarSign } from "react-icons/fi";
-import HeaderProduct from "../components/HeaderProduct";
-import { Link } from "react-router-dom";
+} from 'react-icons/ai'
+import { HiOutlineCube } from 'react-icons/hi'
+import { FiDollarSign } from 'react-icons/fi'
+import HeaderProduct from '../components/HeaderProduct'
+import { Link } from 'react-router-dom'
 
 const DaftarJual = () => {
   return (
@@ -22,6 +22,7 @@ const DaftarJual = () => {
               <h1 className="lg:block font-bold text-xl my-4">
                 Daftar Jual Saya
               </h1>
+              {/* card nama penjual */}
               <CardName />
             </div>
 
@@ -81,12 +82,12 @@ const DaftarJual = () => {
               </div>
               <div className="flex flex-row md:w-4/5 sm:w-full flex-wrap justify-around">
                 <Link to="/addProduct">
-                  <div className="flex flex-col justify-center items-center sm:w-52 sm:h-40 md:w-52 md:w-48 lg:h-56 lg:w-48 border-2">
+                  <div className="flex flex-col justify-center items-center sm:w-52 sm:h-40 md:w-52 md:w-48 lg:h-56 lg:w-48 border-2 rounded-md border-dashed">
                     <AiOutlinePlus className="mx-auto my-auto" />
                     <p className="mx-auto my-auto block">Tambah Produk</p>
                   </div>
                 </Link>
-                <div className=" border-2 sm:w-52 sm:h-40 md:w-52 md:w-48 lg:h-56 lg:w-48 flex flex-col">
+                <div className=" border-2 sm:w-52 sm:h-40 md:w-52 md:w-48 lg:h-56 lg:w-48 flex flex-col rounded-md">
                   <div className="h-1/2 border-2">
                     <img
                       src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
@@ -139,8 +140,7 @@ const DaftarJual = () => {
         </div>
       </div>
     </>
-  );
+  )
 }
-
 
 export default DaftarJual
