@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import Slider from "../components/Slider";
-import NavDashboard from "../components/NavDashboar";
-import ButtonDashboard from "../components/ButtonDashboard";
-import CardDashboard from "../components/CardDashboard";
-import HeaderProduct from "../components/HeaderProduct";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react'
+import Slider from '../components/Slider'
+import NavDashboard from '../components/NavDashboar'
+import ButtonDashboard from '../components/ButtonDashboard'
+import CardDashboard from '../components/CardDashboard'
+import HeaderProduct from '../components/HeaderProduct'
+import { useSelector } from 'react-redux'
 
-import "../public/css/style.css";
+import '../public/css/style.css'
 
 const Dashboard = () => {
-  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  const { isAuthenticated, error } = useSelector((state) => state.auth)
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      alert(error)
     }
-  }, [error]);
+  }, [error])
 
   return (
     <>
@@ -24,7 +24,9 @@ const Dashboard = () => {
         <section>
           <Slider />
           <ButtonDashboard />
-          <CardDashboard />
+          <div className="flex flex-row flex-wrap justify-center p-4">
+            <CardDashboard />
+          </div>
 
           <div className="relative z-50" id="plus">
             <div className="flex justify-center drop-shadow-lg">
@@ -41,7 +43,7 @@ const Dashboard = () => {
         </section>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

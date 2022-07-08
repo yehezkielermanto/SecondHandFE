@@ -9,32 +9,41 @@ import { useState } from 'react'
 const CardDashboard = () => {
   const dispatch = useDispatch()
   const { product } = useSelector((state) => state.product)
-  const [products, setProducts] = useState('')
-  // const handleSubmit = (id) => {
-  //   dispatch(getProductById(id));
-  // };
 
   useEffect(() => {
-    if (products == '') {
+    ;(async () => {
       dispatch(getAllProducts())
-      setProducts(product.data.barang)
-    } else {
-      console.log('sedang memuat')
-    }
-  }, [product])
+    })()
+  }, [dispatch])
 
-  // useEffect(() => {
-  //   console.log('hello')
-  //   if (product !== null) {
-  //     // console.log(product.data.barang)
-  //     setProducts(product)
-  //     // console.log(products)
-  //   }
-  // }, [products])
-  // console.log(product.data.barang)
-
-  console.log(products)
-  return <></>
+  return (
+    <>
+      {/* <div className="flex flex-row justify-center"> */}
+      {product === undefined ? (
+        <></>
+      ) : (
+        <>
+          {product.length === 0 ? (
+            <div>
+              <h4 className="content-center font-semibold text-center">
+                Produk Tidak Tersedia
+              </h4>
+            </div>
+          ) : (
+            product.data.barang.map((product) => (
+              <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg mx-2 w-1/6">
+                <img src={product1} alt="" className="w-full" />
+                <h3 className="font-semibold">{product.nama}</h3>
+                <p>{product.deskripsi}</p>
+                <h3 className="font-semibold">{product.harga}</h3>
+              </div>
+            ))
+          )}
+        </>
+      )}
+      {/* </div> */}
+    </>
+  )
 }
 
 export default CardDashboard

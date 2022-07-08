@@ -64,6 +64,7 @@ export const getAllProducts = () => async (dispatch) => {
   //   token = `Bearer ${localStorage.getItem("token")}`;
 
   try {
+    // console.log("disini");
     const response = await fetch(REACT_APP_URLENDPOINT + '/api/v1/products', {
       method: 'GET',
       headers: {
@@ -72,7 +73,7 @@ export const getAllProducts = () => async (dispatch) => {
       },
     })
     const data = await response.json()
-    // console.log(data)
+    // console.log(data);
     dispatch({
       type: GET_ALL_PRODUCT,
       payload: data,
@@ -92,11 +93,11 @@ export const getAllProducts = () => async (dispatch) => {
   }
 }
 
-export const getProductByKategori = (params) => async (dispatch) => {
-  // let token = "";
-  // if (localStorage.getItem("token"))
-  //   token = `Bearer ${localStorage.getItem("token")}`;
+// let token = "";
+// if (localStorage.getItem("token"))
+//   token = `Bearer ${localStorage.getItem("token")}`;
 
+export const getProductByKategori = (params) => async (dispatch) => {
   try {
     const response = await fetch(
       REACT_APP_URLENDPOINT +
@@ -110,11 +111,14 @@ export const getProductByKategori = (params) => async (dispatch) => {
         },
       },
     )
-    const data = await response.json()
+    const barang = await response.json()
+    const data = { barang }
+    const product = { data }
+    console.log(barang)
 
     dispatch({
       type: GET_ALL_PRODUCT,
-      payload: data,
+      product: product,
       status: 'GET_ALL',
     })
   } catch (error) {
