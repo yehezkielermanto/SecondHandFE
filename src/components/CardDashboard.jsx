@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getAllProducts } from '../redux/actions/produkActions'
 import { useState } from 'react'
+import { IKImage } from 'imagekitio-react'
+const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 
 const CardDashboard = () => {
   const dispatch = useDispatch()
@@ -32,7 +34,16 @@ const CardDashboard = () => {
           ) : (
             product.data.barang.map((product) => (
               <div className="inline-block m-1 border border-gray-300 p-1 rounded-lg mx-2 w-1/6">
-                <img src={product1} alt="" className="w-full" />
+                <IKImage
+                  urlEndpoint={urlImg}
+                  path={product.gambarbarangs}
+                  transformation={[
+                    {
+                      h: 96,
+                      w: 96,
+                    },
+                  ]}
+                />
                 <h3 className="font-semibold">{product.nama}</h3>
                 <p>{product.deskripsi}</p>
                 <h3 className="font-semibold">{product.harga}</h3>

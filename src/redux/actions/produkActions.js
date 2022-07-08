@@ -58,6 +58,7 @@ export const deleteProduct = (params) => async (dispatch) => {
   }
 }
 
+// --------------------------------------------------------------------action get all products
 export const getAllProducts = () => async (dispatch) => {
   // let token = "";
   // if (localStorage.getItem("token"))
@@ -73,6 +74,34 @@ export const getAllProducts = () => async (dispatch) => {
       },
     })
     const data = await response.json()
+    console.log('ini data')
+    console.log(data.data.barang.length)
+    let j = 0
+    for (let i = 0; i < data.data.barang.length; i++) {
+      console.log(data.data.barang[i].gambarbarangs[j])
+      j += 1
+    }
+    return
+
+    const fetchImgDetail = await fetch(
+      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/profileImg/details/${data.barang.id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+
+    const imgDetail = await fetchImgDetail.json()
+
+    if (imgDetail.status === 'FAILED') {
+      dispatch({
+        type: USERS_ERROR,
+        payload: imgDetail.message,
+      })
+      return
+    }
     // console.log(data);
     dispatch({
       type: GET_ALL_PRODUCT,
