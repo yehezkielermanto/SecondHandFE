@@ -266,4 +266,6 @@ export const statusAddProduct = () => async (dispatch) => {
 
 export const terimaPenawaran = () => async (dispatch) => {
   dispatch({ type: TERIMA_PENAWARAN })
+
 }
+

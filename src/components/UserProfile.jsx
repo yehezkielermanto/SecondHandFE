@@ -83,7 +83,7 @@ export default function AkunComponent() {
             </div>
           </Link>
         </div>
-        <div className="items-center flex gap-5 py-6 font-medium text-sm">
+        <div className="items-center flex gap-5 py-6 px-3 font-medium text-sm">
           <FiSettings className=" text-2xl text-[#4B1979] " />
           Pengaturan Akun
         </div>
