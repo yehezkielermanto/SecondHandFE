@@ -6,6 +6,7 @@ import {
   TEMP_PRODUCT,
   EDIT_PRODUCT,
   NEW_PRODUCT,
+  TERIMA_PENAWARAN,
 } from '../actions/types'
 const initialState = {
   product: [],
@@ -14,6 +15,7 @@ const initialState = {
   previewProduct: [],
   status: null,
   error: null,
+  terima: false,
 }
 
 const productReducer = (state = initialState, action) => {
@@ -22,19 +24,19 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         product: action.payload,
-        status: action.status,
+        status: 'GET_ALL',
       }
     case ADD_PRODUCT:
       return {
         ...state,
         status: 'success add product',
+        product: [],
+        previewProduct: [],
       }
     case NEW_PRODUCT:
       return {
         ...state,
         status: '',
-        product: [],
-        previewProduct: [],
       }
     case DELETE_PRODUCT:
       return {
@@ -58,6 +60,11 @@ const productReducer = (state = initialState, action) => {
         ...state,
         previewProduct: action.payload,
         status: 'notPreview',
+      }
+    case TERIMA_PENAWARAN:
+      return {
+        ...state,
+        terima: true,
       }
     default:
       return state

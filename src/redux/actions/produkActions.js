@@ -8,6 +8,7 @@ import {
   TEMP_PRODUCT,
   EDIT_PRODUCT,
   NEW_PRODUCT,
+  TERIMA_PENAWARAN,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 
@@ -58,23 +59,24 @@ export const deleteProduct = (params) => async (dispatch) => {
 }
 
 export const getAllProducts = () => async (dispatch) => {
-  let token = ''
-  if (localStorage.getItem('token'))
-    token = `Bearer ${localStorage.getItem('token')}`
+  // let token = "";
+  // if (localStorage.getItem("token"))
+  //   token = `Bearer ${localStorage.getItem("token")}`;
 
   try {
+    // console.log("disini");
     const response = await fetch(REACT_APP_URLENDPOINT + '/api/v1/products', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: token,
+        // Authorization: token,
       },
     })
     const data = await response.json()
+    // console.log(data);
     dispatch({
       type: GET_ALL_PRODUCT,
       payload: data,
-      status: 'GET_ALL',
     })
   } catch (error) {
     dispatch({
@@ -91,29 +93,32 @@ export const getAllProducts = () => async (dispatch) => {
   }
 }
 
-export const getProductByKategori = (params) => async (dispatch) => {
-  let token = ''
-  if (localStorage.getItem('token'))
-    token = `Bearer ${localStorage.getItem('token')}`
+// let token = "";
+// if (localStorage.getItem("token"))
+//   token = `Bearer ${localStorage.getItem("token")}`;
 
+export const getProductByKategori = (params) => async (dispatch) => {
   try {
     const response = await fetch(
       REACT_APP_URLENDPOINT +
         '/api/v1/product/kategori?' +
-        new URLSearchParams({ kategori: params }),
+        new URLSearchParams({ idkategori: params }),
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token,
+          // Authorization: token,
         },
       },
     )
-    const data = await response.json()
+    const barang = await response.json()
+    const data = { barang }
+    const product = { data }
+    console.log(barang)
 
     dispatch({
       type: GET_ALL_PRODUCT,
-      payload: data,
+      product: product,
       status: 'GET_ALL',
     })
   } catch (error) {
@@ -163,7 +168,7 @@ export const newProduct = (data) => async (dispatch) => {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Barang berhasil ditambahkan',
+        title: 'Barang berhasil diterbitkan',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -228,4 +233,8 @@ export const editProduct = (data) => async (dispatch) => {
 
 export const statusAddProduct = () => async (dispatch) => {
   dispatch({ type: NEW_PRODUCT })
+}
+
+export const terimaPenawaran = () => async (dispatch) => {
+  dispatch({ type: TERIMA_PENAWARAN })
 }
