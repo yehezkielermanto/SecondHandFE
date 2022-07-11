@@ -58,27 +58,61 @@ export const deleteProduct = (params) => async (dispatch) => {
   }
 }
 
+// --------------------------------------------------------------------action get all products
 export const getAllProducts = () => async (dispatch) => {
-  // let token = "";
-  // if (localStorage.getItem("token"))
-  //   token = `Bearer ${localStorage.getItem("token")}`;
-
   try {
-    // console.log("disini");
-    const response = await fetch(REACT_APP_URLENDPOINT + '/api/v1/products', {
+    const response = await fetch(`${REACT_APP_URLENDPOINT}/api/v1/products`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         // Authorization: token,
       },
     })
+
     const data = await response.json()
-    // console.log(data);
-    dispatch({
-      type: GET_ALL_PRODUCT,
-      payload: data,
-    })
+    // console.log(data.data.barang.length)
+    let j = 0
+    let i = 0
+    if (data !== '') {
+      while (i < data.data.barang.length) {
+        // console.log(data.data.barang[i].gambarbarangs)
+        for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
+          // console.log(data.data.barang[i].gambarbarangs[j].gambar)
+          const fetchImgDetail = await fetch(
+            `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            },
+          )
+
+          const imgDetail = await fetchImgDetail.json()
+          // console.log(imgDetail)
+          if (imgDetail.status === 'FAILED') {
+            dispatch({
+              type: USERS_ERROR,
+            })
+            return
+            // console.log(data);
+          }
+          // data.data.barang[i].gambarbarangs[j].gambar = imgDetail.gambar
+          // gambar.push(imgDetail.gambar)
+          data.data.barang[i].gambarProduk = imgDetail.gambar
+        }
+        i++
+      }
+      dispatch({ type: GET_ALL_PRODUCT, payload: data.data })
+    } else {
+      console.log(error.message)
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: error.response,
+      })
+    }
   } catch (error) {
+    console.log(error.message)
     dispatch({
       type: PRODUCT_ERROR,
       payload: error.response,
@@ -111,17 +145,48 @@ export const getProductByKategori = (params) => async (dispatch) => {
         },
       },
     )
-    const barang = await response.json()
-    const data = { barang }
-    const product = { data }
-    console.log(barang)
+    const data = await response.json()
 
+    let j = 0
+    let i = 0
+
+    while (i < data.barang.length) {
+      // console.log(data.data.barang[i].gambarbarangs)
+      for (j = 0; j < data.barang[i].gambarbarangs.length; j++) {
+        // console.log(data.data.barang[i].gambarbarangs[j].gambar)
+        const fetchImgDetail = await fetch(
+          `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.barang[i].gambarbarangs[j].gambar}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        )
+
+        const imgDetail = await fetchImgDetail.json()
+        // console.log(imgDetail)
+        if (imgDetail.status === 'FAILED') {
+          dispatch({
+            type: USERS_ERROR,
+          })
+          return
+          // console.log(data);
+        }
+        // data.data.barang[i].gambarbarangs[j].gambar = imgDetail.gambar
+        // gambar.push(imgDetail.gambar)
+        data.barang[i].gambarProduk = imgDetail.gambar
+      }
+      i++
+    }
+    console.log(data)
     dispatch({
       type: GET_ALL_PRODUCT,
-      product: product,
+      payload: data,
       status: 'GET_ALL',
     })
   } catch (error) {
+    console.log(error.message)
     dispatch({
       type: PRODUCT_ERROR,
       payload: error.response,
@@ -237,6 +302,4 @@ export const statusAddProduct = () => async (dispatch) => {
 
 export const terimaPenawaran = () => async (dispatch) => {
   dispatch({ type: TERIMA_PENAWARAN })
-
 }
-
