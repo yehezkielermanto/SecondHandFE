@@ -87,7 +87,7 @@ const CardName = (props) => {
               <div className="text-start mx-3 flex flex-col">
                 <h6 className="font-medium">{user.nama}</h6>
                 <p className="text-muted">
-                  {/* {city.length === 0 ? (
+                  {city.length === 0 ? (
                     <small>Kota Kosong</small>
                   ) : (
                     city.filter((kota) =>
@@ -99,7 +99,7 @@ const CardName = (props) => {
                         <small>Kota Tidak Ditemukan</small>
                       )
                     )
-                  )} */}
+                  )}
                 </p>
               </div>
             </div>
