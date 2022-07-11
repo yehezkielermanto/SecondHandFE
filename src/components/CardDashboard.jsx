@@ -33,7 +33,7 @@ const CardDashboard = () => {
               </h4>
             </div>
           ) : (
-            product.barang.map((product) => (
+            product?.barang?.map((product) => (
               <div className="inline-block m-1 p-1 border border-gray-300 rounded-lg mx-2 w-1/6">
                 <IKImage
                   urlEndpoint={urlImg}
@@ -41,7 +41,7 @@ const CardDashboard = () => {
                   className="object-cover w-full h-48 rounded-lg"
                 />
                 <h3 className="font-semibold p-1">{product.nama}</h3>
-                <p className="p-1">{product.deskripsi}</p>
+                <p className="p-1">{product.kategori.nama_kategori}</p>
                 <h3 className="font-semibold p-1">{product.harga}</h3>
               </div>
             ))
