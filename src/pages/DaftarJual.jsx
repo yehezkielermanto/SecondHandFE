@@ -1,20 +1,118 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import CardName from '../components/CardName'
-
 import { FiDollarSign, FiBox, FiHeart, FiChevronRight, FiPlus } from "react-icons/fi";
 import HeaderProduct from "../components/HeaderProduct";
 import { Link } from "react-router-dom";
 import daftarJual from "../img/daftarjual.png"
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "../redux/actions/usersActions";
+import { getAllProducts } from "../redux/actions/produkActions";
+import { IKImage } from "imagekitio-react";
+const urlImg = "https://ik.imagekit.io/jmprup9kb";
 
 
-const DaftarJual = () => {
+const DaftarJual = (props) => {
+  const dispatch = useDispatch();
+  let produks;
+
+  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  const { user, errorU } = useSelector((state) => state.users);
+  const { product, status, errorP } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchUser());
+    } else {
+      alert("User Data Not Found !");
+      dispatch(logout());
+    }
+  }, [isAuthenticated]);
+
+  /* useEffect(() => {
+    if (status == "GET_ALL") {
+      (async () => {
+        dispatch(getAllProducts());
+      })
+    }
+    if (product.length === 0) {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        titleText: "Sedang Memuat Dafta Produk",
+        showConfirmButton: false,
+      });
+    }
+  }, [status]); */
+
+  useEffect(() => {
+    (async () => {
+      dispatch(getAllProducts());
+    })();
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        titleText: error,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+
+      dispatch(logout());
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (errorU) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        titleText: errorU,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      // alert(errorU);
+    }
+  }, [errorU]);
+
+  useEffect(() => {
+    if (errorP) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        titleText: errorP,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+
+      dispatch(logout());
+    }
+  }, [errorP]);
+
+  /* useEffect(() => {
+    if (status === null || status == undefined) {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        titleText: "Sedang Memuat Daftar Produk",
+        showConfirmButton: false,
+      });
+    }
+  }) */
+
+  produks = product?.data;
+
+  console.log("List Produk, " + produks);
+  console.log(product);
+
   return (
     <div className="w-screen min-h-screen">
       <HeaderProduct />
 
-
       <div className="flex flex-col w-full px-4 py-8 lg:max-w-screen-lg lg:mx-auto">
-
 
         <h1 className="hidden lg:block font-bold text-xl mb-4">Daftar Jual Saya</h1>            
          
@@ -53,6 +151,7 @@ const DaftarJual = () => {
                 <FiPlus />
                 <p className='text-center'>Tambah Produk</p>
               </Link>
+
               <div className="flex flex-col w-full h-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
                   <div className="h-1/2">
                     <img
