@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom'
 const CardName = () => {
   return (
     <>
-
       <div className="border p-4 rounded-[16px]">
-
         <div className="">
           <div className="flex justify-between">
             <div className="flex flex-row mx-2">
@@ -23,15 +21,15 @@ const CardName = () => {
               </div>
             </div>
 
-
             <div className="flex-grow-1 ms-3">
-              <button
-                type="button"
-                className="btn btn-outline-primary bg-white  border border-[#7126B5] mt-2 px-2 btn-sm float-end font-medium rounded-[8px]"
-              >
-                Edit
-              </button>
-
+              <Link to="/user/profile">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary bg-white  border border-[#7126B5] mt-2 px-2 btn-sm float-end font-medium rounded-[8px]"
+                >
+                  Edit
+                </button>
+              </Link>
             </div>
           </div>
         </div>
