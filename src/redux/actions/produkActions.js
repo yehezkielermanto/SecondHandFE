@@ -76,31 +76,31 @@ export const getAllProducts = () => async (dispatch) => {
     if (data !== '') {
       while (i < data.data.barang.length) {
         // console.log(data.data.barang[i].gambarbarangs)
-        for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
-          // console.log(data.data.barang[i].gambarbarangs[j].gambar)
-          const fetchImgDetail = await fetch(
-            `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
-            {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-              },
+        // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
+        // console.log(data.data.barang[i].gambarbarangs[j].gambar)
+        const fetchImgDetail = await fetch(
+          `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
             },
-          )
+          },
+        )
 
-          const imgDetail = await fetchImgDetail.json()
-          // console.log(imgDetail)
-          if (imgDetail.status === 'FAILED') {
-            dispatch({
-              type: USERS_ERROR,
-            })
-            return
-            // console.log(data);
-          }
-          // data.data.barang[i].gambarbarangs[j].gambar = imgDetail.gambar
-          // gambar.push(imgDetail.gambar)
-          data.data.barang[i].gambarProduk = imgDetail.gambar
+        const imgDetail = await fetchImgDetail.json()
+        // console.log(imgDetail)
+        if (imgDetail.status === 'FAILED') {
+          dispatch({
+            type: USERS_ERROR,
+          })
+          return
+          // console.log(data);
         }
+        // data.data.barang[i].gambarbarangs[j].gambar = imgDetail.gambar
+        // gambar.push(imgDetail.gambar)
+        data.data.barang[i].gambarProduk = imgDetail.gambar
+        // }
         i++
       }
       dispatch({ type: GET_ALL_PRODUCT, payload: data.data })

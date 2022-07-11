@@ -40,7 +40,7 @@ const ProfileHeaderComponent = (props) => {
     setAlamat(user.alamat)
     setKota(user.idkota)
     setNohp(user.nohp)
-    setImgUser(user.imgFileData.filePath)
+    setImgUser(user?.imgFileData?.filePath)
   }, [user])
 
   const imageUpload = async (e) => {

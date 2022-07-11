@@ -41,7 +41,7 @@ const CardDashboard = () => {
                   className="object-cover w-full h-48 rounded-lg"
                 />
                 <h3 className="font-semibold p-1">{product.nama}</h3>
-                <p className="p-1">{product.deskripsi}</p>
+                <p className="p-1">{product.kategori.nama_kategori}</p>
                 <h3 className="font-semibold p-1">{product.harga}</h3>
               </div>
             ))
