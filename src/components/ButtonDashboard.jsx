@@ -7,20 +7,28 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import {
   getAllProducts,
   getProductByKategori,
+  filterProducts,
 } from '../redux/actions/produkActions'
 import { useEffect } from 'react'
 
 const ButtonDashboard = () => {
   const dispatch = useDispatch()
   const { product, status } = useSelector((state) => state.product)
+  const { isAuthenticated } = useSelector((state) => state.auth)
 
   // useEffect(() => {
   //   dispatch(getAllProducts())
   // }, [dispatch])
 
-  if (product === undefined && status !== 'GET_ALL') {
-    dispatch(getAllProducts())
-  }
+  useEffect(() => {
+    ;(async () => {
+      if (isAuthenticated) {
+        dispatch(filterProducts())
+      } else {
+        dispatch(getAllProducts())
+      }
+    })()
+  }, [dispatch, isAuthenticated])
 
   const filterAll = (event) => {
     event.currentTarget.classList.remove('bg-sky-400')
@@ -37,7 +45,11 @@ const ButtonDashboard = () => {
     document.getElementById('filterElektronik').classList.add('bg-sky-400')
     document.getElementById('filterKesehatan').classList.remove('bg-violet-400')
     document.getElementById('filterKesehatan').classList.add('bg-sky-400')
-    dispatch(getAllProducts())
+    if (!isAuthenticated) {
+      dispatch(getAllProducts())
+    } else {
+      dispatch(filterProducts())
+    }
   }
 
   const filterHobi = (event) => {
@@ -56,7 +68,11 @@ const ButtonDashboard = () => {
     document.getElementById('filterElektronik').classList.add('bg-sky-400')
     document.getElementById('filterKesehatan').classList.remove('bg-violet-400')
     document.getElementById('filterKesehatan').classList.add('bg-sky-400')
-    dispatch(getProductByKategori(Hobi))
+    if (!isAuthenticated) {
+      dispatch(getProductByKategori(Hobi))
+    } else {
+      dispatch(filterProducts())
+    }
   }
 
   const filterKendaraan = (event) => {
@@ -75,7 +91,11 @@ const ButtonDashboard = () => {
     document.getElementById('filterElektronik').classList.add('bg-sky-400')
     document.getElementById('filterKesehatan').classList.remove('bg-violet-400')
     document.getElementById('filterKesehatan').classList.add('bg-sky-400')
-    dispatch(getProductByKategori(Kendaraan))
+    if (!isAuthenticated) {
+      dispatch(getProductByKategori(Kendaraan))
+    } else {
+      dispatch(filterProducts())
+    }
   }
 
   const filterBaju = (event) => {
@@ -94,7 +114,11 @@ const ButtonDashboard = () => {
     document.getElementById('filterElektronik').classList.add('bg-sky-400')
     document.getElementById('filterKesehatan').classList.remove('bg-violet-400')
     document.getElementById('filterKesehatan').classList.add('bg-sky-400')
-    dispatch(getProductByKategori(Baju))
+    if (!isAuthenticated) {
+      dispatch(getProductByKategori(Baju))
+    } else {
+      dispatch(filterProducts())
+    }
   }
 
   const filterElektronik = (event) => {
@@ -111,7 +135,11 @@ const ButtonDashboard = () => {
     document.getElementById('filterAll').classList.add('bg-sky-400')
     document.getElementById('filterKesehatan').classList.remove('bg-violet-400')
     document.getElementById('filterKesehatan').classList.add('bg-sky-400')
-    dispatch(getProductByKategori(Elektronik))
+    if (!isAuthenticated) {
+      dispatch(getProductByKategori(Elektronik))
+    } else {
+      dispatch(filterProducts())
+    }
   }
 
   const filterKesehatan = (event) => {
@@ -130,7 +158,11 @@ const ButtonDashboard = () => {
     document.getElementById('filterElektronik').classList.add('bg-sky-400')
     document.getElementById('filterAll').classList.remove('bg-violet-400')
     document.getElementById('filterAll').classList.add('bg-sky-400')
-    dispatch(getProductByKategori(Kesehatan))
+    if (!isAuthenticated) {
+      dispatch(getProductByKategori(Kesehatan))
+    } else {
+      dispatch(filterProducts())
+    }
   }
 
   return (

@@ -3,21 +3,41 @@ import '../public/css/style.css'
 import product1 from '../img/product.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getAllProducts } from '../redux/actions/produkActions'
+import {
+  fetchProductsById,
+  filterProducts,
+  getAllProducts,
+} from '../redux/actions/produkActions'
 import { useState } from 'react'
 import { IKImage } from 'imagekitio-react'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import Swal from 'sweetalert2'
+import { fetchUser } from '../redux/actions/usersActions'
+import { useNavigate } from 'react-router-dom'
 
 const CardDashboard = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { product } = useSelector((state) => state.product)
+  const { isAuthenticated } = useSelector((state) => state.auth)
+  // const { user } = useSelector((state) => state.users)
 
   useEffect(() => {
     ;(async () => {
-      dispatch(getAllProducts())
+      if (isAuthenticated) {
+        dispatch(fetchUser())
+        dispatch(filterProducts())
+      } else {
+        dispatch(getAllProducts())
+      }
     })()
-  }, [dispatch])
+  }, [dispatch, isAuthenticated])
+
+  const handlePreview = (id) => {
+    console.log(id)
+    dispatch(fetchProductsById(id))
+    return navigate('/productbuyer')
+  }
 
   return (
     <>
@@ -34,7 +54,10 @@ const CardDashboard = () => {
             </div>
           ) : (
             product?.barang?.map((product) => (
-              <div className="inline-block m-1 p-1 border border-gray-300 rounded-lg mx-2 w-1/6">
+              <div
+                className="inline-block m-1 p-1 border border-gray-300 rounded-lg mx-2 w-1/6 hover:cursor-pointer"
+                onClick={() => handlePreview(product.id)}
+              >
                 <IKImage
                   urlEndpoint={urlImg}
                   path={product.gambarProduk.filePath}
