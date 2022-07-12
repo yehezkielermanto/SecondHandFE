@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
@@ -91,7 +91,7 @@ const CardName = (props) => {
             </div>
           </div>
         ) : (
-          <div className="flex flex-row mx-2">
+          <div className="flex flex-row mx-2 ">
             <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=50" className="rounded" alt="..." />
             <div className="text-start mx-3 flex flex-col">
               <h6 className="font-medium">Nama Penjual</h6>
@@ -101,10 +101,12 @@ const CardName = (props) => {
             </div>
           </div>
         )}
-        <div className="flex-grow-1 ms-3">
-          <button type="button" className="btn btn-outline-primary bg-white  border border-[#7126B5] mt-2 px-2 btn-sm float-end font-medium rounded-[8px]">
-            Edit
-          </button>
+        <div className="flex items-center content-center justify-center p-1">
+          <div>
+            <Link to="/profile" className="flex h-9.5 py-1.5 px-2 border-1 border border-[#7126B5] rounded-lg hover:bg-violet-500">
+              <h1>Edit</h1>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
