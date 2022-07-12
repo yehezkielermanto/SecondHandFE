@@ -1,23 +1,23 @@
-import React from 'react'
-import '../public/css/style.css'
-import product1 from '../img/product.png'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { getAllProducts } from '../redux/actions/produkActions'
-import { useState } from 'react'
-import { IKImage } from 'imagekitio-react'
-const urlImg = 'https://ik.imagekit.io/jmprup9kb'
-import Swal from 'sweetalert2'
+import React from "react";
+import "../public/css/style.css";
+import product1 from "../img/product.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "../redux/actions/produkActions";
+import { useState } from "react";
+import { IKImage } from "imagekitio-react";
+const urlImg = "https://ik.imagekit.io/jmprup9kb";
+import Swal from "sweetalert2";
 
 const CardDashboard = () => {
-  const dispatch = useDispatch()
-  const { product } = useSelector((state) => state.product)
+  const dispatch = useDispatch();
+  const { product } = useSelector((state) => state.product);
 
   useEffect(() => {
-    ;(async () => {
-      dispatch(getAllProducts())
-    })()
-  }, [dispatch])
+    (async () => {
+      dispatch(getAllProducts());
+    })();
+  }, [dispatch]);
 
   return (
     <>
@@ -29,7 +29,7 @@ const CardDashboard = () => {
           {product.barang === undefined ? (
             <div>
               <h4 className="content-center font-semibold text-center my-4">
-                Produk Tidak Tersedia
+                Produk Kosong
               </h4>
             </div>
           ) : (
@@ -50,7 +50,7 @@ const CardDashboard = () => {
       )}
       {/* </div> */}
     </>
-  )
-}
+  );
+};
 
-export default CardDashboard
+export default CardDashboard;
