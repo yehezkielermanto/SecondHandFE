@@ -73,13 +73,16 @@ export const getAllProducts = () => async (dispatch) => {
     // console.log(data.data.barang.length)
     let j = 0
     let i = 0
+    console.log(data.data);
     if (data !== '') {
       while (i < data.data.barang.length) {
+        // console.log(data.data.barang[i].gambarbarangs[0].gambar);
+        // return;
         // console.log(data.data.barang[i].gambarbarangs)
         // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
         // console.log(data.data.barang[i].gambarbarangs[j].gambar)
         const fetchImgDetail = await fetch(
-          `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
+          `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[0].gambar}`,
           {
             method: 'GET',
             headers: {
@@ -103,6 +106,7 @@ export const getAllProducts = () => async (dispatch) => {
         // }
         i++
       }
+      console.log(data.data)
       dispatch({ type: GET_ALL_PRODUCT, payload: data.data })
     } else {
       console.log(error.message)
