@@ -7,6 +7,7 @@ import {
   EDIT_PRODUCT,
   NEW_PRODUCT,
   TERIMA_PENAWARAN,
+  DETAIL_PRODUCT,
 } from '../actions/types'
 const initialState = {
   product: [],
@@ -65,6 +66,11 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         terima: true,
+      }
+    case DETAIL_PRODUCT:
+      return {
+        ...state,
+        detailProduct: action.payload,
       }
     default:
       return state
