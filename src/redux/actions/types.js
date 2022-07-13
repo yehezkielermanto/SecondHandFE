@@ -29,6 +29,7 @@ export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 export const NEW_PRODUCT = 'NEW_PRODUCT'
 export const DETAIL_PRODUCT = 'DETAIL_PRODUCT'
 export const EMPTY_DETAIL = 'EMPTY_DETAIL'
+export const SELLER = 'SELLER'
 
 // transactions
 export const TERIMA_PENAWARAN = 'TERIMA_PENAWARAN'

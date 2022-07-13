@@ -21,6 +21,7 @@ const CardDashboard = () => {
   const dispatch = useDispatch()
   const { product, detailProduct } = useSelector((state) => state.product)
   const { isAuthenticated } = useSelector((state) => state.auth)
+  const [isLoading, setLoading] = useState(false)
   // const { user } = useSelector((state) => state.users)
 
   useEffect(() => {
@@ -38,14 +39,51 @@ const CardDashboard = () => {
   const handlePreview = (id) => {
     // console.log(id)
     dispatch(fetchProductsById(id))
+    setLoading(true)
   }
   useEffect(() => {
     ;(async () => {
       if (detailProduct !== '') {
+        setLoading(false)
         return navigate('/productbuyer')
       }
     })()
   }, [detailProduct])
+
+  useEffect(() => {
+    if (isLoading == true) {
+      Swal.fire({
+        title: 'Sedang memuat Produk',
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      setLoading(false)
+    }
+  })
+
+  useEffect(() => {
+    ;(async () => {
+      if (product == '') {
+        Swal.fire({
+          title: 'Sedang memuat Produk',
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+          },
+        })
+      } else {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          titleText: 'Produk Berhasil Termuat',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
+    })()
+  }, [product])
 
   return (
     <>
