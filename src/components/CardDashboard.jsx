@@ -57,6 +57,7 @@ const CardDashboard = () => {
               <div
                 className="inline-block m-1 p-1 border border-gray-300 rounded-lg mx-2 w-1/6 hover:cursor-pointer"
                 onClick={() => handlePreview(product.id)}
+                key={product.id}
               >
                 <IKImage
                   urlEndpoint={urlImg}
