@@ -8,6 +8,7 @@ import {
   getAllProducts,
   getProductByKategori,
   filterProducts,
+  filterProductsCategAuth,
 } from '../redux/actions/produkActions'
 import { useEffect } from 'react'
 
@@ -71,7 +72,7 @@ const ButtonDashboard = () => {
     if (!isAuthenticated) {
       dispatch(getProductByKategori(Hobi))
     } else {
-      dispatch(filterProducts())
+      dispatch(filterProductsCategAuth(Hobi))
     }
   }
 
@@ -94,7 +95,7 @@ const ButtonDashboard = () => {
     if (!isAuthenticated) {
       dispatch(getProductByKategori(Kendaraan))
     } else {
-      dispatch(filterProducts())
+      dispatch(filterProductsCategAuth(Kendaraan))
     }
   }
 
@@ -117,7 +118,7 @@ const ButtonDashboard = () => {
     if (!isAuthenticated) {
       dispatch(getProductByKategori(Baju))
     } else {
-      dispatch(filterProducts())
+      dispatch(filterProductsCategAuth(Baju))
     }
   }
 
@@ -138,7 +139,7 @@ const ButtonDashboard = () => {
     if (!isAuthenticated) {
       dispatch(getProductByKategori(Elektronik))
     } else {
-      dispatch(filterProducts())
+      dispatch(filterProductsCategAuth(Elektronik))
     }
   }
 
@@ -161,7 +162,7 @@ const ButtonDashboard = () => {
     if (!isAuthenticated) {
       dispatch(getProductByKategori(Kesehatan))
     } else {
-      dispatch(filterProducts())
+      dispatch(filterProductsCategAuth(Kesehatan))
     }
   }
 

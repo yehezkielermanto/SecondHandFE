@@ -74,7 +74,7 @@ export const getAllProducts = () => async (dispatch) => {
     // console.log(data.data.barang.length)
     let j = 0
     let i = 0
-    console.log(data.data);
+    console.log(data.data)
     if (data !== '') {
       while (i < data.data.barang.length) {
         // console.log(data.data.barang[i].gambarbarangs[0].gambar);
@@ -331,6 +331,68 @@ export const filterProducts = () => async (dispatch) => {
     const token = localStorage.getItem('token')
     const response = await fetch(
       REACT_APP_URLENDPOINT + '/api/v1/filterProducts',
+      {
+        method: 'GET',
+        headers: {
+          ContentType: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+    const data = await response.json()
+    let j = 0
+    let i = 0
+    if (data !== '') {
+      while (i < data.data.barang.length) {
+        // console.log(data.data.barang[i].gambarbarangs)
+        // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
+        // console.log(data.data.barang[i].gambarbarangs[j].gambar)
+        const fetchImgDetail = await fetch(
+          `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        )
+
+        const imgDetail = await fetchImgDetail.json()
+        // console.log(imgDetail)
+        if (imgDetail.status === 'FAILED') {
+          dispatch({
+            type: USERS_ERROR,
+          })
+          return
+          // console.log(data);
+        }
+        // data.data.barang[i].gambarbarangs[j].gambar = imgDetail.gambar
+        // gambar.push(imgDetail.gambar)
+        data.data.barang[i].gambarProduk = imgDetail.gambar
+        // }
+        i++
+      }
+      dispatch({ type: GET_ALL_PRODUCT, payload: data.data })
+    } else {
+      console.log(error.message)
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: error.response,
+      })
+    }
+  } catch (error) {
+    dispatch({ type: PRODUCT_ERROR })
+  }
+}
+
+// filter products by category Auth
+export const filterProductsCategAuth = (id) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await fetch(
+      REACT_APP_URLENDPOINT +
+        '/api/v1/filterProductsCateg?' +
+        new URLSearchParams({ idkategori: id }),
       {
         method: 'GET',
         headers: {
