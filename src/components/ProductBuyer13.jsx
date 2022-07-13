@@ -168,14 +168,14 @@ export default function ProductBuyer13() {
       <div
         onClick={handleCloseModal}
         className={`w-screen h-screen fixed ${
-          isModalShow ? 'flex' : 'hidden'
+          isModalShow ? "flex" : "hidden"
         } items-center justify-center bg-black bg-opacity-70 top-0 left-0 z-50`}
       >
         {/* Modal for Terima */}
         <div
           onClick={(e) => e.stopPropagation()}
           className={`${
-            isModalAcceptShow ? 'bg-white' : 'hidden'
+            isModalAcceptShow ? "bg-white" : "hidden"
           } lg:relative absolute bottom-0 p-6 w-full max-w-sm md:h-auto rounded-2xl`}
         >
           <button className="float-right">
@@ -190,14 +190,16 @@ export default function ProductBuyer13() {
           </p>
           <div className="bg-[#EEEEEE] p-4 rounded-2xl my-2">
             <div className="flex flex-row items-center">
-              <img
+              
+              <IKImage
+                urlEndpoint={urlImg}
+                path={detailProduct?.gambarProduk?.[0]?.filePath}
                 className="w-[48px] h-[48px] rounded-[12px] border border-neutral-2"
-                alt="produk"
-                src={product}
               />
+
               <div className="flex flex-col justify-between ml-4 text-sm">
-                <p className="mb-1 font-medium">Jam Tangan Casio</p>
-                <p className="mb-1 font-regular">Rp 250.000</p>
+                <p className="mb-1 font-medium">{detailProduct.nama}</p>
+                <p className="mb-1 font-regular">Rp {detailProduct.harga}</p>
               </div>
             </div>
           </div>
@@ -222,5 +224,5 @@ export default function ProductBuyer13() {
         </div>
       </div>
     </div>
-  )
+  );
 }
