@@ -10,6 +10,7 @@ import {
   NEW_PRODUCT,
   TERIMA_PENAWARAN,
   DETAIL_PRODUCT,
+  EMPTY_DETAIL,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 
@@ -74,7 +75,7 @@ export const getAllProducts = () => async (dispatch) => {
     // console.log(data.data.barang.length)
     let j = 0
     let i = 0
-    console.log(data.data)
+    // console.log(data.data)
     if (data !== '') {
       while (i < data.data.barang.length) {
         // console.log(data.data.barang[i].gambarbarangs[0].gambar);
@@ -107,7 +108,7 @@ export const getAllProducts = () => async (dispatch) => {
         // }
         i++
       }
-      console.log(data.data)
+      // console.log(data.data)
       dispatch({ type: GET_ALL_PRODUCT, payload: data.data })
     } else {
       console.log(error.message)
@@ -310,7 +311,7 @@ export const terimaPenawaran = () => async (dispatch) => {
   dispatch({ type: TERIMA_PENAWARAN })
 }
 
-// get products by id
+// ================get products by id
 export const fetchProductsById = (id) => async (dispatch) => {
   try {
     const response = await fetch(
@@ -318,6 +319,39 @@ export const fetchProductsById = (id) => async (dispatch) => {
       { method: 'GET', headers: { 'Content-Type': 'application/json' } },
     )
     const result = await response.json()
+
+    // ambil/fecth image products
+    let i = 0
+    let gambar = []
+    while (i < result.gambarbarangs.length) {
+      // console.log(data.data.barang[i].gambarbarangs)
+      // for (j = 0; j < data.barang[i].gambarbarangs.length; j++) {
+      // console.log(data.data.barang[i].gambarbarangs[j].gambar)
+      const fetchImgDetail = await fetch(
+        `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${result.gambarbarangs[i].gambar}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      const imgDetail = await fetchImgDetail.json()
+      // console.log(imgDetail)
+      if (imgDetail.status === 'FAILED') {
+        dispatch({
+          type: USERS_ERROR,
+        })
+        return
+        // console.log(data);
+      }
+      // data.data.barang[i].gambarbarangs[j].gambar = imgDetail.gambar
+      // gambar.push(imgDetail.gambar)
+      gambar.push(imgDetail.gambar)
+      // }
+      i++
+    }
+    result.gambarProduk = gambar
     // console.log(result)
     dispatch({ type: DETAIL_PRODUCT, payload: result })
   } catch (error) {
@@ -325,7 +359,7 @@ export const fetchProductsById = (id) => async (dispatch) => {
   }
 }
 
-// filter products by user id
+// ==================filter products by user id
 export const filterProducts = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token')
@@ -445,4 +479,9 @@ export const filterProductsCategAuth = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: PRODUCT_ERROR })
   }
+}
+
+// empty detail products
+export const emptyDetailProduct = () => async (dispatch) => {
+  dispatch({ type: EMPTY_DETAIL })
 }
