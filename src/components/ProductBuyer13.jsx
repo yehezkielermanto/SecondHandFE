@@ -12,23 +12,53 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IKImage } from 'imagekitio-react'
 import {
   emptyDetailProduct,
+  fetchProfileSeller,
   getAllProducts,
 } from '../redux/actions/produkActions'
+import { useEffect } from 'react'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
+import Swal from 'sweetalert2'
 
 export default function ProductBuyer13() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   // ambil detail products dari redux
-  const { detailProduct } = useSelector((state) => state.product)
+  const { detailProduct, seller } = useSelector((state) => state.product)
   const [isModalAcceptShow, setModalAcceptShow] = useState(false)
   const isModalShow = isModalAcceptShow
+  const [isLoading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(false)
+    if (isLoading == false) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        titleText: 'Produk Berhasil Termuat',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }
+    if (detailProduct == '' && seller == '') {
+      return navigate('/')
+    }
+  })
+
+  useEffect(() => {
+    dispatch(
+      fetchProfileSeller({
+        idkota: detailProduct.user.idkota,
+        idgambar: detailProduct.user.gambar,
+      }),
+    )
+  }, [dispatch])
 
   const handleCloseModal = () => {
     setModalAcceptShow(false)
   }
   const handleOpenAcceptModal = () => {
+    // check apakah isAuthenticated or not
     setModalAcceptShow(true)
   }
 
@@ -102,13 +132,14 @@ export default function ProductBuyer13() {
           </div>
 
           <div className="flex bg-white rounded-xl py-4 shadow-low gap-4 p-4 w-full relative md:w-4/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white">
-            <img
+            <IKImage
+              urlEndpoint={urlImg}
+              path={seller?.imgDetail?.gambar?.filePath}
               className="h-14 aspect-square rounded-xl object-cover"
-              src={Seller}
             />
             <div className="flex flex-col justify-center ml-3">
               <h1 className="font-medium">{detailProduct.user?.nama}</h1>
-              <p className="text-sm text-neutral-3">Kota</p>
+              <p className="text-sm text-neutral-3">{seller.kota}</p>
             </div>
           </div>
         </div>
