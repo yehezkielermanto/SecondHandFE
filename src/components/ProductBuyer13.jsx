@@ -8,10 +8,13 @@ import { Carousel } from 'react-responsive-carousel'
 import { Link } from 'react-router-dom'
 import { Input } from 'antd'
 import product from '../img/productBuyer.png'
+import { useSelector } from "react-redux";
+
 
 export default function ProductBuyer13() {
 	const navigate = useNavigate()
   
+	const{detailProduct} = useSelector((state)=>state.product)
     const [ isModalAcceptShow, setModalAcceptShow ] = useState(false);
     const isModalShow = isModalAcceptShow;
   
