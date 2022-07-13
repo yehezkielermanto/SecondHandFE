@@ -22,12 +22,14 @@ const CardDashboard = () => {
   const { product, detailProduct } = useSelector((state) => state.product)
   const { isAuthenticated } = useSelector((state) => state.auth)
   const [isLoading, setLoading] = useState(false)
+  const [isAuth, setAuth] = useState(false)
   // const { user } = useSelector((state) => state.users)
 
   useEffect(() => {
     ;(async () => {
       if (isAuthenticated) {
         dispatch(fetchUser())
+        setAuth(true)
         dispatch(filterProducts())
       } else {
         dispatch(logout())
@@ -38,9 +40,25 @@ const CardDashboard = () => {
 
   const handlePreview = (id) => {
     // console.log(id)
+    if (isAuth === true) {
     dispatch(fetchProductsById(id))
     setLoading(true)
   }
+  else {
+    Swal.fire({
+      title: 'Oops...',
+      text: 'You must login first',
+      icon: 'error',
+      confirmButtonText: 'Login',
+    }).then((result) => {
+      if (result.value) {
+        navigate('/login')
+      }
+    }
+    )
+  }
+}
+  
   useEffect(() => {
     ;(async () => {
       if (detailProduct !== '') {
