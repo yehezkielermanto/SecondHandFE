@@ -11,6 +11,7 @@ import {
   TERIMA_PENAWARAN,
   DETAIL_PRODUCT,
   EMPTY_DETAIL,
+  SELLER,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 
@@ -257,6 +258,7 @@ export const newProduct = (data) => async (dispatch) => {
 export const tempProduct = (data) => async (dispatch) => {
   try {
     if (data != '') {
+      // =======================ambil data kota dari tabel kota di database
       const response = await fetch(
         REACT_APP_URLENDPOINT + '/api/v1/cities/' + data.kota,
         {
@@ -264,6 +266,7 @@ export const tempProduct = (data) => async (dispatch) => {
           headers: { 'Content-Type': 'application/json' },
         },
       )
+      // ====================ambil nama kategori dari tabel kategori
       const findCateg = await fetch(
         REACT_APP_URLENDPOINT + '/api/v1/category/' + data.kategori,
         {
@@ -484,4 +487,38 @@ export const filterProductsCategAuth = (id) => async (dispatch) => {
 // empty detail products
 export const emptyDetailProduct = () => async (dispatch) => {
   dispatch({ type: EMPTY_DETAIL })
+}
+
+export const fetchProfileSeller = (data) => async (dispatch) => {
+  try {
+    const kota = await fetch(
+      REACT_APP_URLENDPOINT + '/api/v1/cities/' + data.idkota,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      },
+    )
+
+    const fetchImgDetail = await fetch(
+      `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.idgambar}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+
+    const imgDetail = await fetchImgDetail.json()
+
+    const result = await kota.json()
+
+    dispatch({
+      type: SELLER,
+      payload: { imgDetail, kota: result.city.nama_kota },
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({ type: PRODUCT_ERROR })
+  }
 }
