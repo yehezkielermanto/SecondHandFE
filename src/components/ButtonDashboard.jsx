@@ -21,15 +21,15 @@ const ButtonDashboard = () => {
   //   dispatch(getAllProducts())
   // }, [dispatch])
 
-  useEffect(() => {
-    ;(async () => {
-      if (isAuthenticated) {
-        dispatch(filterProducts())
-      } else {
-        dispatch(getAllProducts())
-      }
-    })()
-  }, [dispatch, isAuthenticated])
+  // useEffect(() => {
+  //   ;(async () => {
+  //     if (isAuthenticated) {
+  //       dispatch(filterProducts())
+  //     } else {
+  //       dispatch(getAllProducts())
+  //     }
+  //   })()
+  // }, [dispatch, isAuthenticated])
 
   const filterAll = (event) => {
     event.currentTarget.classList.remove('bg-sky-400')

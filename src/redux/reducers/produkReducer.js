@@ -8,10 +8,11 @@ import {
   NEW_PRODUCT,
   TERIMA_PENAWARAN,
   DETAIL_PRODUCT,
+  EMPTY_DETAIL,
 } from '../actions/types'
 const initialState = {
   product: [],
-  detailProduct: [],
+  detailProduct: '',
   editProduct: [],
   previewProduct: [],
   status: null,
@@ -25,6 +26,7 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         product: action.payload,
+        detailProduct: '',
         status: 'GET_ALL',
       }
     case ADD_PRODUCT:
@@ -71,6 +73,11 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         detailProduct: action.payload,
+      }
+    case EMPTY_DETAIL:
+      return {
+        ...state,
+        detailProduct: '',
       }
     default:
       return state

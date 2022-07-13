@@ -14,11 +14,12 @@ const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import Swal from 'sweetalert2'
 import { fetchUser } from '../redux/actions/usersActions'
 import { useNavigate } from 'react-router-dom'
+import { logout } from '../redux/actions/authActions'
 
 const CardDashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { product } = useSelector((state) => state.product)
+  const { product, detailProduct } = useSelector((state) => state.product)
   const { isAuthenticated } = useSelector((state) => state.auth)
   // const { user } = useSelector((state) => state.users)
 
@@ -28,16 +29,23 @@ const CardDashboard = () => {
         dispatch(fetchUser())
         dispatch(filterProducts())
       } else {
+        dispatch(logout())
         dispatch(getAllProducts())
       }
     })()
   }, [dispatch, isAuthenticated])
 
   const handlePreview = (id) => {
-    console.log(id)
+    // console.log(id)
     dispatch(fetchProductsById(id))
-    return navigate('/productbuyer')
   }
+  useEffect(() => {
+    ;(async () => {
+      if (detailProduct !== '') {
+        return navigate('/productbuyer')
+      }
+    })()
+  }, [detailProduct])
 
   return (
     <>
