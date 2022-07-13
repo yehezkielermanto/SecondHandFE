@@ -9,6 +9,7 @@ export const GET_USER = 'GET_USER'
 export const UPDATEPROFILE = 'UPDATEPROFILE'
 export const JUST_UPDATED = 'JUST_UPDATED'
 export const USERS_ERROR = 'USERS_ERROR'
+export const DELETE_DATA_USER = 'DELETE_DATA_USER'
 
 // Actions for cities
 export const GET_CITIES = 'GET_CITIES'
@@ -26,5 +27,7 @@ export const TEMP_PRODUCT = 'TEMP_PRODUCT'
 export const GET_ALL_PRODUCT = 'GET_ALL_PRODUCT'
 export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 export const NEW_PRODUCT = 'NEW_PRODUCT'
+export const DETAIL_PRODUCT = 'DETAIL_PRODUCT'
 
+// transactions
 export const TERIMA_PENAWARAN = 'TERIMA_PENAWARAN'
