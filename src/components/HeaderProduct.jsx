@@ -25,7 +25,7 @@ export default function HeaderProduct() {
           </button>
 
           <div className="flex-grow lg:flex-grow-0 lg:flex lg:justify-center lg:items-center lg:gap-4">
-            <div className="hidden lg:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
+            <Link to="/" className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2" />
             <div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex lg:bg-[#EEEEEE]">
               <input
                 className="w-full h-full bg-transparent"
@@ -37,18 +37,18 @@ export default function HeaderProduct() {
 
           <div className="hidden lg:flex">
             <Link to="/daftarjual">
-              <FiList className="xl:w-5 h-full mx-2" />
+              <FiList className="xl:w-5 h-full mx-2 hover:text-[#7126B5]" />
             </Link>
 
             <button
               onClick={() => setOpen((open) => !open)}
               className=" flex justify-center w-10 bg-transparent text-white rounded-full bg-opacity-50 cursor-pointer hover:bg-gray-300 hover:bg-opacity-50 transition"
             >
-              <FiBell className="xl:w-5 h-full mx-2 text-black" />
+              <FiBell className="xl:w-5 h-full mx-2 text-black hover:text-[#7126B5]" />
             </button>
 
             <Link to="/user">
-              <FiUser className="xl:w-5 h-full mx-2" />
+              <FiUser className="xl:w-5 h-full mx-2 hover:text-[#7126B5]" />
             </Link>
           </div>
         </div>

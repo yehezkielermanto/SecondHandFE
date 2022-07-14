@@ -14,7 +14,7 @@ export default function Product() {
 			<div className="drop-shadow-lg lg:pb-10">
 				<div className="w-full pt-8 px-4 gap-4 md:bg-white md:shadow-high md:justify-between md:py-4 md:px-16 hidden md:flex items-center">
 					<div className="flex-grow md:flex-grow-0 md:flex md:justify-center md:items-center md:gap-4">
-						<div className="hidden md:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
+					<Link to="/" className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2" />
 						<div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex md:bg-[#EEEEEE]">
 							<input
 								className="w-full h-full bg-transparent"
