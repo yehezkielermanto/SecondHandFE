@@ -18,6 +18,7 @@ import {
 import { useEffect } from 'react'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import Swal from 'sweetalert2'
+import { createBid, fetchTrans } from '../redux/actions/bidAction'
 
 export default function ProductBuyer13() {
   const navigate = useNavigate()
@@ -28,9 +29,11 @@ export default function ProductBuyer13() {
   const [isModalAcceptShow, setModalAcceptShow] = useState(false)
   const isModalShow = isModalAcceptShow
   const [isLoading, setLoading] = useState(false)
+  // state harga
+  const [price, setPrice] = useState(null)
+  const [bidProduct, setBidProduct] = useState(false)
 
   useEffect(() => {
-    setLoading(false)
     if (isLoading == false) {
       Swal.fire({
         position: 'center',
@@ -43,19 +46,14 @@ export default function ProductBuyer13() {
     if (detailProduct == '' && seller == '') {
       return navigate('/')
     }
-  })
-
-
-
-  useEffect(() => {
     dispatch(
       fetchProfileSeller({
         idkota: detailProduct.user.idkota,
         idgambar: detailProduct.user.gambar,
       }),
     )
+    dispatch(fetchTrans())
   }, [dispatch])
-
 
   const handleCloseModal = () => {
     setModalAcceptShow(false)
@@ -70,20 +68,33 @@ export default function ProductBuyer13() {
     return navigate('/')
   }
 
-	return (
-		<div className="w-screen min-h-screen">
-			<div className="drop-shadow-lg lg:pb-10">
-				<div className="w-full pt-8 px-4 gap-4 md:bg-white md:shadow-high md:justify-between md:py-4 md:px-16 hidden md:flex items-center">
-					<div className="flex-grow md:flex-grow-0 md:flex md:justify-center md:items-center md:gap-4">
-					<Link to="/" className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2" />
-						<div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex md:bg-[#EEEEEE]">
-							<input
-								className="w-full h-full bg-transparent"
-								placeholder="Cari di sini ..."
-							/>
-							<FiSearch className="text-2xl" />
-						</div>
-					</div>
+  // button bid products
+  const handleSubmitBid = async (e) => {
+    e.preventDefault()
+    dispatch(
+      createBid({
+        price,
+        productId: detailProduct.id,
+        sellerId: detailProduct.iduser,
+      }),
+    )
+    setModalAcceptShow(false)
+  }
+
+  return (
+    <div className="w-screen min-h-screen">
+      <div className="drop-shadow-lg lg:pb-10">
+        <div className="w-full pt-8 px-4 gap-4 md:bg-white md:shadow-high md:justify-between md:py-4 md:px-16 hidden md:flex items-center">
+          <div className="flex-grow md:flex-grow-0 md:flex md:justify-center md:items-center md:gap-4">
+            <div className="hidden md:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
+            <div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex md:bg-[#EEEEEE]">
+              <input
+                className="w-full h-full bg-transparent"
+                placeholder="Cari di sini ..."
+              />
+              <FiSearch className="text-2xl" />
+            </div>
+          </div>
 
           <div className="flex gap-4 items-center text-2xl">
             <FiList />
@@ -159,26 +170,32 @@ export default function ProductBuyer13() {
 
       {/* Mobile version */}
       <div className="fixed w-full bottom-4 px-4 md:hidden">
-        <button
-          onClick={handleOpenAcceptModal}
-          className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl"
-        >
-          Saya Tertarik dan Ingin Nego
-        </button>
+        {!bidProduct ? (
+          <button
+            onClick={handleOpenAcceptModal}
+            className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl"
+          >
+            Saya Tertarik dan Ingin Nego
+          </button>
+        ) : (
+          <button className="disabled:opacity-75">
+            Menunggu respon penjual
+          </button>
+        )}
       </div>
 
       {/* Backdrop for Modal */}
       <div
         onClick={handleCloseModal}
         className={`w-screen h-screen fixed ${
-          isModalShow ? "flex" : "hidden"
+          isModalShow ? 'flex' : 'hidden'
         } items-center justify-center bg-black bg-opacity-70 top-0 left-0 z-50`}
       >
         {/* Modal for Terima */}
         <div
           onClick={(e) => e.stopPropagation()}
           className={`${
-            isModalAcceptShow ? "bg-white" : "hidden"
+            isModalAcceptShow ? 'bg-white' : 'hidden'
           } lg:relative absolute bottom-0 p-6 w-full max-w-sm md:h-auto rounded-2xl`}
         >
           <button className="float-right">
@@ -193,7 +210,6 @@ export default function ProductBuyer13() {
           </p>
           <div className="bg-[#EEEEEE] p-4 rounded-2xl my-2">
             <div className="flex flex-row items-center">
-              
               <IKImage
                 urlEndpoint={urlImg}
                 path={detailProduct?.gambarProduk?.[0]?.filePath}
@@ -215,17 +231,19 @@ export default function ProductBuyer13() {
               id="tawar"
               placeholder="Rp 0,00"
               required
+              onChange={(e) => setPrice(e.target.value)}
             />
           </div>
           <button
             className="flex items-center justify-center w-full py-3 mt-6 bg-[#7126B5] hover:bg-[#8f48cf] text-white font-normal text-sm rounded-[16px] 
 						focus:shadow-lg focus:outline-none active:shadow-lg"
             type="button"
+            onClick={handleSubmitBid}
           >
             <p>Kirim</p>
           </button>
         </div>
       </div>
     </div>
-  );
+  )
 }

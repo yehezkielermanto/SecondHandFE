@@ -41,24 +41,22 @@ const CardDashboard = () => {
   const handlePreview = (id) => {
     // console.log(id)
     if (isAuth === true) {
-    dispatch(fetchProductsById(id))
-    setLoading(true)
-  }
-  else {
-    Swal.fire({
-      title: 'Oops...',
-      text: 'You must login first',
-      icon: 'error',
-      confirmButtonText: 'Login',
-    }).then((result) => {
-      if (result.value) {
-        navigate('/login')
-      }
+      dispatch(fetchProductsById(id))
+      setLoading(true)
+    } else {
+      Swal.fire({
+        title: 'Oops...',
+        text: 'Tolong login terlebih dahulu',
+        icon: 'error',
+        confirmButtonText: 'Login',
+      }).then((result) => {
+        if (result.value) {
+          navigate('/login')
+        }
+      })
     }
-    )
   }
-}
-  
+
   useEffect(() => {
     ;(async () => {
       if (detailProduct !== '') {
