@@ -1,45 +1,51 @@
-import React, { useEffect, useState } from "react";
-import CardName from "../components/CardName";
-import { FiDollarSign, FiBox, FiHeart, FiChevronRight, FiPlus } from "react-icons/fi";
-import HeaderProduct from "../components/HeaderProduct";
-import { Link } from "react-router-dom";
-import daftarJual from "../img/daftarjual.png";
-import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUser } from "../redux/actions/usersActions";
-import { getAllProducts } from "../redux/actions/produkActions";
-import { IKImage } from "imagekitio-react";
-const urlImg = "https://ik.imagekit.io/jmprup9kb";
+import React, { useEffect, useState } from 'react'
+import CardName from '../components/CardName'
+import {
+  FiDollarSign,
+  FiBox,
+  FiHeart,
+  FiChevronRight,
+  FiPlus,
+} from 'react-icons/fi'
+import HeaderProduct from '../components/HeaderProduct'
+import { Link } from 'react-router-dom'
+import daftarJual from '../img/daftarjual.png'
+import Swal from 'sweetalert2'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchUser } from '../redux/actions/usersActions'
+import { getAllProducts } from '../redux/actions/produkActions'
+import { IKImage } from 'imagekitio-react'
+const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 
 const DaftarJual = (props) => {
-  const dispatch = useDispatch();
-  const [produks, setProduks] = useState();
+  const dispatch = useDispatch()
+  const [produks, setProduks] = useState()
 
-  const { isAuthenticated, error } = useSelector((state) => state.auth);
-  const { user, errorU } = useSelector((state) => state.users);
-  const { product, status, errorP } = useSelector((state) => state.product);
+  const { isAuthenticated, error } = useSelector((state) => state.auth)
+  const { user, errorU } = useSelector((state) => state.users)
+  const { product, status, errorP } = useSelector((state) => state.product)
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(fetchUser());
+      dispatch(fetchUser())
     } else {
       Swal.fire({
-        position: "center",
-        icon: "warning",
-        titleText: "Akses Tidak Terautentikasi !!",
+        position: 'center',
+        icon: 'warning',
+        titleText: 'Akses Tidak Terautentikasi !!',
         showConfirmButton: false,
         timer: 1500,
-      });
-      dispatch(logout());
+      })
+      dispatch(logout())
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated])
 
   useEffect(() => {
-    (async () => {
-      dispatch(getAllProducts());
+    ;(async () => {
+      dispatch(getAllProducts())
       // console.log(product);
-    })();
-  }, [dispatch]);
+    })()
+  }, [dispatch])
   // produks = product?.barang;
 
   useEffect(() => {
@@ -51,67 +57,69 @@ const DaftarJual = (props) => {
         showConfirmButton: false,
       }); */
       Swal.fire({
-        title: "Sedang Memuat Daftar Produk",
+        title: 'Sedang Memuat Daftar Produk',
         timerProgressBar: true,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
+      })
     } else {
       Swal.fire({
-        position: "center",
-        icon: "success",
-        titleText: "Produk Berhasil Termuat",
+        position: 'center',
+        icon: 'success',
+        titleText: 'Produk Berhasil Termuat',
         showConfirmButton: false,
         timer: 1500,
-      });
+      })
 
-      let temp = product?.barang;
+      let temp = product?.barang
 
-      setProduks(temp.filter((filteredProduct) => filteredProduct.iduser === user.id));
+      setProduks(
+        temp.filter((filteredProduct) => filteredProduct.iduser === user.id),
+      )
     }
-  }, [product]);
+  }, [product])
 
   useEffect(() => {
     if (error) {
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'error',
         titleText: error,
         showConfirmButton: false,
         timer: 3000,
-      });
+      })
 
-      dispatch(logout());
+      dispatch(logout())
     }
-  }, [error]);
+  }, [error])
 
   useEffect(() => {
     if (errorU) {
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'error',
         titleText: errorU,
         showConfirmButton: false,
         timer: 3000,
-      });
+      })
       // alert(errorU);
     }
-  }, [errorU]);
+  }, [errorU])
 
   useEffect(() => {
     if (errorP) {
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'error',
         titleText: errorP,
         showConfirmButton: false,
         timer: 3000,
-      });
+      })
 
-      dispatch(logout());
+      dispatch(logout())
     }
-  }, [errorP]);
+  }, [errorP])
 
   /* useEffect(() => {
     if (status === null || status == undefined) {
@@ -139,7 +147,7 @@ const DaftarJual = (props) => {
       }
   }, [produks]); */
 
-  console.log(produks)
+  // console.log(produks)
   // console.log(product);
 
   return (
@@ -150,7 +158,9 @@ const DaftarJual = (props) => {
       {/* Content Wrap */}
       <div className="flex flex-col w-full px-4 py-8 lg:max-w-screen-lg lg:mx-auto">
         {/* Content Header */}
-        <h1 className="hidden lg:block font-bold text-xl mb-4">Daftar Jual Saya</h1>
+        <h1 className="hidden lg:block font-bold text-xl mb-4">
+          Daftar Jual Saya
+        </h1>
         <CardName />
 
         {/* Categories Table - Mobile */}
@@ -173,19 +183,25 @@ const DaftarJual = (props) => {
           <div className="hidden lg:flex w-56 shadow-high bg-white py-4 border rounded-[16px] flex-col gap-2 flex-none self-start">
             <p className="font-medium text-black px-4">Kategori</p>
             <div className="flex flex-col divide-y divide-[#E5E5E5]">
-              <button className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}>
+              <button
+                className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}
+              >
                 <span className="flex gap-2 items-center">
                   <FiBox className="" /> Semua Produk
                 </span>
                 <FiChevronRight className="text-neutral-2" />
               </button>
-              <button className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}>
+              <button
+                className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}
+              >
                 <span className="flex gap-2 items-center">
                   <FiHeart className="" /> Diminati
                 </span>
                 <FiChevronRight className="text-neutral-2" />
               </button>
-              <button className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}>
+              <button
+                className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}
+              >
                 <span className="flex gap-2 items-center">
                   <FiDollarSign className="" /> Terjual
                 </span>
@@ -206,11 +222,18 @@ const DaftarJual = (props) => {
             {produks == null || produks == undefined ? (
               <div className="flex flex-col w-full h-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
                 <div className="h-1/2">
-                  <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." />
+                  <img
+                    src={daftarJual}
+                    className="w-full h-full block rounded-[4px] justify-center items-center"
+                    alt="..."
+                  />
                 </div>
                 <div className="h-1/2 mt-2">
                   <p className="">
-                    <Link to="/seller/produk/detail" className="text-decoration-none text-dark">
+                    <Link
+                      to="/seller/produk/detail"
+                      className="text-decoration-none text-dark"
+                    >
                       Jam Tangan
                     </Link>
                   </p>
@@ -233,7 +256,10 @@ const DaftarJual = (props) => {
                   </div>
                   <div className="h-1/2 mt-2">
                     <p className="">
-                      <Link to="/seller/produk/detail" className="text-decoration-none text-dark">
+                      <Link
+                        to="/seller/produk/detail"
+                        className="text-decoration-none text-dark"
+                      >
                         {produkList.nama}
                       </Link>
                     </p>
@@ -262,12 +288,11 @@ const DaftarJual = (props) => {
                 <p className="">Rp. 250.000</p>
               </div>
             </div> */}
-            
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DaftarJual;
+export default DaftarJual

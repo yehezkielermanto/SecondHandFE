@@ -30,7 +30,6 @@ export default function ProductBuyer13() {
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-    setLoading(false)
     if (isLoading == false) {
       Swal.fire({
         position: 'center',
@@ -43,9 +42,6 @@ export default function ProductBuyer13() {
     if (detailProduct == '' && seller == '') {
       return navigate('/')
     }
-  })
-
-  useEffect(() => {
     dispatch(
       fetchProfileSeller({
         idkota: detailProduct.user.idkota,
@@ -168,14 +164,14 @@ export default function ProductBuyer13() {
       <div
         onClick={handleCloseModal}
         className={`w-screen h-screen fixed ${
-          isModalShow ? "flex" : "hidden"
+          isModalShow ? 'flex' : 'hidden'
         } items-center justify-center bg-black bg-opacity-70 top-0 left-0 z-50`}
       >
         {/* Modal for Terima */}
         <div
           onClick={(e) => e.stopPropagation()}
           className={`${
-            isModalAcceptShow ? "bg-white" : "hidden"
+            isModalAcceptShow ? 'bg-white' : 'hidden'
           } lg:relative absolute bottom-0 p-6 w-full max-w-sm md:h-auto rounded-2xl`}
         >
           <button className="float-right">
@@ -190,7 +186,6 @@ export default function ProductBuyer13() {
           </p>
           <div className="bg-[#EEEEEE] p-4 rounded-2xl my-2">
             <div className="flex flex-row items-center">
-              
               <IKImage
                 urlEndpoint={urlImg}
                 path={detailProduct?.gambarProduk?.[0]?.filePath}
@@ -224,5 +219,5 @@ export default function ProductBuyer13() {
         </div>
       </div>
     </div>
-  );
+  )
 }
