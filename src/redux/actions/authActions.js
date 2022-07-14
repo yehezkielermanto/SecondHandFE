@@ -5,6 +5,7 @@ import {
   LOGOUT,
   isREGISTER,
   DELETE_DATA_USER,
+  GET_ALL_PRODUCT,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 import Swal from 'sweetalert2'

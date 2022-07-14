@@ -14,30 +14,92 @@ const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import Swal from 'sweetalert2'
 import { fetchUser } from '../redux/actions/usersActions'
 import { useNavigate } from 'react-router-dom'
+import { logout } from '../redux/actions/authActions'
 
 const CardDashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { product } = useSelector((state) => state.product)
+  const { product, detailProduct } = useSelector((state) => state.product)
   const { isAuthenticated } = useSelector((state) => state.auth)
+  const [isLoading, setLoading] = useState(false)
+  const [isAuth, setAuth] = useState(false)
   // const { user } = useSelector((state) => state.users)
 
   useEffect(() => {
     ;(async () => {
       if (isAuthenticated) {
         dispatch(fetchUser())
+        setAuth(true)
         dispatch(filterProducts())
       } else {
+        dispatch(logout())
         dispatch(getAllProducts())
       }
     })()
   }, [dispatch, isAuthenticated])
 
   const handlePreview = (id) => {
-    console.log(id)
-    dispatch(fetchProductsById(id))
-    return navigate('/productbuyer')
+    // console.log(id)
+    if (isAuth === true) {
+      dispatch(fetchProductsById(id))
+      setLoading(true)
+    } else {
+      Swal.fire({
+        title: 'Oops...',
+        text: 'Tolong login terlebih dahulu',
+        icon: 'error',
+        confirmButtonText: 'Login',
+      }).then((result) => {
+        if (result.value) {
+          navigate('/login')
+        }
+      })
+    }
   }
+
+  useEffect(() => {
+    ;(async () => {
+      if (detailProduct !== '') {
+        setLoading(false)
+        return navigate('/productbuyer')
+      }
+    })()
+  }, [detailProduct])
+
+  useEffect(() => {
+    if (isLoading == true) {
+      Swal.fire({
+        title: 'Sedang memuat Produk',
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      setLoading(false)
+    }
+  })
+
+  useEffect(() => {
+    ;(async () => {
+      if (product == '') {
+        Swal.fire({
+          title: 'Sedang memuat Produk',
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+          },
+        })
+      } else {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          titleText: 'Produk Berhasil Termuat',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
+    })()
+  }, [product])
 
   return (
     <>
