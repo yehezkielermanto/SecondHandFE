@@ -33,3 +33,5 @@ export const SELLER = 'SELLER'
 
 // transactions
 export const TERIMA_PENAWARAN = 'TERIMA_PENAWARAN'
+//create transaction
+export const CREATE_TRANSACTION = 'CREATE_TRANSACTION'
