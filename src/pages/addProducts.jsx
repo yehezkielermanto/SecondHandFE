@@ -390,7 +390,7 @@ export default function addProducts() {
     <>
       <nav className="drop-shadow-lg pb-12w-full flex pt-8 px-4 gap-4 lg:bg-white lg:shadow-high lg:justify-between lg:py-4 lg:px-16">
         <div className="flex-grow lg:flex-grow-0 lg:flex lg:justify-center lg:items-center lg:gap-4">
-          <div className="hidden lg:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
+        <Link to="/" className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2" />
         </div>
       </nav>
 
@@ -620,7 +620,7 @@ export default function addProducts() {
                 </label>
               </div>
               <br />
-              <div className="flex flex-row">
+              <div className="flex flex-row mb-5">
                 <button
                   onClick={handlePreview}
                   className="hover:bg-violet-900 border-2 border-violet-700 hover:text-white mx-2 w-full p-1.5 rounded-lg"

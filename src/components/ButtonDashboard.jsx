@@ -173,79 +173,79 @@ const ButtonDashboard = () => {
         <div className="flex w-full mt-1 overflow-x-scroll lg:hidden">
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterAll}
               id="filterAll"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Semua
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterHobi}
               id="filterHobi"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Hobi
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterKendaraan}
               id="filterKendaraan"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Kendaraan
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterBaju}
               id="filterBaju"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Baju
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterElektronik}
               id="filterElektronik"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Elektronik
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterKesehatan}
               id="filterKesehatan"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Kesehatan
             </button>
           </div>
@@ -254,79 +254,79 @@ const ButtonDashboard = () => {
         <div className="flex w-full mt-1 invisible lg:visible">
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterAll}
               id="filterAll"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Semua
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterHobi}
               id="filterHobi"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Hobi
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterKendaraan}
               id="filterKendaraan"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Kendaraan
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterBaju}
               id="filterBaju"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Baju
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterElektronik}
               id="filterElektronik"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Elektronik
             </button>
           </div>
           <div className="snap-center">
             <button
-              className="flex font-poppins hover:bg-[#7126B5] bg-gray-300 px-6 py-2.5 hover:text-white text-gray-700 border border-solid border-gray-300 text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
+              className="flex font-poppins hover:bg-[#7126B5] bg-[#E2D4F0] px-6 py-2.5 hover:text-white  border border-solid border-[#E2D4F0] text-font-medium text-sm leading-tight rounded-[10px] shadow-md focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3 ml-1 mr-1"
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
               onClick={filterKesehatan}
               id="filterKesehatan"
             >
-              <AiOutlineSearch className="hover:text-white text-gray-700 mr-1" />
+              <AiOutlineSearch className="hover:text-white  mr-1" />
               Kesehatan
             </button>
           </div>

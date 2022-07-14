@@ -45,6 +45,8 @@ export default function ProductBuyer13() {
     }
   })
 
+
+
   useEffect(() => {
     dispatch(
       fetchProfileSeller({
@@ -53,6 +55,7 @@ export default function ProductBuyer13() {
       }),
     )
   }, [dispatch])
+
 
   const handleCloseModal = () => {
     setModalAcceptShow(false)
@@ -67,20 +70,20 @@ export default function ProductBuyer13() {
     return navigate('/')
   }
 
-  return (
-    <div className="w-screen min-h-screen">
-      <div className="drop-shadow-lg lg:pb-10">
-        <div className="w-full pt-8 px-4 gap-4 md:bg-white md:shadow-high md:justify-between md:py-4 md:px-16 hidden md:flex items-center">
-          <div className="flex-grow md:flex-grow-0 md:flex md:justify-center md:items-center md:gap-4">
-            <div className="hidden md:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
-            <div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex md:bg-[#EEEEEE]">
-              <input
-                className="w-full h-full bg-transparent"
-                placeholder="Cari di sini ..."
-              />
-              <FiSearch className="text-2xl" />
-            </div>
-          </div>
+	return (
+		<div className="w-screen min-h-screen">
+			<div className="drop-shadow-lg lg:pb-10">
+				<div className="w-full pt-8 px-4 gap-4 md:bg-white md:shadow-high md:justify-between md:py-4 md:px-16 hidden md:flex items-center">
+					<div className="flex-grow md:flex-grow-0 md:flex md:justify-center md:items-center md:gap-4">
+					<Link to="/" className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2" />
+						<div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex md:bg-[#EEEEEE]">
+							<input
+								className="w-full h-full bg-transparent"
+								placeholder="Cari di sini ..."
+							/>
+							<FiSearch className="text-2xl" />
+						</div>
+					</div>
 
           <div className="flex gap-4 items-center text-2xl">
             <FiList />

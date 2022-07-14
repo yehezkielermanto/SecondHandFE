@@ -195,21 +195,21 @@ const DaftarJual = (props) => {
           </div>
 
           {/* Product List */}
-          <div className="grid grid-cols-2 gap-2 lg:grid-cols-3 min-h-[10rem] mb-2">
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-5 lg:grid-cols-5 min-h-[8rem] mb-2">
             <Link
               to="/addProduct"
-              className="flex flex-col justify-center items-center w-full h-full min-h-[10rem] border border-neutral-2 border-dashed text-neutral-3 hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2 focus:outline-none"
+              className="flex flex-col justify-center items-center w-full h-full min-h-[8rem] border border-neutral-2 border-dashed text-neutral-3 hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2 focus:outline-none"
             >
               <FiPlus />
-              <p className="text-center">Tambah Produk</p>
+              <p className="text-center mx-5">Tambah Produk</p>
             </Link>
             {produks == null || produks == undefined ? (
-              <div className="flex flex-col w-full h-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
+              <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
                 <div className="h-1/2">
                   <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." />
                 </div>
-                <div className="h-1/2 mt-2">
-                  <p className="">
+                <div className="mt-2">
+                  <p className="h-1/2">
                     <Link to="/seller/produk/detail" className="text-decoration-none text-dark">
                       Jam Tangan
                     </Link>
@@ -222,7 +222,7 @@ const DaftarJual = (props) => {
               </div>
             ) : (
               produks.map((produkList) => (
-                <div className="flex flex-col w-full h-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
+                <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
                   <div className="h-1/2">
                     {/* <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." /> */}
                     <IKImage
