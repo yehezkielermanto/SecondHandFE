@@ -16,7 +16,7 @@ const NavDashboard = () => {
 <div className="w-1/12"></div>
 <div className="flex items-center font-poppins w-5/12">
 <div className="flex-grow lg:flex-grow-0 lg:flex lg:justify-center lg:items-center lg:gap-4">
-          <div className="hidden lg:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
+<Link to="/" className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2" />
           <div className="h-12 rounded-2xl py-3 px-6 text-neutral-3 flex bg-[#EEEEEE]">
             <input
               className="w-full h-full bg-transparent"

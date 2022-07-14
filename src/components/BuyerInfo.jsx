@@ -108,7 +108,7 @@ export default function BuyerInfo(props) {
                   } grid-cols-2 lg:float-right text-center pt-4 pb-4`}
                 >
                   <button
-                    className="mr-2 px-[48px] py-2 inline-block bg-white border border-[#7126B5] hover:bg-gray-200 text-black hover:text-white font-normal text-sm leading-tight rounded-[16px] 
+                    className="mr-2 px-[48px] py-2 inline-block bg-white border border-[#7126B5] hover:bg-gray-200 text-black font-normal text-sm leading-tight rounded-[16px] 
                                       focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7126B5] disabled:opacity-70"
                     type="button"
                     onClick={handleOpenDeniedModal}

@@ -32,7 +32,7 @@ const Dashboard = () => {
         <section>
           <Slider />
           <ButtonDashboard />
-          <div className="flex flex-row flex-wrap justify-center p-4">
+          <div className="mx-3 md:mx-10 lg:mx-12 px-0 lg:px-10 place-items-center grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-6">
             <CardDashboard />
           </div>
 
