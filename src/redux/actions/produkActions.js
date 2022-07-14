@@ -81,7 +81,6 @@ export const getAllProducts = () => async (dispatch) => {
       while (i < data.data.barang.length) {
         // console.log(data.data.barang[i].gambarbarangs[0].gambar);
         // return;
-        console.log(data.data.barang[i].gambarbarangs[0])
         // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
         const fetchImgDetail = await fetch(
           `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[0].gambar}`,
