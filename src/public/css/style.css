@@ -1,3 +1,15 @@
+.fade-anim img {
+  animation: fadeAnim 0.5s ease-out;
+}
+@keyframes fadeAnim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +17,53 @@
 /* Font Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-html, body {
-    font-family: 'Poppins', sans-serif;
+html,
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+#button {
+  margin-left: 100px;
+}
+#card {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+#plus {
+  margin-top: -100px;
+}
+#navmo {
+  margin-top: -50px;
+}
+#caresoul{
+  margin-left: 90px;
+  margin-right: 90px;
+}
+@media screen and (max-width: 992px) {
+  #button {
+    margin-left: 50px;
+  }
+  #card {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  #caresoul{
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #button {
+    margin-left: 10px;
+  }
+  #card {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  #caresoul{
+    margin-top:-120px;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

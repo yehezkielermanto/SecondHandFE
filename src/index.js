@@ -8,14 +8,25 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import store from './redux/store'
-
-import App from './App'
+import Protected from './components/Protected'
 // For Profile Page
+import DaftarJual from './pages/DaftarJual'
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
 import Login from './pages/Login'
-// import NotFound from "./pages/404";
+import Product from './pages/ProductSeller'
+import ProductBuyer from './pages/ProductBuyer'
+import UserProfile from './pages/UserProfile'
+import Notification from './pages/Notification'
+import CategoryTable from './components/CategoryTable'
+import NotFound from './pages/404'
+import AddProduct from './pages/addProducts'
+import BuyerInfo from './components/BuyerInfo'
+import BuyerInfoEnd from './components/BuyerInfoEnd'
+import ProductPageEdit from './components/ProductPageEdit'
+
+const { REACT_APP_ID } = process.env
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -24,12 +35,44 @@ root.render(
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         {/* Endpoint  for user profile */}
+
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route
+          path="/daftarjual"
+          element={
+            <Protected>
+              <DaftarJual />
+            </Protected>
+          }
+        />
+        <Route path="/notif" element={<Notification />} />
+        <Route path="/productEditPage" element={<ProductPageEdit />} />
+        <Route
+          path="/user/profile"
+          element={
+            <Protected>
+              <Profile />
+            </Protected>
+          }
+        />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/productbuyer" element={<ProductBuyer />} />
+        <Route path="/buyerinfo" element={<BuyerInfo />} />
+        <Route path="/buyerinfoend" element={<BuyerInfoEnd />} />
+        <Route
+          path="/user"
+          element={
+            <Protected>
+              <UserProfile />
+            </Protected>
+          }
+        />
+        <Route
           path="/login"
           element={
-            <GoogleOAuthProvider clientId="68980823363-57tmdid7nhefj7abt7l5u1jcbfdddg2p.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId={REACT_APP_ID}>
               <Login />
             </GoogleOAuthProvider>
           }
@@ -37,22 +80,32 @@ root.render(
         <Route
           path="/register"
           element={
-            <GoogleOAuthProvider clientId="68980823363-57tmdid7nhefj7abt7l5u1jcbfdddg2p.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId={REACT_APP_ID}>
               <Register />
             </GoogleOAuthProvider>
           }
         />
 
+        <Route path="/kategori" element={<CategoryTable />} />
+        {/* add new products */}
+        <Route
+          path="/addProduct"
+          element={
+            <Protected>
+              <AddProduct />
+            </Protected>
+          }
+        />
         {/* 404 */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
 
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
-)
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
