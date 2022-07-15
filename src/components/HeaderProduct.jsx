@@ -1,13 +1,39 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import { FiMenu, FiSearch, FiList, FiBell, FiUser } from 'react-icons/fi'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import product from '../img/product.png'
+import { fetchTrans } from '../redux/actions/bidAction'
 import ResponsiveNavLink from './ResponsiveNavLink'
 import Sidebar from './Sidebar'
 
 export default function HeaderProduct() {
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+  const { transaction } = useSelector((state) => state.bid)
+  const { user } = useSelector((state) => state.users)
+  const { isAuthenticated } = useSelector((state) => state.auth)
+  const [trans, setTrans] = useState('')
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchTrans())
+    }
+  }, [dispatch, isAuthenticated])
+
+  useEffect(() => {
+    if (transaction != undefined) {
+      let tempTrans = transaction.transaction
+      let filterTemp = tempTrans?.filter(function (bid) {
+        return bid.iduser_seller == user.id
+      })
+      console.log(filterTemp)
+      setTrans(filterTemp)
+    }
+  }, [transaction])
+
   return (
     <div>
       <div className="drop-shadow-lg mt-8 lg:mt-0 relative z-30">
@@ -25,7 +51,10 @@ export default function HeaderProduct() {
           </button>
 
           <div className="flex-grow lg:flex-grow-0 lg:flex lg:justify-center lg:items-center lg:gap-4">
-            <Link to="/" className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2" />
+            <Link
+              to="/"
+              className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2"
+            />
             <div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex lg:bg-[#EEEEEE]">
               <input
                 className="w-full h-full bg-transparent"
