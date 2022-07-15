@@ -253,6 +253,7 @@ const DaftarJual = (props) => {
               <FiPlus />
               <p className="text-center mx-5">Tambah Produk</p>
             </Link>
+          </div>
 
             {produks == null || produks == undefined ? (
               <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
@@ -266,7 +267,7 @@ const DaftarJual = (props) => {
                 <div className="mt-2">
                   <p className="h-1/2">
                     <Link
-                      to="/seller/produk/detail"
+                      to="/daftarjual"
                       className="text-decoration-none text-dark"
                     >
                       Jam Tangan
@@ -321,7 +322,7 @@ const DaftarJual = (props) => {
                 <p className="">Rp. 250.000</p>
               </div>
             </div> */}
-          </div>
+          
         </div>
       </div>
     </div>
