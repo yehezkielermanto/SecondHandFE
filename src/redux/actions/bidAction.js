@@ -33,9 +33,13 @@ export const fetchTrans = () => async (dispatch) => {
       REACT_APP_URLENDPOINT + '/api/v1/transaction',
       { method: 'get', headers: { 'Content-Type': 'application/json' } },
     )
+
+    // ambil gambar barang
     const transaction = await fetchTransaction.json()
+    console.log(transaction.transaction[0].barang)
     dispatch({ type: CREATE_TRANSACTION, payload: transaction })
   } catch (error) {
+    console.log(error.message)
     dispatch({ type: PRODUCT_ERROR })
   }
 }

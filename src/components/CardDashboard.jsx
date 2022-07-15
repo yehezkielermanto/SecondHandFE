@@ -4,6 +4,7 @@ import product1 from '../img/product.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import {
+  emptyDetailProduct,
   fetchProductsById,
   filterProducts,
   getAllProducts,
@@ -27,6 +28,7 @@ const CardDashboard = () => {
 
   useEffect(() => {
     ;(async () => {
+      dispatch(emptyDetailProduct())
       if (isAuthenticated) {
         dispatch(fetchUser())
         setAuth(true)
@@ -62,6 +64,8 @@ const CardDashboard = () => {
       if (detailProduct !== '') {
         setLoading(false)
         return navigate('/productbuyer')
+      } else {
+        return navigate('/')
       }
     })()
   }, [detailProduct])
