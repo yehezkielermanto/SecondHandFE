@@ -258,27 +258,7 @@ const DaftarJual = (props) => {
             {produks == null || produks == undefined ? (
               <div className="grid grid-cols-2 gap-2 md:grid-cols-5 lg:grid-cols-5 min-h-[8rem] mb-2">
               <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
-                <div className="h-1/2">
-                  <img
-                    src={daftarJual}
-                    className="w-full h-full block rounded-[4px] justify-center items-center"
-                    alt="..."
-                  />
-                </div>
-                <div className="mt-2">
-                  <p className="h-1/2">
-                    <Link
-                      to="/daftarjual"
-                      className="text-decoration-none text-dark"
-                    >
-                      Jam Tangan
-                    </Link>
-                  </p>
-                  <p className="text-[#8A8A8A]">
-                    <small>Aksesoris</small>
-                  </p>
-                  <p className="">Rp. 250.000</p>
-                </div>
+                <p className="text-center mx-5">Belum Ada Product</p>
               </div>
               </div>
             ) : (
