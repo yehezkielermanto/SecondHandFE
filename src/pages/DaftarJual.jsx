@@ -256,6 +256,7 @@ const DaftarJual = (props) => {
           </div>
 
             {produks == null || produks == undefined ? (
+              <div className="grid grid-cols-2 gap-2 md:grid-cols-5 lg:grid-cols-5 min-h-[8rem] mb-2">
               <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
                 <div className="h-1/2">
                   <img
@@ -279,9 +280,11 @@ const DaftarJual = (props) => {
                   <p className="">Rp. 250.000</p>
                 </div>
               </div>
+              </div>
             ) : (
               // edit disini to navigate ke ProductPageEdit
               produks.map((produkList) => (
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-5 lg:grid-cols-5 min-h-[8rem] mb-2">
                 <div
                   className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
                   onClick={() => handlePreview(produkList.id)}
@@ -302,6 +305,7 @@ const DaftarJual = (props) => {
                     </p>
                     <p>Rp.{produkList.harga}</p>
                   </div>
+                </div>
                 </div>
               ))
             )}
