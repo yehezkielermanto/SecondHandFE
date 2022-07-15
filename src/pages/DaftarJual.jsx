@@ -73,7 +73,7 @@ const DaftarJual = (props) => {
     ;(async () => {
       if (detailProduct !== '') {
         setLoading(false)
-        return navigate('/productEditPage')
+        return navigate('/productPageEdit')
       }
     })()
   }, [detailProduct])
