@@ -13,7 +13,10 @@ import daftarJual from '../img/daftarjual.png'
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../redux/actions/usersActions'
-import { getAllProducts, fetchProductsById, } from '../redux/actions/produkActions'
+import {
+  getAllProducts,
+  fetchProductsById,
+} from '../redux/actions/produkActions'
 import { IKImage } from 'imagekitio-react'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 
@@ -23,14 +26,16 @@ const DaftarJual = (props) => {
 
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { user, errorU } = useSelector((state) => state.users)
-  const { product, status, errorP } = useSelector((state) => state.product)
-  const { product, detailProduct } = useSelector((state) => state.product)
+  const { product, status, errorP, detailProduct } = useSelector(
+    (state) => state.product,
+  )
   const navigate = useNavigate()
   const [isAuth, setAuth] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchUser())
+      setAuth(isAuthenticated)
     } else {
       Swal.fire({
         position: 'center',
@@ -52,10 +57,10 @@ const DaftarJual = (props) => {
   // produks = product?.barang;
 
   const handlePreview = (id) => {
-    // console.log(id)
+    console.log(id)
     if (isAuth === true) {
       dispatch(fetchProductsById(id))
-      setLoading(true)
+      return navigate('/productPageEdit')
     } else {
       Swal.fire({
         title: 'Oops...',
@@ -72,7 +77,6 @@ const DaftarJual = (props) => {
   useEffect(() => {
     ;(async () => {
       if (detailProduct !== '') {
-        setLoading(false)
         return navigate('/productPageEdit')
       }
     })()
@@ -277,9 +281,10 @@ const DaftarJual = (props) => {
             ) : (
               // edit disini to navigate ke ProductPageEdit
               produks.map((produkList) => (
-                <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
-                onClick={() => handlePreview(product.id)}
-                key={product.id}
+                <div
+                  className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
+                  onClick={() => handlePreview(produkList.id)}
+                  key={produkList.id}
                 >
                   <div className="h-1/2">
                     {/* <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." /> */}
@@ -290,14 +295,7 @@ const DaftarJual = (props) => {
                     />
                   </div>
                   <div className="h-1/2 mt-2">
-                    <p className="">
-                      <Link
-                        to="/seller/produk/detail"
-                        className="text-decoration-none text-dark"
-                      >
-                        {produkList.nama}
-                      </Link>
-                    </p>
+                    <p className="">{produkList.nama}</p>
                     <p className="text-[#8A8A8A]">
                       <small>Aksesoris</small>
                     </p>

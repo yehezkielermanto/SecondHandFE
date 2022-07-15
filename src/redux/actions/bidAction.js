@@ -34,9 +34,10 @@ export const fetchTrans = () => async (dispatch) => {
       { method: 'get', headers: { 'Content-Type': 'application/json' } },
     )
 
-    // ambil gambar barang
     const transaction = await fetchTransaction.json()
-    console.log(transaction.transaction[0].barang)
+
+    // ambil gambar barang
+    // console.log(transaction.transaction[0].barang)
     dispatch({ type: CREATE_TRANSACTION, payload: transaction })
   } catch (error) {
     console.log(error.message)
