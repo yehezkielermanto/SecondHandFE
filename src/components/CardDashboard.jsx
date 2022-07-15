@@ -41,24 +41,22 @@ const CardDashboard = () => {
   const handlePreview = (id) => {
     // console.log(id)
     if (isAuth === true) {
-    dispatch(fetchProductsById(id))
-    setLoading(true)
-  }
-  else {
-    Swal.fire({
-      title: 'Oops...',
-      text: 'You must login first',
-      icon: 'error',
-      confirmButtonText: 'Login',
-    }).then((result) => {
-      if (result.value) {
-        navigate('/login')
-      }
+      dispatch(fetchProductsById(id))
+      setLoading(true)
+    } else {
+      Swal.fire({
+        title: 'Oops...',
+        text: 'Tolong login terlebih dahulu',
+        icon: 'error',
+        confirmButtonText: 'Login',
+      }).then((result) => {
+        if (result.value) {
+          navigate('/login')
+        }
+      })
     }
-    )
   }
-}
-  
+
   useEffect(() => {
     ;(async () => {
       if (detailProduct !== '') {
@@ -112,14 +110,14 @@ const CardDashboard = () => {
         <>
           {product.barang === undefined ? (
             <div>
-              <h4 className="content-center font-semibold text-center my-4">
+              <h4 className="content-center font-bold justify-end  my-4">
                 Produk Tidak Tersedia
               </h4>
             </div>
           ) : (
             product?.barang?.map((product) => (
               <div
-                className="inline-block m-1 p-1 border border-gray-300 rounded-lg mx-2 w-1/6 hover:cursor-pointer"
+                className="mt-3 inline-block m-1 p-1 border border-gray-300 rounded-lg hover:cursor-pointer shadow-low p-4 text-neutral-5 rounded-lg w-full"
                 onClick={() => handlePreview(product.id)}
                 key={product.id}
               >

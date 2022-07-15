@@ -9,6 +9,7 @@ import { logout } from '../redux/actions/authActions'
 import { Link } from 'react-router-dom'
 import { IKImage, IKContext } from 'imagekitio-react'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
+import Swal from 'sweetalert2'
 
 export default function AkunComponent() {
   const dispatch = useDispatch()

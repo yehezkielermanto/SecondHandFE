@@ -5,6 +5,7 @@ import usersReducer from './usersReducer'
 import citiesReducer from './citiesReducer'
 import categoryReducer from './categoryReducer'
 import productReducer from './produkReducer'
+import bidReducer from './bidReducer'
 
 export default combineReducers({
   auth: authReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   cities: citiesReducer,
   product: productReducer,
   category: categoryReducer,
+  bid: bidReducer,
 })
