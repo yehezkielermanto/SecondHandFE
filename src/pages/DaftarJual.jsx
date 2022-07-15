@@ -8,12 +8,12 @@ import {
   FiPlus,
 } from 'react-icons/fi'
 import HeaderProduct from '../components/HeaderProduct'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import daftarJual from '../img/daftarjual.png'
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../redux/actions/usersActions'
-import { getAllProducts } from '../redux/actions/produkActions'
+import { getAllProducts, fetchProductsById, } from '../redux/actions/produkActions'
 import { IKImage } from 'imagekitio-react'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 
@@ -24,6 +24,9 @@ const DaftarJual = (props) => {
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { user, errorU } = useSelector((state) => state.users)
   const { product, status, errorP } = useSelector((state) => state.product)
+  const { product, detailProduct } = useSelector((state) => state.product)
+  const navigate = useNavigate()
+  const [isAuth, setAuth] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -47,6 +50,33 @@ const DaftarJual = (props) => {
     })()
   }, [dispatch])
   // produks = product?.barang;
+
+  const handlePreview = (id) => {
+    // console.log(id)
+    if (isAuth === true) {
+      dispatch(fetchProductsById(id))
+      setLoading(true)
+    } else {
+      Swal.fire({
+        title: 'Oops...',
+        text: 'Tolong login terlebih dahulu',
+        icon: 'error',
+        confirmButtonText: 'Login',
+      }).then((result) => {
+        if (result.value) {
+          navigate('/login')
+        }
+      })
+    }
+  }
+  useEffect(() => {
+    ;(async () => {
+      if (detailProduct !== '') {
+        setLoading(false)
+        return navigate('/productPageEdit')
+      }
+    })()
+  }, [detailProduct])
 
   useEffect(() => {
     if (product.barang == undefined || product.barang == null) {
@@ -219,6 +249,7 @@ const DaftarJual = (props) => {
               <FiPlus />
               <p className="text-center mx-5">Tambah Produk</p>
             </Link>
+
             {produks == null || produks == undefined ? (
               <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
                 <div className="h-1/2">
@@ -244,8 +275,12 @@ const DaftarJual = (props) => {
                 </div>
               </div>
             ) : (
+              // edit disini to navigate ke ProductPageEdit
               produks.map((produkList) => (
-                <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
+                <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
+                onClick={() => handlePreview(product.id)}
+                key={product.id}
+                >
                   <div className="h-1/2">
                     {/* <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." /> */}
                     <IKImage
