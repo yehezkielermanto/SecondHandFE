@@ -363,6 +363,7 @@ export const fetchProductsById = (id) => async (dispatch) => {
     // console.log(result)
     dispatch({ type: DETAIL_PRODUCT, payload: result })
   } catch (error) {
+    console.log(error.message)
     dispatch({ type: PRODUCT_ERROR })
   }
 }

@@ -47,7 +47,7 @@ root.render(
           }
         />
         <Route path="/notif" element={<Notification />} />
-        <Route path="/productEditPage" element={<ProductPageEdit />} />
+        <Route path="/productPageEdit" element={<ProductPageEdit />} />
         <Route
           path="/user/profile"
           element={
