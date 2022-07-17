@@ -37,7 +37,19 @@ export const fetchTrans = () => async (dispatch) => {
     const transaction = await fetchTransaction.json()
 
     // ambil gambar barang
-    // console.log(transaction.transaction[0].barang)
+    console.log(transaction.transaction.length)
+    let i = 0
+    let gambar = []
+    while (i < transaction.transaction.length) {
+      // action komunikasi dengan backend untuk ambil detail gambar dari imagekit
+      const fetchImgDetail = await fetch(
+        `${REACT_APP_URLENDPOINT}/api/v1/products/picture/${transaction.transaction[i].barang.gambarbarangs[0].gambar}`,
+        { method: 'GET', headers: { 'Content-Type': 'application/json' } },
+      )
+      const imgDetail = await fetchImgDetail.json()
+      transaction.transaction[i].gambarProduk = imgDetail.gambar
+      i++
+    }
     dispatch({ type: CREATE_TRANSACTION, payload: transaction })
   } catch (error) {
     console.log(error.message)
