@@ -36,7 +36,7 @@ const Dashboard = () => {
             <CardDashboard />
           </div>
 
-          <div className="relative z-50" id="plus">
+          <div className="relative z-40" id="plus">
             <div className="flex justify-center drop-shadow-lg">
               {enableClick == true ? (
                 <Link to="/addProduct">
