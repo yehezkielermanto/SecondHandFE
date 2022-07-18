@@ -269,23 +269,23 @@ export const updateProduct = (data) => async (dispatch) => {
     formdata.append("kategori", data.kategori);
     formdata.append("deskripsi", data.deskripsi);
     // Upload File Image
-    for (var i = 0; i < data.gambar.length; i++) {
+    for (var i = 0; i < data.dataGambar.length; i++) {
       if (
-        data.gambar[i].type === "image/jpeg" ||
-        data.gambar[i].type === "image/png"
+        data.dataGambar[i].type === "image/jpeg" ||
+        data.dataGambar[i].type === "image/png"
       ) {
-        formdata.append("gambar", data.gambar[i]);
+        formdata.append("image", data.dataGambar[i]);
       }
     }
     // Delete File Image
-    if (data.imgTemp.length > 0) {
-      for (i = 0; i < data.imgTemp.length; i++) {
-        formdata.append("imgTemp", data.imgTemp[i]);
+    if (data.image.length > 0) {
+      for (i = 0; i < data.image.length; i++) {
+        formdata.append("image", data.image[i]);
       }
     }
 
     const response = await fetch(
-      process.env.REACT_APP_BACKEND_URL + "/api/v1/products/" + data.id,
+      process.env.REACT_APP_BACKEND_URL + "/api/v1/product/" + data.id,
       {
         method: "PUT",
         body: formdata,
