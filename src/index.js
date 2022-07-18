@@ -58,8 +58,22 @@ root.render(
         />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/productbuyer" element={<ProductBuyer />} />
-        <Route path="/buyerinfo" element={<BuyerInfo />} />
+        <Route
+          path="/productbuyer"
+          element={
+            <Protected>
+              <ProductBuyer />
+            </Protected>
+          }
+        />
+        <Route
+          path="/buyerinfo"
+          element={
+            <Protected>
+              <BuyerInfo />
+            </Protected>
+          }
+        />
         <Route path="/buyerinfoend" element={<BuyerInfoEnd />} />
         <Route
           path="/user"
@@ -100,12 +114,12 @@ root.render(
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-  </Provider>
+  </Provider>,
 
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
-);
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -68,7 +68,8 @@ export default function ProductBuyer13() {
         return (
           bid.iduser_seller == detailProduct.iduser &&
           bid.idbarang == detailProduct.id &&
-          bid.iduser == user.id
+          bid.iduser == user.id &&
+          bid.status_terima == null
         )
       })
       setBidProduct(filterTemp)

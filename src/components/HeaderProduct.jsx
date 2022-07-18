@@ -30,7 +30,11 @@ export default function HeaderProduct() {
     if (transaction != undefined) {
       let tempTrans = transaction.transaction
       let filterTemp = tempTrans?.filter(function (bid) {
-        return bid.iduser_seller == user?.id
+        return (
+          bid.iduser_seller == user?.id &&
+          bid.status_terima == null &&
+          bid.status_pembelian == null
+        )
       })
       setTrans(filterTemp)
     }
@@ -132,7 +136,7 @@ export default function HeaderProduct() {
           </>
         ) : (
           <div>
-            <p>Notifikasi masih kosong</p>
+            <p className="m-4 text-center">Notifikasi masih kosong</p>
           </div>
         )}
       </div>
