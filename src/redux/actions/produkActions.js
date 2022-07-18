@@ -260,6 +260,90 @@ export const newProduct = (data) => async (dispatch) => {
   }
 }
 
+// -------------------------------Update product
+export const updateProduct = (data) => async (dispatch) => {
+  try {
+    var formdata = new FormData();
+    formdata.append("nama", data.nama);
+    formdata.append("harga", data.harga);
+    formdata.append("kategori", data.kategori);
+    formdata.append("deskripsi", data.deskripsi);
+    // Upload File Image
+    for (var i = 0; i < data.dataGambar.length; i++) {
+      if (
+        data.dataGambar[i].type === "image/jpeg" ||
+        data.dataGambar[i].type === "image/png"
+      ) {
+        formdata.append("image", data.dataGambar[i]);
+      }
+    }
+    // Delete File Image
+    if (data.image.length > 0) {
+      for (i = 0; i < data.image.length; i++) {
+        formdata.append("image", data.image[i]);
+      }
+    }
+
+    const response = await fetch(
+      process.env.REACT_APP_BACKEND_URL + "/api/v1/product/" + data.id,
+      {
+        method: "PUT",
+        body: formdata,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      const data = await response.json();
+
+      dispatch({
+        type: UPDATE_PRODUCT,
+        payload: data,
+        status: "Updated",
+      });
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Berhasil",
+        text: "Data berhasil diupdate",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      const data = await response.json();
+
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: data,
+      });
+
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: data.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: error.response,
+    });
+
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: error.message,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+};
+
 export const tempProduct = (data) => async (dispatch) => {
   try {
     if (data != '') {

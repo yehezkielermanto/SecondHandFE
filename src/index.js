@@ -25,6 +25,7 @@ import AddProduct from './pages/addProducts'
 import BuyerInfo from './components/BuyerInfo'
 import BuyerInfoEnd from './components/BuyerInfoEnd'
 import ProductPageEdit from './components/ProductPageEdit'
+import EditProduct from './pages/EditProducts'
 
 const { REACT_APP_ID } = process.env
 
@@ -110,6 +111,9 @@ root.render(
             </Protected>
           }
         />
+
+        <Route path="/editProduct" element={<EditProduct />} />
+
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>

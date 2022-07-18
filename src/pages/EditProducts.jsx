@@ -6,7 +6,11 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import ResponsiveNavLink from '../components/ResponsiveNavLink'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { listCategory } from '../redux/actions/categoryActions'
-import { newProduct, tempProduct } from '../redux/actions/produkActions'
+import {
+  newProduct,
+  updateProduct,
+  tempProduct,
+} from '../redux/actions/produkActions'
 import Swal from 'sweetalert2'
 import { fetchUser } from '../redux/actions/usersActions'
 import { statusAddProduct } from '../redux/actions/produkActions'
@@ -15,7 +19,9 @@ export default function addProducts() {
   const dispatch = useDispatch()
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { category, errorC } = useSelector((state) => state.category)
-  const { status, previewProduct } = useSelector((state) => state.product)
+  const { status, previewProduct, detailProduct } = useSelector(
+    (state) => state.product,
+  )
   const { user } = useSelector((state) => state.users)
 
   const [namaProduk, setProduk] = useState('')
@@ -258,10 +264,10 @@ export default function addProducts() {
 
   //----------------useEffect nama
   useEffect(() => {
-    setProduk(previewProduct.namaProduk)
-    setHarga(previewProduct.hargaProduk)
-    setDeskripsi(previewProduct.deskripsi)
-    setKategori(previewProduct.kategori)
+    setProduk(detailProduct.nama)
+    setHarga(detailProduct.harga)
+    setDeskripsi(detailProduct.deskripsi)
+    setKategori(detailProduct.idkategori)
     if (previewProduct != '') {
       // set gambar dari redux
       // setTempGambar(previewProduct.tempGambar)
@@ -285,7 +291,7 @@ export default function addProducts() {
         }
       }
     }
-  }, [previewProduct])
+  }, [detailProduct])
 
   // ----------------------------handling submit button -> terbitkan produk
   const handleSubmit = async (e) => {
@@ -374,7 +380,7 @@ export default function addProducts() {
         })
         dispatch(
           // dispatch formData to backend
-          newProduct({
+          updateProduct({
             namaProduk,
             hargaProduk,
             kategori,
@@ -513,7 +519,7 @@ export default function addProducts() {
                     <option value="">Daftar Kategori Kosong</option>
                   ) : (
                     category.map((kateg) =>
-                      previewProduct.kategori == kateg.id ? (
+                      detailProduct.idkategori == kateg.id ? (
                         <option selected value={kategori.id}>
                           {kateg.nama_kategori}
                         </option>
@@ -527,7 +533,6 @@ export default function addProducts() {
                 </select>
               </div>
               {/* <br/> */}
-              {/* -------------------------------------------deskripsi barang */}
               <p className="mb-2 text-xs font-poppins">
                 Deskripsi<span className="text-red-600">*</span>
               </p>

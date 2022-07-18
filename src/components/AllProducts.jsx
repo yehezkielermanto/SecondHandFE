@@ -51,6 +51,7 @@ function AllProducts() {
     console.log(id)
     if (isAuth === true) {
       dispatch(fetchProductsById(id))
+
       return navigate('/productPageEdit')
     } else {
       Swal.fire({
