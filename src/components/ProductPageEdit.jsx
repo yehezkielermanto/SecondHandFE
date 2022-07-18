@@ -11,6 +11,7 @@ import {
   emptyDetailProduct,
   fetchProfileSeller,
   getAllProducts,
+  fetchProductsById,
 } from '../redux/actions/produkActions'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import Swal from 'sweetalert2'
@@ -22,19 +23,36 @@ export default function ProductPageEdit() {
 
   const { detailProduct, seller } = useSelector((state) => state.product)
   const [isLoading, setLoading] = useState(false)
+  const { status, previewProduct } = useSelector((state) => state.product)
 
-  useEffect(() => {
-    if (isLoading == false) {
+  const handleToEdit = (id) => {
+    console.log(id)
+    try {
+      dispatch(fetchProductsById(id))
+      return navigate('/editProduct')
+    } catch (error) {
       Swal.fire({
         position: 'center',
-        icon: 'success',
-        titleText: 'Produk Berhasil Termuat',
+        icon: 'warning',
+        titleText: error,
         showConfirmButton: false,
         timer: 1500,
       })
-    }
+      dispatch(logout())
+    } 
+  }
+  useEffect(() => {
+    (async () => {
+      if (detailProduct !== '') {
+        return navigate('/editProduct')
+      }
+    })
+  }, [detailProduct])
+
+  useEffect(() => {
+ 
     if (detailProduct == '' && seller == '') {
-      return navigate('/')
+      return navigate('/daftarjual')
     }
     dispatch(
       fetchProfileSeller({
@@ -90,12 +108,14 @@ export default function ProductPageEdit() {
               Hapus
             </button>
 
-            <Link to="/product">
-              <button className="hidden md:block w-full border border-[#7126B5] bg-white font-medium text-neutral-5 text-center py-2 mt-4 rounded-lg">
-                Edit
-              </button>
-            </Link>
-          </div>
+            <button
+                  className="hidden md:block w-full border border-[#7126B5] hover:bg-[#EEEEEE] bg-white font-medium text-neutral-5 text-center py-2 mt-4 rounded-lg"
+                  onClick={() => handleToEdit(detailProduct.id)}
+                  key={detailProduct.id}
+                >
+                  Edit
+                </button>
+              </div>
 
           <div className="flex bg-white rounded-xl py-4 shadow-low gap-4 p-4 w-full relative md:w-4/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white">
             <IKImage
@@ -120,11 +140,6 @@ export default function ProductPageEdit() {
         </div>
       </div>
 
-      <div className="fixed w-full bottom-4 px-4 md:hidden">
-        <button className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl">
-          Terbitkan
-        </button>
-      </div>
     </div>
   )
 }

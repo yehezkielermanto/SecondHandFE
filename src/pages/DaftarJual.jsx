@@ -58,28 +58,26 @@ const DaftarJual = (props) => {
 
   const handlePreview = (id) => {
     console.log(id)
-    if (isAuth === true) {
+    try {
       dispatch(fetchProductsById(id))
       return navigate('/productPageEdit')
-    } else {
+    } catch (error) {
       Swal.fire({
-        title: 'Oops...',
-        text: 'Tolong login terlebih dahulu',
-        icon: 'error',
-        confirmButtonText: 'Login',
-      }).then((result) => {
-        if (result.value) {
-          navigate('/login')
-        }
+        position: 'center',
+        icon: 'warning',
+        titleText: error,
+        showConfirmButton: false,
+        timer: 1500,
       })
-    }
+      dispatch(logout())
+    } 
   }
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       if (detailProduct !== '') {
         return navigate('/productPageEdit')
       }
-    })()
+    })
   }, [detailProduct])
 
   useEffect(() => {
@@ -264,11 +262,12 @@ const DaftarJual = (props) => {
             ) : (
               // edit disini to navigate ke ProductPageEdit
               produks.map((produkList) => (
-                <div className="grid grid-cols-2 gap-2 md:grid-cols-5 lg:grid-cols-5 min-h-[8rem] mb-2">
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-5 lg:grid-cols-5 min-h-[8rem] mb-2"
+                onClick={() => handlePreview(produkList.id)}
+                key={produkList.id}
+                >
                 <div
                   className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
-                  onClick={() => handlePreview(produkList.id)}
-                  key={produkList.id}
                 >
                   <div className="h-1/2">
                     {/* <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." /> */}
