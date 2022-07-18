@@ -15,7 +15,7 @@ export default function addProducts() {
   const dispatch = useDispatch()
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { category, errorC } = useSelector((state) => state.category)
-  const { status, previewProduct } = useSelector((state) => state.product)
+  const { status, previewProduct, detailProduct } = useSelector((state) => state.product)
   const { user } = useSelector((state) => state.users)
 
   const [namaProduk, setProduk] = useState('')
@@ -473,7 +473,7 @@ export default function addProducts() {
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   onChange={(e) => setProduk(e.target.value)}
-                  value={namaProduk}
+                  value={detailProduct.nama}
                   placeholder="Nama Produk"
                 />
               </div>
@@ -488,7 +488,7 @@ export default function addProducts() {
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   onChange={(e) => setHarga(e.target.value)}
-                  value={hargaProduk}
+                  value={detailProduct.harga}
                   placeholder="Rp 0,00"
                 />
               </div>
@@ -507,7 +507,7 @@ export default function addProducts() {
                   </option>
                   {/* {category.length === 0 ? ( */}
                   {category === null ? (
-                    <option value="">Daftar Kategori Kosong</option>
+                    <option value="">{detailProduct.kategori?.nama_kategori}</option>
                   ) : (
                     category.map((kateg) =>
                       previewProduct.kategori == kateg.id ? (
@@ -532,7 +532,7 @@ export default function addProducts() {
                 <textarea
                   className="form-control block w-full px-4 py-2 lg:py-3 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-[10px] transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
-                  value={deskripsi}
+                  value={detailProduct.deskripsi}
                   name="nohp"
                   onChange={(e) => setDeskripsi(e.target.value)}
                   placeholder="Contoh: Jalan Ikan Hiu 33"
