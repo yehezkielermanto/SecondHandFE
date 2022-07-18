@@ -50,9 +50,9 @@ export default function ProductPageEdit() {
   }, [detailProduct])
 
   useEffect(() => {
- 
+
     if (detailProduct == '' && seller == '') {
-      return navigate('/daftarjual')
+      return navigate('/productPageEdit')
     }
     dispatch(
       fetchProfileSeller({
