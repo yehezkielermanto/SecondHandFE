@@ -1,52 +1,117 @@
-import React, { useState, useEffect } from 'react'
-import { FiSearch, FiList, FiBell, FiUser, FiArrowLeft } from 'react-icons/fi'
-import Image from '../img/productDetails.png'
-import Seller from '../img/seller.png'
-import { Carousel } from 'react-responsive-carousel'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { IKImage } from 'imagekitio-react'
+import React, { useState, useEffect } from "react";
+import { FiSearch, FiList, FiBell, FiUser, FiArrowLeft } from "react-icons/fi";
+import Image from "../img/productDetails.png";
+import Seller from "../img/seller.png";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { IKImage } from "imagekitio-react";
 import {
   emptyDetailProduct,
   fetchProfileSeller,
   getAllProducts,
-} from '../redux/actions/produkActions'
-const urlImg = 'https://ik.imagekit.io/jmprup9kb'
-import Swal from 'sweetalert2'
-import HeaderProduct from './HeaderProduct'
+  deleteProduct,
+} from "../redux/actions/produkActions";
+const urlImg = "https://ik.imagekit.io/jmprup9kb";
+import Swal from "sweetalert2";
+import HeaderProduct from "./HeaderProduct";
 
 export default function ProductPageEdit() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { detailProduct, seller } = useSelector((state) => state.product)
-  const [isLoading, setLoading] = useState(false)
+  const { detailProduct, seller } = useSelector((state) => state.product);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isLoading == false) {
       Swal.fire({
-        position: 'center',
-        icon: 'success',
-        titleText: 'Produk Berhasil Termuat',
+        position: "center",
+        icon: "success",
+        titleText: "Produk Berhasil Termuat",
         showConfirmButton: false,
         timer: 1500,
-      })
+      });
     }
-    if (detailProduct == '' && seller == '') {
-      return navigate('/')
+    if (detailProduct == "" && seller == "") {
+      return navigate("/");
     }
     dispatch(
       fetchProfileSeller({
-        idkota: detailProduct.user.idkota,
-        idgambar: detailProduct.user.gambar,
-      }),
-    )
-  }, [dispatch])
+        idkota: user.idkota,
+        idgambar: user.gambar,
+      })
+    );
+  }, [dispatch]);
 
   const handleBack = () => {
-    dispatch(emptyDetailProduct())
-    return navigate('/daftarjual')
+    dispatch(emptyDetailProduct());
+    return navigate("/daftarjual");
+  };
+  function handleDelete() {
+    let oldImage = [
+      gambar1,
+      gambar2,
+      gambar3,
+      gambar4,
+      gambar5,
+      gambar6,
+      gambar7,
+      gambar8,
+    ];
+    if (gambar1 !== "") {
+      oldImage.push(gambar1);
+    }
+    if (gambar2 !== "") {
+      oldImage.push(gambar2);
+    }
+    if (gambar3 !== "") {
+      oldImage.push(gambar3);
+    }
+    if (gambar4 !== "") {
+      oldImage.push(gambar4);
+    }
+    if (gambar5 !== "") {
+      oldImage.push(gambar5);
+    }
+    if (gambar6 !== "") {
+      oldImage.push(gambar6);
+    }
+    if (gambar7 !== "") {
+      oldImage.push(gambar7);
+    }
+    if (gambar8 !== "") {
+      oldImage.push(gambar8);
+    }
+
+    Swal.fire({
+      title: "Konfirmasi",
+      text: "Apakah anda yakin ingin menghapus produk ini?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Loading",
+          text: "Mohon tunggu...",
+          icon: "info",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+          showConfirmButton: false,
+          showCloseButton: false,
+          showCancelButton: false,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+        });
+        dispatch(deleteProduct({ id: id, oldImage }));
+      }
+    });
   }
 
   return (
@@ -80,13 +145,16 @@ export default function ProductPageEdit() {
 
         <div className="px-4 flex flex-col relative bottom-2 gap-4 md:flex-grow md:bottom-0 ">
           <div className="w-full relative md:w-4/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white">
-            <h1 className="font-medium">{detailProduct.nama}</h1>
+            <h1 className="font-medium">{nama}</h1>
             <p className="text-sm text-[#8A8A8A] dark:text-[#8A8A8A] mb-3">
-              {detailProduct.kategori?.nama_kategori}
+              {kategori?.nama_kategori}
             </p>
-            <p className="">Rp {detailProduct.harga}</p>
+            <p className="">Rp {harga}</p>
 
-            <button className="hidden md:block w-full bg-[#FF0000] font-medium text-white text-center py-2 mt-4 rounded-lg">
+            <button
+              onClick={handleDelete}
+              className="hidden md:block w-full bg-[#FF0000] font-medium text-white text-center py-2 mt-4 rounded-lg"
+            >
               Hapus
             </button>
 
@@ -104,7 +172,7 @@ export default function ProductPageEdit() {
               className="h-14 aspect-square rounded-xl object-cover"
             />
             <div className="flex flex-col justify-center ml-3">
-              <h1 className="font-medium">{detailProduct.user?.nama}</h1>
+              <h1 className="font-medium">{user?.nama}</h1>
               <p className="text-sm text-neutral-3">{seller.kota}</p>
             </div>
           </div>
@@ -115,7 +183,7 @@ export default function ProductPageEdit() {
         <div className="w-full relative md:w-3/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.15)] bg-white mt-5">
           <h1 className="font-medium mb-5">Deskripsi</h1>
           <p className="text-sm font-regular lg:leading-tight leading-normal text-[#8A8A8A] dark:text-[#8A8A8A]">
-            {detailProduct.deskripsi}
+            {deskripsi}
           </p>
         </div>
       </div>
@@ -126,5 +194,5 @@ export default function ProductPageEdit() {
         </button>
       </div>
     </div>
-  )
+  );
 }
