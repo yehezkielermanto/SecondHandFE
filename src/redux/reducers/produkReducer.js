@@ -49,6 +49,9 @@ const productReducer = (state = initialState, action) => {
     case DELETE_PRODUCT:
       return {
         ...state,
+        product: [],
+        detailProduct: [],
+        previewProduct: [],
         status: action.payload,
       }
     case PRODUCT_ERROR:

@@ -19,12 +19,9 @@ const { REACT_APP_URLENDPOINT } = process.env
 
 // action delete product
 export const deleteProduct = (params) => async (dispatch) => {
-  const { id, oldImage } = params
   try {
     const response = await fetch(
-      REACT_APP_URLENDPOINT +
-        '/api/v1/product?' +
-        new URLSearchParams({ id, oldImage }),
+      REACT_APP_URLENDPOINT + '/api/v1/product/' + params.id,
       {
         method: 'DELETE',
         headers: {
@@ -37,7 +34,6 @@ export const deleteProduct = (params) => async (dispatch) => {
 
     dispatch({
       type: DELETE_PRODUCT,
-      payload: data.status,
     })
 
     Swal.fire({

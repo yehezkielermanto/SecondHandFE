@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { IKImage } from 'imagekitio-react'
 import {
+  deleteProduct,
   emptyDetailProduct,
   fetchProductsById,
   fetchProfileSeller,
@@ -51,7 +52,6 @@ export default function ProductPageEdit() {
 
   useEffect(() => {
     if (detailProduct == '' && seller === '') {
-      // return navigate('/daftarjual')
     } else {
       setLoading('false')
       Swal.fire({
@@ -67,6 +67,38 @@ export default function ProductPageEdit() {
   const handleBack = () => {
     dispatch(emptyDetailProduct())
     return navigate('/daftarjual')
+  }
+
+  // hapus barang
+  const handleDelete = () => {
+    Swal.fire({
+      title: 'Konfirmasi',
+      text: 'Apakah anda yakin ingin menghapus produk ini?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ya',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Loading',
+          text: 'Mohon tunggu...',
+          icon: 'info',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+          showConfirmButton: false,
+          showCloseButton: false,
+          showCancelButton: false,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown',
+          },
+        })
+        dispatch(deleteProduct({ id: detailProduct.id }))
+        // return navigate('/daftarjual')
+      }
+    })
   }
 
   return (
@@ -106,7 +138,10 @@ export default function ProductPageEdit() {
             </p>
             <p className="">Rp {detailProduct.harga}</p>
 
-            <button className="hidden md:block w-full bg-[#FF0000] font-medium text-white text-center py-2 mt-4 rounded-lg">
+            <button
+              className="hidden md:block w-full bg-[#FF0000] font-medium text-white text-center py-2 mt-4 rounded-lg"
+              onClick={handleDelete}
+            >
               Hapus
             </button>
 
