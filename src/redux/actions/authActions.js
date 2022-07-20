@@ -6,6 +6,7 @@ import {
   isREGISTER,
   DELETE_DATA_USER,
   GET_ALL_PRODUCT,
+  DELETE_TRANSACTION,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 import Swal from 'sweetalert2'
@@ -151,6 +152,7 @@ export const logout = () => async (dispatch) => {
   dispatch({
     type: DELETE_DATA_USER,
   })
+  dispatch({ type: DELETE_TRANSACTION })
 }
 
 const authError = (error) => async (dispatch) => {
