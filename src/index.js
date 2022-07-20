@@ -25,8 +25,6 @@ import AddProduct from './pages/addProducts'
 import BuyerInfo from './components/BuyerInfo'
 import BuyerInfoEnd from './components/BuyerInfoEnd'
 import ProductPageEdit from './components/ProductPageEdit'
-import EditProduct from './pages/EditProducts'
-import PreviewEditProduct from './components/PreviewEditPage'
 
 const { REACT_APP_ID } = process.env
 
@@ -48,18 +46,8 @@ root.render(
             </Protected>
           }
         />
-        {/* mobile notification */}
         <Route path="/notif" element={<Notification />} />
-        <Route path="/productPageEdit" element={<ProductPageEdit />} />
-        {/* view edit product */}
-        <Route
-          path="/previewPageEdit"
-          element={
-            <Protected>
-              <PreviewEditProduct />
-            </Protected>
-          }
-        />
+        <Route path="/productEditPage" element={<ProductPageEdit />} />
         <Route
           path="/user/profile"
           element={
@@ -70,22 +58,8 @@ root.render(
         />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/product" element={<Product />} />
-        <Route
-          path="/productbuyer"
-          element={
-            <Protected>
-              <ProductBuyer />
-            </Protected>
-          }
-        />
-        <Route
-          path="/buyerinfo"
-          element={
-            <Protected>
-              <BuyerInfo />
-            </Protected>
-          }
-        />
+        <Route path="/productbuyer" element={<ProductBuyer />} />
+        <Route path="/buyerinfo" element={<BuyerInfo />} />
         <Route path="/buyerinfoend" element={<BuyerInfoEnd />} />
         <Route
           path="/user"
@@ -122,19 +96,16 @@ root.render(
             </Protected>
           }
         />
-
-        <Route path="/editProduct" element={<EditProduct />} />
-
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
 
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
-)
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

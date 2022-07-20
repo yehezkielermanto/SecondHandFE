@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import '../public/css/style.css'
 import Swal from 'sweetalert2'
-import Header from '../components/Header'
 import { Link, Navigate } from 'react-router-dom'
 import { fetchUser, submitUpdate } from '../redux/actions/usersActions'
 import { logout } from '../redux/actions/authActions'
@@ -133,10 +132,9 @@ const ProfileHeaderComponent = (props) => {
 
   return (
     <>
-    <Header title="Lengkapi Info Akun" />
       {/* Main Content */}
       {!justUpdated ? (
-        <div className="flex flex-col h-auto sm:w-full lg:w-7/12 lg:mx-auto  p-3 text-left ">
+        <div className="flex flex-col h-auto sm:w-full lg:w-7/12 lg:mx-auto  p-3 text-left border-2">
           <Link to="/user">
             <div className="invisible lg:visible p-0 w-10 flex justify-center hover:bg-violet-800 rounded-full">
               <svg
