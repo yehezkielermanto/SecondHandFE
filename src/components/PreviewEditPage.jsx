@@ -16,7 +16,7 @@ export default function PreviewEditPage() {
   const { status, previewProduct, detailProduct } = useSelector(
     (state) => state.product,
   )
-  const { user, errorU } = useSelector((state) => state.users)
+  const { user } = useSelector((state) => state.users)
   const handleEdit = async (e) => {
     e.preventDefault()
     dispatch(
