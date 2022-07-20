@@ -16,6 +16,7 @@ import {
   AcceptBid,
   declineTrans,
   DeniedBid,
+  makeFalseStatus,
   soldProduct,
 } from '../redux/actions/bidAction'
 
@@ -46,6 +47,12 @@ export default function BuyerInfo(props) {
     setModalAcceptShow(true)
     dispatch(terimaPenawaran())
     dispatch(AcceptBid(detailTrans.bid.idbarang))
+    dispatch(
+      makeFalseStatus({
+        iduser: detailTrans.bid.iduser,
+        idbarang: detailTrans.bid.idbarang,
+      }),
+    )
   }
   const handleOpenDeniedModal = () => {
     setModalDeniedShow(true)
@@ -67,6 +74,9 @@ export default function BuyerInfo(props) {
   useEffect(() => {
     if (detailTrans == undefined) {
       return navigate('/daftarjual')
+    }
+    if (detailTrans?.bid?.status_terima == true) {
+      setAcceptProduct(true)
     }
   }, [detailTrans])
 

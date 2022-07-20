@@ -189,7 +189,6 @@ export const soldProduct = (id) => async (dispatch) => {
 export const declineTrans = (id) => async (dispatch) => {
   try {
     if (id != '') {
-      console.log(id)
       const response = await fetch(
         REACT_APP_URLENDPOINT +
           `/api/v1/transaction/declineTrans/${id.idtrans}`,
@@ -211,5 +210,34 @@ export const declineTrans = (id) => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: TRANSACTION_ERROR, payload: error.message })
+  }
+}
+
+// make status_pembelian = false
+export const makeFalseStatus = (params) => async (dispatch) => {
+  try {
+    if (params != '') {
+      const response = await fetch(
+        REACT_APP_URLENDPOINT +
+          `/api/v1/transaction/makeFalse/${params.iduser}/${params.idbarang}`,
+        {
+          method: 'put',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      const data = await response.json()
+      if (data.message === 'Token Expired') {
+        dispatch({
+          type: LOGOUT,
+        })
+        return
+      }
+    }
+  } catch (error) {
+    console.log(error.message)
+    dispatch({ type: TRANSACTION_ERROR })
   }
 }

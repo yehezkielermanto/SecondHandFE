@@ -35,6 +35,7 @@ export default function ProductBuyer13() {
   // state harga
   const [price, setPrice] = useState(null)
   const [bidProduct, setBidProduct] = useState('')
+  const [productFalse, setProductFalse] = useState(false)
 
   useEffect(() => {
     if (isLoading == false) {
@@ -75,6 +76,13 @@ export default function ProductBuyer13() {
       setBidProduct(filterTemp)
     }
   }, [transaction])
+
+  // check products available or not
+  useEffect(() => {
+    if (detailProduct?.available == false) {
+      setProductFalse(true)
+    }
+  }, [detailProduct])
 
   const handleCloseModal = () => {
     setModalAcceptShow(false)
@@ -165,20 +173,31 @@ export default function ProductBuyer13() {
               {detailProduct.kategori?.nama_kategori}
             </p>
             <p className="">Rp {detailProduct.harga}</p>
-            {bidProduct == '' ? (
-              <button
-                onClick={handleOpenAcceptModal}
-                className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg"
-              >
-                Saya Tertarik dan Ingin Nego
-              </button>
-            ) : (
+            {productFalse === true ? (
               <button
                 disabled={true}
                 className="bg-[#D0D0D0] font-medium text-white text-center py-4 w-full rounded-xl"
               >
-                Menunggu respon penjual
+                Produk telah terjual
               </button>
+            ) : (
+              <>
+                {bidProduct == '' ? (
+                  <button
+                    onClick={handleOpenAcceptModal}
+                    className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg"
+                  >
+                    Saya Tertarik dan Ingin Nego
+                  </button>
+                ) : (
+                  <button
+                    disabled={true}
+                    className="bg-[#D0D0D0] font-medium text-white text-center py-4 w-full rounded-xl"
+                  >
+                    Menunggu respon penjual
+                  </button>
+                )}
+              </>
             )}
           </div>
 
