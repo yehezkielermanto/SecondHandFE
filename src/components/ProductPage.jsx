@@ -69,7 +69,7 @@ export default function Product() {
           <div className="drop-shadow-lg lg:pb-10">
             <div className="w-full pt-8 px-4 gap-4 md:bg-white md:shadow-high md:justify-between md:py-4 md:px-16 hidden md:flex items-center">
               <div className="flex-grow md:flex-grow-0 md:flex md:justify-center md:items-center md:gap-4">
-                <div className="hidden md:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
+              <Link to="/" className="hidden lg:inline w-[5.88rem] h-8 bg-[#4B1979] my-2" />
                 <div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex md:bg-[#EEEEEE]">
                   <input
                     className="w-full h-full bg-transparent"
@@ -117,14 +117,14 @@ export default function Product() {
                 <p className="">Rp {previewProduct.hargaProduk}</p>
 
                 <button
-                  className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg"
+                  className="hidden md:block w-full bg-[#7126B5] hover:bg-[#8f48cf] font-medium text-white text-center py-2.5 mt-4 rounded-lg"
                   onClick={handlePublish}
                 >
                   Terbitkan
                 </button>
 
                 <button
-                  className="hidden md:block w-full border border-[#7126B5] bg-white font-medium text-neutral-5 text-center py-2 mt-4 rounded-lg"
+                  className="hidden md:block w-full border border-[#7126B5] hover:bg-[#EEEEEE] bg-white font-medium text-neutral-5 text-center py-2 mt-4 rounded-lg"
                   onClick={handleEdit}
                 >
                   Edit
@@ -148,8 +148,8 @@ export default function Product() {
           </div>
 
           <div className="pb-5 px-4 mt-2 mb-10 md:max-w-screen-lg md:mt-4 md:mx-auto md:px-0 md:pb-0 ">
-            <div className="w-full relative md:w-3/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.15)] bg-white mt-5">
-              <h1 className="font-medium mb-5">Deskripsi</h1>
+            <div className="w-full relative md:w-3/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.15)] bg-white mt-3">
+              <h1 className="font-medium mb-2">Deskripsi</h1>
               <p className="text-sm font-regular lg:leading-tight leading-normal text-[#8A8A8A] dark:text-[#8A8A8A]">
                 {previewProduct.deskripsi}
               </p>
