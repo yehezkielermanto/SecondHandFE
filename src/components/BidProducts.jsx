@@ -16,7 +16,10 @@ function BidProducts() {
     if (transaction != undefined) {
       let tempTrans = transaction.transaction
       let filterTemp = tempTrans?.filter(function (bid) {
-        return bid.iduser_seller == user?.id && bid.status_terima == null
+        return (
+          (bid.iduser_seller == user?.id && bid.status_terima == null) ||
+          (bid.status_terima == true && bid.status_pembelian == null)
+        )
       })
       setTrans(filterTemp)
     }
