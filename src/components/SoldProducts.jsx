@@ -39,13 +39,13 @@ function SoldProduct() {
         trans?.map((produkList) => (
           <div className="grid grid-cols-3 gap-2 md:grid-cols-5 lg:grid-cols-1 min-h-[8rem] mb-2">
             <div
-              className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
+              className="flex flex-col w-48 bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
               key={produkList.id}
             >
               <div className="h-1/2">
                 {/* <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." /> */}
                 <IKImage
-                  className="w-full h-full block rounded-[4px] justify-center items-center object-contain"
+                  className="w-full h-full block rounded-[4px] justify-center items-center"
                   urlEndpoint={urlImg}
                   path={produkList?.gambarProduk?.filePath}
                 />
