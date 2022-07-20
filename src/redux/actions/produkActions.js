@@ -12,16 +12,17 @@ import {
   DETAIL_PRODUCT,
   EMPTY_DETAIL,
   SELLER,
-  TEMP_PRODUCT_EDIT,
-  UPDATE_PRODUCT,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 
 // action delete product
 export const deleteProduct = (params) => async (dispatch) => {
+  const { id, oldImage } = params
   try {
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/product/' + params.id,
+      REACT_APP_URLENDPOINT +
+        '/api/v1/product?' +
+        new URLSearchParams({ id, oldImage }),
       {
         method: 'DELETE',
         headers: {
@@ -34,6 +35,7 @@ export const deleteProduct = (params) => async (dispatch) => {
 
     dispatch({
       type: DELETE_PRODUCT,
+      payload: data.status,
     })
 
     Swal.fire({
@@ -79,6 +81,7 @@ export const getAllProducts = () => async (dispatch) => {
       while (i < data.data.barang.length) {
         // console.log(data.data.barang[i].gambarbarangs[0].gambar);
         // return;
+        console.log(data.data.barang[i].gambarbarangs[0])
         // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
         const fetchImgDetail = await fetch(
           `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[0].gambar}`,
@@ -258,84 +261,6 @@ export const newProduct = (data) => async (dispatch) => {
   }
 }
 
-// -------------------------------Update product
-export const updateProduct = (data) => async (dispatch) => {
-  try {
-    console.log(data.dataGambar.length)
-    var formdata = new FormData()
-    formdata.append('nama', data.namaProduk)
-    formdata.append('harga', data.hargaProduk)
-    formdata.append('kategori', data.kategori)
-    formdata.append('deskripsi', data.deskripsi)
-    // Upload File Image
-    for (var i = 0; i < data.dataGambar.length; i++) {
-      if (
-        data.dataGambar[i].type === 'image/jpeg' ||
-        data.dataGambar[i].type === 'image/png'
-      ) {
-        formdata.append('image', data.dataGambar[i])
-      }
-    }
-
-    const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/product/' + data.id,
-      {
-        method: 'PUT',
-        body: formdata,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      },
-    )
-    // respon status
-
-    if (response.status === 200) {
-      const data = await response.json()
-
-      dispatch({
-        type: UPDATE_PRODUCT,
-      })
-
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Berhasil',
-        text: 'Data berhasil diupdate',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    } else {
-      const data = await response.json()
-
-      dispatch({
-        type: UPDATE_PRODUCT,
-      })
-
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: data.message,
-        showConfirmButton: false,
-        timer: 1500,
-      })
-    }
-  } catch (error) {
-    console.log(error.message)
-    dispatch({
-      type: PRODUCT_ERROR,
-      payload: error.response,
-    })
-
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: error.message,
-      showConfirmButton: false,
-      timer: 1500,
-    })
-  }
-}
-
 export const tempProduct = (data) => async (dispatch) => {
   try {
     if (data != '') {
@@ -369,50 +294,6 @@ export const tempProduct = (data) => async (dispatch) => {
           kota: kota,
           dataGambar: data.dataGambar,
           namaKategori: category.category.nama_kategori,
-        },
-      })
-    }
-  } catch (error) {
-    dispatch({ type: PRODUCT_ERROR })
-  }
-}
-
-// preview edit products
-export const viewEditProduct = (data) => async (dispatch) => {
-  try {
-    if (data != '') {
-      // =======================ambil data kota dari tabel kota di database
-      const response = await fetch(
-        REACT_APP_URLENDPOINT + '/api/v1/cities/' + data.kota,
-        {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        },
-      )
-      // ====================ambil nama kategori dari tabel kategori
-      const findCateg = await fetch(
-        REACT_APP_URLENDPOINT + '/api/v1/category/' + data.kategori,
-        {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        },
-      )
-      const result = await response.json()
-      const category = await findCateg.json()
-      const kota = result.city.nama_kota
-      console.log(data.image)
-      dispatch({
-        type: TEMP_PRODUCT_EDIT,
-        payload: {
-          namaProduk: data.namaProduk,
-          hargaProduk: data.hargaProduk,
-          kategori: data.kategori,
-          deskripsi: data.deskripsi,
-          gambar: data.gambar,
-          kota: kota,
-          dataGambar: data.dataGambar,
-          namaKategori: category.category.nama_kategori,
-          fileImage: data.image,
         },
       })
     }
@@ -483,7 +364,6 @@ export const fetchProductsById = (id) => async (dispatch) => {
     // console.log(result)
     dispatch({ type: DETAIL_PRODUCT, payload: result })
   } catch (error) {
-    console.log(error.message)
     dispatch({ type: PRODUCT_ERROR })
   }
 }

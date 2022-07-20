@@ -10,8 +10,6 @@ import {
   DETAIL_PRODUCT,
   EMPTY_DETAIL,
   SELLER,
-  TEMP_PRODUCT_EDIT,
-  UPDATE_PRODUCT,
 } from '../actions/types'
 const initialState = {
   product: '',
@@ -49,9 +47,6 @@ const productReducer = (state = initialState, action) => {
     case DELETE_PRODUCT:
       return {
         ...state,
-        product: [],
-        detailProduct: [],
-        previewProduct: [],
         status: action.payload,
       }
     case PRODUCT_ERROR:
@@ -66,25 +61,11 @@ const productReducer = (state = initialState, action) => {
         previewProduct: action.payload,
         status: 'edited',
       }
-    case TEMP_PRODUCT_EDIT:
-      return {
-        ...state,
-        previewProduct: action.payload,
-        status: 'viewEdit',
-      }
     case EDIT_PRODUCT:
       return {
         ...state,
         previewProduct: action.payload,
         status: 'notPreview',
-      }
-    case UPDATE_PRODUCT:
-      return {
-        ...state,
-        product: [],
-        detailProduct: [],
-        previewProduct: [],
-        status: 'updated',
       }
     case TERIMA_PENAWARAN:
       return {

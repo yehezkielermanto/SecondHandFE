@@ -10,16 +10,14 @@ import { Input } from 'antd'
 import product from '../img/productBuyer.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { IKImage } from 'imagekitio-react'
-const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import {
   emptyDetailProduct,
   fetchProfileSeller,
   getAllProducts,
 } from '../redux/actions/produkActions'
 import { useEffect } from 'react'
+const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import Swal from 'sweetalert2'
-import { createBid, fetchTrans } from '../redux/actions/bidAction'
-import HeaderProduct from './HeaderProduct'
 
 export default function ProductBuyer13() {
   const navigate = useNavigate()
@@ -27,14 +25,9 @@ export default function ProductBuyer13() {
 
   // ambil detail products dari redux
   const { detailProduct, seller } = useSelector((state) => state.product)
-  const { transaction } = useSelector((state) => state.bid)
-  const { user } = useSelector((state) => state.users)
   const [isModalAcceptShow, setModalAcceptShow] = useState(false)
   const isModalShow = isModalAcceptShow
   const [isLoading, setLoading] = useState(false)
-  // state harga
-  const [price, setPrice] = useState(null)
-  const [bidProduct, setBidProduct] = useState('')
 
   useEffect(() => {
     if (isLoading == false) {
@@ -46,52 +39,23 @@ export default function ProductBuyer13() {
         timer: 1500,
       })
     }
-    if (detailProduct != '') {
-      dispatch(
-        fetchProfileSeller({
-          idkota: detailProduct.user.idkota,
-          idgambar: detailProduct.user.gambar,
-        }),
-      )
-    }
     if (detailProduct == '' && seller == '') {
       return navigate('/')
     }
-
-    dispatch(fetchTrans())
+    dispatch(
+      fetchProfileSeller({
+        idkota: detailProduct.user.idkota,
+        idgambar: detailProduct.user.gambar,
+      }),
+    )
   }, [dispatch])
-
-  useEffect(() => {
-    if (transaction != undefined) {
-      let tempTrans = transaction.transaction
-      let filterTemp = tempTrans?.filter(function (bid) {
-        return (
-          bid.iduser_seller == detailProduct.iduser &&
-          bid.idbarang == detailProduct.id &&
-          bid.iduser == user.id &&
-          bid.status_terima == null
-        )
-      })
-      setBidProduct(filterTemp)
-    }
-  }, [transaction])
 
   const handleCloseModal = () => {
     setModalAcceptShow(false)
   }
   const handleOpenAcceptModal = () => {
-    if (user.idkota == null || user.alamat == null || user.nohp == null) {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: 'mohon isikan data diri terlebih dahulu',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-      return navigate('/user/profile')
-    } else {
-      setModalAcceptShow(true)
-    }
+    // check apakah isAuthenticated or not
+    setModalAcceptShow(true)
   }
 
   const handleBack = () => {
@@ -99,41 +63,31 @@ export default function ProductBuyer13() {
     return navigate('/')
   }
 
-  // button bid products
-  const handleSubmitBid = async (e) => {
-    e.preventDefault()
-    dispatch(
-      createBid({
-        price,
-        productId: detailProduct.id,
-        sellerId: detailProduct.iduser,
-      }),
-    )
-    setModalAcceptShow(false)
-    setBidProduct(true)
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.resumeTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      },
-    })
-
-    Toast.fire({
-      icon: 'success',
-      title: 'Harga tawarmu berhasil dikirim ke penjual',
-    })
-  }
-
   return (
     <div className="w-screen min-h-screen">
-      {/* navbar */}
-      <HeaderProduct />
-      <div className="flex flex-col md:flex-row md:mx-auto md:max-w-screen-lg md:mt-5 md:mx-auto md:px-0 md:pb-0 ">
+      <div className="drop-shadow-lg lg:pb-10">
+        <div className="w-full pt-8 px-4 gap-4 md:bg-white md:shadow-high md:justify-between md:py-4 md:px-16 hidden md:flex items-center">
+          <div className="flex-grow md:flex-grow-0 md:flex md:justify-center md:items-center md:gap-4">
+            <div className="hidden md:inline w-[5.88rem] h-8 bg-[#7126B5]"></div>
+            <div className="h-12 bg-white rounded-2xl py-3 px-6 text-neutral-3 flex md:bg-[#EEEEEE]">
+              <input
+                className="w-full h-full bg-transparent"
+                placeholder="Cari di sini ..."
+              />
+              <FiSearch className="text-2xl" />
+            </div>
+          </div>
+
+          <div className="flex gap-4 items-center text-2xl">
+            <FiList />
+            <FiBell />
+            <Link to="/user">
+              <FiUser className="xl:w-5 h-full mx-2" />
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col md:flex-row md:mx-auto md:max-w-screen-lg md:mt-4 md:mx-auto md:px-0 md:pb-0 ">
         <div className="w-full aspect-[6/5] relative md:w-3/5 md:flex-shrink-0 ">
           <Carousel
             showThumbs={false}
@@ -143,7 +97,6 @@ export default function ProductBuyer13() {
           >
             {detailProduct?.gambarProduk?.map((gambar) => (
               <IKImage
-                key={gambar.fileId}
                 urlEndpoint={urlImg}
                 path={gambar.filePath}
                 className="w-full aspect-[6/5] object-cover md:rounded-xl"
@@ -165,21 +118,13 @@ export default function ProductBuyer13() {
               {detailProduct.kategori?.nama_kategori}
             </p>
             <p className="">Rp {detailProduct.harga}</p>
-            {bidProduct == '' ? (
-              <button
-                onClick={handleOpenAcceptModal}
-                className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg"
-              >
-                Saya Tertarik dan Ingin Nego
-              </button>
-            ) : (
-              <button
-                disabled={true}
-                className="bg-[#D0D0D0] font-medium text-white text-center py-4 w-full rounded-xl"
-              >
-                Menunggu respon penjual
-              </button>
-            )}
+
+            <button
+              onClick={handleOpenAcceptModal}
+              className="hidden md:block w-full bg-[#7126B5] font-medium text-white text-center py-2 mt-4 rounded-lg"
+            >
+              Saya Tertarik dan Ingin Nego
+            </button>
           </div>
 
           <div className="flex bg-white rounded-xl py-4 shadow-low gap-4 p-4 w-full relative md:w-4/5 md:flex-shrink-0 p-4 rounded-lg shadow-[0px_0px_10px_rgba(0,0,0,0.15)] bg-white">
@@ -207,21 +152,12 @@ export default function ProductBuyer13() {
 
       {/* Mobile version */}
       <div className="fixed w-full bottom-4 px-4 md:hidden">
-        {bidProduct == '' ? (
-          <button
-            onClick={handleOpenAcceptModal}
-            className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl"
-          >
-            Saya Tertarik dan Ingin Nego
-          </button>
-        ) : (
-          <button
-            disabled={true}
-            className="bg-[#D0D0D0] font-medium text-white text-center py-4 w-full rounded-xl"
-          >
-            Menunggu respon penjual
-          </button>
-        )}
+        <button
+          onClick={handleOpenAcceptModal}
+          className="bg-[#7126B5] font-medium text-white text-center py-4 w-full rounded-xl"
+        >
+          Saya Tertarik dan Ingin Nego
+        </button>
       </div>
 
       {/* Backdrop for Modal */}
@@ -271,14 +207,12 @@ export default function ProductBuyer13() {
               id="tawar"
               placeholder="Rp 0,00"
               required
-              onChange={(e) => setPrice(e.target.value)}
             />
           </div>
           <button
             className="flex items-center justify-center w-full py-3 mt-6 bg-[#7126B5] hover:bg-[#8f48cf] text-white font-normal text-sm rounded-[16px] 
 						focus:shadow-lg focus:outline-none active:shadow-lg"
             type="button"
-            onClick={handleSubmitBid}
           >
             <p>Kirim</p>
           </button>

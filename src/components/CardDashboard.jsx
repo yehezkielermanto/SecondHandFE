@@ -4,7 +4,6 @@ import product1 from '../img/product.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import {
-  emptyDetailProduct,
   fetchProductsById,
   filterProducts,
   getAllProducts,
@@ -28,7 +27,6 @@ const CardDashboard = () => {
 
   useEffect(() => {
     ;(async () => {
-      dispatch(emptyDetailProduct())
       if (isAuthenticated) {
         dispatch(fetchUser())
         setAuth(true)
@@ -64,8 +62,6 @@ const CardDashboard = () => {
       if (detailProduct !== '') {
         setLoading(false)
         return navigate('/productbuyer')
-      } else {
-        return navigate('/')
       }
     })()
   }, [detailProduct])
@@ -114,14 +110,14 @@ const CardDashboard = () => {
         <>
           {product.barang === undefined ? (
             <div>
-              <h4 className="content-center font-bold justify-end  my-4">
+              <h4 className="content-center font-semibold text-center my-4">
                 Produk Tidak Tersedia
               </h4>
             </div>
           ) : (
             product?.barang?.map((product) => (
               <div
-                className="mt-3 inline-block m-1 p-1 border border-gray-300 rounded-lg hover:cursor-pointer shadow-low p-4 text-neutral-5 rounded-lg w-full"
+                className="inline-block m-1 p-1 border border-gray-300 rounded-lg mx-2 w-1/6 hover:cursor-pointer"
                 onClick={() => handlePreview(product.id)}
                 key={product.id}
               >
