@@ -1,13 +1,9 @@
 import {
-  CREATE_TRANSACTION,
-  DELETE_TRANSACTION,
-  DETAIL_TRANSACTION,
-  TRANSACTION_ERROR,
-} from '../actions/types'
+    CREATE_TRANSACTION,
+} from "../actions/types";
 const initialState = {
-  transaction: '',
-  detailTrans: '',
-}
+    transaction: '',
+};
 
 const bidReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,26 +11,11 @@ const bidReducer = (state = initialState, action) => {
       return {
         ...state,
         transaction: action.payload,
-      }
-    case DETAIL_TRANSACTION:
-      return {
-        ...state,
-        detailTrans: action.payload,
-      }
-    case DELETE_TRANSACTION:
-      return {
-        ...state,
-        transaction: '',
-        detailTrans: '',
-      }
-    case TRANSACTION_ERROR:
-      return {
-        ...state,
-        transaction: action.payload,
-      }
+      };
+    
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default bidReducer
+export default bidReducer;

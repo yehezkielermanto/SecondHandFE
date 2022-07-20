@@ -32,11 +32,11 @@ const Dashboard = () => {
         <section>
           <Slider />
           <ButtonDashboard />
-          <div className="mx-3 md:mx-10 lg:mx-12 px-0 lg:px-10 place-items-center grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-6">
+          <div className="flex flex-row flex-wrap justify-center p-4">
             <CardDashboard />
           </div>
 
-          <div className="relative z-40" id="plus">
+          <div className="relative z-50" id="plus">
             <div className="flex justify-center drop-shadow-lg">
               {enableClick == true ? (
                 <Link to="/addProduct">
