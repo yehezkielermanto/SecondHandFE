@@ -30,6 +30,8 @@ export const NEW_PRODUCT = 'NEW_PRODUCT'
 export const DETAIL_PRODUCT = 'DETAIL_PRODUCT'
 export const EMPTY_DETAIL = 'EMPTY_DETAIL'
 export const SELLER = 'SELLER'
+export const TEMP_PRODUCT_EDIT = 'TEMP_PRODUCT_EDIT'
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 
 // transactions
 export const TERIMA_PENAWARAN = 'TERIMA_PENAWARAN'

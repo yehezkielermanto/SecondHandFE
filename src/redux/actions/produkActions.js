@@ -12,6 +12,8 @@ import {
   DETAIL_PRODUCT,
   EMPTY_DETAIL,
   SELLER,
+  TEMP_PRODUCT_EDIT,
+  UPDATE_PRODUCT,
 } from './types'
 const { REACT_APP_URLENDPOINT } = process.env
 
@@ -263,86 +265,80 @@ export const newProduct = (data) => async (dispatch) => {
 // -------------------------------Update product
 export const updateProduct = (data) => async (dispatch) => {
   try {
-    var formdata = new FormData();
-    formdata.append("nama", data.nama);
-    formdata.append("harga", data.harga);
-    formdata.append("kategori", data.kategori);
-    formdata.append("deskripsi", data.deskripsi);
+    console.log(data.dataGambar.length)
+    var formdata = new FormData()
+    formdata.append('nama', data.namaProduk)
+    formdata.append('harga', data.hargaProduk)
+    formdata.append('kategori', data.kategori)
+    formdata.append('deskripsi', data.deskripsi)
     // Upload File Image
     for (var i = 0; i < data.dataGambar.length; i++) {
       if (
-        data.dataGambar[i].type === "image/jpeg" ||
-        data.dataGambar[i].type === "image/png"
+        data.dataGambar[i].type === 'image/jpeg' ||
+        data.dataGambar[i].type === 'image/png'
       ) {
-        formdata.append("image", data.dataGambar[i]);
-      }
-    }
-    // Delete File Image
-    if (data.image.length > 0) {
-      for (i = 0; i < data.image.length; i++) {
-        formdata.append("image", data.image[i]);
+        formdata.append('image', data.dataGambar[i])
       }
     }
 
     const response = await fetch(
-      process.env.REACT_APP_BACKEND_URL + "/api/v1/product/" + data.id,
+      REACT_APP_URLENDPOINT + '/api/v1/product/' + data.id,
       {
-        method: "PUT",
+        method: 'PUT',
         body: formdata,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
-    );
+      },
+    )
+    // respon status
 
     if (response.status === 200) {
-      const data = await response.json();
+      const data = await response.json()
 
       dispatch({
         type: UPDATE_PRODUCT,
-        payload: data,
-        status: "Updated",
-      });
+      })
 
       Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Berhasil",
-        text: "Data berhasil diupdate",
+        position: 'center',
+        icon: 'success',
+        title: 'Berhasil',
+        text: 'Data berhasil diupdate',
         showConfirmButton: false,
         timer: 1500,
-      });
+      })
     } else {
-      const data = await response.json();
+      const data = await response.json()
 
       dispatch({
-        type: PRODUCT_ERROR,
-        payload: data,
-      });
+        type: UPDATE_PRODUCT,
+      })
 
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'success',
         title: data.message,
         showConfirmButton: false,
         timer: 1500,
-      });
+      })
     }
   } catch (error) {
+    console.log(error.message)
     dispatch({
       type: PRODUCT_ERROR,
       payload: error.response,
-    });
+    })
 
     Swal.fire({
-      position: "center",
-      icon: "error",
+      position: 'center',
+      icon: 'error',
       title: error.message,
       showConfirmButton: false,
       timer: 1500,
-    });
+    })
   }
-};
+}
 
 export const tempProduct = (data) => async (dispatch) => {
   try {
@@ -377,6 +373,50 @@ export const tempProduct = (data) => async (dispatch) => {
           kota: kota,
           dataGambar: data.dataGambar,
           namaKategori: category.category.nama_kategori,
+        },
+      })
+    }
+  } catch (error) {
+    dispatch({ type: PRODUCT_ERROR })
+  }
+}
+
+// preview edit products
+export const viewEditProduct = (data) => async (dispatch) => {
+  try {
+    if (data != '') {
+      // =======================ambil data kota dari tabel kota di database
+      const response = await fetch(
+        REACT_APP_URLENDPOINT + '/api/v1/cities/' + data.kota,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        },
+      )
+      // ====================ambil nama kategori dari tabel kategori
+      const findCateg = await fetch(
+        REACT_APP_URLENDPOINT + '/api/v1/category/' + data.kategori,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        },
+      )
+      const result = await response.json()
+      const category = await findCateg.json()
+      const kota = result.city.nama_kota
+      console.log(data.image)
+      dispatch({
+        type: TEMP_PRODUCT_EDIT,
+        payload: {
+          namaProduk: data.namaProduk,
+          hargaProduk: data.hargaProduk,
+          kategori: data.kategori,
+          deskripsi: data.deskripsi,
+          gambar: data.gambar,
+          kota: kota,
+          dataGambar: data.dataGambar,
+          namaKategori: category.category.nama_kategori,
+          fileImage: data.image,
         },
       })
     }

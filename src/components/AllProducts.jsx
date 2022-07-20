@@ -47,6 +47,10 @@ function AllProducts() {
   }, [dispatch])
   // produks = product?.barang;
 
+  useEffect(() => {
+    dispatch(getAllProducts())
+  }, [dispatch])
+
   const handlePreview = (id) => {
     console.log(id)
     if (isAuth === true) {
@@ -66,13 +70,13 @@ function AllProducts() {
       })
     }
   }
-  useEffect(() => {
-    ;(async () => {
-      if (detailProduct !== '') {
-        return navigate('/productPageEdit')
-      }
-    })()
-  }, [detailProduct])
+  // useEffect(() => {
+  //   ;(async () => {
+  //     if (detailProduct !== '') {
+  //       return navigate('/productPageEdit')
+  //     }
+  //   })()
+  // }, [detailProduct])
 
   useEffect(() => {
     if (product.barang == undefined || product.barang == null) {

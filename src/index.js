@@ -26,6 +26,7 @@ import BuyerInfo from './components/BuyerInfo'
 import BuyerInfoEnd from './components/BuyerInfoEnd'
 import ProductPageEdit from './components/ProductPageEdit'
 import EditProduct from './pages/EditProducts'
+import PreviewEditProduct from './components/PreviewEditPage'
 
 const { REACT_APP_ID } = process.env
 
@@ -47,8 +48,18 @@ root.render(
             </Protected>
           }
         />
+        {/* mobile notification */}
         <Route path="/notif" element={<Notification />} />
         <Route path="/productPageEdit" element={<ProductPageEdit />} />
+        {/* view edit product */}
+        <Route
+          path="/previewPageEdit"
+          element={
+            <Protected>
+              <PreviewEditProduct />
+            </Protected>
+          }
+        />
         <Route
           path="/user/profile"
           element={

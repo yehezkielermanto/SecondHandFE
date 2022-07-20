@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiMenu } from 'react-icons/fi'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import ResponsiveNavLink from '../components/ResponsiveNavLink'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { listCategory } from '../redux/actions/categoryActions'
-import {
-  newProduct,
-  updateProduct,
-  tempProduct,
-} from '../redux/actions/produkActions'
+import { updateProduct, viewEditProduct } from '../redux/actions/produkActions'
 import Swal from 'sweetalert2'
 import { fetchUser } from '../redux/actions/usersActions'
 import { statusAddProduct } from '../redux/actions/produkActions'
+// imagekit
+import { IKImage } from 'imagekitio-react'
+const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 
 export default function addProducts() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { isAuthenticated, error } = useSelector((state) => state.auth)
   const { category, errorC } = useSelector((state) => state.category)
   const { status, previewProduct, detailProduct } = useSelector(
@@ -36,6 +36,10 @@ export default function addProducts() {
   const [dataUrl3, setDataUrl3] = useState('')
   const [previewImg4, setPreview4] = useState('')
   const [dataUrl4, setDataUrl4] = useState('')
+  const [imageFile1, setImageFile1] = useState('')
+  const [imageFile2, setImageFile2] = useState('')
+  const [imageFile3, setImageFile3] = useState('')
+  const [imageFile4, setImageFile4] = useState('')
 
   // --------------------------------------list category and name
   useEffect(() => {
@@ -88,14 +92,13 @@ export default function addProducts() {
   // --------------------------------------------image1
   const image1 = async (e) => {
     e.preventDefault()
-    // setGambar([e.target.files[0]])
-    setPreview1(e.target.files[0])
+    setImageFile1(e.target.files[0])
   }
 
   useEffect(() => {
     let fileReader,
       isCancel = false
-    if (previewImg1) {
+    if (imageFile1) {
       fileReader = new FileReader()
       fileReader.onload = (e) => {
         const { result } = e.target
@@ -103,7 +106,7 @@ export default function addProducts() {
           setDataUrl1(result)
         }
       }
-      fileReader.readAsDataURL(previewImg1)
+      fileReader.readAsDataURL(imageFile1)
     }
     return () => {
       isCancel = true
@@ -111,20 +114,20 @@ export default function addProducts() {
         fileReader.abort()
       }
     }
-  }, [previewImg1])
+  }, [imageFile1])
 
   // ----------------------------------image2
   const image2 = async (e) => {
     e.preventDefault()
     // setGambar([e.target.files[0]])
     // setTempGambar([URL.createObjectURL(e.target.files[0])])
-    setPreview2(e.target.files[0])
+    setImageFile2(e.target.files[0])
   }
 
   useEffect(() => {
     let fileReader,
       isCancel = false
-    if (previewImg2) {
+    if (imageFile2) {
       fileReader = new FileReader()
       fileReader.onload = (e) => {
         const { result } = e.target
@@ -132,7 +135,7 @@ export default function addProducts() {
           setDataUrl2(result)
         }
       }
-      fileReader.readAsDataURL(previewImg2)
+      fileReader.readAsDataURL(imageFile2)
     }
     return () => {
       isCancel = true
@@ -140,19 +143,19 @@ export default function addProducts() {
         fileReader.abort()
       }
     }
-  }, [previewImg2])
+  }, [imageFile2])
 
   // -----------------------------------------------------image3
   const image3 = async (e) => {
     e.preventDefault()
     // setGambar([e.target.files[0]])
     // setTempGambar([URL.createObjectURL(e.target.files[0])])
-    setPreview3(e.target.files[0])
+    setImageFile3(e.target.files[0])
   }
   useEffect(() => {
     let fileReader,
       isCancel = false
-    if (previewImg3) {
+    if (imageFile3) {
       fileReader = new FileReader()
       fileReader.onload = (e) => {
         const { result } = e.target
@@ -160,7 +163,7 @@ export default function addProducts() {
           setDataUrl3(result)
         }
       }
-      fileReader.readAsDataURL(previewImg3)
+      fileReader.readAsDataURL(imageFile3)
     }
     return () => {
       isCancel = true
@@ -168,19 +171,19 @@ export default function addProducts() {
         fileReader.abort()
       }
     }
-  }, [previewImg3])
+  }, [imageFile3])
 
   // ----------------------------------------------------image4
   const image4 = async (e) => {
     e.preventDefault()
     // setGambar([e.target.files[0]])
     // setTempGambar([URL.createObjectURL(e.target.files[0])])
-    setPreview4(e.target.files[0])
+    setImageFile4(e.target.files[0])
   }
   useEffect(() => {
     let fileReader,
       isCancel = false
-    if (previewImg4) {
+    if (imageFile4) {
       fileReader = new FileReader()
       fileReader.onload = (e) => {
         const { result } = e.target
@@ -188,7 +191,7 @@ export default function addProducts() {
           setDataUrl4(result)
         }
       }
-      fileReader.readAsDataURL(previewImg4)
+      fileReader.readAsDataURL(imageFile4)
     }
     return () => {
       isCancel = true
@@ -196,14 +199,15 @@ export default function addProducts() {
         fileReader.abort()
       }
     }
-  }, [previewImg4])
+  }, [imageFile4])
 
   // -----------------------------------show preview product before publish
   const handlePreview = async (e) => {
     e.preventDefault()
-    // temp gambar
+    // temp gambar data image (file dan filePath imagekit)
     let tempGambar = []
     let dataGambar = []
+    let fileImage = []
 
     // check inputan is empty or not
     if (user.idkota == null || user.alamat == null || user.nohp == null) {
@@ -223,24 +227,44 @@ export default function addProducts() {
         previewImg1 !== ''
       ) {
         // check kelengkapan user
-        if (dataUrl1 != '') {
-          tempGambar.push(dataUrl1)
+        // --------------------------------------image1
+        if (previewImg1 != '') {
           dataGambar.push(previewImg1)
         }
-        if (dataUrl2 != '') {
-          tempGambar.push(dataUrl2)
+        if (dataUrl1 != '') {
+          tempGambar.push(dataUrl1)
+          fileImage.push(imageFile1)
+          dataGambar.pop()
+        }
+        // --------------------------------------image2
+        if (previewImg2 !== '') {
           dataGambar.push(previewImg2)
+        }
+        if (dataUrl2 != '') {
+          fileImage.push(imageFile2)
+          tempGambar.push(dataUrl2)
+          dataGambar.pop()
+        }
+        // ---------------------------------------image3
+        if (previewImg3 !== '') {
+          dataGambar.push(previewImg3)
         }
         if (dataUrl3 != '') {
           tempGambar.push(dataUrl3)
-          dataGambar.push(previewImg3)
+          fileImage.push(imageFile3)
+          dataGambar.pop()
+        }
+        // ---------------------------------------image4
+        if (previewImg4 !== '') {
+          dataGambar.push(previewImg4)
         }
         if (dataUrl4 != '') {
           tempGambar.push(dataUrl4)
-          dataGambar.push(previewImg4)
+          fileImage.push(imageFile4)
+          dataGambar.pop()
         }
         dispatch(
-          tempProduct({
+          viewEditProduct({
             namaProduk,
             hargaProduk,
             kategori,
@@ -248,6 +272,7 @@ export default function addProducts() {
             kota: user.idkota,
             gambar: tempGambar,
             dataGambar: dataGambar,
+            image: fileImage,
           }),
         )
       } else {
@@ -268,30 +293,61 @@ export default function addProducts() {
     setHarga(detailProduct.harga)
     setDeskripsi(detailProduct.deskripsi)
     setKategori(detailProduct.idkategori)
-    if (previewProduct != '') {
+    if (detailProduct != '') {
       // set gambar dari redux
       // setTempGambar(previewProduct.tempGambar)
       // cek panjang gambar dari redux
-      let tempGambarLength = previewProduct.gambar.length
+      let tempGambarLength = detailProduct.gambarProduk.length
       for (let i = 0; i < tempGambarLength; i++) {
         if (tempGambarLength == 1) {
-          setPreview1(previewProduct.dataGambar[0])
+          setPreview1(detailProduct.gambarProduk[0].filePath)
         } else if (tempGambarLength == 2) {
-          setPreview1(previewProduct.dataGambar[0])
-          setPreview2(previewProduct.dataGambar[1])
+          setPreview1(detailProduct.gambarProduk[0].filePath)
+          setPreview2(detailProduct.gambarProduk[1].filePath)
         } else if (tempGambarLength == 3) {
-          setPreview1(previewProduct.dataGambar[0])
-          setPreview2(previewProduct.dataGambar[1])
-          setPreview3(previewProduct.dataGambar[2])
+          setPreview1(detailProduct.gambarProduk[0].filePath)
+          setPreview2(detailProduct.gambarProduk[1].filePath)
+          setPreview3(detailProduct.gambarProduk[2].filePath)
         } else if (tempGambarLength == 4) {
-          setPreview1(previewProduct.dataGambar[0])
-          setPreview2(previewProduct.dataGambar[1])
-          setPreview3(previewProduct.dataGambar[2])
-          setPreview4(previewProduct.dataGambar[3])
+          setPreview1(detailProduct.gambarProduk[0].filePath)
+          setPreview2(detailProduct.gambarProduk[1].filePath)
+          setPreview3(detailProduct.gambarProduk[2].filePath)
+          setPreview4(detailProduct.gambarProduk[3].filePath)
         }
       }
     }
   }, [detailProduct])
+
+  // useEffect preview image products
+  useEffect(() => {
+    setProduk(previewProduct.namaProduk)
+    setHarga(previewProduct.hargaProduk)
+    setDeskripsi(previewProduct.deskripsi)
+    setKategori(previewProduct.kategori)
+    if (previewProduct != '') {
+      // set gambar dari redux
+      // setTempGambar(previewProduct.tempGambar)
+      // cek panjang gambar dari redux
+      let tempGambarLength = previewProduct?.image?.length
+      for (let i = 0; i < tempGambarLength; i++) {
+        if (tempGambarLength == 1) {
+          setImageFile1(previewProduct.image[0])
+        } else if (tempGambarLength == 2) {
+          setImageFile1(detailProduct.image[0])
+          setImageFile2(detailProduct.image[1])
+        } else if (tempGambarLength == 3) {
+          setImageFile1(detailProduct.image[0])
+          setImageFile2(detailProduct.image[1])
+          setImageFile3(detailProduct.image[2])
+        } else if (tempGambarLength == 4) {
+          setImageFile1(detailProduct.image[0])
+          setImageFile2(detailProduct.image[1])
+          setImageFile3(detailProduct.image[2])
+          setImageFile4(detailProduct.image[3])
+        }
+      }
+    }
+  }, [previewProduct])
 
   // ----------------------------handling submit button -> terbitkan produk
   const handleSubmit = async (e) => {
@@ -342,7 +398,7 @@ export default function addProducts() {
           timer: 1500,
         })
       }
-      if (previewImg1 === '') {
+      if (previewImg1 === '' || imageFile1 === '') {
         Swal.fire({
           position: 'center',
           icon: 'warning',
@@ -353,26 +409,27 @@ export default function addProducts() {
       }
 
       if (
-        namaProduk !== '' &&
-        hargaProduk !== '' &&
-        kategori !== '' &&
-        deskripsi !== '' &&
-        previewImg1 !== ''
+        (namaProduk !== '' &&
+          hargaProduk !== '' &&
+          kategori !== '' &&
+          deskripsi !== '' &&
+          previewImg1 !== '') ||
+        imageFile1 !== ''
       ) {
         if (dataUrl1 != '') {
-          dataGambar.push(previewImg1)
+          dataGambar.push(imageFile1)
         }
         if (dataUrl2 != '') {
-          dataGambar.push(previewImg2)
+          dataGambar.push(imageFile2)
         }
         if (dataUrl3 != '') {
-          dataGambar.push(previewImg3)
+          dataGambar.push(imageFile3)
         }
         if (dataUrl4 != '') {
-          dataGambar.push(previewImg4)
+          dataGambar.push(imageFile4)
         }
         Swal.fire({
-          title: 'Sedang menambah Barang',
+          title: 'Sedang update Barang',
           timerProgressBar: true,
           didOpen: () => {
             Swal.showLoading()
@@ -381,6 +438,7 @@ export default function addProducts() {
         dispatch(
           // dispatch formData to backend
           updateProduct({
+            id: detailProduct.id,
             namaProduk,
             hargaProduk,
             kategori,
@@ -439,16 +497,16 @@ export default function addProducts() {
       </div>
 
       {/* ------------------------------------------form input new product */}
-      {status == 'success add product' ? (
+      {status === 'updated' ? (
         <Navigate to="/daftarjual" />
-      ) : status === 'edited' ? (
-        <Navigate to="/product" />
+      ) : status === 'viewEdit' ? (
+        <Navigate to="/previewPageEdit" />
       ) : (
         <form>
           {/* {!justUpdated ? ( */}
           <div className="flex flex-col h-full sm:w-full lg:w-6/12 lg:mx-auto mt-5 px-3 text-left">
             <div className="h-full sm:w-full lg:mx-auto mt-5 px-3 text-left">
-              <Link to="/daftarjual">
+              <Link to="/productPageEdit">
                 <div className="invisible lg:visible p-0 w-10 flex justify-center hover:bg-violet-800 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -520,8 +578,8 @@ export default function addProducts() {
                   ) : (
                     category.map((kateg) =>
                       detailProduct.idkategori == kateg.id ? (
-                        <option selected value={kategori.id}>
-                          {kateg.nama_kategori}
+                        <option selected value={kategori?.id}>
+                          {kateg?.nama_kategori}
                         </option>
                       ) : (
                         <option key={kateg.id} value={kateg.id}>
@@ -551,7 +609,7 @@ export default function addProducts() {
                 Foto Produk<span className="text-red-600">*</span>
               </p>
               <div className="mb-4 flex flex-row">
-                {/* image 1 */}
+                {/* -------------------------------------------------image 1 */}
                 <label
                   for="dropzone-file1"
                   class="flex flex-col mx-2 w-full justify-center items-center bg-violet-300 hover:bg-violet-400 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer "
@@ -560,7 +618,13 @@ export default function addProducts() {
                     {previewImg1 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={dataUrl1} alt="image" />
+                      <>
+                        {imageFile1 === '' ? (
+                          <IKImage urlEndpoint={urlImg} path={previewImg1} />
+                        ) : (
+                          <img src={dataUrl1} alt="image" />
+                        )}
+                      </>
                     )}
                   </div>
                   <input
@@ -579,7 +643,7 @@ export default function addProducts() {
                     {previewImg2 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={dataUrl2} alt="image" />
+                      <IKImage urlEndpoint={urlImg} path={previewImg2} />
                     )}
                   </div>
                   <input
@@ -598,7 +662,7 @@ export default function addProducts() {
                     {previewImg3 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={dataUrl3} alt="image" />
+                      <IKImage urlEndpoint={urlImg} path={previewImg3} />
                     )}
                   </div>
                   <input
@@ -617,7 +681,7 @@ export default function addProducts() {
                     {previewImg4 === '' ? (
                       <AiOutlinePlus />
                     ) : (
-                      <img src={dataUrl4} alt="image" />
+                      <IKImage urlEndpoint={urlImg} path={previewImg4} />
                     )}
                   </div>
                   <input

@@ -10,13 +10,13 @@ import { Input } from 'antd'
 import product from '../img/productBuyer.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { IKImage } from 'imagekitio-react'
+const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import {
   emptyDetailProduct,
   fetchProfileSeller,
   getAllProducts,
 } from '../redux/actions/produkActions'
 import { useEffect } from 'react'
-const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import Swal from 'sweetalert2'
 import { createBid, fetchTrans } from '../redux/actions/bidAction'
 import HeaderProduct from './HeaderProduct'

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { FiSearch, FiList, FiBell, FiUser, FiArrowLeft } from 'react-icons/fi'
-import Image from '../img/productDetails.png'
-import Seller from '../img/seller.png'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Link, useNavigate } from 'react-router-dom'
@@ -21,7 +19,7 @@ export default function ProductPageEdit() {
   const dispatch = useDispatch()
 
   const { detailProduct, seller } = useSelector((state) => state.product)
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState('')
 
   const handleToEdit = (id) => {
     console.log(id)
@@ -40,9 +38,6 @@ export default function ProductPageEdit() {
     }
   }
   useEffect(() => {
-    // if (detailProduct !== '') {
-    //   return navigate('/editProduct')
-    // }
     if (detailProduct) {
       dispatch(
         fetchProfileSeller({
@@ -55,10 +50,19 @@ export default function ProductPageEdit() {
   }, [detailProduct])
 
   useEffect(() => {
-    if (detailProduct === undefined && seller === undefined) {
-      return navigate('/daftarjual')
+    if (detailProduct == '' && seller === '') {
+      // return navigate('/daftarjual')
+    } else {
+      setLoading('false')
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        titleText: 'Produk berhasil dimuat',
+        showConfirmButton: false,
+        timer: 1300,
+      })
     }
-  })
+  }, [detailProduct])
 
   const handleBack = () => {
     dispatch(emptyDetailProduct())
