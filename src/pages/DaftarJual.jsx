@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import CardName from '../components/CardName'
 import {
   FiDollarSign,
@@ -8,147 +8,44 @@ import {
   FiPlus,
 } from 'react-icons/fi'
 import HeaderProduct from '../components/HeaderProduct'
-import { Link } from 'react-router-dom'
-import daftarJual from '../img/daftarjual.png'
-import Swal from 'sweetalert2'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchUser } from '../redux/actions/usersActions'
-import { getAllProducts } from '../redux/actions/produkActions'
-import { IKImage } from 'imagekitio-react'
-const urlImg = 'https://ik.imagekit.io/jmprup9kb'
+
+import AllProducts from '../components/AllProducts'
+import { useState } from 'react'
+import BidProducts from '../components/BidProducts'
+import SoldProduct from '../components/SoldProducts'
 
 const DaftarJual = (props) => {
-  const dispatch = useDispatch()
-  const [produks, setProduks] = useState()
+  const [All, setAll] = useState('')
+  const [AllBid, setBid] = useState('')
+  const [AllSold, setSold] = useState('')
+  const [isAll, setIsAll] = useState('')
 
-  const { isAuthenticated, error } = useSelector((state) => state.auth)
-  const { user, errorU } = useSelector((state) => state.users)
-  const { product, status, errorP } = useSelector((state) => state.product)
+  const showAll = () => {
+    setAll('show')
+    setBid('hide')
+    setIsAll('hide')
+    setSold('hide')
+  }
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(fetchUser())
-    } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        titleText: 'Akses Tidak Terautentikasi !!',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-      dispatch(logout())
-    }
-  }, [isAuthenticated])
+  const showBid = () => {
+    setBid('show')
+    setAll('hide')
+    setIsAll('hide')
+    setSold('hide')
+  }
 
-  useEffect(() => {
-    ;(async () => {
-      dispatch(getAllProducts())
-      // console.log(product);
-    })()
-  }, [dispatch])
-  // produks = product?.barang;
+  const showSold = () => {
+    setBid('hide')
+    setAll('hide')
+    setIsAll('hide')
+    setSold('show')
+  }
 
   useEffect(() => {
-    if (product.barang == undefined || product.barang == null) {
-      /* Swal.fire({
-        position: "center",
-        icon: "warning",
-        titleText: "Sedang Memuat Dafta Produk",
-        showConfirmButton: false,
-      }); */
-      Swal.fire({
-        title: 'Sedang Memuat Daftar Produk',
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-        },
-      })
-    } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        titleText: 'Produk Berhasil Termuat',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-
-      let temp = product?.barang
-
-      setProduks(
-        temp.filter((filteredProduct) => filteredProduct.iduser === user.id),
-      )
+    if (All !== 'show' && AllBid !== 'show' && AllSold !== 'show') {
+      setIsAll('show')
     }
-  }, [product])
-
-  useEffect(() => {
-    if (error) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        titleText: error,
-        showConfirmButton: false,
-        timer: 3000,
-      })
-
-      dispatch(logout())
-    }
-  }, [error])
-
-  useEffect(() => {
-    if (errorU) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        titleText: errorU,
-        showConfirmButton: false,
-        timer: 3000,
-      })
-      // alert(errorU);
-    }
-  }, [errorU])
-
-  useEffect(() => {
-    if (errorP) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        titleText: errorP,
-        showConfirmButton: false,
-        timer: 3000,
-      })
-
-      dispatch(logout())
-    }
-  }, [errorP])
-
-  /* useEffect(() => {
-    if (status === null || status == undefined) {
-      Swal.fire({
-        position: "center",
-        icon: "warning",
-        titleText: "Sedang Memuat Daftar Produk",
-        showConfirmButton: false,
-      });
-    }
-  }) */
-
-  /* useEffect(() => {
-      if (produks != null || produks != undefined) {
-        let temp = product?.barang;
-        produks = temp.filter((filteredProduct) => filteredProduct.iduser === user.id);
-        console.log(produks);
-
-        if (produks == null || produks == undefined || produks == "undefined") {
-          produks = null;
-        }
-        console.log(temp);
-        console.log(`ID USER PRODUK ${product?.barang[1]?.iduser}`);
-        console.log(`ID USE ${user.id}`);
-      }
-  }, [produks]); */
-
-  // console.log(produks)
-  // console.log(product);
+  }, [isAll])
 
   return (
     <div className="w-screen min-h-screen">
@@ -185,6 +82,7 @@ const DaftarJual = (props) => {
             <div className="flex flex-col divide-y divide-[#E5E5E5]">
               <button
                 className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}
+                onClick={showAll}
               >
                 <span className="flex gap-2 items-center">
                   <FiBox className="" /> Semua Produk
@@ -193,6 +91,7 @@ const DaftarJual = (props) => {
               </button>
               <button
                 className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}
+                onClick={showBid}
               >
                 <span className="flex gap-2 items-center">
                   <FiHeart className="" /> Diminati
@@ -201,6 +100,7 @@ const DaftarJual = (props) => {
               </button>
               <button
                 className={`flex justify-between items-center py-3 px-4 focus:text-[#7126B5] font-medium hover:bg-gray-200 focus:outline-none`}
+                onClick={showSold}
               >
                 <span className="flex gap-2 items-center">
                   <FiDollarSign className="" /> Terjual
@@ -209,86 +109,10 @@ const DaftarJual = (props) => {
               </button>
             </div>
           </div>
-
-          {/* Product List */}
-          <div className="grid grid-cols-2 gap-2 lg:grid-cols-3 min-h-[10rem] mb-2">
-            <Link
-              to="/addProduct"
-              className="flex flex-col justify-center items-center w-full h-full min-h-[10rem] border border-neutral-2 border-dashed text-neutral-3 hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2 focus:outline-none"
-            >
-              <FiPlus />
-              <p className="text-center">Tambah Produk</p>
-            </Link>
-            {produks == null || produks == undefined ? (
-              <div className="flex flex-col w-full h-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
-                <div className="h-1/2">
-                  <img
-                    src={daftarJual}
-                    className="w-full h-full block rounded-[4px] justify-center items-center"
-                    alt="..."
-                  />
-                </div>
-                <div className="h-1/2 mt-2">
-                  <p className="">
-                    <Link
-                      to="/seller/produk/detail"
-                      className="text-decoration-none text-dark"
-                    >
-                      Jam Tangan
-                    </Link>
-                  </p>
-                  <p className="text-[#8A8A8A]">
-                    <small>Aksesoris</small>
-                  </p>
-                  <p className="">Rp. 250.000</p>
-                </div>
-              </div>
-            ) : (
-              produks.map((produkList) => (
-                <div className="flex flex-col w-full h-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
-                  <div className="h-1/2">
-                    {/* <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." /> */}
-                    <IKImage
-                      className="w-full h-full block rounded-[4px] justify-center items-center"
-                      urlEndpoint={urlImg}
-                      path={produkList?.gambarProduk?.filePath}
-                    />
-                  </div>
-                  <div className="h-1/2 mt-2">
-                    <p className="">
-                      <Link
-                        to="/seller/produk/detail"
-                        className="text-decoration-none text-dark"
-                      >
-                        {produkList.nama}
-                      </Link>
-                    </p>
-                    <p className="text-[#8A8A8A]">
-                      <small>Aksesoris</small>
-                    </p>
-                    <p>Rp.{produkList.harga}</p>
-                  </div>
-                </div>
-              ))
-            )}
-
-            {/* <div className="flex flex-col w-full h-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
-              <div className="h-1/2">
-                <img src={daftarJual} className="w-full h-full block rounded-[4px] justify-center items-center" alt="..." />
-              </div>
-              <div className="h-1/2 mt-2">
-                <p className="">
-                  <Link to="/seller/produk/detail" className="text-decoration-none text-dark">
-                    Jam Tangan
-                  </Link>
-                </p>
-                <p className="text-[#8A8A8A]">
-                  <small>Aksesoris</small>
-                </p>
-                <p className="">Rp. 250.000</p>
-              </div>
-            </div> */}
-          </div>
+          {isAll === 'show' ? <AllProducts /> : ''}
+          {All === 'show' ? <AllProducts /> : ''}
+          {AllBid === 'show' ? <BidProducts /> : ''}
+          {AllSold === 'show' ? <SoldProduct /> : ''}
         </div>
       </div>
     </div>

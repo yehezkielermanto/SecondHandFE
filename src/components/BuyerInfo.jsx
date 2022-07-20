@@ -9,6 +9,15 @@ import { FaWhatsapp } from 'react-icons/fa'
 import buyer from '../img/buyer.png'
 import product from '../img/productBuyer.png'
 import { terimaPenawaran } from '../redux/actions/produkActions'
+const urlImg = 'https://ik.imagekit.io/jmprup9kb'
+import { IKImage } from 'imagekitio-react'
+import Moment from 'moment'
+import {
+  AcceptBid,
+  declineTrans,
+  DeniedBid,
+  soldProduct,
+} from '../redux/actions/bidAction'
 
 export default function BuyerInfo(props) {
   const navigate = useNavigate()
@@ -16,11 +25,13 @@ export default function BuyerInfo(props) {
   // const isAcceptProduct = window.location.pathname === '/accept-produk'
 
   const { terima } = useSelector((state) => state.product)
-
+  const { detailTrans } = useSelector((state) => state.bid)
+  const { user } = useSelector((state) => state.users)
   const [isAcceptProduct, setAcceptProduct] = useState(false)
   const [isModalAcceptShow, setModalAcceptShow] = useState(false)
   const [isModalDeniedShow, setModalDeniedShow] = useState(false)
   const [isModalStatusShow, setModalStatusShow] = useState(false)
+  const [choose, setChoose] = useState('terima')
   const isModalShow =
     isModalAcceptShow || isModalStatusShow || isModalDeniedShow
 
@@ -29,9 +40,12 @@ export default function BuyerInfo(props) {
     setModalStatusShow(false)
     setModalDeniedShow(false)
   }
+
+  // terima tawaran
   const handleOpenAcceptModal = () => {
     setModalAcceptShow(true)
     dispatch(terimaPenawaran())
+    dispatch(AcceptBid(detailTrans.bid.idbarang))
   }
   const handleOpenDeniedModal = () => {
     setModalDeniedShow(true)
@@ -49,6 +63,45 @@ export default function BuyerInfo(props) {
     }
   }, [terima])
 
+  // cek apakah detailTrans kosong
+  useEffect(() => {
+    if (detailTrans == undefined) {
+      return navigate('/daftarjual')
+    }
+  }, [detailTrans])
+
+  // tolak tawaran
+  const handleDeniedBid = () => {
+    dispatch(DeniedBid(detailTrans.bid.id))
+    setModalDeniedShow(false)
+    return navigate('/daftarjual')
+  }
+
+  // button handle end transaction
+  const handleEndTrans = (e) => {
+    e.preventDefault()
+    console.log(choose)
+    if (choose == 'terima') {
+      dispatch(
+        soldProduct({
+          idtrans: detailTrans.bid.id,
+          idbarang: detailTrans.bid.idbarang,
+        }),
+      )
+    } else {
+      dispatch(
+        declineTrans({
+          idtrans: detailTrans.bid.id,
+        }),
+      )
+    }
+    return navigate('/BuyerInfoEnd')
+  }
+
+  const handleStateEnd = (value) => {
+    setChoose(value)
+  }
+
   return (
     <section className="h-full">
       <Header title="Info Penawar" />
@@ -62,13 +115,18 @@ export default function BuyerInfo(props) {
 
             <div className="flex flex-row items-center bg-white rounded-[12px] border shadow-md">
               <div className="w-[48px] h-[48px] rounded-[12px] border border-neutral-2 m-4">
-                <img src={buyer} />
+                <IKImage
+                  urlEndpoint={urlImg}
+                  path={detailTrans?.bid?.gambarUser.filePath}
+                />
               </div>
               <div className="flex flex-col justify-between leading-normal">
                 <p className="mb-1 text-black text-sm font-normal">
-                  Nama Pembeli
+                  {detailTrans?.bid?.user.nama}
                 </p>
-                <p className="font-normal text-[10px] text-neutral-3 ">Kota</p>
+                <p className="font-normal text-[10px] text-neutral-3 ">
+                  {detailTrans?.bid?.user.kotum.nama_kota}
+                </p>
               </div>
             </div>
 
@@ -79,36 +137,37 @@ export default function BuyerInfo(props) {
             <div className="grid grid-cols-1 divide-y">
               <div>
                 <div className="flex gap-4 py-3">
-                  <img
+                  <IKImage
                     className="w-12 h-12 object-cover rounded-lg flex-none"
+                    urlEndpoint={urlImg}
+                    path={detailTrans?.bid?.gambarProduk.filePath}
                     alt="Foto Produk"
-                    src={product}
                   />
 
                   <div className="flex-grow flex flex-col">
                     <p className="text-[10px] text-neutral-3 mb-1">
-                      Penjualan Produk
+                      Penawaran Produk
                     </p>
-                    <p className="mb-1">Jam Tangan Casio</p>
-                    <p className="mb-1">Rp. 20000</p>
-                    <p>Terjual Rp. 10000</p>
+                    <p className="mb-1">{detailTrans?.bid?.barang.nama}</p>
+                    <p className="mb-1">Rp. {detailTrans?.bid?.barang.harga}</p>
+                    <p>Ditawar Rp. {detailTrans?.bid?.harga_tawar}</p>
                   </div>
 
                   <span className="flex-none text-[10px] text-neutral-3">
-                    20 Apr, 14:04
+                    {Moment(detailTrans?.bid?.createdAt).format(
+                      'DD MMM, h:mm a',
+                    )}
                   </span>
                 </div>
 
                 {/* Buttons */}
                 <div
                   className={`${
-
                     isAcceptProduct ? 'hidden' : 'grid'
-
                   } grid-cols-2 lg:float-right text-center pt-4 pb-4`}
                 >
                   <button
-                    className="mr-2 px-[48px] py-2 inline-block bg-white border border-[#7126B5] hover:bg-gray-200 text-black hover:text-white font-normal text-sm leading-tight rounded-[16px] 
+                    className="mr-2 px-[48px] py-2 inline-block bg-white border border-[#7126B5] hover:bg-gray-200 text-black font-normal text-sm leading-tight rounded-[16px] 
                                       focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7126B5] disabled:opacity-70"
                     type="button"
                     onClick={handleOpenDeniedModal}
@@ -181,26 +240,33 @@ export default function BuyerInfo(props) {
               Product Match
             </p>
             <div className="flex flex-row items-center">
-              <img
+              {/* modal seller tertarik untuk mengambil harga */}
+              <IKImage
                 className="w-[48px] h-[48px] rounded-[12px] border border-neutral-2"
+                urlEndpoint={urlImg}
+                path={detailTrans?.bid?.gambarUser.filePath}
                 alt="buyer"
-                src={buyer}
               />
               <div className="flex flex-col justify-between ml-4">
-                <p className="mb-1 font-medium text-sm">Nama Pembeli</p>
-                <p className="font-normal text-[10px] text-neutral-3 ">Kota</p>
+                <p className="mb-1 font-medium text-sm">
+                  {detailTrans?.bid?.user.nama}
+                </p>
+                <p className="font-normal text-[10px] text-neutral-3 ">
+                  {detailTrans?.bid?.user.kotum.nama_kota}
+                </p>
               </div>
             </div>
             <div className="flex flex-row items-center mt-4">
-              <img
+              <IKImage
                 className="w-[48px] h-[48px] rounded-[12px] border border-neutral-2"
-                alt="produk"
-                src={product}
+                urlEndpoint={urlImg}
+                path={detailTrans?.bid?.gambarProduk.filePath}
+                alt="Foto Produk"
               />
               <div className="flex flex-col justify-between ml-4 text-sm">
-                <p className="mb-1">Jam Tangan Casio</p>
-                <p className="mb-1">Rp. 20000</p>
-                <p>Ditawar Rp. 10000</p>
+                <p className="mb-1">{detailTrans?.bid?.barang.nama}</p>
+                <p className="mb-1">Rp. {detailTrans?.bid?.barang.harga}</p>
+                <p>Ditawar {detailTrans?.bid?.harga_tawar}</p>
               </div>
             </div>
           </div>
@@ -235,12 +301,13 @@ export default function BuyerInfo(props) {
                           focus:shadow-lg focus:outline-none active:shadow-lg mr-2"
               type="button"
             >
-              Cancel
+              Batalkan
             </button>
             <button
               className="flex items-center justify-center  py-2 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-normal text-sm rounded-[16px] 
                           focus:shadow-lg focus:outline-none active:shadow-lg"
               type="button"
+              onClick={handleDeniedBid}
             >
               Tolak
             </button>
@@ -264,12 +331,13 @@ export default function BuyerInfo(props) {
             <div className="flex pb-3">
               <div className="items-center h-5">
                 <input
-                  checked
+                  checked={choose == 'terima'}
                   id="radio1"
                   name="status"
                   type="radio"
-                  value=""
+                  value="terima"
                   className="accent-[#7126B5] bg-[#C4C4C4] rounded border-[#C4C4C4] focus:ring-[#C4C4C4] focus:ring-2"
+                  onChange={() => handleStateEnd('terima')}
                 />
               </div>
               <div className="ml-3 text-sm">
@@ -290,8 +358,10 @@ export default function BuyerInfo(props) {
                   id="radio2"
                   name="status"
                   type="radio"
-                  value=""
+                  value="tolak"
                   className="accent-[#7126B5] bg-[#C4C4C4] rounded border-[#C4C4C4] focus:ring-[#C4C4C4] focus:ring-2"
+                  onChange={() => handleStateEnd('tolak')}
+                  checked={choose == 'tolak'}
                 />
               </div>
               <div className="ml-3 text-sm">
@@ -308,19 +378,16 @@ export default function BuyerInfo(props) {
             </div>
           </div>
 
-          <Link to="/BuyerInfoEnd">
           <button
             className="flex items-center justify-center w-full py-3 mt-6 bg-[#7126B5] hover:bg-[#8f48cf] text-white font-normal text-sm rounded-[16px] 
                       focus:shadow-lg focus:outline-none active:shadow-lg"
-            type="button">
+            type="button"
+            onClick={handleEndTrans}
+          >
             Kirim
           </button>
-          </Link>
-
         </div>
       </div>
     </section>
   )
-
 }
-
