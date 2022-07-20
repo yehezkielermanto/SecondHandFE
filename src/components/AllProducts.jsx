@@ -166,7 +166,7 @@ function AllProducts() {
       {produks == null || produks == undefined ? (
         <div className="grid grid-cols-3 gap-2 md:grid-cols-5 lg:grid-cols-1 min-h-[8rem] mb-2">
           <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
-            <p className="text-center mx-5">Belum Ada Product</p>
+            <p className="text-center justify-center items-center mx-5">Belum Ada Product</p>
           </div>
         </div>
       ) : (
@@ -174,7 +174,7 @@ function AllProducts() {
         produks.map((produkList) => (
           <div className="grid grid-cols-3 gap-2 md:grid-cols-5 lg:grid-cols-1 min-h-[8rem] mb-2">
             <div
-              className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
+              className="flex flex-col w-48  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
               onClick={() => handlePreview(produkList.id)}
               key={produkList.id}
             >
