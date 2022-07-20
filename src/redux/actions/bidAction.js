@@ -219,7 +219,7 @@ export const makeFalseStatus = (params) => async (dispatch) => {
     if (params != '') {
       const response = await fetch(
         REACT_APP_URLENDPOINT +
-          `/api/v1/transaction/makeFalse/${params.iduser}`,
+          `/api/v1/transaction/makeFalse/${params.iduser}/${params.idbarang}`,
         {
           method: 'put',
           headers: {

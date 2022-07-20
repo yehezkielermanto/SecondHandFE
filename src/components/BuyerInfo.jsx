@@ -47,7 +47,12 @@ export default function BuyerInfo(props) {
     setModalAcceptShow(true)
     dispatch(terimaPenawaran())
     dispatch(AcceptBid(detailTrans.bid.idbarang))
-    dispatch(makeFalseStatus({ iduser: detailTrans.bid.iduser }))
+    dispatch(
+      makeFalseStatus({
+        iduser: detailTrans.bid.iduser,
+        idbarang: detailTrans.bid.idbarang,
+      }),
+    )
   }
   const handleOpenDeniedModal = () => {
     setModalDeniedShow(true)
