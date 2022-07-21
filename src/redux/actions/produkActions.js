@@ -21,7 +21,7 @@ const { REACT_APP_URLENDPOINT } = process.env
 export const deleteProduct = (params) => async (dispatch) => {
   try {
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/product/' + params.id,
+      REACT_APP_URLENDPOINT + '/api/v1/products/' + params.id,
       {
         method: 'DELETE',
         headers: {
@@ -278,7 +278,7 @@ export const updateProduct = (data) => async (dispatch) => {
     }
 
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/product/' + data.id,
+      REACT_APP_URLENDPOINT + '/api/v1/products/' + data.id,
       {
         method: 'PUT',
         body: formdata,
