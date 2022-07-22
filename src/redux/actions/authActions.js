@@ -8,14 +8,14 @@ import {
   GET_ALL_PRODUCT,
   DELETE_TRANSACTION,
 } from './types'
-const { REACT_APP_URLENDPOINT } = process.env
+const { REACT_APP_ENDPOINT } = process.env
 import Swal from 'sweetalert2'
 
 // register new user
 export const registerUser = (data) => async (dispatch) => {
   try {
     const response = await fetch(
-      `${REACT_APP_URLENDPOINT}/api/v1/auth/register`,
+      `${REACT_APP_ENDPOINT}/api/v1/auth/register`,
       {
         method: 'POST',
         headers: {
@@ -54,7 +54,7 @@ export const registerUser = (data) => async (dispatch) => {
 // login action
 export const loginViaForm = (data) => async (dispatch) => {
   try {
-    const response = await fetch(`${REACT_APP_URLENDPOINT}/api/v1/auth/login`, {
+    const response = await fetch(`${REACT_APP_ENDPOINT}/api/v1/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
       access_token: accessToken,
     }
     const response = await fetch(
-      `${REACT_APP_URLENDPOINT}/api/v1/auth/google`,
+      `${REACT_APP_ENDPOINT}/api/v1/auth/google`,
       {
         method: 'POST',
         headers: {
