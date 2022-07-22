@@ -153,7 +153,7 @@ function AllProducts() {
   return (
     <>
       {/* Product List */}
-      <div className="grid grid-cols-3 gap-2 md:grid-cols-5 lg:grid-cols-1 min-h-[8rem] mb-2">
+      <div className="grid grid-cols-3 gap-2 md:grid-cols-1 lg:grid-cols-3 min-h-[8rem] mb-2">
         <Link
           to="/addProduct"
           className="flex flex-col justify-center items-center w-full h-full min-h-[8rem] border border-neutral-2 border-dashed text-neutral-3 hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2 focus:outline-none"
@@ -161,20 +161,19 @@ function AllProducts() {
           <FiPlus />
           <p className="text-center mx-5">Tambah Produk</p>
         </Link>
-      </div>
-
-      {produks == null || produks == undefined ? (
-        <div className="grid grid-cols-3 gap-2 md:grid-cols-5 lg:grid-cols-1 min-h-[8rem] mb-2">
-          <div className="flex flex-col w-full  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2">
-            <p className="text-center justify-center items-center mx-5">Belum Ada Product</p>
-          </div>
-        </div>
-      ) : (
-        // edit disini to navigate ke ProductPageEdit
-        produks.map((produkList) => (
+        {produks == '' || produks == undefined ? (
           <div className="grid grid-cols-3 gap-2 md:grid-cols-5 lg:grid-cols-1 min-h-[8rem] mb-2">
+            <div className="flex flex-col justify-center items-center w-full h-full min-h-[8rem] border border-neutral-2 border-dashed text-neutral-3 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2 focus:outline-none">
+              <p className="text-center justify-center items-center mx-5">
+                Belum Ada Product
+              </p>
+            </div>
+          </div>
+        ) : (
+          // edit disini to navigate ke ProductPageEdit
+          produks.map((produkList) => (
             <div
-              className="flex flex-col w-48  bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
+              className="flex flex-col w-full bg-neutral-1 shadow-low rounded-md py-3 px-2 gap-2 border border-neutral-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-2"
               onClick={() => handlePreview(produkList.id)}
               key={produkList.id}
             >
@@ -194,9 +193,9 @@ function AllProducts() {
                 <p>Rp.{produkList.harga}</p>
               </div>
             </div>
-          </div>
-        ))
-      )}
+          ))
+        )}
+      </div>
     </>
   )
 }
