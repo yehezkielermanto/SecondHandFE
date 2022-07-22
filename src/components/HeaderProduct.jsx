@@ -9,6 +9,7 @@ import ResponsiveNavLink from './ResponsiveNavLink'
 import Sidebar from './Sidebar'
 const urlImg = 'https://ik.imagekit.io/jmprup9kb'
 import Moment from 'moment'
+import { getProductByNama } from '../redux/actions/produkActions'
 
 export default function HeaderProduct() {
   const dispatch = useDispatch()
@@ -18,6 +19,11 @@ export default function HeaderProduct() {
   const { user } = useSelector((state) => state.users)
   const { isAuthenticated } = useSelector((state) => state.auth)
   const [trans, setTrans] = useState('')
+  const [search, setSearch] = useState('')
+  const handleSearch = () => {
+    console.log(search)
+    dispatch(getProductByNama(search))
+  }
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -64,8 +70,11 @@ export default function HeaderProduct() {
               <input
                 className="w-full h-full bg-transparent"
                 placeholder="Cari di sini ..."
+                onChange={(e) => setSearch(e.target.value)}
               />
-              <FiSearch className="text-2xl" />
+              <button onClick={handleSearch}>
+                <FiSearch className="text-2xl" />
+              </button>
             </div>
           </div>
 
