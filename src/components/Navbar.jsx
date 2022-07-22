@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import { useDispatch } from "react-redux";
 import "../public/css/style.css";
 import logo from "../img/logo.png";
+import {
+  getProductByNama,
+  getAllProducts,
+} from "../redux/actions/produkActions";
 
 const margin = {
   marginLeft: "100px",
@@ -17,6 +22,24 @@ const marginmin = {
 };
 
 function Navbar() {
+  const dispatch = useDispatch();
+  // const [nama, Statenama] = useState("");
+  // --- taruh di form.control
+  const handleSubmit = async () => {
+    let keyword = document.getElementById("exampleFormControlInput").value;
+    if (keyword === "") {
+      dispatch(getAllProducts());
+    } else {
+      dispatch(getProductByNama(keyword));
+    }
+  };
+
+  // taruh di button
+  const handleKeyPress = async (target) => {
+    if (target.charCode === 13) {
+      handleSubmit();
+    }
+  };
   return (
     <>
       <nav className="flex items-center justify-between drop-shadow-lg w-full h-20 bg-white">
@@ -30,23 +53,27 @@ function Navbar() {
               className="form-control block w-full lg:px-10 py-1.5 font-normal text-gray-700 border border-solid border-gray-300 rounded-[10px] m-0 text-gray-700 bg-gray-300"
               id="exampleFormControlInput"
               placeholder="cari apapun disini"
+              onchange={handleKeyPress}
             />
           </div>
         </div>
 
         <div className="flex items-center justify-end w-20 h-20 py-5 lg:w-1/2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
+          <button onClick={handleSubmit}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
