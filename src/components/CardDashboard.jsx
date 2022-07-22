@@ -24,6 +24,7 @@ const CardDashboard = () => {
   const { isAuthenticated } = useSelector((state) => state.auth)
   const [isLoading, setLoading] = useState(false)
   const [isAuth, setAuth] = useState(false)
+  const [Product, setProduct] = useState('')
   // const { user } = useSelector((state) => state.users)
 
   useEffect(() => {
@@ -84,42 +85,44 @@ const CardDashboard = () => {
   })
 
   useEffect(() => {
-    ;(async () => {
-      if (product == '') {
-        Swal.fire({
-          title: 'Sedang memuat Produk',
-          timerProgressBar: true,
-          didOpen: () => {
-            Swal.showLoading()
-          },
-        })
-      } else {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          titleText: 'Produk Berhasil Termuat',
-          showConfirmButton: false,
-          timer: 1500,
-        })
-      }
-    })()
+    if (product == '') {
+      Swal.fire({
+        title: 'Sedang memuat Produk',
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        titleText: 'Produk Berhasil Termuat',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+      let temp = product?.barang
+      setProduct(
+        temp.filter((filteredProduct) => filteredProduct.available !== false),
+      )
+    }
   }, [product])
 
   return (
     <>
       {/* <div className="flex flex-row justify-center"> */}
-      {product === [] ? (
+      {Product === [] ? (
         <></>
       ) : (
         <>
-          {product.barang === undefined ? (
+          {Product === '' ? (
             <div>
               <h4 className="content-center font-bold justify-end  my-4">
                 Produk Tidak Tersedia
               </h4>
             </div>
           ) : (
-            product?.barang?.map((product) => (
+            Product.map((product) => (
               <div
                 className="mt-3 inline-block m-1 p-1 border border-gray-300 rounded-lg hover:cursor-pointer shadow-low p-4 text-neutral-5 rounded-lg w-full"
                 onClick={() => handlePreview(product.id)}

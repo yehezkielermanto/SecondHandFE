@@ -75,7 +75,7 @@ const DaftarJual = (props) => {
         </div>
 
         {/* Content Body / Main */}
-        <div className="lg:flex mt-4 lg:gap-5">
+        <div className="lg:flex mt-4 lg:gap-3">
           {/* Categories Table - Dekstop */}
           <div className="hidden lg:flex w-56 shadow-high bg-white py-4 border rounded-[16px] flex-col gap-2 flex-none self-start">
             <p className="font-medium text-black px-4">Kategori</p>
