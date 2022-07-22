@@ -21,7 +21,8 @@ const { REACT_APP_URLENDPOINT } = process.env
 export const deleteProduct = (params) => async (dispatch) => {
   try {
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/product/' + params.id,
+      REACT_APP_URLENDPOINT + '/api/v1/products/' + params.id,
+
       {
         method: 'DELETE',
         headers: {
@@ -96,7 +97,7 @@ export const getAllProducts = () => async (dispatch) => {
           dispatch({
             type: USERS_ERROR,
           })
-          retcurn
+          return
           // console.log(data);
         }
         // data.data.barang[i].gambarbarangs[j].gambar = imgDetail.gambar
@@ -127,6 +128,72 @@ export const getAllProducts = () => async (dispatch) => {
       type: PRODUCT_ERROR,
       payload: error.response,
     })
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: error.message,
+      showConfirmButton: false,
+      timer: 1500,
+    })
+  }
+}
+
+//------------------------------------------------------------------search by nama
+
+export const getProductByNama = (params) => async (dispatch) => {
+  try {
+    const nama = params
+    const response = await fetch(
+      REACT_APP_URLENDPOINT +
+        '/api/v1/product/nama?' +
+        new URLSearchParams({
+          nama,
+        }),
+    )
+    const data = await response.json()
+    // ambil gambar
+    let i = 0
+    while (i < data.length) {
+      // console.log(data.data.barang[i].gambarbarangs[0].gambar);
+      // return;
+      // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
+      const fetchImgDetail = await fetch(
+        `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data[i].gambarbarangs[0].gambar}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+
+      const imgDetail = await fetchImgDetail.json()
+      // console.log(imgDetail)
+      if (imgDetail.status === 'FAILED') {
+        dispatch({
+          type: USERS_ERROR,
+        })
+        return
+        // console.log(data);
+      }
+
+      data[i].gambarProduk = imgDetail.gambar
+      // }
+      i++
+    }
+    // console.log({ barang: data })
+
+    dispatch({
+      type: GET_ALL_PRODUCT,
+      payload: { barang: data },
+      status: 'GET_ALL',
+    })
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ERROR,
+      payload: error.response,
+    })
+
     Swal.fire({
       position: 'center',
       icon: 'error',
@@ -278,7 +345,7 @@ export const updateProduct = (data) => async (dispatch) => {
     }
 
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/product/' + data.id,
+      REACT_APP_URLENDPOINT + '/api/v1/products/' + data.id,
       {
         method: 'PUT',
         body: formdata,
