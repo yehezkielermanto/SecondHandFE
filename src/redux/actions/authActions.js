@@ -8,14 +8,14 @@ import {
   GET_ALL_PRODUCT,
   DELETE_TRANSACTION,
 } from './types'
-const { REACT_APP_ENDPOINT } = process.env
+// const { process.env.REACT_APP_ENDPOINT } = process.env
 import Swal from 'sweetalert2'
 
 // register new user
 export const registerUser = (data) => async (dispatch) => {
   try {
     const response = await fetch(
-      `${REACT_APP_ENDPOINT}/api/v1/auth/register`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/auth/register`,
       {
         method: 'POST',
         headers: {
@@ -54,13 +54,16 @@ export const registerUser = (data) => async (dispatch) => {
 // login action
 export const loginViaForm = (data) => async (dispatch) => {
   try {
-    const response = await fetch(`${REACT_APP_ENDPOINT}/api/v1/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/auth/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    })
+    )
 
     const result = await response.json()
     if (result.token) {
@@ -115,7 +118,7 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
       access_token: accessToken,
     }
     const response = await fetch(
-      `${REACT_APP_ENDPOINT}/api/v1/auth/google`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/auth/google`,
       {
         method: 'POST',
         headers: {
