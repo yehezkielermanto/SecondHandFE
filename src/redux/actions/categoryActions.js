@@ -17,7 +17,7 @@ export const categoryError = (error) => async (dispatch) => {
 export const listCategory = () => async (dispatch) => {
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_URLENDPOINT}/api/v1/category`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/category`,
       {
         method: 'GET',
         headers: {

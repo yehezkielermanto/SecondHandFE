@@ -15,13 +15,13 @@ import {
   TEMP_PRODUCT_EDIT,
   UPDATE_PRODUCT,
 } from './types'
-const { REACT_APP_URLENDPOINT } = process.env
+// const { REACT_APP_ENDPOINT } = process.env
 
 // action delete product
 export const deleteProduct = (params) => async (dispatch) => {
   try {
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/products/' + params.id,
+      process.env.REACT_APP_ENDPOINT + '/api/v1/products/' + params.id,
 
       {
         method: 'DELETE',
@@ -63,13 +63,16 @@ export const deleteProduct = (params) => async (dispatch) => {
 // --------------------------------------------------------------------action get all products
 export const getAllProducts = () => async (dispatch) => {
   try {
-    const response = await fetch(`${REACT_APP_URLENDPOINT}/api/v1/products`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        // Authorization: token,
+    const response = await fetch(
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/products`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: token,
+        },
       },
-    })
+    )
 
     const data = await response.json()
     // console.log(data.data.barang.length)
@@ -82,7 +85,7 @@ export const getAllProducts = () => async (dispatch) => {
         // return;
         // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
         const fetchImgDetail = await fetch(
-          `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[0].gambar}`,
+          `${process.env.REACT_APP_ENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[0].gambar}`,
           {
             method: 'GET',
             headers: {
@@ -144,7 +147,7 @@ export const getProductByNama = (params) => async (dispatch) => {
   try {
     const nama = params
     const response = await fetch(
-      REACT_APP_URLENDPOINT +
+      process.env.REACT_APP_ENDPOINT +
         '/api/v1/product/nama?' +
         new URLSearchParams({
           nama,
@@ -158,7 +161,7 @@ export const getProductByNama = (params) => async (dispatch) => {
       // return;
       // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
       const fetchImgDetail = await fetch(
-        `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data[i].gambarbarangs[0].gambar}`,
+        `${process.env.REACT_APP_ENDPOINT}/api/v1/products/picture/${data[i].gambarbarangs[0].gambar}`,
         {
           method: 'GET',
           headers: {
@@ -212,7 +215,7 @@ export const getProductByNama = (params) => async (dispatch) => {
 export const getProductByKategori = (params) => async (dispatch) => {
   try {
     const response = await fetch(
-      REACT_APP_URLENDPOINT +
+      process.env.REACT_APP_ENDPOINT +
         '/api/v1/product/kategori?' +
         new URLSearchParams({ idkategori: params }),
       {
@@ -233,7 +236,7 @@ export const getProductByKategori = (params) => async (dispatch) => {
       // for (j = 0; j < data.barang[i].gambarbarangs.length; j++) {
       // console.log(data.data.barang[i].gambarbarangs[j].gambar)
       const fetchImgDetail = await fetch(
-        `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.barang[i].gambarbarangs[j].gambar}`,
+        `${process.env.REACT_APP_ENDPOINT}/api/v1/products/picture/${data.barang[i].gambarbarangs[j].gambar}`,
         {
           method: 'GET',
           headers: {
@@ -301,7 +304,7 @@ export const newProduct = (data) => async (dispatch) => {
     }
 
     const response = await fetch(
-      `${REACT_APP_URLENDPOINT}/api/v1/products`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/products`,
       requestOptions,
     )
 
@@ -345,7 +348,7 @@ export const updateProduct = (data) => async (dispatch) => {
     }
 
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/products/' + data.id,
+      process.env.REACT_APP_ENDPOINT + '/api/v1/products/' + data.id,
       {
         method: 'PUT',
         body: formdata,
@@ -408,7 +411,7 @@ export const tempProduct = (data) => async (dispatch) => {
     if (data != '') {
       // =======================ambil data kota dari tabel kota di database
       const response = await fetch(
-        REACT_APP_URLENDPOINT + '/api/v1/cities/' + data.kota,
+        process.env.REACT_APP_ENDPOINT + '/api/v1/cities/' + data.kota,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -416,7 +419,7 @@ export const tempProduct = (data) => async (dispatch) => {
       )
       // ====================ambil nama kategori dari tabel kategori
       const findCateg = await fetch(
-        REACT_APP_URLENDPOINT + '/api/v1/category/' + data.kategori,
+        process.env.REACT_APP_ENDPOINT + '/api/v1/category/' + data.kategori,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -450,7 +453,7 @@ export const viewEditProduct = (data) => async (dispatch) => {
     if (data != '') {
       // =======================ambil data kota dari tabel kota di database
       const response = await fetch(
-        REACT_APP_URLENDPOINT + '/api/v1/cities/' + data.kota,
+        process.env.REACT_APP_ENDPOINT + '/api/v1/cities/' + data.kota,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -458,7 +461,7 @@ export const viewEditProduct = (data) => async (dispatch) => {
       )
       // ====================ambil nama kategori dari tabel kategori
       const findCateg = await fetch(
-        REACT_APP_URLENDPOINT + '/api/v1/category/' + data.kategori,
+        process.env.REACT_APP_ENDPOINT + '/api/v1/category/' + data.kategori,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -510,7 +513,7 @@ export const terimaPenawaran = () => async (dispatch) => {
 export const fetchProductsById = (id) => async (dispatch) => {
   try {
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/products/' + id,
+      process.env.REACT_APP_ENDPOINT + '/api/v1/products/' + id,
       { method: 'GET', headers: { 'Content-Type': 'application/json' } },
     )
     const result = await response.json()
@@ -523,7 +526,7 @@ export const fetchProductsById = (id) => async (dispatch) => {
       // for (j = 0; j < data.barang[i].gambarbarangs.length; j++) {
       // console.log(data.data.barang[i].gambarbarangs[j].gambar)
       const fetchImgDetail = await fetch(
-        `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${result.gambarbarangs[i].gambar}`,
+        `${process.env.REACT_APP_ENDPOINT}/api/v1/products/picture/${result.gambarbarangs[i].gambar}`,
         {
           method: 'GET',
           headers: {
@@ -560,7 +563,7 @@ export const filterProducts = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token')
     const response = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/filterProducts',
+      process.env.REACT_APP_ENDPOINT + '/api/v1/filterProducts',
       {
         method: 'GET',
         headers: {
@@ -578,7 +581,7 @@ export const filterProducts = () => async (dispatch) => {
         // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
         // console.log(data.data.barang[i].gambarbarangs[j].gambar)
         const fetchImgDetail = await fetch(
-          `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
+          `${process.env.REACT_APP_ENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
           {
             method: 'GET',
             headers: {
@@ -620,7 +623,7 @@ export const filterProductsCategAuth = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token')
     const response = await fetch(
-      REACT_APP_URLENDPOINT +
+      process.env.REACT_APP_ENDPOINT +
         '/api/v1/filterProductsCateg?' +
         new URLSearchParams({ idkategori: id }),
       {
@@ -640,7 +643,7 @@ export const filterProductsCategAuth = (id) => async (dispatch) => {
         // for (j = 0; j < data.data.barang[i].gambarbarangs.length; j++) {
         // console.log(data.data.barang[i].gambarbarangs[j].gambar)
         const fetchImgDetail = await fetch(
-          `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
+          `${process.env.REACT_APP_ENDPOINT}/api/v1/products/picture/${data.data.barang[i].gambarbarangs[j].gambar}`,
           {
             method: 'GET',
             headers: {
@@ -685,7 +688,7 @@ export const emptyDetailProduct = () => async (dispatch) => {
 export const fetchProfileSeller = (data) => async (dispatch) => {
   try {
     const kota = await fetch(
-      REACT_APP_URLENDPOINT + '/api/v1/cities/' + data.idkota,
+      process.env.REACT_APP_ENDPOINT + '/api/v1/cities/' + data.idkota,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -693,7 +696,7 @@ export const fetchProfileSeller = (data) => async (dispatch) => {
     )
 
     const fetchImgDetail = await fetch(
-      `${process.env.REACT_APP_URLENDPOINT}/api/v1/products/picture/${data.idgambar}`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/products/picture/${data.idgambar}`,
       {
         method: 'GET',
         headers: {

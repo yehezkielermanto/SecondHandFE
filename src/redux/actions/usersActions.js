@@ -4,7 +4,7 @@ export const fetchUser = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token')
     const response = await fetch(
-      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/siapaSaya`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/users/siapaSaya`,
       {
         method: 'GET',
         headers: {
@@ -25,7 +25,7 @@ export const fetchUser = () => async (dispatch) => {
     }
 
     const fetchImgDetail = await fetch(
-      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/profileImg/details/${result.data.id}`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/users/profileImg/details/${result.data.id}`,
       {
         method: 'GET',
         headers: {
@@ -126,7 +126,7 @@ export const submitUpdate = (data) => async (dispatch) => {
     // console.log(idUpdate);
 
     const response = await fetch(
-      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/update/${idUpdate}`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/users/update/${idUpdate}`,
       requestOptions,
     )
 
@@ -142,7 +142,7 @@ export const submitUpdate = (data) => async (dispatch) => {
 
     /* TO FETCH USER DATA */
     const fetchUserData = await fetch(
-      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/siapaSaya`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/users/siapaSaya`,
       {
         method: 'GET',
         headers: {
@@ -165,7 +165,7 @@ export const submitUpdate = (data) => async (dispatch) => {
 
     /* TO FETCH USER's IMG DETAIL FROM IMAGEKIT */
     const fetchImgDetail = await fetch(
-      `${process.env.REACT_APP_URLENDPOINT}/api/v1/users/profileImg/details/${resultUserData.data.id}`,
+      `${process.env.REACT_APP_ENDPOINT}/api/v1/users/profileImg/details/${resultUserData.data.id}`,
       {
         method: 'GET',
         headers: {
