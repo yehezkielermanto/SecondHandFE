@@ -96,7 +96,7 @@ export default function ProductPageEdit() {
           },
         })
         dispatch(deleteProduct({ id: detailProduct.id }))
-        // return navigate('/daftarjual')
+        return navigate('/daftarjual')
       }
     })
   }
